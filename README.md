@@ -20,5 +20,5 @@ playground to mess around with bitcoin scripts
 * Descriptor wallets
 
 2. bitcoin-cli requires importing wallet to query, else it won't. Upon import, it will scan the whole network for that wallet UTXOs. Preferably using preset wallets for test cases.
-3. how to assign a key pair to a wallet?
-4. how to list all receiving addresses from a wallet? bitcoin-cli -rpcwallet=alice listreceivedbyaddress
+3. create wallet
+* check knowledge/btcd.md

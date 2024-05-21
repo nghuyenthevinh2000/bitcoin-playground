@@ -1,0 +1,188 @@
+2024-05-21 10:59:24.300 [WRN] BTCW: open simnet/walletdb/btcwallet.conf: no such file or directory
+2024-05-21 10:59:24.301 [INF] BTCW: Version 0.15.1-alpha
+2024-05-21 10:59:24.301 [INF] BTCW: Server TLS is disabled.  Only legacy RPC may be used
+2024-05-21 10:59:24.301 [INF] RPCS: Listening on 127.0.0.1:18554
+2024-05-21 10:59:24.301 [INF] RPCS: Listening on [::1]:18554
+2024-05-21 10:59:24.301 [INF] BTCW: Chain server RPC TLS is disabled
+2024-05-21 10:59:24.301 [INF] BTCW: Attempting RPC client connection to localhost:18556
+2024-05-21 10:59:24.305 [INF] CHNS: Established connection to RPC server localhost:18556
+2024-05-21 10:59:24.907 [INF] WLLT: Opened wallet
+2024-05-21 10:59:24.908 [INF] WLLT: RECOVERY MODE ENABLED -- rescanning for used addresses with recovery_window=250
+2024-05-21 10:59:24.935 [INF] WLLT: Started rescan from block 683e86bd5c6d110d91b94b97137ba6bfe02dbbdb8e3dff722a669b5d69d77af6 (height 0) for 0 addresses
+2024-05-21 10:59:24.935 [INF] WLLT: Catching up block hashes to height 0, this might take a while
+2024-05-21 10:59:24.944 [INF] WLLT: Done catching up block hashes
+2024-05-21 10:59:24.944 [INF] WLLT: Finished rescan for 0 addresses (synced to block 683e86bd5c6d110d91b94b97137ba6bfe02dbbdb8e3dff722a669b5d69d77af6, height 0)
+2024-05-21 11:08:59.314 [INF] BTCW: Received signal (interrupt).  Shutting down...
+2024-05-21 11:08:59.315 [WRN] BTCW: Stopping legacy RPC server...
+2024-05-21 11:08:59.316 [INF] BTCW: Legacy RPC server shutdown
+2024-05-21 11:08:59.316 [INF] BTCW: Shutdown complete2024-05-21 11:09:45.292 [WRN] BTCW: open simnet/walletdb/btcwallet.conf: no such file or directory
+2024-05-21 11:09:45.292 [INF] BTCW: Version 0.15.1-alpha
+2024-05-21 11:09:45.292 [INF] BTCW: Server TLS is disabled.  Only legacy RPC may be used
+2024-05-21 11:09:45.293 [INF] RPCS: Listening on 127.0.0.1:18554
+2024-05-21 11:09:45.293 [INF] RPCS: Listening on [::1]:18554
+2024-05-21 11:09:45.293 [INF] BTCW: Chain server RPC TLS is disabled
+2024-05-21 11:09:45.294 [INF] BTCW: Attempting RPC client connection to localhost:18556
+2024-05-21 11:09:45.298 [INF] CHNS: Established connection to RPC server localhost:18556
+2024-05-21 11:09:45.917 [INF] WLLT: Opened wallet
+2024-05-21 11:09:45.918 [INF] WLLT: RECOVERY MODE ENABLED -- rescanning for used addresses with recovery_window=250
+2024-05-21 11:09:45.948 [INF] WLLT: Started rescan from block 683e86bd5c6d110d91b94b97137ba6bfe02dbbdb8e3dff722a669b5d69d77af6 (height 0) for 1 address
+2024-05-21 11:09:45.949 [INF] WLLT: Catching up block hashes to height 0, this might take a while
+2024-05-21 11:09:45.959 [INF] WLLT: Done catching up block hashes
+2024-05-21 11:09:45.959 [INF] WLLT: Finished rescan for 1 address (synced to block 683e86bd5c6d110d91b94b97137ba6bfe02dbbdb8e3dff722a669b5d69d77af6, height 0)
+2024-05-21 11:18:30.654 [ERR] WLLT: Cannot fetch new account properties for notification after account creation: address manager is locked
+2024-05-21 11:18:50.734 [INF] WLLT: The wallet has been temporarily unlocked
+2024-05-21 11:19:50.143 [INF] WLLT: The wallet has been locked
+2024-05-21 11:21:37.912 [ERR] CHNS: Websocket receive error from localhost:18556: websocket: close 1006 unexpected EOF
+2024-05-21 11:21:37.915 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 11:21:37.915 [INF] CHNS: Retrying connection to localhost:18556 in 5s
+2024-05-21 11:21:42.916 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 11:21:42.916 [INF] CHNS: Retrying connection to localhost:18556 in 10s
+2024-05-21 11:21:52.918 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 11:21:52.918 [INF] CHNS: Retrying connection to localhost:18556 in 15s
+2024-05-21 11:22:07.923 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 11:22:07.923 [INF] CHNS: Retrying connection to localhost:18556 in 20s
+2024-05-21 11:22:27.926 [INF] CHNS: Reestablished connection to RPC server localhost:18556
+2024-05-21 11:22:27.926 [INF] WLLT: RECOVERY MODE ENABLED -- rescanning for used addresses with recovery_window=250
+2024-05-21 11:22:27.928 [WRN] CHNS: Received unexpected reply: {"hash":"683e86bd5c6d110d91b94b97137ba6bfe02dbbdb8e3dff722a669b5d69d77af6","height":0} (id 11)
+2024-05-21 11:22:27.946 [INF] WLLT: Started rescan from block 683e86bd5c6d110d91b94b97137ba6bfe02dbbdb8e3dff722a669b5d69d77af6 (height 0) for 2 addresses
+2024-05-21 11:22:27.946 [INF] WLLT: Catching up block hashes to height 0, this might take a while
+2024-05-21 11:22:27.955 [INF] WLLT: Done catching up block hashes
+2024-05-21 11:22:27.955 [INF] WLLT: Finished rescan for 2 addresses (synced to block 683e86bd5c6d110d91b94b97137ba6bfe02dbbdb8e3dff722a669b5d69d77af6, height 0)
+2024-05-21 11:49:39.141 [ERR] CHNS: Websocket receive error from localhost:18556: websocket: close 1006 unexpected EOF
+2024-05-21 11:49:39.143 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 11:49:39.143 [INF] CHNS: Retrying connection to localhost:18556 in 5s
+2024-05-21 11:49:44.150 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 11:49:44.150 [INF] CHNS: Retrying connection to localhost:18556 in 10s
+2024-05-21 11:49:54.154 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 11:49:54.155 [INF] CHNS: Retrying connection to localhost:18556 in 15s
+2024-05-21 11:50:09.160 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 11:50:09.160 [INF] CHNS: Retrying connection to localhost:18556 in 20s
+2024-05-21 11:50:29.163 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 11:50:29.163 [INF] CHNS: Retrying connection to localhost:18556 in 25s
+2024-05-21 11:50:54.167 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 11:50:54.167 [INF] CHNS: Retrying connection to localhost:18556 in 30s
+2024-05-21 11:51:24.170 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 11:51:24.170 [INF] CHNS: Retrying connection to localhost:18556 in 35s
+2024-05-21 11:51:59.174 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 11:51:59.175 [INF] CHNS: Retrying connection to localhost:18556 in 40s
+2024-05-21 11:52:39.181 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 11:52:39.181 [INF] CHNS: Retrying connection to localhost:18556 in 45s
+2024-05-21 11:53:24.185 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 11:53:24.185 [INF] CHNS: Retrying connection to localhost:18556 in 50s
+2024-05-21 11:54:14.188 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 11:54:14.188 [INF] CHNS: Retrying connection to localhost:18556 in 55s
+2024-05-21 11:55:09.192 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 11:55:09.192 [INF] CHNS: Retrying connection to localhost:18556 in 1m0s
+2024-05-21 11:56:09.194 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 11:56:09.194 [INF] CHNS: Retrying connection to localhost:18556 in 1m0s
+2024-05-21 11:57:09.197 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 11:57:09.197 [INF] CHNS: Retrying connection to localhost:18556 in 1m0s
+2024-05-21 11:58:09.198 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 11:58:09.198 [INF] CHNS: Retrying connection to localhost:18556 in 1m0s
+2024-05-21 11:59:09.201 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 11:59:09.201 [INF] CHNS: Retrying connection to localhost:18556 in 1m0s
+2024-05-21 12:00:09.203 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 12:00:09.203 [INF] CHNS: Retrying connection to localhost:18556 in 1m0s
+2024-05-21 12:01:09.206 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 12:01:09.206 [INF] CHNS: Retrying connection to localhost:18556 in 1m0s
+2024-05-21 12:02:09.209 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 12:02:09.209 [INF] CHNS: Retrying connection to localhost:18556 in 1m0s
+2024-05-21 12:03:09.212 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 12:03:09.212 [INF] CHNS: Retrying connection to localhost:18556 in 1m0s
+2024-05-21 12:04:09.222 [INF] CHNS: Reestablished connection to RPC server localhost:18556
+2024-05-21 12:04:09.222 [INF] WLLT: RECOVERY MODE ENABLED -- rescanning for used addresses with recovery_window=250
+2024-05-21 12:04:09.248 [INF] WLLT: Started rescan from block 4305fbf0a0651b886f9b01159d645671a2ea98e5a20aac7a02e520290cd7d800 (height 103) for 2 addresses
+2024-05-21 12:04:09.261 [INF] WLLT: Catching up block hashes to height 103, this might take a while
+2024-05-21 12:04:09.271 [INF] WLLT: Done catching up block hashes
+2024-05-21 12:04:09.271 [INF] WLLT: Finished rescan for 2 addresses (synced to block 4305fbf0a0651b886f9b01159d645671a2ea98e5a20aac7a02e520290cd7d800, height 103)
+2024-05-21 14:34:00.048 [ERR] CHNS: Websocket receive error from localhost:18556: websocket: close 1006 unexpected EOF
+2024-05-21 14:34:00.049 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 14:34:00.049 [INF] CHNS: Retrying connection to localhost:18556 in 5s
+2024-05-21 14:34:05.053 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 14:34:05.053 [INF] CHNS: Retrying connection to localhost:18556 in 10s
+2024-05-21 14:34:15.057 [INF] CHNS: Reestablished connection to RPC server localhost:18556
+2024-05-21 14:34:15.058 [INF] WLLT: RECOVERY MODE ENABLED -- rescanning for used addresses with recovery_window=250
+2024-05-21 14:34:15.080 [INF] WLLT: Started rescan from block 4305fbf0a0651b886f9b01159d645671a2ea98e5a20aac7a02e520290cd7d800 (height 103) for 2 addresses
+2024-05-21 14:34:15.093 [INF] WLLT: Catching up block hashes to height 103, this might take a while
+2024-05-21 14:34:15.107 [INF] WLLT: Done catching up block hashes
+2024-05-21 14:34:15.107 [INF] WLLT: Finished rescan for 2 addresses (synced to block 4305fbf0a0651b886f9b01159d645671a2ea98e5a20aac7a02e520290cd7d800, height 103)
+2024-05-21 14:35:56.424 [ERR] CHNS: Websocket receive error from localhost:18556: websocket: close 1006 unexpected EOF
+2024-05-21 14:35:56.426 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 14:35:56.426 [INF] CHNS: Retrying connection to localhost:18556 in 5s
+2024-05-21 14:36:01.428 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 14:36:01.428 [INF] CHNS: Retrying connection to localhost:18556 in 10s
+2024-05-21 14:36:11.430 [INF] CHNS: Reestablished connection to RPC server localhost:18556
+2024-05-21 14:36:11.430 [INF] WLLT: RECOVERY MODE ENABLED -- rescanning for used addresses with recovery_window=250
+2024-05-21 14:36:11.451 [INF] WLLT: Started rescan from block 4305fbf0a0651b886f9b01159d645671a2ea98e5a20aac7a02e520290cd7d800 (height 103) for 2 addresses
+2024-05-21 14:36:11.463 [INF] WLLT: Catching up block hashes to height 103, this might take a while
+2024-05-21 14:36:11.472 [INF] WLLT: Done catching up block hashes
+2024-05-21 14:36:11.472 [INF] WLLT: Finished rescan for 2 addresses (synced to block 4305fbf0a0651b886f9b01159d645671a2ea98e5a20aac7a02e520290cd7d800, height 103)
+2024-05-21 14:37:11.885 [ERR] CHNS: Websocket receive error from localhost:18556: websocket: close 1006 unexpected EOF
+2024-05-21 14:37:11.886 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 14:37:11.886 [INF] CHNS: Retrying connection to localhost:18556 in 5s
+2024-05-21 14:37:16.890 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 14:37:16.890 [INF] CHNS: Retrying connection to localhost:18556 in 10s
+2024-05-21 14:37:26.893 [INF] CHNS: Reestablished connection to RPC server localhost:18556
+2024-05-21 14:37:26.893 [INF] WLLT: RECOVERY MODE ENABLED -- rescanning for used addresses with recovery_window=250
+2024-05-21 14:37:26.911 [INF] WLLT: Started rescan from block 4305fbf0a0651b886f9b01159d645671a2ea98e5a20aac7a02e520290cd7d800 (height 103) for 2 addresses
+2024-05-21 14:37:26.922 [INF] WLLT: Catching up block hashes to height 103, this might take a while
+2024-05-21 14:37:26.932 [INF] WLLT: Done catching up block hashes
+2024-05-21 14:37:26.932 [INF] WLLT: Finished rescan for 2 addresses (synced to block 4305fbf0a0651b886f9b01159d645671a2ea98e5a20aac7a02e520290cd7d800, height 103)
+2024-05-21 14:39:20.824 [ERR] CHNS: Websocket receive error from localhost:18556: websocket: close 1006 unexpected EOF
+2024-05-21 14:39:20.825 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 14:39:20.826 [INF] CHNS: Retrying connection to localhost:18556 in 5s
+2024-05-21 14:39:25.830 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 14:39:25.830 [INF] CHNS: Retrying connection to localhost:18556 in 10s
+2024-05-21 14:39:35.833 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 14:39:35.833 [INF] CHNS: Retrying connection to localhost:18556 in 15s
+2024-05-21 14:39:50.838 [INF] CHNS: Failed to connect to localhost:18556: dial tcp 127.0.0.1:18556: connect: connection refused
+2024-05-21 14:39:50.839 [INF] CHNS: Retrying connection to localhost:18556 in 20s
+2024-05-21 14:40:10.842 [INF] CHNS: Reestablished connection to RPC server localhost:18556
+2024-05-21 14:40:10.842 [INF] WLLT: RECOVERY MODE ENABLED -- rescanning for used addresses with recovery_window=250
+2024-05-21 14:40:10.863 [INF] WLLT: Started rescan from block 4305fbf0a0651b886f9b01159d645671a2ea98e5a20aac7a02e520290cd7d800 (height 103) for 2 addresses
+2024-05-21 14:40:10.874 [INF] WLLT: Catching up block hashes to height 103, this might take a while
+2024-05-21 14:40:10.883 [INF] WLLT: Done catching up block hashes
+2024-05-21 14:40:10.883 [INF] WLLT: Finished rescan for 2 addresses (synced to block 4305fbf0a0651b886f9b01159d645671a2ea98e5a20aac7a02e520290cd7d800, height 103)
+2024-05-21 15:50:06.247 [INF] RPCS: New websocket client 127.0.0.1:55633
+2024-05-21 15:50:06.891 [WRN] RPCS: Websocket receive failed from client 127.0.0.1:55633: websocket: close 1006 unexpected EOF
+2024-05-21 15:50:06.891 [INF] RPCS: Disconnected websocket client 127.0.0.1:55633
+2024-05-21 15:52:27.462 [INF] RPCS: New websocket client 127.0.0.1:55660
+2024-05-21 15:52:28.112 [WRN] RPCS: Websocket receive failed from client 127.0.0.1:55660: websocket: close 1006 unexpected EOF
+2024-05-21 15:52:28.112 [INF] RPCS: Disconnected websocket client 127.0.0.1:55660
+2024-05-21 15:56:44.323 [INF] RPCS: New websocket client 127.0.0.1:55914
+2024-05-21 15:56:44.951 [INF] WLLT: The wallet has been temporarily unlocked
+2024-05-21 15:56:45.599 [WRN] RPCS: Websocket receive failed from client 127.0.0.1:55914: websocket: close 1006 unexpected EOF
+2024-05-21 15:56:45.599 [INF] RPCS: Disconnected websocket client 127.0.0.1:55914
+2024-05-21 15:58:44.060 [INF] RPCS: New websocket client 127.0.0.1:55922
+2024-05-21 15:58:44.061 [INF] WLLT: The wallet has been temporarily unlocked
+2024-05-21 15:58:44.728 [WRN] RPCS: Websocket receive failed from client 127.0.0.1:55922: websocket: close 1006 unexpected EOF
+2024-05-21 15:58:44.728 [INF] RPCS: Disconnected websocket client 127.0.0.1:55922
+2024-05-21 15:59:48.319 [INF] RPCS: New websocket client 127.0.0.1:55926
+2024-05-21 15:59:48.319 [INF] WLLT: The wallet has been temporarily unlocked
+2024-05-21 15:59:48.972 [WRN] RPCS: Websocket receive failed from client 127.0.0.1:55926: websocket: close 1006 unexpected EOF
+2024-05-21 15:59:48.972 [INF] RPCS: Disconnected websocket client 127.0.0.1:55926
+2024-05-21 16:01:46.688 [INF] RPCS: New websocket client 127.0.0.1:55933
+2024-05-21 16:01:46.688 [INF] WLLT: The wallet has been temporarily unlocked
+2024-05-21 16:01:47.353 [WRN] RPCS: Websocket receive failed from client 127.0.0.1:55933: websocket: close 1006 unexpected EOF
+2024-05-21 16:01:47.353 [INF] RPCS: Disconnected websocket client 127.0.0.1:55933
+2024-05-21 16:02:27.614 [INF] RPCS: New websocket client 127.0.0.1:55939
+2024-05-21 16:02:27.614 [INF] WLLT: The wallet has been temporarily unlocked
+2024-05-21 16:02:28.252 [WRN] RPCS: Websocket receive failed from client 127.0.0.1:55939: websocket: close 1006 unexpected EOF
+2024-05-21 16:02:28.252 [INF] RPCS: Disconnected websocket client 127.0.0.1:55939
+2024-05-21 16:02:41.619 [INF] RPCS: New websocket client 127.0.0.1:55942
+2024-05-21 16:02:41.619 [INF] WLLT: The wallet has been temporarily unlocked
+2024-05-21 16:02:42.268 [WRN] RPCS: Websocket receive failed from client 127.0.0.1:55942: websocket: close 1006 unexpected EOF
+2024-05-21 16:02:42.268 [INF] RPCS: Disconnected websocket client 127.0.0.1:55942
+2024-05-21 16:02:54.163 [INF] RPCS: New websocket client 127.0.0.1:55945
+2024-05-21 16:02:54.163 [INF] WLLT: The wallet has been temporarily unlocked
+2024-05-21 16:02:54.800 [WRN] RPCS: Websocket receive failed from client 127.0.0.1:55945: websocket: close 1006 unexpected EOF
+2024-05-21 16:02:54.800 [INF] RPCS: Disconnected websocket client 127.0.0.1:55945
+2024-05-21 16:04:30.398 [INF] RPCS: New websocket client 127.0.0.1:55963
+2024-05-21 16:04:30.398 [INF] WLLT: The wallet has been temporarily unlocked
+2024-05-21 16:04:31.033 [WRN] RPCS: Websocket receive failed from client 127.0.0.1:55963: websocket: close 1006 unexpected EOF
+2024-05-21 16:04:31.033 [INF] RPCS: Disconnected websocket client 127.0.0.1:55963
+2024-05-21 16:05:10.499 [INF] RPCS: New websocket client 127.0.0.1:55969
+2024-05-21 16:05:10.500 [INF] WLLT: The wallet has been temporarily unlocked
+2024-05-21 16:05:11.138 [WRN] RPCS: Websocket receive failed from client 127.0.0.1:55969: websocket: close 1006 unexpected EOF
+2024-05-21 16:05:11.138 [INF] RPCS: Disconnected websocket client 127.0.0.1:55969
+2024-05-21 16:17:10.878 [INF] WLLT: The wallet has been locked

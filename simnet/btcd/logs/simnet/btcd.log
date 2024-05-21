@@ -1,0 +1,623 @@
+2024-05-21 10:38:00.485 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-21 10:38:00.486 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-21 10:38:00.511 [INF] BTCD: Block database loaded
+2024-05-21 10:38:00.512 [INF] INDX: Transaction index is enabled
+2024-05-21 10:38:00.512 [INF] INDX: Committed filter index is enabled
+2024-05-21 10:38:00.512 [INF] CHAN: Pre-alloacting for 251 MiB: 
+2024-05-21 10:38:00.519 [INF] CHAN: Loading block index...
+2024-05-21 10:38:00.520 [INF] CHAN: Chain state (height 0, hash 683e86bd5c6d110d91b94b97137ba6bfe02dbbdb8e3dff722a669b5d69d77af6, totaltx 1, work 2)
+2024-05-21 10:38:00.521 [INF] AMGR: Loaded 0 addresses from file 'simnet/btcd/simnet/peers.json'
+2024-05-21 10:38:00.521 [INF] RPCS: RPC server listening on 127.0.0.1:18556
+2024-05-21 10:38:00.521 [INF] RPCS: RPC server listening on [::1]:18556
+2024-05-21 10:38:00.521 [INF] CMGR: Server listening on 0.0.0.0:18555
+2024-05-21 10:38:00.521 [INF] CMGR: Server listening on [::]:18555
+2024-05-21 10:38:29.776 [INF] BTCD: Received signal (interrupt).  Shutting down...
+2024-05-21 10:38:29.776 [INF] BTCD: Gracefully shutting down the server...
+2024-05-21 10:38:29.776 [WRN] SRVR: Server shutting down
+2024-05-21 10:38:29.776 [WRN] RPCS: RPC server shutting down
+2024-05-21 10:38:29.776 [INF] RPCS: RPC server shutdown complete
+2024-05-21 10:38:29.776 [INF] SYNC: Sync manager shutting down
+2024-05-21 10:38:29.776 [INF] CHAN: Flushing UTXO cache of 97 MiB with 0 entries to disk. For large sizes, this can take up to several minutes...
+2024-05-21 10:38:29.776 [INF] AMGR: Address manager shutting down
+2024-05-21 10:38:29.776 [INF] SRVR: Server shutdown complete
+2024-05-21 10:38:29.776 [INF] BTCD: Gracefully shutting down the database...
+2024-05-21 10:38:29.788 [INF] BTCD: Shutdown complete
+2024-05-21 10:41:39.293 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-21 10:41:39.293 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-21 10:41:39.318 [INF] BTCD: Block database loaded
+2024-05-21 10:41:39.324 [INF] INDX: Transaction index is enabled
+2024-05-21 10:41:39.324 [INF] INDX: Committed filter index is enabled
+2024-05-21 10:41:39.324 [INF] CHAN: Pre-alloacting for 251 MiB: 
+2024-05-21 10:41:39.328 [INF] CHAN: Loading block index...
+2024-05-21 10:41:39.329 [INF] CHAN: Chain state (height 0, hash 683e86bd5c6d110d91b94b97137ba6bfe02dbbdb8e3dff722a669b5d69d77af6, totaltx 1, work 2)
+2024-05-21 10:41:39.330 [INF] AMGR: Loaded 0 addresses from file 'simnet/btcd/simnet/peers.json'
+2024-05-21 10:41:39.330 [INF] RPCS: RPC server listening on 127.0.0.1:18556
+2024-05-21 10:41:39.330 [INF] RPCS: RPC server listening on [::1]:18556
+2024-05-21 10:41:39.330 [INF] CMGR: Server listening on 0.0.0.0:18555
+2024-05-21 10:41:39.330 [INF] CMGR: Server listening on [::]:18555
+2024-05-21 10:42:18.129 [INF] BTCD: Received signal (interrupt).  Shutting down...
+2024-05-21 10:42:18.129 [INF] BTCD: Gracefully shutting down the server...
+2024-05-21 10:42:18.129 [WRN] SRVR: Server shutting down
+2024-05-21 10:42:18.129 [WRN] RPCS: RPC server shutting down
+2024-05-21 10:42:18.129 [INF] RPCS: RPC server shutdown complete
+2024-05-21 10:42:18.130 [INF] SYNC: Sync manager shutting down
+2024-05-21 10:42:18.130 [INF] CHAN: Flushing UTXO cache of 97 MiB with 0 entries to disk. For large sizes, this can take up to several minutes...
+2024-05-21 10:42:18.130 [INF] AMGR: Address manager shutting down
+2024-05-21 10:42:18.131 [INF] SRVR: Server shutdown complete
+2024-05-21 10:42:18.131 [INF] BTCD: Gracefully shutting down the database...
+2024-05-21 10:42:18.145 [INF] BTCD: Shutdown complete
+2024-05-21 10:42:30.448 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-21 10:42:30.448 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-21 10:42:30.483 [INF] BTCD: Block database loaded
+2024-05-21 10:42:30.494 [INF] INDX: Transaction index is enabled
+2024-05-21 10:42:30.495 [INF] INDX: Committed filter index is enabled
+2024-05-21 10:42:30.496 [INF] CHAN: Pre-alloacting for 251 MiB: 
+2024-05-21 10:42:30.500 [INF] CHAN: Loading block index...
+2024-05-21 10:42:30.501 [INF] CHAN: Chain state (height 0, hash 683e86bd5c6d110d91b94b97137ba6bfe02dbbdb8e3dff722a669b5d69d77af6, totaltx 1, work 2)
+2024-05-21 10:42:30.503 [INF] AMGR: Loaded 0 addresses from file 'simnet/btcd/simnet/peers.json'
+2024-05-21 10:42:30.503 [INF] RPCS: RPC server listening on 127.0.0.1:18556
+2024-05-21 10:42:30.503 [INF] RPCS: RPC server listening on [::1]:18556
+2024-05-21 10:42:30.503 [INF] CMGR: Server listening on 0.0.0.0:18555
+2024-05-21 10:42:30.503 [INF] CMGR: Server listening on [::]:18555
+2024-05-21 10:42:41.591 [INF] BTCD: Received signal (interrupt).  Shutting down...
+2024-05-21 10:42:41.591 [INF] BTCD: Gracefully shutting down the server...
+2024-05-21 10:42:41.591 [WRN] SRVR: Server shutting down
+2024-05-21 10:42:41.591 [WRN] RPCS: RPC server shutting down
+2024-05-21 10:42:41.591 [INF] RPCS: RPC server shutdown complete
+2024-05-21 10:42:41.591 [INF] SYNC: Sync manager shutting down
+2024-05-21 10:42:41.591 [INF] CHAN: Flushing UTXO cache of 97 MiB with 0 entries to disk. For large sizes, this can take up to several minutes...
+2024-05-21 10:42:41.592 [INF] AMGR: Address manager shutting down
+2024-05-21 10:42:41.592 [INF] SRVR: Server shutdown complete
+2024-05-21 10:42:41.592 [INF] BTCD: Gracefully shutting down the database...
+2024-05-21 10:42:41.607 [INF] BTCD: Shutdown complete
+2024-05-21 10:43:17.574 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-21 10:43:17.574 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-21 10:43:17.602 [INF] BTCD: Block database loaded
+2024-05-21 10:43:17.607 [INF] INDX: Transaction index is enabled
+2024-05-21 10:43:17.607 [INF] INDX: Committed filter index is enabled
+2024-05-21 10:43:17.607 [INF] CHAN: Pre-alloacting for 251 MiB: 
+2024-05-21 10:43:17.612 [INF] CHAN: Loading block index...
+2024-05-21 10:43:17.613 [INF] CHAN: Chain state (height 0, hash 683e86bd5c6d110d91b94b97137ba6bfe02dbbdb8e3dff722a669b5d69d77af6, totaltx 1, work 2)
+2024-05-21 10:43:17.614 [INF] AMGR: Loaded 0 addresses from file 'simnet/btcd/simnet/peers.json'
+2024-05-21 10:43:17.614 [INF] RPCS: RPC server listening on 127.0.0.1:18556
+2024-05-21 10:43:17.614 [INF] RPCS: RPC server listening on [::1]:18556
+2024-05-21 10:43:17.614 [INF] CMGR: Server listening on 0.0.0.0:18555
+2024-05-21 10:43:17.614 [INF] CMGR: Server listening on [::]:18555
+2024-05-21 10:48:04.548 [INF] RPCS: New websocket client 127.0.0.1:51430
+2024-05-21 10:48:05.187 [INF] RPCS: Beginning rescan for 0 addresses
+2024-05-21 10:48:05.187 [INF] RPCS: Skipping rescan as client has no addrs/utxos
+2024-05-21 10:48:05.187 [INF] RPCS: Finished rescan
+2024-05-21 10:59:06.708 [ERR] RPCS: Websocket receive error from 127.0.0.1:51430: websocket: close 1006 unexpected EOF
+2024-05-21 10:59:06.708 [INF] RPCS: Disconnected websocket client 127.0.0.1:51430
+2024-05-21 10:59:24.305 [INF] RPCS: New websocket client 127.0.0.1:51773
+2024-05-21 10:59:24.935 [INF] RPCS: Beginning rescan for 0 addresses
+2024-05-21 10:59:24.935 [INF] RPCS: Skipping rescan as client has no addrs/utxos
+2024-05-21 10:59:24.935 [INF] RPCS: Finished rescan
+2024-05-21 11:08:59.316 [ERR] RPCS: Websocket receive error from 127.0.0.1:51773: websocket: close 1006 unexpected EOF
+2024-05-21 11:08:59.317 [INF] RPCS: Disconnected websocket client 127.0.0.1:51773
+2024-05-21 11:09:45.298 [INF] RPCS: New websocket client 127.0.0.1:51999
+2024-05-21 11:09:45.948 [INF] RPCS: Beginning rescan for 1 address
+2024-05-21 11:09:45.949 [INF] RPCS: Finished rescan
+2024-05-21 11:21:37.910 [INF] BTCD: Received signal (interrupt).  Shutting down...
+2024-05-21 11:21:37.912 [INF] BTCD: Gracefully shutting down the server...
+2024-05-21 11:21:37.912 [WRN] SRVR: Server shutting down
+2024-05-21 11:21:37.912 [WRN] RPCS: RPC server shutting down
+2024-05-21 11:21:37.912 [ERR] RPCS: Websocket receive error from 127.0.0.1:51999: read tcp4 127.0.0.1:18556->127.0.0.1:51999: use of closed network connection
+2024-05-21 11:21:37.912 [INF] RPCS: Disconnected websocket client 127.0.0.1:51999
+2024-05-21 11:21:37.912 [INF] RPCS: RPC server shutdown complete
+2024-05-21 11:21:37.941 [INF] SYNC: Sync manager shutting down
+2024-05-21 11:21:37.941 [INF] CHAN: Flushing UTXO cache of 97 MiB with 0 entries to disk. For large sizes, this can take up to several minutes...
+2024-05-21 11:21:37.941 [INF] AMGR: Address manager shutting down
+2024-05-21 11:21:37.941 [INF] SRVR: Server shutdown complete
+2024-05-21 11:21:37.941 [INF] BTCD: Gracefully shutting down the database...
+2024-05-21 11:21:37.952 [INF] BTCD: Shutdown complete
+2024-05-21 11:22:11.885 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-21 11:22:11.885 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-21 11:22:11.912 [INF] BTCD: Block database loaded
+2024-05-21 11:22:11.919 [INF] INDX: Transaction index is enabled
+2024-05-21 11:22:11.919 [INF] INDX: Committed filter index is enabled
+2024-05-21 11:22:11.919 [INF] CHAN: Pre-alloacting for 251 MiB: 
+2024-05-21 11:22:11.927 [INF] CHAN: Loading block index...
+2024-05-21 11:22:11.928 [INF] CHAN: Chain state (height 0, hash 683e86bd5c6d110d91b94b97137ba6bfe02dbbdb8e3dff722a669b5d69d77af6, totaltx 1, work 2)
+2024-05-21 11:22:11.929 [INF] RPCS: RPC server listening on 127.0.0.1:18556
+2024-05-21 11:22:11.929 [INF] RPCS: RPC server listening on [::1]:18556
+2024-05-21 11:22:11.929 [INF] AMGR: Loaded 0 addresses from file 'simnet/btcd/simnet/peers.json'
+2024-05-21 11:22:11.929 [INF] CMGR: Server listening on 0.0.0.0:18555
+2024-05-21 11:22:11.929 [INF] CMGR: Server listening on [::]:18555
+2024-05-21 11:22:27.926 [INF] RPCS: New websocket client 127.0.0.1:52046
+2024-05-21 11:22:27.946 [INF] RPCS: Beginning rescan for 2 addresses
+2024-05-21 11:22:27.946 [INF] RPCS: Finished rescan
+2024-05-21 11:22:54.117 [INF] MINR: Block submitted via CPU miner accepted (hash 1b2a1b3af78ad6f433a8a86c3b55d178f2c5292351ecd1bf6750e0144878e822, amount 50 BTC)
+2024-05-21 11:22:56.458 [INF] MINR: Block submitted via CPU miner accepted (hash 5e16c8a3bd551e5010fd96f6d24cef0ee1a9cd8d60d4fe1cc6221cb6d60e9139, amount 50 BTC)
+2024-05-21 11:22:59.850 [INF] MINR: Block submitted via CPU miner accepted (hash 6a13cbb12d402907c50c73f8e411f08a70ceae12028699b33da58f31ae50090d, amount 50 BTC)
+2024-05-21 11:22:59.851 [INF] MINR: Block submitted via CPU miner accepted (hash 498c1aaf5d8260367dff3eb2dd8840762877faff07be0e37e629fa2af063d51b, amount 50 BTC)
+2024-05-21 11:22:59.851 [INF] MINR: Block submitted via CPU miner accepted (hash 78eda72ec63d860be9085b3596a3e3198f81228d100c0e9eb1c77b9ecd8171b6, amount 50 BTC)
+2024-05-21 11:22:59.851 [INF] MINR: Block submitted via CPU miner accepted (hash 4610f071a67de6384a2d673ecf414ba0a982aa24cf079e2eb1c2f442a05e7c4d, amount 50 BTC)
+2024-05-21 11:22:59.851 [INF] MINR: Block submitted via CPU miner accepted (hash 5e04ef6e4d45c56125594691cb2a894e8394729a6aed950af5f095789a8e3b0f, amount 50 BTC)
+2024-05-21 11:22:59.852 [INF] MINR: Block submitted via CPU miner accepted (hash 5842804018be1f93fe108ea22a662a2cf45eaa5071f0721a450df185bb0a0978, amount 50 BTC)
+2024-05-21 11:22:59.852 [INF] MINR: Block submitted via CPU miner accepted (hash 6d0e524c2881f16dc09d3c07d589872d655cd9f074cebc4333f5828749be3737, amount 50 BTC)
+2024-05-21 11:22:59.852 [INF] MINR: Block submitted via CPU miner accepted (hash 379c00922373207a41fc8cc87b2152b9124b49d0209fac733462888c603a27b9, amount 50 BTC)
+2024-05-21 11:22:59.853 [INF] MINR: Block submitted via CPU miner accepted (hash 6fd1ae29048e9306ee652ac05c62fce5dc011540906a6d4f37fc1750ea3faad7, amount 50 BTC)
+2024-05-21 11:22:59.853 [INF] MINR: Block submitted via CPU miner accepted (hash 37b6bf9eb8774109fc99afe5a1c10ae158fc50f85c098459dd11fc2b381dd437, amount 50 BTC)
+2024-05-21 11:22:59.854 [INF] MINR: Block submitted via CPU miner accepted (hash 7f86d1d82c0a89bd6ea4113b9f42aaec0e760f6aa34064a0aa043d62cf55c609, amount 50 BTC)
+2024-05-21 11:22:59.854 [INF] MINR: Block submitted via CPU miner accepted (hash 4f2cc51864565f777bafff8f365671f77e5ad4246d3b4208f93074a190a99728, amount 50 BTC)
+2024-05-21 11:22:59.854 [INF] MINR: Block submitted via CPU miner accepted (hash 2432d3cda0176a17a3f5bdf1dd5f6f5b9b5cf73975c1b911b76ceaa75559fa97, amount 50 BTC)
+2024-05-21 11:22:59.859 [INF] MINR: Block submitted via CPU miner accepted (hash 45e49a31e0367c2d083338a032db37dcb071e9cea61382dc47ccf5f7f6ddd22d, amount 50 BTC)
+2024-05-21 11:22:59.859 [INF] MINR: Block submitted via CPU miner accepted (hash 7c6f3625a20084cd991497a2934389a8bb2fe286a28366cacc33cabd6d5a6068, amount 50 BTC)
+2024-05-21 11:22:59.859 [INF] MINR: Block submitted via CPU miner accepted (hash 5a97a61064006c23f3eb965f26b9b3c717b0f5e8279b553857edc5d0d434842f, amount 50 BTC)
+2024-05-21 11:22:59.864 [INF] MINR: Block submitted via CPU miner accepted (hash 119966f6e750c78bbf6eae8862561f67e9d0d64645a8c99fc08a9cf4e9e959c1, amount 50 BTC)
+2024-05-21 11:22:59.864 [INF] MINR: Block submitted via CPU miner accepted (hash 71cfaf386ae38b0be580723640b9626b7441331164f40edd4ed3920ead51b5e0, amount 50 BTC)
+2024-05-21 11:22:59.865 [INF] MINR: Block submitted via CPU miner accepted (hash 7e8b063fcbabf41e58383d3dba03179267391a22590055d36b716c6dfae86c87, amount 50 BTC)
+2024-05-21 11:22:59.868 [INF] MINR: Block submitted via CPU miner accepted (hash 67d6750a731b1c27462e5567724dc30078d93cfedf8b4e355afa1be9909b01ad, amount 50 BTC)
+2024-05-21 11:22:59.868 [INF] MINR: Block submitted via CPU miner accepted (hash 52cac42b0f106c63a6ef3c20630af276c45215d27c8eac9496c1f7609df9bbea, amount 50 BTC)
+2024-05-21 11:22:59.868 [INF] MINR: Block submitted via CPU miner accepted (hash 6dfa3bf69ccc4bf168004fd2da389a1a856b91fdd32914375d2f919bf79152fb, amount 50 BTC)
+2024-05-21 11:22:59.869 [INF] MINR: Block submitted via CPU miner accepted (hash 0b637a3a5011435ba1b58684ec3660be1082f39924fcc94977c117004f25dfaf, amount 50 BTC)
+2024-05-21 11:22:59.873 [INF] MINR: Block submitted via CPU miner accepted (hash 385b9795caaf429d3c9b0665ca82ab96b84417fd3f602c0eefa82da6d148d51d, amount 50 BTC)
+2024-05-21 11:22:59.874 [INF] MINR: Block submitted via CPU miner accepted (hash 69a0fccd575f044ebd7913c7a4d9e300332e19173782a05bae7f6ba89786b707, amount 50 BTC)
+2024-05-21 11:22:59.874 [INF] MINR: Block submitted via CPU miner accepted (hash 65493bee8437d4ad6d950526567486fbde4e288926e73c2482ac2c98c244c443, amount 50 BTC)
+2024-05-21 11:22:59.874 [INF] MINR: Block submitted via CPU miner accepted (hash 18be0309e8fc7745bc4ae154d196e6c5ff38521ed8a76db9d2d7dc9db2da9d32, amount 50 BTC)
+2024-05-21 11:22:59.879 [INF] MINR: Block submitted via CPU miner accepted (hash 0b9c1bd8aa62715453cf67248aac276b9625b9e49a6760c5672cd6d37570e596, amount 50 BTC)
+2024-05-21 11:22:59.879 [INF] MINR: Block submitted via CPU miner accepted (hash 76d29d3e132f48a686f924c67e1c3206edaa749bc80965bc7a5d54a327e9e18f, amount 50 BTC)
+2024-05-21 11:22:59.880 [INF] MINR: Block submitted via CPU miner accepted (hash 1ce99f1331f3755b2c5f8bd2f3fb2e2076b231be05dc56af7796bda516378d31, amount 50 BTC)
+2024-05-21 11:22:59.880 [INF] MINR: Block submitted via CPU miner accepted (hash 2dc392dc8681a0ed38ea70f1d646827c39a6c2c49587fc8a14cb1435eb63128f, amount 50 BTC)
+2024-05-21 11:22:59.885 [INF] MINR: Block submitted via CPU miner accepted (hash 20b3f5a04b7ccdb5e0dd407e4174a10005bbe27babd1751e28e4a93614ebdf77, amount 50 BTC)
+2024-05-21 11:22:59.885 [INF] MINR: Block submitted via CPU miner accepted (hash 78c2b3f5cf5d76e61ddecb24f59b091e9b1a9d3cd17173d2428e662ebe49a070, amount 50 BTC)
+2024-05-21 11:22:59.885 [INF] MINR: Block submitted via CPU miner accepted (hash 0d142849d1d5e841adde90a7e689421efa8ca8091b6c426721e3ba5f8f582787, amount 50 BTC)
+2024-05-21 11:22:59.889 [INF] MINR: Block submitted via CPU miner accepted (hash 648126bfb3d078c5b1223bd827097c9dadb619f038f41f17fce5825e702a8922, amount 50 BTC)
+2024-05-21 11:22:59.890 [INF] MINR: Block submitted via CPU miner accepted (hash 28331874bc8f2465cf47495a210eccc77a3d4893d05da3ce18575eeb3948b182, amount 50 BTC)
+2024-05-21 11:22:59.895 [INF] MINR: Block submitted via CPU miner accepted (hash 1493c6d6869e2ab79049f0ce3eb18326017bbc3cb20fb7dc3f8b4e0ce69b92df, amount 50 BTC)
+2024-05-21 11:22:59.895 [INF] MINR: Block submitted via CPU miner accepted (hash 626a6e077e4b4f5ee0c04f0b62bb02eb3d85a969d22dd65b148acbd5ccfe772d, amount 50 BTC)
+2024-05-21 11:22:59.896 [INF] MINR: Block submitted via CPU miner accepted (hash 2e019c89393ccb5616c69da4486fc70c4e7e58fc2d8a301b65ffd2e8871f356d, amount 50 BTC)
+2024-05-21 11:22:59.901 [INF] MINR: Block submitted via CPU miner accepted (hash 020f77f5d87f4b0f32ae9ec37e22aeb845baed8577943f2586bcae293f6b1c42, amount 50 BTC)
+2024-05-21 11:22:59.901 [INF] MINR: Block submitted via CPU miner accepted (hash 16f22ed016a5da340fcebb6f6d5006aa85547b94cc98b473b136a076661184ad, amount 50 BTC)
+2024-05-21 11:22:59.901 [INF] MINR: Block submitted via CPU miner accepted (hash 5cba22ff3d0fbe1df658862d2e497039e59d55c93bf399857ad2b5b49d878c75, amount 50 BTC)
+2024-05-21 11:22:59.902 [INF] MINR: Block submitted via CPU miner accepted (hash 0074df6a44739447c0a30054298ec6f0324b08d9acbea3528067f44028b02177, amount 50 BTC)
+2024-05-21 11:22:59.906 [INF] MINR: Block submitted via CPU miner accepted (hash 1bc14632b3b89393fe9755bb956b1df7030a33ab3e5b18a839ae0bce286d66c7, amount 50 BTC)
+2024-05-21 11:22:59.907 [INF] MINR: Block submitted via CPU miner accepted (hash 0117ae87b61ca9b87f191320e074722e854e8b248cb51d604e1e0e0e95c20dd7, amount 50 BTC)
+2024-05-21 11:22:59.907 [INF] MINR: Block submitted via CPU miner accepted (hash 16fd41d54429b3b223a9fc6c86390b4327d3078dd645cf4c57a4cf98c26f79cf, amount 50 BTC)
+2024-05-21 11:22:59.911 [INF] MINR: Block submitted via CPU miner accepted (hash 449eb26e0428fb3b37818b31b113197e8db73bedebaddc648ae5dca4ee181675, amount 50 BTC)
+2024-05-21 11:22:59.912 [INF] MINR: Block submitted via CPU miner accepted (hash 4222c2de8166927ede0f5eb2b310ca0c316345d0373f85568b423b98781d309d, amount 50 BTC)
+2024-05-21 11:22:59.912 [INF] MINR: Block submitted via CPU miner accepted (hash 5b91702bdb2bb285a44ec5853d5372bce686b7042d7b529301674d53ec11bf6c, amount 50 BTC)
+2024-05-21 11:22:59.912 [INF] MINR: Block submitted via CPU miner accepted (hash 28a06a5e33ccb6c4d829672ab747700c0f12cbe1694614be82b851d12ec64ef5, amount 50 BTC)
+2024-05-21 11:22:59.918 [INF] MINR: Block submitted via CPU miner accepted (hash 447f3086d5a79fc43ba6a3a86a49e60084527ef3b51db12e4ed39093a98dce71, amount 50 BTC)
+2024-05-21 11:22:59.918 [INF] MINR: Block submitted via CPU miner accepted (hash 33c82ecefea82026c3d9417a8377ec7cd6728ceba2c7dff8284971449956a51c, amount 50 BTC)
+2024-05-21 11:22:59.918 [INF] MINR: Block submitted via CPU miner accepted (hash 182c5e246a36ef2e06fc8d841519b3b47c192ea3eff542b54fdba85fa41c730a, amount 50 BTC)
+2024-05-21 11:22:59.924 [INF] MINR: Block submitted via CPU miner accepted (hash 593ce57e63f859f3698307edcffee9a38a02cb325173cbb452fcb4f4086012c6, amount 50 BTC)
+2024-05-21 11:22:59.924 [INF] MINR: Block submitted via CPU miner accepted (hash 216426857db2bbf9c3fc88ebf7f5feca4aa10a43a70711707e751fdf61fa5ad7, amount 50 BTC)
+2024-05-21 11:22:59.924 [INF] MINR: Block submitted via CPU miner accepted (hash 2288d44fc086551109d2e4b3930a6aa3191aa5669818a6f677bbe5cd2f61517e, amount 50 BTC)
+2024-05-21 11:22:59.925 [INF] MINR: Block submitted via CPU miner accepted (hash 01acaf99b9bf4cdeaa7b68050923f906c194a2d30482695d597c55645f815eb9, amount 50 BTC)
+2024-05-21 11:22:59.930 [INF] MINR: Block submitted via CPU miner accepted (hash 5df78121d2a4598def5bba2417928bffd328eb8a531faabc657571cbe684ae53, amount 50 BTC)
+2024-05-21 11:22:59.930 [INF] MINR: Block submitted via CPU miner accepted (hash 69d41278cf940f64ba79672d3eb25623c607cb06998c2adc263dbc32a19739df, amount 50 BTC)
+2024-05-21 11:22:59.930 [INF] MINR: Block submitted via CPU miner accepted (hash 728b55be71f909900f50c8f49f49d045ec5286c917901d8c8fe9424eee80fe3d, amount 50 BTC)
+2024-05-21 11:22:59.934 [INF] MINR: Block submitted via CPU miner accepted (hash 2323ba12de5cd9cdb72792eeeb670ec038ece86ae92c3eb05603730f164eabe9, amount 50 BTC)
+2024-05-21 11:22:59.935 [INF] MINR: Block submitted via CPU miner accepted (hash 66e80f5640f49b99ab58203307acd0389ebaac0cfad0579888ab513e6abe90ec, amount 50 BTC)
+2024-05-21 11:22:59.940 [INF] MINR: Block submitted via CPU miner accepted (hash 312abf31a16005485bd10c6e12c3aa7a732a3c403759dc3a5a7526156ce4751e, amount 50 BTC)
+2024-05-21 11:22:59.941 [INF] MINR: Block submitted via CPU miner accepted (hash 6d80d3c6b1bc37078ae531064d3f208016395e738a373d1b1cb7cc5f4887b3b6, amount 50 BTC)
+2024-05-21 11:22:59.941 [INF] MINR: Block submitted via CPU miner accepted (hash 0dfd802fdfd88d8e3863db824751128a9c1f948778410fc24b1c30935cc621a0, amount 50 BTC)
+2024-05-21 11:22:59.947 [INF] MINR: Block submitted via CPU miner accepted (hash 15e885c9b0897c4c0da4b2527b054211e84fe862706ac98d8b3995ae26918685, amount 50 BTC)
+2024-05-21 11:22:59.947 [INF] MINR: Block submitted via CPU miner accepted (hash 7c77ae28bb1c9a38018b2b7338aca5ea47020572826d6e4cf4b383fd59a989aa, amount 50 BTC)
+2024-05-21 11:22:59.948 [INF] MINR: Block submitted via CPU miner accepted (hash 270ae4afaa461d086db943250ad0b2f8c573eb80823be1a5d9c223bb3f8e0ba4, amount 50 BTC)
+2024-05-21 11:22:59.948 [INF] MINR: Block submitted via CPU miner accepted (hash 60eea39d6636656736a3b2ba642b2b63165621773429b521f4105e465e0df9c5, amount 50 BTC)
+2024-05-21 11:22:59.954 [INF] MINR: Block submitted via CPU miner accepted (hash 7ae35804d02d4b3a171a804f799318bdca354d7fa30f5a4fe3f2125f6b094b62, amount 50 BTC)
+2024-05-21 11:22:59.954 [INF] MINR: Block submitted via CPU miner accepted (hash 683fa7d5523462ce52ba77e6c649ba8de4d25d07c97fab7daf0b25d0f1a64207, amount 50 BTC)
+2024-05-21 11:22:59.954 [INF] MINR: Block submitted via CPU miner accepted (hash 76649faa013f6424794d2c6fabe882931ce541d7414adef7cdfa4b865f159374, amount 50 BTC)
+2024-05-21 11:22:59.958 [INF] MINR: Block submitted via CPU miner accepted (hash 6ba7b300deafe36a133a384185d4d4588eac0dfe4be16cba4a1e570e2bcc6747, amount 50 BTC)
+2024-05-21 11:22:59.959 [INF] MINR: Block submitted via CPU miner accepted (hash 6be6105739a0fbd1aeb8770dda3dd5baff36ac6f17adc9ab83d252082605dae2, amount 50 BTC)
+2024-05-21 11:22:59.959 [INF] MINR: Block submitted via CPU miner accepted (hash 459580686ac5f184f327673b62dac85846490fbd0c17f2253bc9f3103a16507a, amount 50 BTC)
+2024-05-21 11:22:59.959 [INF] MINR: Block submitted via CPU miner accepted (hash 4e3bcef98ce856b0d646e49a4df1eaeb60f23e924dd2c52c63243954dc7b110c, amount 50 BTC)
+2024-05-21 11:22:59.965 [INF] MINR: Block submitted via CPU miner accepted (hash 36004ce4afd631b9a2024e632da5f1f3eae1021c3fa50cbbf2b7f609dae60d97, amount 50 BTC)
+2024-05-21 11:22:59.966 [INF] MINR: Block submitted via CPU miner accepted (hash 1305504727d53f94eafc994f6e51ee94ff14df58347fe3b7bad09490f97ed9b0, amount 50 BTC)
+2024-05-21 11:22:59.966 [INF] MINR: Block submitted via CPU miner accepted (hash 118213c8467c8e048991231d30b472b9fa5146bc52e1f2266e747e97138fe00a, amount 50 BTC)
+2024-05-21 11:22:59.966 [INF] MINR: Block submitted via CPU miner accepted (hash 269487d6a321e75903c8a5ce5f07d153a2e36b81243082e7c911dc98f82d7417, amount 50 BTC)
+2024-05-21 11:22:59.972 [INF] MINR: Block submitted via CPU miner accepted (hash 53a42d60807aeaa8ad323efde9413fdcfe3d6b6397123b19f4bf382dcc9cf037, amount 50 BTC)
+2024-05-21 11:22:59.973 [INF] MINR: Block submitted via CPU miner accepted (hash 00d4a19818a71f742fcf5707471fff97a0473ccf059dcca8aa48f90a12ac6e31, amount 50 BTC)
+2024-05-21 11:22:59.973 [INF] MINR: Block submitted via CPU miner accepted (hash 404b434af245a4bb2232ae33dc0808eb7a4c357847bffcf8494b8b1450febfce, amount 50 BTC)
+2024-05-21 11:22:59.978 [INF] MINR: Block submitted via CPU miner accepted (hash 611f1fcb509cbbdef6c2958bc2d2aecf2638866c6ee80edbf2aa107b852e7d63, amount 50 BTC)
+2024-05-21 11:22:59.978 [INF] MINR: Block submitted via CPU miner accepted (hash 467fc6dbfdb4bde2d429e1ee633cf5c564c0c73894d3fb498c17a7fb6b9d4efe, amount 50 BTC)
+2024-05-21 11:22:59.979 [INF] MINR: Block submitted via CPU miner accepted (hash 1310fb5da836e8482306fbf58b7dcf31bc7ed895e2006e589c2b431baf3f2390, amount 50 BTC)
+2024-05-21 11:22:59.982 [INF] MINR: Block submitted via CPU miner accepted (hash 65d2451385b9951b85e7ac2a4bee3b3fdb0ff2fa3321a4631746ca04390b3363, amount 50 BTC)
+2024-05-21 11:22:59.983 [INF] MINR: Block submitted via CPU miner accepted (hash 650440e2f3c460e8aea7ab99d9e94eef59d9bbf88fd0b1dfd05106450e4e74e1, amount 50 BTC)
+2024-05-21 11:22:59.983 [INF] MINR: Block submitted via CPU miner accepted (hash 177de5ef888044437f93a5220a45fc57a5b0448e0e38ad1721f86d1727efb494, amount 50 BTC)
+2024-05-21 11:22:59.990 [INF] MINR: Block submitted via CPU miner accepted (hash 555bad88e8c1900b4729960f09c8f133b09a8199d084b4e8093b9c2b491e5043, amount 50 BTC)
+2024-05-21 11:22:59.990 [INF] MINR: Block submitted via CPU miner accepted (hash 6531c381ff1ef98d0427c456a0f547548da1c02c74a3f0c940e4b8a4b581c60f, amount 50 BTC)
+2024-05-21 11:22:59.991 [INF] MINR: Block submitted via CPU miner accepted (hash 17f94ed521b550400401ec57dfff1596f79225c2d94631674868e9aad72dc418, amount 50 BTC)
+2024-05-21 11:22:59.996 [INF] MINR: Block submitted via CPU miner accepted (hash 33c69ea300011e877b7ec75d711ab8bad9ff85f1ffe6bb58cad6f627a4a08d90, amount 50 BTC)
+2024-05-21 11:22:59.996 [INF] MINR: Block submitted via CPU miner accepted (hash 5657aa16d99a748a8e71a898af1987127219ad5b5362aceeb85fe18765c1a896, amount 50 BTC)
+2024-05-21 11:22:59.997 [INF] MINR: Block submitted via CPU miner accepted (hash 69ab53c4c8fd72de7c5259b8cc37097a5a2c76b9852d5465ded02f2baba677ec, amount 50 BTC)
+2024-05-21 11:23:00.002 [INF] MINR: Block submitted via CPU miner accepted (hash 6da45435f854210fe055aa607c4339f456d3676f876357508ddb9f9758710728, amount 50 BTC)
+2024-05-21 11:23:00.002 [INF] MINR: Block submitted via CPU miner accepted (hash 41a6682943923bcb8af0eea1bb319d01a6fd1fa20f85754f166beb99d647a36e, amount 50 BTC)
+2024-05-21 11:23:00.003 [INF] MINR: Block submitted via CPU miner accepted (hash 1c3092757d84b11f2970ebfeb8794ccd65a095a12fc7e739c66c649da04bcc32, amount 50 BTC)
+2024-05-21 11:23:00.003 [INF] MINR: Block submitted via CPU miner accepted (hash 6e1abfd44e2aba658935f135c01f844fb469ad16d0131c888337eabbda8baacc, amount 50 BTC)
+2024-05-21 11:23:00.006 [INF] MINR: Block submitted via CPU miner accepted (hash 14f4a37abd5823688aa9f21ffcdbd42e55221df6fa63a662b65958b34a6aab41, amount 50 BTC)
+2024-05-21 11:23:00.007 [INF] MINR: Block submitted via CPU miner accepted (hash 4305fbf0a0651b886f9b01159d645671a2ea98e5a20aac7a02e520290cd7d800, amount 50 BTC)
+2024-05-21 11:49:39.139 [INF] BTCD: Received signal (interrupt).  Shutting down...
+2024-05-21 11:49:39.140 [INF] BTCD: Gracefully shutting down the server...
+2024-05-21 11:49:39.140 [WRN] SRVR: Server shutting down
+2024-05-21 11:49:39.140 [WRN] RPCS: RPC server shutting down
+2024-05-21 11:49:39.141 [INF] RPCS: RPC server shutdown complete
+2024-05-21 11:49:39.141 [ERR] RPCS: Websocket receive error from 127.0.0.1:52046: read tcp4 127.0.0.1:18556->127.0.0.1:52046: use of closed network connection
+2024-05-21 11:49:39.141 [INF] RPCS: Disconnected websocket client 127.0.0.1:52046
+2024-05-21 11:49:39.176 [INF] SYNC: Sync manager shutting down
+2024-05-21 11:49:39.176 [INF] CHAN: Flushing UTXO cache of 97 MiB with 103 entries to disk. For large sizes, this can take up to several minutes...
+2024-05-21 11:49:39.199 [INF] AMGR: Address manager shutting down
+2024-05-21 11:49:39.200 [INF] SRVR: Server shutdown complete
+2024-05-21 11:49:39.200 [INF] BTCD: Gracefully shutting down the database...
+2024-05-21 11:49:39.214 [INF] BTCD: Shutdown complete
+2024-05-21 12:03:38.267 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-21 12:03:38.268 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-21 12:03:38.310 [INF] BTCD: Block database loaded
+2024-05-21 12:03:38.312 [INF] INDX: Transaction index is enabled
+2024-05-21 12:03:38.312 [INF] INDX: Committed filter index is enabled
+2024-05-21 12:03:38.312 [INF] CHAN: Pre-alloacting for 251 MiB: 
+2024-05-21 12:03:38.320 [INF] CHAN: Loading block index...
+2024-05-21 12:03:38.322 [INF] CHAN: Chain state (height 103, hash 4305fbf0a0651b886f9b01159d645671a2ea98e5a20aac7a02e520290cd7d800, totaltx 104, work 208)
+2024-05-21 12:03:38.322 [INF] RPCS: RPC server listening on 127.0.0.1:18556
+2024-05-21 12:03:38.322 [INF] RPCS: RPC server listening on [::1]:18556
+2024-05-21 12:03:38.324 [INF] AMGR: Loaded 0 addresses from file 'simnet/btcd/simnet/peers.json'
+2024-05-21 12:03:38.324 [INF] CMGR: Server listening on 0.0.0.0:18555
+2024-05-21 12:03:38.325 [INF] CMGR: Server listening on [::]:18555
+2024-05-21 12:04:09.222 [INF] RPCS: New websocket client 127.0.0.1:52928
+2024-05-21 12:04:09.250 [INF] RPCS: Beginning rescan for 2 addresses
+2024-05-21 12:04:09.251 [INF] RPCS: Finished rescan
+2024-05-21 12:04:51.507 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-21 12:04:51.507 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-21 12:04:51.507 [ERR] BTCD: resource temporarily unavailable: resource temporarily unavailable
+2024-05-21 12:04:51.507 [INF] BTCD: Shutdown complete
+2024-05-21 12:06:22.394 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-21 12:06:22.394 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-21 12:06:22.394 [ERR] BTCD: resource temporarily unavailable: resource temporarily unavailable
+2024-05-21 12:06:22.394 [INF] BTCD: Shutdown complete
+2024-05-21 12:08:38.392 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-21 12:08:38.392 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-21 12:08:38.393 [ERR] BTCD: resource temporarily unavailable: resource temporarily unavailable
+2024-05-21 12:08:38.393 [INF] BTCD: Shutdown complete
+2024-05-21 12:09:11.356 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-21 12:09:11.356 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-21 12:09:11.356 [ERR] BTCD: resource temporarily unavailable: resource temporarily unavailable
+2024-05-21 12:09:11.356 [INF] BTCD: Shutdown complete
+2024-05-21 14:32:57.390 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-21 14:32:57.390 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-21 14:32:57.390 [ERR] BTCD: resource temporarily unavailable: resource temporarily unavailable
+2024-05-21 14:32:57.390 [INF] BTCD: Shutdown complete
+2024-05-21 14:33:31.435 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-21 14:33:31.435 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-21 14:33:31.435 [ERR] BTCD: resource temporarily unavailable: resource temporarily unavailable
+2024-05-21 14:33:31.435 [INF] BTCD: Shutdown complete
+2024-05-21 14:34:00.047 [INF] BTCD: Received signal (terminated).  Shutting down...
+2024-05-21 14:34:00.047 [INF] BTCD: Gracefully shutting down the server...
+2024-05-21 14:34:00.047 [WRN] SRVR: Server shutting down
+2024-05-21 14:34:00.048 [WRN] RPCS: RPC server shutting down
+2024-05-21 14:34:00.048 [ERR] RPCS: Websocket receive error from 127.0.0.1:52928: read tcp4 127.0.0.1:18556->127.0.0.1:52928: use of closed network connection
+2024-05-21 14:34:00.048 [INF] RPCS: RPC server shutdown complete
+2024-05-21 14:34:00.048 [INF] RPCS: Disconnected websocket client 127.0.0.1:52928
+2024-05-21 14:34:00.080 [INF] SYNC: Sync manager shutting down
+2024-05-21 14:34:00.080 [INF] CHAN: Flushing UTXO cache of 97 MiB with 0 entries to disk. For large sizes, this can take up to several minutes...
+2024-05-21 14:34:00.081 [INF] AMGR: Address manager shutting down
+2024-05-21 14:34:00.085 [INF] SRVR: Server shutdown complete
+2024-05-21 14:34:00.085 [INF] BTCD: Gracefully shutting down the database...
+2024-05-21 14:34:00.107 [INF] BTCD: Shutdown complete
+2024-05-21 14:34:12.476 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-21 14:34:12.476 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-21 14:34:12.508 [INF] BTCD: Block database loaded
+2024-05-21 14:34:12.509 [INF] INDX: Transaction index is enabled
+2024-05-21 14:34:12.509 [INF] INDX: Committed filter index is enabled
+2024-05-21 14:34:12.509 [INF] CHAN: Pre-alloacting for 251 MiB: 
+2024-05-21 14:34:12.517 [INF] CHAN: Loading block index...
+2024-05-21 14:34:12.519 [INF] CHAN: Chain state (height 103, hash 4305fbf0a0651b886f9b01159d645671a2ea98e5a20aac7a02e520290cd7d800, totaltx 104, work 208)
+2024-05-21 14:34:12.520 [INF] RPCS: RPC server listening on 127.0.0.1:18556
+2024-05-21 14:34:12.520 [INF] RPCS: RPC server listening on [::1]:18556
+2024-05-21 14:34:12.520 [INF] AMGR: Loaded 0 addresses from file 'simnet/btcd/simnet/peers.json'
+2024-05-21 14:34:12.520 [INF] CMGR: Server listening on 0.0.0.0:18555
+2024-05-21 14:34:12.520 [INF] CMGR: Server listening on [::]:18555
+2024-05-21 14:34:15.057 [INF] RPCS: New websocket client 127.0.0.1:54218
+2024-05-21 14:34:15.080 [INF] RPCS: Beginning rescan for 2 addresses
+2024-05-21 14:34:15.081 [INF] RPCS: Finished rescan
+2024-05-21 14:35:56.422 [INF] BTCD: Received signal (interrupt).  Shutting down...
+2024-05-21 14:35:56.423 [INF] BTCD: Gracefully shutting down the server...
+2024-05-21 14:35:56.423 [WRN] SRVR: Server shutting down
+2024-05-21 14:35:56.423 [WRN] RPCS: RPC server shutting down
+2024-05-21 14:35:56.424 [INF] RPCS: RPC server shutdown complete
+2024-05-21 14:35:56.424 [ERR] RPCS: Websocket receive error from 127.0.0.1:54218: read tcp4 127.0.0.1:18556->127.0.0.1:54218: use of closed network connection
+2024-05-21 14:35:56.424 [INF] RPCS: Disconnected websocket client 127.0.0.1:54218
+2024-05-21 14:35:56.424 [INF] SYNC: Sync manager shutting down
+2024-05-21 14:35:56.424 [INF] CHAN: Flushing UTXO cache of 97 MiB with 0 entries to disk. For large sizes, this can take up to several minutes...
+2024-05-21 14:35:56.424 [INF] AMGR: Address manager shutting down
+2024-05-21 14:35:56.425 [INF] SRVR: Server shutdown complete
+2024-05-21 14:35:56.425 [INF] BTCD: Gracefully shutting down the database...
+2024-05-21 14:35:56.443 [INF] BTCD: Shutdown complete
+2024-05-21 14:36:02.232 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-21 14:36:02.233 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-21 14:36:02.261 [INF] BTCD: Block database loaded
+2024-05-21 14:36:02.264 [INF] INDX: Transaction index is enabled
+2024-05-21 14:36:02.265 [INF] INDX: Committed filter index is enabled
+2024-05-21 14:36:02.265 [INF] CHAN: Pre-alloacting for 251 MiB: 
+2024-05-21 14:36:02.269 [INF] CHAN: Loading block index...
+2024-05-21 14:36:02.271 [INF] CHAN: Chain state (height 103, hash 4305fbf0a0651b886f9b01159d645671a2ea98e5a20aac7a02e520290cd7d800, totaltx 104, work 208)
+2024-05-21 14:36:02.271 [INF] RPCS: RPC server listening on 127.0.0.1:18556
+2024-05-21 14:36:02.271 [INF] RPCS: RPC server listening on [::1]:18556
+2024-05-21 14:36:02.272 [INF] AMGR: Loaded 0 addresses from file 'simnet/btcd/simnet/peers.json'
+2024-05-21 14:36:02.272 [INF] CMGR: Server listening on 0.0.0.0:18555
+2024-05-21 14:36:02.272 [INF] CMGR: Server listening on [::]:18555
+2024-05-21 14:36:11.430 [INF] RPCS: New websocket client 127.0.0.1:54253
+2024-05-21 14:36:11.452 [INF] RPCS: Beginning rescan for 2 addresses
+2024-05-21 14:36:11.453 [INF] RPCS: Finished rescan
+2024-05-21 14:36:46.723 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-21 14:36:46.723 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-21 14:36:46.724 [ERR] BTCD: resource temporarily unavailable: resource temporarily unavailable
+2024-05-21 14:36:46.724 [INF] BTCD: Shutdown complete
+2024-05-21 14:37:11.885 [INF] BTCD: Received signal (terminated).  Shutting down...
+2024-05-21 14:37:11.885 [INF] BTCD: Gracefully shutting down the server...
+2024-05-21 14:37:11.885 [WRN] SRVR: Server shutting down
+2024-05-21 14:37:11.885 [WRN] RPCS: RPC server shutting down
+2024-05-21 14:37:11.885 [INF] RPCS: RPC server shutdown complete
+2024-05-21 14:37:11.885 [ERR] RPCS: Websocket receive error from 127.0.0.1:54253: read tcp4 127.0.0.1:18556->127.0.0.1:54253: use of closed network connection
+2024-05-21 14:37:11.885 [INF] RPCS: Disconnected websocket client 127.0.0.1:54253
+2024-05-21 14:37:11.885 [INF] SYNC: Sync manager shutting down
+2024-05-21 14:37:11.885 [INF] CHAN: Flushing UTXO cache of 97 MiB with 0 entries to disk. For large sizes, this can take up to several minutes...
+2024-05-21 14:37:11.885 [INF] AMGR: Address manager shutting down
+2024-05-21 14:37:11.886 [INF] SRVR: Server shutdown complete
+2024-05-21 14:37:11.886 [INF] BTCD: Gracefully shutting down the database...
+2024-05-21 14:37:11.898 [INF] BTCD: Shutdown complete
+2024-05-21 14:37:22.502 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-21 14:37:22.502 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-21 14:37:22.528 [INF] BTCD: Block database loaded
+2024-05-21 14:37:22.530 [INF] INDX: Transaction index is enabled
+2024-05-21 14:37:22.530 [INF] INDX: Committed filter index is enabled
+2024-05-21 14:37:22.530 [INF] CHAN: Pre-alloacting for 251 MiB: 
+2024-05-21 14:37:22.541 [INF] CHAN: Loading block index...
+2024-05-21 14:37:22.561 [INF] CHAN: Chain state (height 103, hash 4305fbf0a0651b886f9b01159d645671a2ea98e5a20aac7a02e520290cd7d800, totaltx 104, work 208)
+2024-05-21 14:37:22.562 [INF] AMGR: Loaded 0 addresses from file 'simnet/btcd/simnet/peers.json'
+2024-05-21 14:37:22.562 [INF] RPCS: RPC server listening on 127.0.0.1:18556
+2024-05-21 14:37:22.562 [INF] RPCS: RPC server listening on [::1]:18556
+2024-05-21 14:37:22.562 [INF] CMGR: Server listening on 0.0.0.0:18555
+2024-05-21 14:37:22.562 [INF] CMGR: Server listening on [::]:18555
+2024-05-21 14:37:26.892 [INF] RPCS: New websocket client 127.0.0.1:54277
+2024-05-21 14:37:26.912 [INF] RPCS: Beginning rescan for 2 addresses
+2024-05-21 14:37:26.912 [INF] RPCS: Finished rescan
+2024-05-21 14:38:08.742 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-21 14:38:08.742 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-21 14:38:08.742 [ERR] BTCD: resource temporarily unavailable: resource temporarily unavailable
+2024-05-21 14:38:08.742 [INF] BTCD: Shutdown complete
+2024-05-21 14:39:20.824 [INF] BTCD: Received signal (terminated).  Shutting down...
+2024-05-21 14:39:20.824 [INF] BTCD: Gracefully shutting down the server...
+2024-05-21 14:39:20.824 [WRN] SRVR: Server shutting down
+2024-05-21 14:39:20.824 [WRN] RPCS: RPC server shutting down
+2024-05-21 14:39:20.824 [ERR] RPCS: Websocket receive error from 127.0.0.1:54277: read tcp4 127.0.0.1:18556->127.0.0.1:54277: use of closed network connection
+2024-05-21 14:39:20.824 [INF] RPCS: Disconnected websocket client 127.0.0.1:54277
+2024-05-21 14:39:20.824 [INF] RPCS: RPC server shutdown complete
+2024-05-21 14:39:20.824 [INF] SYNC: Sync manager shutting down
+2024-05-21 14:39:20.824 [INF] CHAN: Flushing UTXO cache of 97 MiB with 0 entries to disk. For large sizes, this can take up to several minutes...
+2024-05-21 14:39:20.824 [INF] AMGR: Address manager shutting down
+2024-05-21 14:39:20.824 [INF] SRVR: Server shutdown complete
+2024-05-21 14:39:20.824 [INF] BTCD: Gracefully shutting down the database...
+2024-05-21 14:39:20.838 [INF] BTCD: Shutdown complete
+2024-05-21 14:39:59.084 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-21 14:39:59.085 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-21 14:39:59.115 [INF] BTCD: Block database loaded
+2024-05-21 14:39:59.116 [INF] INDX: Transaction index is enabled
+2024-05-21 14:39:59.116 [INF] INDX: Committed filter index is enabled
+2024-05-21 14:39:59.116 [INF] CHAN: Pre-alloacting for 251 MiB: 
+2024-05-21 14:39:59.124 [INF] CHAN: Loading block index...
+2024-05-21 14:39:59.125 [INF] CHAN: Chain state (height 103, hash 4305fbf0a0651b886f9b01159d645671a2ea98e5a20aac7a02e520290cd7d800, totaltx 104, work 208)
+2024-05-21 14:39:59.125 [INF] RPCS: RPC server listening on 127.0.0.1:18556
+2024-05-21 14:39:59.126 [INF] AMGR: Loaded 0 addresses from file 'simnet/btcd/simnet/peers.json'
+2024-05-21 14:39:59.126 [INF] RPCS: RPC server listening on [::1]:18556
+2024-05-21 14:39:59.126 [INF] CMGR: Server listening on 0.0.0.0:18555
+2024-05-21 14:39:59.126 [INF] CMGR: Server listening on [::]:18555
+2024-05-21 14:40:10.841 [INF] RPCS: New websocket client 127.0.0.1:54322
+2024-05-21 14:40:10.864 [INF] RPCS: Beginning rescan for 2 addresses
+2024-05-21 14:40:10.865 [INF] RPCS: Finished rescan
+2024-05-21 14:50:35.840 [INF] RPCS: New websocket client 127.0.0.1:54653
+2024-05-21 14:50:35.841 [ERR] RPCS: Websocket receive error from 127.0.0.1:54653: websocket: close 1006 unexpected EOF
+2024-05-21 14:50:35.842 [INF] RPCS: Disconnected websocket client 127.0.0.1:54653
+2024-05-21 14:51:33.478 [INF] RPCS: New websocket client 127.0.0.1:54655
+2024-05-21 14:51:33.479 [ERR] RPCS: Websocket receive error from 127.0.0.1:54655: websocket: close 1006 unexpected EOF
+2024-05-21 14:51:33.479 [INF] RPCS: Disconnected websocket client 127.0.0.1:54655
+2024-05-21 14:51:56.216 [INF] RPCS: New websocket client 127.0.0.1:54657
+2024-05-21 14:51:56.216 [ERR] RPCS: Websocket receive error from 127.0.0.1:54657: websocket: close 1006 unexpected EOF
+2024-05-21 14:51:56.216 [INF] RPCS: Disconnected websocket client 127.0.0.1:54657
+2024-05-21 14:52:13.008 [INF] RPCS: New websocket client 127.0.0.1:54658
+2024-05-21 14:52:13.009 [ERR] RPCS: Websocket receive error from 127.0.0.1:54658: websocket: close 1006 unexpected EOF
+2024-05-21 14:52:13.009 [INF] RPCS: Disconnected websocket client 127.0.0.1:54658
+2024-05-21 14:56:40.740 [INF] RPCS: New websocket client 127.0.0.1:54966
+2024-05-21 14:56:40.742 [ERR] RPCS: Websocket receive error from 127.0.0.1:54966: websocket: close 1006 unexpected EOF
+2024-05-21 14:56:40.742 [INF] RPCS: Disconnected websocket client 127.0.0.1:54966
+2024-05-21 15:06:47.533 [INF] RPCS: New websocket client 127.0.0.1:54981
+2024-05-21 15:06:47.547 [ERR] RPCS: Websocket receive error from 127.0.0.1:54981: websocket: close 1006 unexpected EOF
+2024-05-21 15:06:47.547 [INF] RPCS: Disconnected websocket client 127.0.0.1:54981
+2024-05-21 15:07:46.237 [INF] RPCS: New websocket client 127.0.0.1:54985
+2024-05-21 15:07:46.245 [ERR] RPCS: Websocket receive error from 127.0.0.1:54985: websocket: close 1006 unexpected EOF
+2024-05-21 15:07:46.246 [INF] RPCS: Disconnected websocket client 127.0.0.1:54985
+2024-05-21 15:08:07.205 [INF] RPCS: New websocket client 127.0.0.1:54986
+2024-05-21 15:08:09.044 [ERR] RPCS: Websocket receive error from 127.0.0.1:54986: websocket: close 1006 unexpected EOF
+2024-05-21 15:08:09.045 [INF] RPCS: Disconnected websocket client 127.0.0.1:54986
+2024-05-21 15:22:28.341 [INF] RPCS: New websocket client 127.0.0.1:55240
+2024-05-21 15:22:28.343 [ERR] RPCS: Websocket receive error from 127.0.0.1:55240: websocket: close 1006 unexpected EOF
+2024-05-21 15:22:28.343 [INF] RPCS: Disconnected websocket client 127.0.0.1:55240
+2024-05-21 15:23:38.342 [INF] RPCS: New websocket client 127.0.0.1:55245
+2024-05-21 15:23:38.347 [ERR] RPCS: Websocket receive error from 127.0.0.1:55245: websocket: close 1006 unexpected EOF
+2024-05-21 15:23:38.347 [INF] RPCS: Disconnected websocket client 127.0.0.1:55245
+2024-05-21 15:23:52.625 [INF] RPCS: New websocket client 127.0.0.1:55246
+2024-05-21 15:23:52.626 [ERR] RPCS: Websocket receive error from 127.0.0.1:55246: websocket: close 1006 unexpected EOF
+2024-05-21 15:23:52.626 [INF] RPCS: Disconnected websocket client 127.0.0.1:55246
+2024-05-21 15:24:08.287 [INF] RPCS: New websocket client 127.0.0.1:55247
+2024-05-21 15:24:08.291 [ERR] RPCS: Websocket receive error from 127.0.0.1:55247: websocket: close 1006 unexpected EOF
+2024-05-21 15:24:08.291 [INF] RPCS: Disconnected websocket client 127.0.0.1:55247
+2024-05-21 15:25:33.124 [INF] RPCS: New websocket client 127.0.0.1:55402
+2024-05-21 15:25:33.125 [INF] RPCS: New websocket client 127.0.0.1:55403
+2024-05-21 15:25:33.130 [ERR] RPCS: Websocket receive error from 127.0.0.1:55402: websocket: close 1006 unexpected EOF
+2024-05-21 15:25:33.130 [ERR] RPCS: Websocket receive error from 127.0.0.1:55403: websocket: close 1006 unexpected EOF
+2024-05-21 15:25:33.130 [INF] RPCS: Disconnected websocket client 127.0.0.1:55402
+2024-05-21 15:25:33.130 [INF] RPCS: Disconnected websocket client 127.0.0.1:55403
+2024-05-21 15:26:45.141 [INF] RPCS: New websocket client 127.0.0.1:55404
+2024-05-21 15:26:45.142 [INF] RPCS: New websocket client 127.0.0.1:55405
+2024-05-21 15:26:45.811 [ERR] RPCS: Websocket receive error from 127.0.0.1:55405: read tcp4 127.0.0.1:18556->127.0.0.1:55405: read: connection reset by peer
+2024-05-21 15:26:45.811 [INF] RPCS: Disconnected websocket client 127.0.0.1:55405
+2024-05-21 15:26:45.811 [ERR] RPCS: Websocket receive error from 127.0.0.1:55404: websocket: close 1006 unexpected EOF
+2024-05-21 15:26:45.812 [INF] RPCS: Disconnected websocket client 127.0.0.1:55404
+2024-05-21 15:50:06.240 [INF] RPCS: New websocket client 127.0.0.1:55631
+2024-05-21 15:50:06.241 [INF] RPCS: New websocket client 127.0.0.1:55632
+2024-05-21 15:50:06.891 [ERR] RPCS: Websocket receive error from 127.0.0.1:55632: read tcp4 127.0.0.1:18556->127.0.0.1:55632: read: connection reset by peer
+2024-05-21 15:50:06.891 [INF] RPCS: Disconnected websocket client 127.0.0.1:55632
+2024-05-21 15:50:06.891 [ERR] RPCS: Websocket receive error from 127.0.0.1:55631: websocket: close 1006 unexpected EOF
+2024-05-21 15:50:06.891 [INF] RPCS: Disconnected websocket client 127.0.0.1:55631
+2024-05-21 15:52:27.460 [INF] RPCS: New websocket client 127.0.0.1:55658
+2024-05-21 15:52:27.461 [INF] RPCS: New websocket client 127.0.0.1:55659
+2024-05-21 15:52:28.112 [ERR] RPCS: Websocket receive error from 127.0.0.1:55659: websocket: close 1006 unexpected EOF
+2024-05-21 15:52:28.112 [ERR] RPCS: Websocket receive error from 127.0.0.1:55658: websocket: close 1006 unexpected EOF
+2024-05-21 15:52:28.112 [INF] RPCS: Disconnected websocket client 127.0.0.1:55659
+2024-05-21 15:52:28.112 [INF] RPCS: Disconnected websocket client 127.0.0.1:55658
+2024-05-21 15:56:44.320 [INF] RPCS: New websocket client 127.0.0.1:55912
+2024-05-21 15:56:44.321 [INF] RPCS: New websocket client 127.0.0.1:55913
+2024-05-21 15:56:45.599 [ERR] RPCS: Websocket receive error from 127.0.0.1:55912: websocket: close 1006 unexpected EOF
+2024-05-21 15:56:45.599 [ERR] RPCS: Websocket receive error from 127.0.0.1:55913: websocket: close 1006 unexpected EOF
+2024-05-21 15:56:45.599 [INF] RPCS: Disconnected websocket client 127.0.0.1:55912
+2024-05-21 15:56:45.599 [INF] RPCS: Disconnected websocket client 127.0.0.1:55913
+2024-05-21 15:58:44.057 [INF] RPCS: New websocket client 127.0.0.1:55920
+2024-05-21 15:58:44.059 [INF] RPCS: New websocket client 127.0.0.1:55921
+2024-05-21 15:58:44.728 [ERR] RPCS: Websocket receive error from 127.0.0.1:55921: read tcp4 127.0.0.1:18556->127.0.0.1:55921: read: connection reset by peer
+2024-05-21 15:58:44.728 [ERR] RPCS: Websocket receive error from 127.0.0.1:55920: websocket: close 1006 unexpected EOF
+2024-05-21 15:58:44.728 [INF] RPCS: Disconnected websocket client 127.0.0.1:55921
+2024-05-21 15:58:44.728 [INF] RPCS: Disconnected websocket client 127.0.0.1:55920
+2024-05-21 15:59:48.316 [INF] RPCS: New websocket client 127.0.0.1:55924
+2024-05-21 15:59:48.317 [INF] RPCS: New websocket client 127.0.0.1:55925
+2024-05-21 15:59:48.972 [ERR] RPCS: Websocket receive error from 127.0.0.1:55925: read tcp4 127.0.0.1:18556->127.0.0.1:55925: read: connection reset by peer
+2024-05-21 15:59:48.972 [INF] RPCS: Disconnected websocket client 127.0.0.1:55925
+2024-05-21 15:59:48.972 [ERR] RPCS: Websocket receive error from 127.0.0.1:55924: websocket: close 1006 unexpected EOF
+2024-05-21 15:59:48.972 [INF] RPCS: Disconnected websocket client 127.0.0.1:55924
+2024-05-21 16:01:46.685 [INF] RPCS: New websocket client 127.0.0.1:55931
+2024-05-21 16:01:46.686 [INF] RPCS: New websocket client 127.0.0.1:55932
+2024-05-21 16:01:47.353 [ERR] RPCS: Websocket receive error from 127.0.0.1:55932: read tcp4 127.0.0.1:18556->127.0.0.1:55932: read: connection reset by peer
+2024-05-21 16:01:47.353 [INF] RPCS: Disconnected websocket client 127.0.0.1:55932
+2024-05-21 16:01:47.353 [ERR] RPCS: Websocket receive error from 127.0.0.1:55931: websocket: close 1006 unexpected EOF
+2024-05-21 16:01:47.353 [INF] RPCS: Disconnected websocket client 127.0.0.1:55931
+2024-05-21 16:02:27.612 [INF] RPCS: New websocket client 127.0.0.1:55937
+2024-05-21 16:02:27.613 [INF] RPCS: New websocket client 127.0.0.1:55938
+2024-05-21 16:02:28.252 [ERR] RPCS: Websocket receive error from 127.0.0.1:55938: websocket: close 1006 unexpected EOF
+2024-05-21 16:02:28.252 [ERR] RPCS: Websocket receive error from 127.0.0.1:55937: websocket: close 1006 unexpected EOF
+2024-05-21 16:02:28.252 [INF] RPCS: Disconnected websocket client 127.0.0.1:55938
+2024-05-21 16:02:28.252 [INF] RPCS: Disconnected websocket client 127.0.0.1:55937
+2024-05-21 16:02:41.615 [INF] RPCS: New websocket client 127.0.0.1:55940
+2024-05-21 16:02:41.617 [INF] RPCS: New websocket client 127.0.0.1:55941
+2024-05-21 16:02:42.268 [ERR] RPCS: Websocket receive error from 127.0.0.1:55941: websocket: close 1006 unexpected EOF
+2024-05-21 16:02:42.268 [ERR] RPCS: Websocket receive error from 127.0.0.1:55940: websocket: close 1006 unexpected EOF
+2024-05-21 16:02:42.268 [INF] RPCS: Disconnected websocket client 127.0.0.1:55941
+2024-05-21 16:02:42.268 [INF] RPCS: Disconnected websocket client 127.0.0.1:55940
+2024-05-21 16:02:54.159 [INF] RPCS: New websocket client 127.0.0.1:55943
+2024-05-21 16:02:54.161 [INF] RPCS: New websocket client 127.0.0.1:55944
+2024-05-21 16:02:54.800 [ERR] RPCS: Websocket receive error from 127.0.0.1:55944: read tcp4 127.0.0.1:18556->127.0.0.1:55944: read: connection reset by peer
+2024-05-21 16:02:54.800 [INF] RPCS: Disconnected websocket client 127.0.0.1:55944
+2024-05-21 16:02:54.800 [ERR] RPCS: Websocket receive error from 127.0.0.1:55943: websocket: close 1006 unexpected EOF
+2024-05-21 16:02:54.800 [INF] RPCS: Disconnected websocket client 127.0.0.1:55943
+2024-05-21 16:04:30.395 [INF] RPCS: New websocket client 127.0.0.1:55961
+2024-05-21 16:04:30.396 [INF] RPCS: New websocket client 127.0.0.1:55962
+2024-05-21 16:04:31.033 [ERR] RPCS: Websocket receive error from 127.0.0.1:55962: read tcp4 127.0.0.1:18556->127.0.0.1:55962: read: connection reset by peer
+2024-05-21 16:04:31.033 [INF] RPCS: Disconnected websocket client 127.0.0.1:55962
+2024-05-21 16:04:31.033 [ERR] RPCS: Websocket receive error from 127.0.0.1:55961: websocket: close 1006 unexpected EOF
+2024-05-21 16:04:31.033 [INF] RPCS: Disconnected websocket client 127.0.0.1:55961
+2024-05-21 16:04:52.752 [INF] MINR: Block submitted via CPU miner accepted (hash 125ec1597a434137e528406694e5b7f37e0feaeadf698005e369dd7da4de2e16, amount 50 BTC)
+2024-05-21 16:04:52.752 [INF] MINR: Block submitted via CPU miner accepted (hash 2fd2b3f0c921e5ea730e1cc5627a6794ae852ea0bcd795899259a83328b03830, amount 50 BTC)
+2024-05-21 16:04:52.752 [INF] MINR: Block submitted via CPU miner accepted (hash 7d9af9856184d5220dcb18155652390c2cfe6786eecf30ea6e04943818040ecb, amount 50 BTC)
+2024-05-21 16:04:52.752 [INF] MINR: Block submitted via CPU miner accepted (hash 42286ed197284a43215dec221aab34fa5510a511258919f83ab7e6b873d0a3e2, amount 50 BTC)
+2024-05-21 16:04:52.752 [INF] MINR: Block submitted via CPU miner accepted (hash 22d72e2df4d2202687950790435725ab1d136daa177fa52f2bc00b64c02f11d0, amount 50 BTC)
+2024-05-21 16:04:52.753 [INF] MINR: Block submitted via CPU miner accepted (hash 7b883389796865b6242063dafc15dbbe3f5c824d57c248c8d81f28f765155178, amount 50 BTC)
+2024-05-21 16:04:52.753 [INF] MINR: Block submitted via CPU miner accepted (hash 3ecb7d38a8a170ab6e766eb040b33ce9c929f818e34e281e2bc9f9b4face79a0, amount 50 BTC)
+2024-05-21 16:04:52.753 [INF] MINR: Block submitted via CPU miner accepted (hash 1b2868a2885789ad71035bdd52cbda44571187c3846e3159d451fbc5e4217368, amount 50 BTC)
+2024-05-21 16:04:52.753 [INF] MINR: Block submitted via CPU miner accepted (hash 3d95cd9932611e2f726d9b20a61ea8922c27347b4acb22ba67aca5c132244846, amount 50 BTC)
+2024-05-21 16:04:52.753 [INF] MINR: Block submitted via CPU miner accepted (hash 76e439bfb700d4824062b61459b9c5b93cf4b83ccb52f66878ca0c4f60e4506b, amount 50 BTC)
+2024-05-21 16:04:52.754 [INF] MINR: Block submitted via CPU miner accepted (hash 09ad7ec6bacc0b9430055834a398dddc5c2fbc51f6b1fc0adebdf9a8e425e737, amount 50 BTC)
+2024-05-21 16:04:52.754 [INF] MINR: Block submitted via CPU miner accepted (hash 46a751c8717af80552e50b8001dfa59800d7b8bb8a45ae7627448d669810a0b5, amount 50 BTC)
+2024-05-21 16:04:52.754 [INF] MINR: Block submitted via CPU miner accepted (hash 144128ef274e7fa61333d2076c946f0f81e7a18d7763ab3a30ad0c35f2d7a1db, amount 50 BTC)
+2024-05-21 16:04:52.754 [INF] MINR: Block submitted via CPU miner accepted (hash 1d70bfde5ac07c92b1e16e959e0eb873e371265904e96e0af03bd7eeadf6af42, amount 50 BTC)
+2024-05-21 16:04:52.754 [INF] MINR: Block submitted via CPU miner accepted (hash 48e457bf793d9a2ddced67835ffd18ed5e33d1a70d6bd24d672c005966c61cc1, amount 50 BTC)
+2024-05-21 16:04:52.754 [INF] MINR: Block submitted via CPU miner accepted (hash 17bef86bea72ee0e40ac7c8505226e72c0343d648fe79d40b220037ca9aae5b1, amount 50 BTC)
+2024-05-21 16:04:52.755 [INF] MINR: Block submitted via CPU miner accepted (hash 0aa5694d754e5b7fb3e7629d7290c6e4839d5309de23433b6f02bc817555fcbc, amount 50 BTC)
+2024-05-21 16:04:52.755 [INF] MINR: Block submitted via CPU miner accepted (hash 443c2dd638adfe3aa2b586f6e7db9de1c8450972c150f95ef926c53b264931e9, amount 50 BTC)
+2024-05-21 16:04:52.760 [INF] MINR: Block submitted via CPU miner accepted (hash 4d896058a3ae550acce6850de7e42a3cae9418adcb21425bae15564edaa9c0ed, amount 50 BTC)
+2024-05-21 16:04:52.761 [INF] MINR: Block submitted via CPU miner accepted (hash 494b128307a49da931b2f8776c9272f8fd2c8499f049a7522eb5340aaa8be9c3, amount 50 BTC)
+2024-05-21 16:04:52.761 [INF] MINR: Block submitted via CPU miner accepted (hash 0b2990408dd024345effe9dce3cd75d7a878dbd273a7fa6c8013c7a91cb5a93d, amount 50 BTC)
+2024-05-21 16:04:52.761 [INF] MINR: Block submitted via CPU miner accepted (hash 7edfd32532be56aa1f16c3e3730f7e573bd4d0927c744263e8842413b206c921, amount 50 BTC)
+2024-05-21 16:04:52.766 [INF] MINR: Block submitted via CPU miner accepted (hash 0895f7d82045e0490a249a4365ea0ceaf2f89d345799a649ae053de6508b3c54, amount 50 BTC)
+2024-05-21 16:04:52.766 [INF] MINR: Block submitted via CPU miner accepted (hash 0b5814cc23f44f9f85afe89fe61ecf0c6ff101d6823779a3fd52f63e44a62390, amount 50 BTC)
+2024-05-21 16:04:52.766 [INF] MINR: Block submitted via CPU miner accepted (hash 2e8ea60301356e25e6d8446eb88c3ed2e4f8190e60d743f06e58cf124edf1591, amount 50 BTC)
+2024-05-21 16:04:52.766 [INF] MINR: Block submitted via CPU miner accepted (hash 4ea6a79bbc92751ef3c09ff293e0ebdacded616844ef7e4c4fd8433e2d1ceb96, amount 50 BTC)
+2024-05-21 16:04:52.771 [INF] MINR: Block submitted via CPU miner accepted (hash 37076937cf4bc846f2dfa8371221b2a4383f0e5ae57a61732139b6bd5fc6bb1a, amount 50 BTC)
+2024-05-21 16:04:52.771 [INF] MINR: Block submitted via CPU miner accepted (hash 22932de42b245ab8eeccfafa814142d3da666353d79d138b3c8ea80e036bd3eb, amount 50 BTC)
+2024-05-21 16:04:52.774 [INF] MINR: Block submitted via CPU miner accepted (hash 509e776bd0c4b976379180fc5c3de356771e5ea943b699ffa9defc62d6f2ab88, amount 50 BTC)
+2024-05-21 16:04:52.774 [INF] MINR: Block submitted via CPU miner accepted (hash 1ced629e5d4f583c2c3130621a7107bf2563777146ae7ed666cea2dea150dccd, amount 50 BTC)
+2024-05-21 16:04:52.775 [INF] MINR: Block submitted via CPU miner accepted (hash 08da01fdc5dd33f82e47260dc43a4213d3fd1260802d16ec62591e24f6611cbe, amount 50 BTC)
+2024-05-21 16:04:52.775 [INF] MINR: Block submitted via CPU miner accepted (hash 44c0aa268e8932a08707a283de95e4d3351681c816e406163993fb1762822685, amount 50 BTC)
+2024-05-21 16:04:52.775 [INF] MINR: Block submitted via CPU miner accepted (hash 756b2c8663fb05791461ffa111af0c363eab11f47f7e14b25cdb763fa2d5153e, amount 50 BTC)
+2024-05-21 16:04:52.775 [INF] MINR: Block submitted via CPU miner accepted (hash 73d0c93e763e68b939a11eee698c076e2af824905ae1cc8c3ec3bd01d47f9754, amount 50 BTC)
+2024-05-21 16:04:52.775 [INF] MINR: Block submitted via CPU miner accepted (hash 0502077e785657211d444d3a0792034b0f0dae202f27d733768b3097c5e1faa3, amount 50 BTC)
+2024-05-21 16:04:52.776 [INF] MINR: Block submitted via CPU miner accepted (hash 1b58d210009cfaadc6ca5524cfff7822e2f60768a59b08055a315f1ff4065b30, amount 50 BTC)
+2024-05-21 16:04:52.776 [INF] MINR: Block submitted via CPU miner accepted (hash 61e3e30efeca8dec9ef53c73f5f63e26f30bac9ea374f3e7c0f86d8e481e10f7, amount 50 BTC)
+2024-05-21 16:04:52.776 [INF] MINR: Block submitted via CPU miner accepted (hash 39c2fddf93ca8b84dd979f69da32802ee644eaf491111b79c3fd49f831414997, amount 50 BTC)
+2024-05-21 16:04:52.780 [INF] MINR: Block submitted via CPU miner accepted (hash 225da3687a0468c2083df3486df620c25a50de941ace8a03822548ef6d9c37b1, amount 50 BTC)
+2024-05-21 16:04:52.780 [INF] MINR: Block submitted via CPU miner accepted (hash 48d50fdf55d96974cdecd4fb3174ec2021178eacf240db771a08417141e85d83, amount 50 BTC)
+2024-05-21 16:04:52.785 [INF] MINR: Block submitted via CPU miner accepted (hash 0bcac139e1bbf7d5e21882d81695f2e96f191a92aed222349373641877ed51b1, amount 50 BTC)
+2024-05-21 16:04:52.786 [INF] MINR: Block submitted via CPU miner accepted (hash 288c6f04d0580a1ee755f9673fe2b9bb7545f4303d17c5dd941b5e8f10d7e2df, amount 50 BTC)
+2024-05-21 16:04:52.786 [INF] MINR: Block submitted via CPU miner accepted (hash 003b1f7569efe744584d89a512f6cad46c07c8d869aa4c6b6a1362a44633bd3e, amount 50 BTC)
+2024-05-21 16:04:52.791 [INF] MINR: Block submitted via CPU miner accepted (hash 5e40838693a3d08e4bd26c5784100a162e0c5a2c95cabd1a68c3791b80a13e8e, amount 50 BTC)
+2024-05-21 16:04:52.791 [INF] MINR: Block submitted via CPU miner accepted (hash 72373cbdd90169ef1d17ad2cfa940760931cb0a4ff898dc41adc3e74b28a823c, amount 50 BTC)
+2024-05-21 16:04:52.795 [INF] MINR: Block submitted via CPU miner accepted (hash 325a3ee138709e3d927f3c6a60bad667126cf1ec4ac6c92f03b96114f3fb323d, amount 50 BTC)
+2024-05-21 16:04:52.795 [INF] MINR: Block submitted via CPU miner accepted (hash 0b8e4883cc93b205e966b2576b3c1f0bf14e5ca8c31ded67bb51a673baf4d81c, amount 50 BTC)
+2024-05-21 16:04:52.795 [INF] MINR: Block submitted via CPU miner accepted (hash 4bc28e142451dc9c062eef70b80aa2fb5feb478a97eb29df438f000a25d67ae5, amount 50 BTC)
+2024-05-21 16:04:52.795 [INF] MINR: Block submitted via CPU miner accepted (hash 3e0713b7de6a0542ff140760db5ec41c7b4f73ee0df24632b3df9001d14abe48, amount 50 BTC)
+2024-05-21 16:04:52.795 [INF] MINR: Block submitted via CPU miner accepted (hash 12fe1e506183a861339d307e527cdab5bfe3a37eaefc6833d0672a6cebf119bb, amount 50 BTC)
+2024-05-21 16:04:52.795 [INF] MINR: Block submitted via CPU miner accepted (hash 5f08120a1c7d90edb97beb966f0cd94b5fa9da4105b72189ff84eadfcebbdeb2, amount 50 BTC)
+2024-05-21 16:04:52.795 [INF] MINR: Block submitted via CPU miner accepted (hash 173f3bcb8ce182df4a47a0c3a9cde2cd4f3f7cbc66f94d8d6a48904314ec8a3a, amount 50 BTC)
+2024-05-21 16:04:52.795 [INF] MINR: Block submitted via CPU miner accepted (hash 17b9604ce6042904d650a400952bd7e8f089155c2baf0e265fa6d0c473232eae, amount 50 BTC)
+2024-05-21 16:04:52.796 [INF] MINR: Block submitted via CPU miner accepted (hash 5375e02ccba1570d01423fb8932585f2de207f36ef79605c7d9b65b32ee35289, amount 50 BTC)
+2024-05-21 16:04:52.796 [INF] MINR: Block submitted via CPU miner accepted (hash 3e73d2d940e1390bccb2103a13e4d8b1914829beb0cec8937b91b5d450d8e770, amount 50 BTC)
+2024-05-21 16:04:52.800 [INF] MINR: Block submitted via CPU miner accepted (hash 29fe004c8e50058a3dac64bc7abc9519ae0f104ba11c7e768b27e7ee00d32aaf, amount 50 BTC)
+2024-05-21 16:04:52.805 [INF] MINR: Block submitted via CPU miner accepted (hash 475e9d3faac56134898c405805784c0f27bc82da2695d2da655917279344fb1a, amount 50 BTC)
+2024-05-21 16:04:52.805 [INF] MINR: Block submitted via CPU miner accepted (hash 16f52bd7bb5b051d005c393781e425bbdcd5e63e8196df1175b04eba97f54dfd, amount 50 BTC)
+2024-05-21 16:04:52.805 [INF] MINR: Block submitted via CPU miner accepted (hash 1835cb36fb0b81e05ee63466d7af9a3a2f112284cc8a443fd2f7f24c2d9bbdfb, amount 50 BTC)
+2024-05-21 16:04:52.809 [INF] MINR: Block submitted via CPU miner accepted (hash 7cc9889861cb5f42688743fa40c48bfb5e96f823f3cf1ee3b0ad5bbd587c36b5, amount 50 BTC)
+2024-05-21 16:04:52.809 [INF] MINR: Block submitted via CPU miner accepted (hash 5039a3013073443bc1e0439d5ddeebe0ab1741ff93dfdb363b7a098a13146f81, amount 50 BTC)
+2024-05-21 16:04:52.810 [INF] MINR: Block submitted via CPU miner accepted (hash 3130c4c7cf91837ac8e121b8c30e7287269cbb59094b165fc02f07fa1f37ba43, amount 50 BTC)
+2024-05-21 16:04:52.813 [INF] MINR: Block submitted via CPU miner accepted (hash 19acd3f147604681781f47237e82670b6dffd48d22970477618684eabf71a508, amount 50 BTC)
+2024-05-21 16:04:52.814 [INF] MINR: Block submitted via CPU miner accepted (hash 04af225031c9d83e0fdd4bc7790c4018e1e084f2c897718798f0a0aa75862ec5, amount 50 BTC)
+2024-05-21 16:04:52.814 [INF] MINR: Block submitted via CPU miner accepted (hash 7cffa582c2eb858ee54cd819d7319c726392ed6ad28263ff7789ab7cf383c616, amount 50 BTC)
+2024-05-21 16:04:52.814 [INF] MINR: Block submitted via CPU miner accepted (hash 38ac429d5f840857f44131c3c82ecb98ce1da46cf5d52311810cd635a61b8146, amount 50 BTC)
+2024-05-21 16:04:52.814 [INF] MINR: Block submitted via CPU miner accepted (hash 3b5bae3017227f5409d3c65613dd5ff9ab99f09c4f2531dac3ad9075567a2eb6, amount 50 BTC)
+2024-05-21 16:04:52.814 [INF] MINR: Block submitted via CPU miner accepted (hash 4ac2ec022dfe117ebe4b9d615918b87fe7f6c1ac5882003a2a88cb4493f6921c, amount 50 BTC)
+2024-05-21 16:04:52.814 [INF] MINR: Block submitted via CPU miner accepted (hash 1c5b137e808a999cefe9240cf4dd8547e381072b572987a08c5d1a582ea0f56d, amount 50 BTC)
+2024-05-21 16:04:52.815 [INF] MINR: Block submitted via CPU miner accepted (hash 3c6392cd5bf50edb53d6ca93981e9f5f15b8f4aa1c82aaec1a9773bb59074556, amount 50 BTC)
+2024-05-21 16:04:52.815 [INF] MINR: Block submitted via CPU miner accepted (hash 1204a9adeb422f5bccec2854b93c155aeadf68e64f707c3135c2409818b28d9d, amount 50 BTC)
+2024-05-21 16:04:52.819 [INF] MINR: Block submitted via CPU miner accepted (hash 5df7419ad8bee9129254f54277cde87d3a7d14512eb238e28a8d00b9247c7aa3, amount 50 BTC)
+2024-05-21 16:04:52.819 [INF] MINR: Block submitted via CPU miner accepted (hash 4d89c307131c0a109e184ce7a2acc2987533ee6916858c21dcddb0f2f6a7c3a4, amount 50 BTC)
+2024-05-21 16:04:52.820 [INF] MINR: Block submitted via CPU miner accepted (hash 4100aa84137fea5fb18b1d0701e47bf3ca5502a857f2df03d9f3be1148d5a07e, amount 50 BTC)
+2024-05-21 16:04:52.820 [INF] MINR: Block submitted via CPU miner accepted (hash 59269cece3aec2de957755aa014fe807b27801ab12a35233ae88ea7a1616f004, amount 50 BTC)
+2024-05-21 16:04:52.824 [INF] MINR: Block submitted via CPU miner accepted (hash 2dab0920bf541433d5dc00f07aa975265eaac5d9ca93d53706fb31070066bb99, amount 50 BTC)
+2024-05-21 16:04:52.824 [INF] MINR: Block submitted via CPU miner accepted (hash 69b847feadc16b559a91007d736997f8b9f049d2e035261c0c1fc7d34c944fb9, amount 50 BTC)
+2024-05-21 16:04:52.824 [INF] MINR: Block submitted via CPU miner accepted (hash 274007dcfe55fd8f1fec9149006b0b72c73671cdef39993e0fc8f8fa548ac96f, amount 50 BTC)
+2024-05-21 16:04:52.829 [INF] MINR: Block submitted via CPU miner accepted (hash 5ef94bccad79b22f22f6d9f0531635fad4feffe83811bb33b890584e61e34141, amount 50 BTC)
+2024-05-21 16:04:52.830 [INF] MINR: Block submitted via CPU miner accepted (hash 20c37705dfbbfd92c3903475412755b96cae271db042aa175edc76ed852bef1b, amount 50 BTC)
+2024-05-21 16:04:52.833 [INF] MINR: Block submitted via CPU miner accepted (hash 6eb2337083ea7a034a55702531e510619b1c7ff175bc805236331609188af221, amount 50 BTC)
+2024-05-21 16:04:52.834 [INF] MINR: Block submitted via CPU miner accepted (hash 7947dfaec9a9c6439c440f2618ae4a4ac323eb5952089130adf5c6e887ecf2ab, amount 50 BTC)
+2024-05-21 16:04:52.834 [INF] MINR: Block submitted via CPU miner accepted (hash 5a8eff5abb69b5a0af32d18ec9de56c692b1a3bff3cec363795ccb8aa39dc46e, amount 50 BTC)
+2024-05-21 16:04:52.834 [INF] MINR: Block submitted via CPU miner accepted (hash 0797135d22e362109205320d8bdd53dabb3e4017439a1b24d1b16f27e5000ba8, amount 50 BTC)
+2024-05-21 16:04:52.834 [INF] MINR: Block submitted via CPU miner accepted (hash 5f33dc2da33d2f692a640dc540ab203b68f67318517e0e30f84d7981b7040ffe, amount 50 BTC)
+2024-05-21 16:04:52.834 [INF] MINR: Block submitted via CPU miner accepted (hash 6f752808c100edcefe1dddfe6f1bf8ff7b45ac148061cbcbe96b5da5cc3dd939, amount 50 BTC)
+2024-05-21 16:04:52.834 [INF] MINR: Block submitted via CPU miner accepted (hash 2d4328bd8f0c01acf36af2e8b78c351e577c8fe6b1ecc21de7aa65bd10dbc5ac, amount 50 BTC)
+2024-05-21 16:04:52.835 [INF] MINR: Block submitted via CPU miner accepted (hash 22210c22f101167dc4916b225441cac4d1e89caf1f25060dd7c242cf47368a14, amount 50 BTC)
+2024-05-21 16:04:52.835 [INF] MINR: Block submitted via CPU miner accepted (hash 4b34dfad0961d175b964872768ebf7a9b2a48e8f1d6c9ddc366105e07c945d88, amount 50 BTC)
+2024-05-21 16:04:52.839 [INF] MINR: Block submitted via CPU miner accepted (hash 68e04236cf47bf693ea7ca425c73e2cc84411faa49e3b2adcb37da096940b7e5, amount 50 BTC)
+2024-05-21 16:04:52.839 [INF] MINR: Block submitted via CPU miner accepted (hash 412684acc379c0ee9b4daf4531e3b8f5098f9f97019a4336efb12158a5e31faa, amount 50 BTC)
+2024-05-21 16:04:52.840 [INF] MINR: Block submitted via CPU miner accepted (hash 441e76d7a951190828807e37290cd788b3797e6c5609a61453ba12808ce4e285, amount 50 BTC)
+2024-05-21 16:04:52.840 [INF] MINR: Block submitted via CPU miner accepted (hash 697390562c84f750fd797573a40858cfa26684d1d261f959394d3f25239c9acb, amount 50 BTC)
+2024-05-21 16:04:52.840 [INF] MINR: Block submitted via CPU miner accepted (hash 363314b9db83795095c8b27e1e50ec50c511837fb00f93bd6aba0fb57345163d, amount 50 BTC)
+2024-05-21 16:04:52.844 [INF] MINR: Block submitted via CPU miner accepted (hash 6f88ac5363dd0352a12b7acfc55ea8672cde6626acb6a6ac70bb6c3e54df3e5f, amount 50 BTC)
+2024-05-21 16:04:52.844 [INF] MINR: Block submitted via CPU miner accepted (hash 2f0ce806db9dc59e5872ed127cbd40bde372fa7245e8c98826af4c64cf25f825, amount 50 BTC)
+2024-05-21 16:04:52.845 [INF] MINR: Block submitted via CPU miner accepted (hash 4544e5f5741c9814b97b9e664bed3bab50cf64dd53fbb662dca55cd0f1b98a92, amount 50 BTC)
+2024-05-21 16:04:52.849 [INF] MINR: Block submitted via CPU miner accepted (hash 31be5277f8347cc4aa829a2810bb6e78f65b58608ca280f0f9dc779606e3ce25, amount 50 BTC)
+2024-05-21 16:04:52.849 [INF] MINR: Block submitted via CPU miner accepted (hash 7d61b4593ef9c9b852b5f96ed6f299bcb36a0309f8861cf3ce3a5bbffae47a1b, amount 50 BTC)
+2024-05-21 16:04:52.849 [INF] MINR: Block submitted via CPU miner accepted (hash 10fd85aebf1008ab7e470b68e5f4e4de172c7c0225a2c95ac65b3d989514171b, amount 50 BTC)
+2024-05-21 16:05:10.496 [INF] RPCS: New websocket client 127.0.0.1:55967
+2024-05-21 16:05:10.497 [INF] RPCS: New websocket client 127.0.0.1:55968
+2024-05-21 16:05:11.138 [ERR] RPCS: Websocket receive error from 127.0.0.1:55968: websocket: close 1006 unexpected EOF
+2024-05-21 16:05:11.138 [ERR] RPCS: Websocket receive error from 127.0.0.1:55967: websocket: close 1006 unexpected EOF
+2024-05-21 16:05:11.138 [INF] RPCS: Disconnected websocket client 127.0.0.1:55968
+2024-05-21 16:05:11.138 [INF] RPCS: Disconnected websocket client 127.0.0.1:55967
