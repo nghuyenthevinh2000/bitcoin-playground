@@ -45,9 +45,20 @@ const (
 )
 
 func TestMain(m *testing.M) {
-	// start a bitcoin regtest network
+	// start a bitcoin simnet network
 	reg.RunBitcoinProcess(false)
-	defer reg.Stop()
+
+	time.Sleep(3 * time.Second)
+
+	// start a wallet process
+	reg.RunWalletProcess()
+
+	defer func() {
+		// stop wallet process
+		reg.StopWallet()
+		// stop bitcoin process
+		reg.StopBitcoin()
+	}()
 
 	// run all tests
 	os.Exit(m.Run())
@@ -99,33 +110,8 @@ func TestBtcdCreateWallet(t *testing.T) {
 
 	res, err := w.Accounts(waddrmgr.KeyScopeBIP0084)
 	assert.Nil(t, err)
+	assert.Less(t, 0, len(res.Accounts))
 	t.Logf("accounts: %+v", res)
-
-	// how to fund this new wallet?
-	// create new receiving address
-	addr, err := w.NewAddress(0, waddrmgr.KeyScopeBIP0084)
-	assert.Nil(t, err)
-	t.Logf("addr: %s", addr.EncodeAddress())
-
-	// 1000 sats
-	bals, err := suite.walletClient.GetBalance("*")
-	assert.Nil(t, err)
-	t.Logf("balances: %v", bals)
-
-	sendAmount := btcutil.Amount(1e3)
-	t.Logf("send amount: %f", sendAmount.ToBTC())
-	hash, err := suite.walletClient.SendToAddress(addr, sendAmount)
-	assert.Nil(t, err)
-	t.Logf("tx hash: %s", hash.String())
-
-	// generate blocks
-	suite.generateBlocks(101)
-
-	// check for balance
-	bal, err := w.CalculateAccountBalances(0, 1)
-	assert.Nil(t, err)
-
-	t.Logf("balance: %f btc", bal.Spendable.ToBTC())
 }
 
 // go test -v -run ^TestBallGameContract$ github.com/nghuyenthevinh2000/bitcoin-playground
@@ -280,4 +266,9 @@ func (s *TestSuite) generateSeed() []byte {
 func (s *TestSuite) generateSeedString() string {
 	seed := s.generateSeed()
 	return hex.EncodeToString(seed)
+}
+
+// construct inputs and outputs to send a BTC amount to an address
+func (s *TestSuite) sendToAddress(addr btcutil.Address, amount btcutil.Amount) {
+
 }

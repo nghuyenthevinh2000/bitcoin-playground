@@ -4,7 +4,7 @@ btcd is the main provider of Bitcoin go library
 
 1. start a btcd process: `btcd --simnet --txindex -P regtest -u regtest --notls -b simnet/btcd --logdir=simnet/btcd/logs --miningaddr=sb1qu8rtzymwzkyk5rfewwczt6hgq8sjxssuhrmw7w`
 2. interact with btcd process: `btcctl --simnet -P regtest -u regtest --notls getblockchaininfo`
-3. start a btcwallet process to interact with btcd: `btcwallet -c localhost:18556 --noclienttls --noservertls -A simnet/walletdb --simnet --btcdusername=regtest --btcdpassword=regtest -u regtest -P regtest`
+3. start a btcwallet process to interact with btcd: `btcwallet --noclienttls --noservertls -A simnet/walletdb --simnet --btcdusername=regtest --btcdpassword=regtest -u regtest -P regtest`
 4. interact with btcwallet process: `btcctl --simnet -P regtest -u regtest --notls --wallet getinfo`
 
 ## Useful commands
@@ -20,3 +20,4 @@ btcd is the main provider of Bitcoin go library
 4. list accounts: `btcctl --simnet -P regtest -u regtest --notls --wallet listaccounts`
 5. check total balances: `btcctl --simnet -P regtest -u regtest --notls --wallet getbalance`
 6. check all spendable UTXOs: `btcctl --simnet -P regtest -u regtest --notls --wallet listunspent`
+7. send: `btcctl --simnet -P regtest -u regtest --notls --wallet sendtoaddress`

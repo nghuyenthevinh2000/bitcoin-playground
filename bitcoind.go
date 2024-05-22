@@ -22,22 +22,61 @@ const (
 
 // managing bitcoin regtest process
 type RegBitcoinProcess struct {
-	Cmd *exec.Cmd
+	BitcoinCmd *exec.Cmd
+	WalletCmd  *exec.Cmd
+}
+
+func (reg *RegBitcoinProcess) RunWalletProcess() {
+	// setup wallet running in simnet mode
+	reg.WalletCmd = exec.Command("btcwallet", "--simnet", "--noclienttls", "--noservertls", "-A", "simnet/walletdb", "--btcdusername", MockBtcUser, "--btcdpassword", MockBtcPass, "-u", MockBtcUser, "-P", MockBtcPass, "&")
+	// set child process group id to the same as parent process id, so that KILL signal can kill both parent and child processes
+	reg.WalletCmd.SysProcAttr = &syscall.SysProcAttr{
+		Setpgid: true,
+	}
+
+	// determine if there is already a running btcwallet process
+	if !isProcessRunning("btcwallet") {
+		if err := reg.WalletCmd.Start(); err != nil {
+			panic(err)
+		}
+	} else {
+		fmt.Println("btcwallet process already running")
+	}
+
+	// wait for wallet to start
+	time.Sleep(3 * time.Second)
+}
+
+func (reg *RegBitcoinProcess) StopWallet() {
+	if reg.WalletCmd != nil && reg.WalletCmd.Process != nil {
+		err := reg.WalletCmd.Process.Kill()
+		if err != nil {
+			panic(err)
+		}
+	}
+}
+
+func (reg *RegBitcoinProcess) LogWalletError() {
+	stderr, _ := reg.WalletCmd.StderrPipe()
+	scanner := bufio.NewScanner(stderr)
+	for scanner.Scan() {
+		fmt.Println(scanner.Text())
+	}
 }
 
 func (reg *RegBitcoinProcess) RunBitcoinProcess(genBlock bool) {
-	// setup bitcoin node running in regtest mode
+	// setup bitcoin node running in simnet mode
 	rpcUser := fmt.Sprintf("--rpcuser=%s", MockBtcUser)
 	rpcPass := fmt.Sprintf("--rpcpass=%s", MockBtcPass)
-	reg.Cmd = exec.Command("btcd", "--simnet", "--txindex", "--notls", "-b", "simnet/btcd", "--logdir", "simnet/btcd/logs", "--miningaddr", MiningAddress, rpcUser, rpcPass, "&")
+	reg.BitcoinCmd = exec.Command("btcd", "--simnet", "--txindex", "--notls", "-b", "simnet/btcd", "--logdir", "simnet/btcd/logs", "--miningaddr", MiningAddress, rpcUser, rpcPass, "&")
 	// set child process group id to the same as parent process id, so that KILL signal can kill both parent and child processes
-	reg.Cmd.SysProcAttr = &syscall.SysProcAttr{
+	reg.BitcoinCmd.SysProcAttr = &syscall.SysProcAttr{
 		Setpgid: true,
 	}
 
 	// determine if there is already a running btcd process
 	if !isProcessRunning("btcd") {
-		if err := reg.Cmd.Start(); err != nil {
+		if err := reg.BitcoinCmd.Start(); err != nil {
 			panic(err)
 		}
 	} else {
@@ -45,7 +84,7 @@ func (reg *RegBitcoinProcess) RunBitcoinProcess(genBlock bool) {
 	}
 
 	// wait for bitcoin node to start
-	time.Sleep(5 * time.Second)
+	time.Sleep(3 * time.Second)
 
 	// generate blocks
 	// if newly created bitcoin regtest, need to generate 101 blocks to finalize coinbase rewards. This is for insufficient funds
@@ -62,17 +101,17 @@ func (reg *RegBitcoinProcess) RunBitcoinProcess(genBlock bool) {
 	}
 }
 
-func (reg *RegBitcoinProcess) Stop() {
-	if reg.Cmd != nil && reg.Cmd.Process != nil {
-		err := reg.Cmd.Process.Kill()
+func (reg *RegBitcoinProcess) StopBitcoin() {
+	if reg.BitcoinCmd != nil && reg.BitcoinCmd.Process != nil {
+		err := reg.BitcoinCmd.Process.Kill()
 		if err != nil {
 			panic(err)
 		}
 	}
 }
 
-func (reg *RegBitcoinProcess) LogError() {
-	stderr, _ := reg.Cmd.StderrPipe()
+func (reg *RegBitcoinProcess) LogBitcoinError() {
+	stderr, _ := reg.BitcoinCmd.StderrPipe()
 	scanner := bufio.NewScanner(stderr)
 	for scanner.Scan() {
 		fmt.Println(scanner.Text())
@@ -84,7 +123,6 @@ func isProcessRunning(name string) bool {
 	out, err := cmd.Output()
 
 	if err != nil {
-		fmt.Printf("Error: %v", err)
 		return false
 	}
 
