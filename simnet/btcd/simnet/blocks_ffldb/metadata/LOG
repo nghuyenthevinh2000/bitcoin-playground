@@ -196,3 +196,36 @@
 16:04:52.736518 version@stat F·[2 1] S·79KiB[724B 78KiB] Sc·[0.50 0.00]
 16:04:52.747379 transaction@flush created L0@45 N·2 S·259B "\x00\x00\x00..loc,v1313":"\x00\x00\x00..\xc1^\x12,v1314"
 16:04:52.747425 version@stat F·[3 1] S·79KiB[983B 78KiB] Sc·[0.75 0.00]
+=============== May 22, 2024 (+07) ===============
+15:01:07.499061 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+15:01:07.499693 version@stat F·[3 1] S·79KiB[983B 78KiB] Sc·[0.75 0.00]
+15:01:07.499706 db@open opening
+15:01:07.499743 journal@recovery F·1
+15:01:07.500457 journal@recovery recovering @42
+15:01:07.500959 version@stat F·[3 1] S·79KiB[983B 78KiB] Sc·[0.75 0.00]
+15:01:07.537096 db@janitor F·6 G·0
+15:01:07.537149 db@open done T·37.434041ms
+15:02:05.963194 transaction@flush created L0@48 N·3 S·427B "\x00\x00\x00..fee,v1315":"\x00\x00\x00..ncy,v1317"
+15:02:05.963254 version@stat F·[4 1] S·79KiB[1KiB 78KiB] Sc·[1.00 0.00]
+15:02:05.967607 db@close closing
+15:02:05.967624 table@compaction L0·4 -> L1·1 S·79KiB Q·1317
+15:02:05.967659 table@build exiting
+15:02:05.967707 db@close done T·99.625µs
+=============== May 22, 2024 (+07) ===============
+15:02:09.118515 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+15:02:09.118676 version@stat F·[4 1] S·79KiB[1KiB 78KiB] Sc·[1.00 0.00]
+15:02:09.118691 db@open opening
+15:02:09.118742 journal@recovery F·1
+15:02:09.119069 journal@recovery recovering @46
+15:02:09.119496 version@stat F·[4 1] S·79KiB[1KiB 78KiB] Sc·[1.00 0.00]
+15:02:09.147785 db@janitor F·7 G·0
+15:02:09.147822 db@open done T·29.119166ms
+15:02:09.147885 table@compaction L0·4 -> L1·1 S·79KiB Q·1317
+15:02:09.155336 table@build created L1@51 N·1270 S·78KiB "\x00\x00\x00..ate,v51":"bid..bid,v35"
+15:02:09.155387 version@stat F·[0 1] S·78KiB[0B 78KiB] Sc·[0.00 0.00]
+15:02:09.160495 table@compaction committed F-4 S-1KiB Ke·0 D·9 T·12.545958ms
+15:02:09.163312 table@remove removed @48
+15:02:09.163860 table@remove removed @45
+15:02:09.163936 table@remove removed @44
+15:02:09.164029 table@remove removed @41
+15:02:09.165151 table@remove removed @40

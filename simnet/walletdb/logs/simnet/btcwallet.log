@@ -186,3 +186,25 @@
 2024-05-21 16:05:11.138 [WRN] RPCS: Websocket receive failed from client 127.0.0.1:55969: websocket: close 1006 unexpected EOF
 2024-05-21 16:05:11.138 [INF] RPCS: Disconnected websocket client 127.0.0.1:55969
 2024-05-21 16:17:10.878 [INF] WLLT: The wallet has been locked
+2024-05-21 16:30:38.611 [INF] BTCW: Received signal (interrupt).  Shutting down...
+2024-05-21 16:30:38.613 [WRN] BTCW: Stopping legacy RPC server...
+2024-05-21 16:30:38.614 [INF] BTCW: Legacy RPC server shutdown
+2024-05-21 16:30:38.614 [INF] BTCW: Shutdown complete2024-05-21 16:30:43.046 [WRN] BTCW: open simnet/walletdb/btcwallet.conf: no such file or directory
+2024-05-21 16:30:43.046 [INF] BTCW: Version 0.15.1-alpha
+2024-05-21 16:30:43.046 [INF] BTCW: Server TLS is disabled.  Only legacy RPC may be used
+2024-05-21 16:30:43.047 [INF] RPCS: Listening on 127.0.0.1:18554
+2024-05-21 16:30:43.047 [INF] RPCS: Listening on [::1]:18554
+2024-05-21 16:30:43.047 [INF] BTCW: Chain server RPC TLS is disabled
+2024-05-21 16:30:43.048 [INF] BTCW: Attempting RPC client connection to localhost:18556
+2024-05-21 16:30:43.053 [INF] CHNS: Established connection to RPC server localhost:18556
+2024-05-21 16:30:43.653 [INF] WLLT: Opened wallet
+2024-05-21 16:30:43.653 [INF] WLLT: RECOVERY MODE ENABLED -- rescanning for used addresses with recovery_window=250
+2024-05-21 16:30:43.682 [INF] WLLT: Started rescan from block 10fd85aebf1008ab7e470b68e5f4e4de172c7c0225a2c95ac65b3d989514171b (height 203) for 2 addresses
+2024-05-21 16:30:43.692 [INF] WLLT: Catching up block hashes to height 203, this might take a while
+2024-05-21 16:30:43.702 [INF] WLLT: Done catching up block hashes
+2024-05-21 16:30:43.702 [INF] WLLT: Finished rescan for 2 addresses (synced to block 10fd85aebf1008ab7e470b68e5f4e4de172c7c0225a2c95ac65b3d989514171b, height 203)
+2024-05-21 16:31:50.530 [INF] WLLT: The wallet has been temporarily unlocked
+2024-05-21 16:32:05.318 [INF] BTCW: Received signal (interrupt).  Shutting down...
+2024-05-21 16:32:05.318 [WRN] BTCW: Stopping legacy RPC server...
+2024-05-21 16:32:05.319 [INF] BTCW: Legacy RPC server shutdown
+2024-05-21 16:32:05.319 [INF] BTCW: Shutdown complete
