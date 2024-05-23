@@ -986,3 +986,968 @@
 2024-05-23 00:52:19.039 [ERR] RPCS: Websocket receive error from [::1]:53543: websocket: close 1006 unexpected EOF
 2024-05-23 00:52:19.040 [INF] RPCS: Disconnected websocket client [::1]:53544
 2024-05-23 00:52:19.040 [INF] RPCS: Disconnected websocket client [::1]:53543
+2024-05-23 09:54:15.720 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-23 09:54:15.720 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-23 09:54:15.761 [INF] BTCD: Block database loaded
+2024-05-23 09:54:15.765 [INF] INDX: Transaction index is enabled
+2024-05-23 09:54:15.765 [INF] INDX: Committed filter index is enabled
+2024-05-23 09:54:15.765 [INF] CHAN: Pre-alloacting for 251 MiB: 
+2024-05-23 09:54:15.769 [INF] CHAN: Loading block index...
+2024-05-23 09:54:15.771 [INF] CHAN: Chain state (height 104, hash 677238c855b191de0f6be93f1d5c160b2e5a5b954c42f1f2dfa2620aaa9b3aa0, totaltx 105, work 210)
+2024-05-23 09:54:15.773 [INF] AMGR: Loaded 0 addresses from file 'simnet/btcd/simnet/peers.json'
+2024-05-23 09:54:15.773 [INF] RPCS: RPC server listening on [::1]:18556
+2024-05-23 09:54:15.773 [INF] RPCS: RPC server listening on 127.0.0.1:18556
+2024-05-23 09:54:15.773 [INF] CMGR: Server listening on 0.0.0.0:18555
+2024-05-23 09:54:15.773 [INF] CMGR: Server listening on [::]:18555
+2024-05-23 09:54:18.753 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-23 09:54:18.753 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-23 09:54:18.753 [ERR] BTCD: resource temporarily unavailable: resource temporarily unavailable
+2024-05-23 09:54:18.753 [INF] BTCD: Shutdown complete
+2024-05-23 09:54:26.510 [INF] BTCD: Received signal (interrupt).  Shutting down...
+2024-05-23 09:54:26.510 [INF] BTCD: Gracefully shutting down the server...
+2024-05-23 09:54:26.510 [WRN] SRVR: Server shutting down
+2024-05-23 09:54:26.511 [WRN] RPCS: RPC server shutting down
+2024-05-23 09:54:26.511 [INF] RPCS: RPC server shutdown complete
+2024-05-23 09:54:26.511 [INF] SYNC: Sync manager shutting down
+2024-05-23 09:54:26.512 [INF] CHAN: Flushing UTXO cache of 97 MiB with 0 entries to disk. For large sizes, this can take up to several minutes...
+2024-05-23 09:54:26.512 [INF] AMGR: Address manager shutting down
+2024-05-23 09:54:26.513 [INF] SRVR: Server shutdown complete
+2024-05-23 09:54:26.513 [INF] BTCD: Gracefully shutting down the database...
+2024-05-23 09:54:26.530 [INF] BTCD: Shutdown complete
+2024-05-23 09:54:39.367 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-23 09:54:39.367 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-23 09:54:39.396 [INF] BTCD: Block database loaded
+2024-05-23 09:54:39.398 [INF] INDX: Transaction index is enabled
+2024-05-23 09:54:39.398 [INF] INDX: Committed filter index is enabled
+2024-05-23 09:54:39.398 [INF] CHAN: Pre-alloacting for 251 MiB: 
+2024-05-23 09:54:39.406 [INF] CHAN: Loading block index...
+2024-05-23 09:54:39.408 [INF] CHAN: Chain state (height 104, hash 677238c855b191de0f6be93f1d5c160b2e5a5b954c42f1f2dfa2620aaa9b3aa0, totaltx 105, work 210)
+2024-05-23 09:54:39.408 [INF] RPCS: RPC server listening on [::1]:18556
+2024-05-23 09:54:39.408 [INF] RPCS: RPC server listening on 127.0.0.1:18556
+2024-05-23 09:54:39.409 [INF] AMGR: Loaded 0 addresses from file 'simnet/btcd/simnet/peers.json'
+2024-05-23 09:54:39.409 [INF] CMGR: Server listening on 0.0.0.0:18555
+2024-05-23 09:54:39.409 [INF] CMGR: Server listening on [::]:18555
+2024-05-23 09:54:59.261 [INF] RPCS: New websocket client [::1]:49693
+2024-05-23 09:54:59.915 [INF] RPCS: Beginning rescan for 1 address
+2024-05-23 09:54:59.916 [INF] RPCS: Finished rescan
+2024-05-23 10:21:37.957 [ERR] RPCS: Websocket receive error from [::1]:49693: websocket: close 1006 unexpected EOF
+2024-05-23 10:21:37.958 [INF] RPCS: Disconnected websocket client [::1]:49693
+2024-05-23 10:21:38.681 [INF] RPCS: New websocket client [::1]:49777
+2024-05-23 10:21:39.316 [INF] RPCS: Beginning rescan for 1 address
+2024-05-23 10:21:39.316 [INF] RPCS: Finished rescan
+2024-05-23 10:21:55.767 [ERR] RPCS: Websocket receive error from [::1]:49777: websocket: close 1006 unexpected EOF
+2024-05-23 10:21:55.769 [INF] RPCS: Disconnected websocket client [::1]:49777
+2024-05-23 10:21:57.131 [INF] RPCS: New websocket client [::1]:49780
+2024-05-23 10:25:16.189 [ERR] RPCS: Websocket receive error from [::1]:49780: websocket: close 1006 unexpected EOF
+2024-05-23 10:25:16.189 [INF] RPCS: Disconnected websocket client [::1]:49780
+2024-05-23 10:25:23.761 [INF] RPCS: New websocket client [::1]:49811
+2024-05-23 10:25:35.021 [ERR] RPCS: Websocket receive error from [::1]:49811: websocket: close 1006 unexpected EOF
+2024-05-23 10:25:35.022 [INF] RPCS: Disconnected websocket client [::1]:49811
+2024-05-23 10:26:27.375 [INF] RPCS: New websocket client [::1]:49814
+2024-05-23 10:26:28.015 [INF] RPCS: Beginning rescan for 1 address
+2024-05-23 10:26:28.015 [INF] RPCS: Finished rescan
+2024-05-23 10:28:39.566 [ERR] RPCS: Websocket receive error from [::1]:49814: websocket: close 1006 unexpected EOF
+2024-05-23 10:28:39.566 [INF] RPCS: Disconnected websocket client [::1]:49814
+2024-05-23 10:28:42.147 [INF] RPCS: New websocket client [::1]:49823
+2024-05-23 10:28:42.795 [INF] RPCS: Beginning rescan for 1 address
+2024-05-23 10:28:42.795 [INF] RPCS: Finished rescan
+2024-05-23 10:31:55.041 [ERR] RPCS: Websocket receive error from [::1]:49823: websocket: close 1006 unexpected EOF
+2024-05-23 10:31:55.042 [INF] RPCS: Disconnected websocket client [::1]:49823
+2024-05-23 10:31:57.225 [INF] RPCS: New websocket client [::1]:49854
+2024-05-23 10:31:57.877 [INF] RPCS: Beginning rescan for 1 address
+2024-05-23 10:31:57.877 [INF] RPCS: Finished rescan
+2024-05-23 10:33:39.544 [ERR] RPCS: Websocket receive error from [::1]:49854: websocket: close 1006 unexpected EOF
+2024-05-23 10:33:39.545 [INF] RPCS: Disconnected websocket client [::1]:49854
+2024-05-23 10:33:40.856 [INF] RPCS: New websocket client [::1]:49866
+2024-05-23 10:33:41.495 [INF] RPCS: Beginning rescan for 1 address
+2024-05-23 10:33:41.496 [INF] RPCS: Finished rescan
+2024-05-23 10:34:15.351 [ERR] RPCS: Websocket receive error from [::1]:49866: websocket: close 1006 unexpected EOF
+2024-05-23 10:34:15.352 [INF] RPCS: Disconnected websocket client [::1]:49866
+2024-05-23 10:34:16.408 [INF] RPCS: New websocket client [::1]:49877
+2024-05-23 10:34:17.057 [INF] RPCS: Beginning rescan for 1 address
+2024-05-23 10:34:17.057 [INF] RPCS: Finished rescan
+2024-05-23 10:34:46.948 [ERR] RPCS: Websocket receive error from [::1]:49877: websocket: close 1006 unexpected EOF
+2024-05-23 10:34:46.950 [INF] RPCS: Disconnected websocket client [::1]:49877
+2024-05-23 10:34:47.953 [INF] RPCS: New websocket client [::1]:49891
+2024-05-23 10:34:48.595 [INF] RPCS: Beginning rescan for 1 address
+2024-05-23 10:34:48.595 [INF] RPCS: Finished rescan
+2024-05-23 10:35:13.625 [ERR] RPCS: Websocket receive error from [::1]:49891: websocket: close 1006 unexpected EOF
+2024-05-23 10:35:13.625 [INF] RPCS: Disconnected websocket client [::1]:49891
+2024-05-23 10:35:14.591 [INF] RPCS: New websocket client [::1]:49903
+2024-05-23 10:35:15.241 [INF] RPCS: Beginning rescan for 1 address
+2024-05-23 10:35:15.241 [INF] RPCS: Finished rescan
+2024-05-23 10:38:03.920 [ERR] RPCS: Websocket receive error from [::1]:49903: websocket: close 1006 unexpected EOF
+2024-05-23 10:38:03.921 [INF] RPCS: Disconnected websocket client [::1]:49903
+2024-05-23 10:38:04.835 [INF] RPCS: New websocket client [::1]:49916
+2024-05-23 10:38:05.480 [INF] RPCS: Beginning rescan for 1 address
+2024-05-23 10:38:05.480 [INF] RPCS: Finished rescan
+2024-05-23 10:42:06.393 [INF] RPCS: New websocket client [::1]:49953
+2024-05-23 10:42:06.394 [INF] RPCS: New websocket client [::1]:49954
+2024-05-23 10:42:07.621 [ERR] RPCS: Websocket receive error from [::1]:49954: read tcp6 [::1]:18556->[::1]:49954: read: connection reset by peer
+2024-05-23 10:42:07.621 [INF] RPCS: Disconnected websocket client [::1]:49954
+2024-05-23 10:42:07.622 [ERR] RPCS: Websocket receive error from [::1]:49953: websocket: close 1006 unexpected EOF
+2024-05-23 10:42:07.622 [INF] RPCS: Disconnected websocket client [::1]:49953
+2024-05-23 10:55:53.779 [INF] RPCS: New websocket client [::1]:50102
+2024-05-23 10:55:53.780 [INF] RPCS: New websocket client [::1]:50103
+2024-05-23 10:55:55.012 [ERR] RPCS: Websocket receive error from [::1]:50103: read tcp6 [::1]:18556->[::1]:50103: read: connection reset by peer
+2024-05-23 10:55:55.012 [INF] RPCS: Disconnected websocket client [::1]:50103
+2024-05-23 10:55:55.012 [ERR] RPCS: Websocket receive error from [::1]:50102: websocket: close 1006 unexpected EOF
+2024-05-23 10:55:55.012 [INF] RPCS: Disconnected websocket client [::1]:50102
+2024-05-23 10:57:00.978 [INF] RPCS: New websocket client [::1]:50107
+2024-05-23 10:57:00.979 [INF] RPCS: New websocket client [::1]:50108
+2024-05-23 10:57:01.628 [ERR] RPCS: Websocket receive error from [::1]:50108: websocket: close 1006 unexpected EOF
+2024-05-23 10:57:01.628 [INF] RPCS: Disconnected websocket client [::1]:50108
+2024-05-23 10:57:01.628 [ERR] RPCS: Websocket receive error from [::1]:50107: websocket: close 1006 unexpected EOF
+2024-05-23 10:57:01.628 [INF] RPCS: Disconnected websocket client [::1]:50107
+2024-05-23 10:59:51.797 [ERR] RPCS: Websocket receive error from [::1]:49916: websocket: close 1006 unexpected EOF
+2024-05-23 10:59:51.797 [INF] RPCS: Disconnected websocket client [::1]:49916
+2024-05-23 10:59:52.899 [INF] RPCS: New websocket client [::1]:50136
+2024-05-23 10:59:53.542 [INF] RPCS: Beginning rescan for 1 address
+2024-05-23 10:59:53.542 [INF] RPCS: Finished rescan
+2024-05-23 11:03:02.340 [ERR] RPCS: Websocket receive error from [::1]:50136: websocket: close 1006 unexpected EOF
+2024-05-23 11:03:02.340 [INF] RPCS: Disconnected websocket client [::1]:50136
+2024-05-23 11:03:03.605 [INF] RPCS: New websocket client [::1]:50145
+2024-05-23 11:03:04.250 [INF] RPCS: Beginning rescan for 1 address
+2024-05-23 11:03:04.250 [INF] RPCS: Finished rescan
+2024-05-23 11:03:38.001 [INF] MINR: Block submitted via CPU miner accepted (hash 60f45e2e326156bf7b601df57a3ad98560804c446c244899325cef58b2472f39, amount 50 BTC)
+2024-05-23 11:03:38.002 [INF] MINR: Block submitted via CPU miner accepted (hash 552148035eb2b4c498237fa33694514c2deccc44903cf4e503af887602204b20, amount 50 BTC)
+2024-05-23 11:03:38.002 [INF] MINR: Block submitted via CPU miner accepted (hash 5cb613e1d53a01ed3a5eaae329c2a753d521e5e2673e8c83242f9610f17b48a5, amount 50 BTC)
+2024-05-23 11:03:38.006 [INF] MINR: Block submitted via CPU miner accepted (hash 0f55f850643a7258743469028155827b2cc81c0d262162ad4d7ae75e71810948, amount 50 BTC)
+2024-05-23 11:03:38.006 [INF] MINR: Block submitted via CPU miner accepted (hash 2a67f70b413ddbe9908e598e8e3acd1e1b1872f524a70a3c86b6970479a9e015, amount 50 BTC)
+2024-05-23 11:03:38.011 [INF] MINR: Block submitted via CPU miner accepted (hash 597188f3b2ef91544158a9b8794575d1a97f754403c5568810aaefe0165bf441, amount 50 BTC)
+2024-05-23 11:03:38.012 [INF] MINR: Block submitted via CPU miner accepted (hash 6e3cc997c71933b74cf645c9be5cef724d62f9c355504f184c75982f3bd09049, amount 50 BTC)
+2024-05-23 11:03:38.016 [INF] MINR: Block submitted via CPU miner accepted (hash 1a3483b73d4cda18f28ee1ce099782fa8651ca4d61dbd5ec4fd77a6f2227acd4, amount 50 BTC)
+2024-05-23 11:03:38.017 [INF] MINR: Block submitted via CPU miner accepted (hash 41fa8b084072482c208cf8c7ea91f53ba5b9bbc646990645b6a1fd413c434376, amount 50 BTC)
+2024-05-23 11:03:38.017 [INF] MINR: Block submitted via CPU miner accepted (hash 4a74f452947c3b2ad7e7c61d928ec3f75f85729be81e4f176c1e15d9c8456b0e, amount 50 BTC)
+2024-05-23 11:03:38.017 [INF] MINR: Block submitted via CPU miner accepted (hash 5d77a1d3c046a38bb5793345fb6f8d6b14c4452d72a1da55c9f1758020c63ee3, amount 50 BTC)
+2024-05-23 11:03:38.022 [INF] MINR: Block submitted via CPU miner accepted (hash 1914cbcdc7f35eca08e43e1b5b77a9dc604eb2d95400e7ad959e6aa102e137e7, amount 50 BTC)
+2024-05-23 11:03:38.022 [INF] MINR: Block submitted via CPU miner accepted (hash 68f1da2701f997a40afe3e3ea08d04dd7c0722b3974ebcd9aa84929e9195e4a3, amount 50 BTC)
+2024-05-23 11:03:38.022 [INF] MINR: Block submitted via CPU miner accepted (hash 40a15be939f98992dae7c4c434dc3f1d6eb79f0daabfc94e25d98edb03f7403f, amount 50 BTC)
+2024-05-23 11:03:38.023 [INF] MINR: Block submitted via CPU miner accepted (hash 7704b49bd912c080214758dc142c1fb28ae491030277dbe2097ae851db736b23, amount 50 BTC)
+2024-05-23 11:03:38.023 [INF] MINR: Block submitted via CPU miner accepted (hash 77d652e0c7944dd1a479b1ff518b5ac6647f8e9cb8140be09682dbc3046bf71d, amount 50 BTC)
+2024-05-23 11:03:38.027 [INF] MINR: Block submitted via CPU miner accepted (hash 581c83230c73c03a2a430daf456d4ca779a5ca2ac70254c6d7cf9bb70d04af54, amount 50 BTC)
+2024-05-23 11:03:38.027 [INF] MINR: Block submitted via CPU miner accepted (hash 5ece82ef30b75b0a03ee901d50c7598f225a59f7ccc294f1fed8b45bc7d9a8e7, amount 50 BTC)
+2024-05-23 11:03:38.027 [INF] MINR: Block submitted via CPU miner accepted (hash 40de0f82082f273ae5759c892133c6b218e1b3252538d15c2176ce3ba277f3c6, amount 50 BTC)
+2024-05-23 11:03:38.031 [INF] MINR: Block submitted via CPU miner accepted (hash 686ca989ccb9ca37156e1388e65ab5154b722f8db8ffadc60abb0581fd09a524, amount 50 BTC)
+2024-05-23 11:03:38.031 [INF] MINR: Block submitted via CPU miner accepted (hash 58e83ab4550d49438c0892df308c965e36dc624cb7fba50d9576eb655c07aa2c, amount 50 BTC)
+2024-05-23 11:03:38.031 [INF] MINR: Block submitted via CPU miner accepted (hash 199a97bb8913d12c71dc5fbdb9a6ac40a6613a919529f056c26a43baa2de15da, amount 50 BTC)
+2024-05-23 11:03:38.032 [INF] MINR: Block submitted via CPU miner accepted (hash 7c23c2f560a72c262f30905e569ddd75b531f84a809b0b1a3a67b5356dd2d5fe, amount 50 BTC)
+2024-05-23 11:03:38.032 [INF] MINR: Block submitted via CPU miner accepted (hash 2cc940597f1eaf6774cbb5f4c7e0b0b2a64c5fcf32b7864d5d69f2ae35a1f751, amount 50 BTC)
+2024-05-23 11:03:38.032 [INF] MINR: Block submitted via CPU miner accepted (hash 126795728993a6cf9da6c66adc123f9333a8d8203b00b1a0ded5430c1b62b11f, amount 50 BTC)
+2024-05-23 11:03:38.032 [INF] MINR: Block submitted via CPU miner accepted (hash 2618aa90667dbef19186613b0aed78ee857f02e632a1021980081a48099ac125, amount 50 BTC)
+2024-05-23 11:03:38.032 [INF] MINR: Block submitted via CPU miner accepted (hash 69563cb72d608a785ade372d6abf10f3c36393d5ec9ca25c63df6e0bc53ecf87, amount 50 BTC)
+2024-05-23 11:03:38.032 [INF] MINR: Block submitted via CPU miner accepted (hash 7ecf981cb248a2ffdf4dc92c8141b3e4d833258222ab542080a5fe43122a3c10, amount 50 BTC)
+2024-05-23 11:03:38.033 [INF] MINR: Block submitted via CPU miner accepted (hash 68ea8adb05962de094947548cae5d044ba7a542e585f9bfd298e7eca650f6255, amount 50 BTC)
+2024-05-23 11:03:38.033 [INF] MINR: Block submitted via CPU miner accepted (hash 15275ed69ed5b3cfedd239fbd111a9cbfa608882c2cd0b38062ac3a393f7e46e, amount 50 BTC)
+2024-05-23 11:03:38.037 [INF] MINR: Block submitted via CPU miner accepted (hash 0c85b5dad8c2c420d8fc7e5fb3d4f86d4e19998b6f3dd072fb58b611fa1582d5, amount 50 BTC)
+2024-05-23 11:03:38.038 [INF] MINR: Block submitted via CPU miner accepted (hash 7288a645701ea00ba3ad26676309690fef5d6e611939f47f007f367c641daab5, amount 50 BTC)
+2024-05-23 11:03:38.038 [INF] MINR: Block submitted via CPU miner accepted (hash 6148e8309c79a866b3a6b7f0d1343577704a31938af7a57b1273548d8898d0a9, amount 50 BTC)
+2024-05-23 11:03:38.038 [INF] MINR: Block submitted via CPU miner accepted (hash 0982a914a1686db6923454d7e2fce982a3fd650beba76c3189c99129b0f0eabc, amount 50 BTC)
+2024-05-23 11:03:38.042 [INF] MINR: Block submitted via CPU miner accepted (hash 51201ccc791df7ea262add75963005b56326f9d94ffc331079b5070938aaa4c3, amount 50 BTC)
+2024-05-23 11:03:38.042 [INF] MINR: Block submitted via CPU miner accepted (hash 3d6e1e5c8269e8cea55ef6904be0aafa075c9816a4cfa6dd6e5573cdbebdee9a, amount 50 BTC)
+2024-05-23 11:03:38.042 [INF] MINR: Block submitted via CPU miner accepted (hash 7cded0a02834b8c17ed88e031643711345abedc045d47e10bacdb7a60568561b, amount 50 BTC)
+2024-05-23 11:03:38.043 [INF] MINR: Block submitted via CPU miner accepted (hash 146948012e5be1bc6b2223268d1cf4bf7e3299a793f584032cd0217eb60965db, amount 50 BTC)
+2024-05-23 11:03:38.047 [INF] MINR: Block submitted via CPU miner accepted (hash 7773165c40b53245529d4d807ad2cbce64b4f6b06b55bf72c4c47516bcc858e3, amount 50 BTC)
+2024-05-23 11:03:38.047 [INF] MINR: Block submitted via CPU miner accepted (hash 50991ffe4f37a1d38088d333b4c4648363c83ad05aea4cbfa706c6493d78c57c, amount 50 BTC)
+2024-05-23 11:03:38.047 [INF] MINR: Block submitted via CPU miner accepted (hash 1eb7c301f3a94b946956666d1297457e77eb1dfe8ed67130fffb95aba3232377, amount 50 BTC)
+2024-05-23 11:03:38.047 [INF] MINR: Block submitted via CPU miner accepted (hash 4d5aa426009c6943f36445c4a65b9618470fb6632f8e2e4f0ae1c859db0b230f, amount 50 BTC)
+2024-05-23 11:03:38.048 [INF] MINR: Block submitted via CPU miner accepted (hash 0af4b37159f24e2096e783e220622356b3417b6f6a5edbaa44f3ff9232816df5, amount 50 BTC)
+2024-05-23 11:03:38.048 [INF] MINR: Block submitted via CPU miner accepted (hash 1f94f3ff61b43c4cc6e9539f23ddc00aa375a7cf4fc2c06413033ebdd322f0f8, amount 50 BTC)
+2024-05-23 11:03:38.051 [INF] MINR: Block submitted via CPU miner accepted (hash 2dd996e1896d6a08d607a0aab5e26c84806c786d7738eee665ebc086fe305258, amount 50 BTC)
+2024-05-23 11:03:38.051 [INF] MINR: Block submitted via CPU miner accepted (hash 60eaa6ee575e10d22a28bdb9cc7900fb489f34374be3596eadb64df68e81a042, amount 50 BTC)
+2024-05-23 11:03:38.052 [INF] MINR: Block submitted via CPU miner accepted (hash 5058d55bdfec7416c1ff9d1f00056859229776238611cb6f9ba1c5e0c58ced11, amount 50 BTC)
+2024-05-23 11:03:38.052 [INF] MINR: Block submitted via CPU miner accepted (hash 2a5a210090205f0ba774618f1c217b5ec7d7ac2d94dcc5be20669272acce7152, amount 50 BTC)
+2024-05-23 11:03:38.052 [INF] MINR: Block submitted via CPU miner accepted (hash 6e3fa22ea29533dcd6f07f5634002d122b7d51174dea842d066ce3c15c45a737, amount 50 BTC)
+2024-05-23 11:03:38.052 [INF] MINR: Block submitted via CPU miner accepted (hash 08a1eb1be6ecfd97ef2df299e985efe273076ee12a8fda74152f088d2d72f124, amount 50 BTC)
+2024-05-23 11:03:38.053 [INF] MINR: Block submitted via CPU miner accepted (hash 6633b4ddc4745e7bb69f88135ecd0b70ebf372d55a89c42ed314c988394c2f80, amount 50 BTC)
+2024-05-23 11:03:38.053 [INF] MINR: Block submitted via CPU miner accepted (hash 6b412275cf746b7b5f4ef56ded88c4a5c4d459d36af8e48bae886b52408f916e, amount 50 BTC)
+2024-05-23 11:03:38.057 [INF] MINR: Block submitted via CPU miner accepted (hash 751fa9a29c97393bfe8169e9480f4086c65fb6f614162b37fc36805982e18f14, amount 50 BTC)
+2024-05-23 11:03:38.057 [INF] MINR: Block submitted via CPU miner accepted (hash 0b71b7aece4d7cb0e153f50f03f30a48d102f4eab83444baf47de08e71969d76, amount 50 BTC)
+2024-05-23 11:03:38.057 [INF] MINR: Block submitted via CPU miner accepted (hash 23e4262440b833ebac729a88e5cfbf6274cd224d258fa6df0ea46f02ad419be5, amount 50 BTC)
+2024-05-23 11:03:38.057 [INF] MINR: Block submitted via CPU miner accepted (hash 403ecd996f4ac0777ea9ce831162e26bd9d854d4e7e63a3cd9919e10faa4dafa, amount 50 BTC)
+2024-05-23 11:03:38.057 [INF] MINR: Block submitted via CPU miner accepted (hash 67dc411b1df92e8c821f59795b1bdcb627342590cb51cb02884002c2fc1e8532, amount 50 BTC)
+2024-05-23 11:03:38.062 [INF] MINR: Block submitted via CPU miner accepted (hash 75a306da0e52fb4077c975d9454745c9bc68155c824d187eee01b455afee0844, amount 50 BTC)
+2024-05-23 11:03:38.062 [INF] MINR: Block submitted via CPU miner accepted (hash 38dbf21e9c06008e3b231b8d75c7961b80416aebca39e75856623cd4913efb61, amount 50 BTC)
+2024-05-23 11:03:38.062 [INF] MINR: Block submitted via CPU miner accepted (hash 5a6d87118ae850cede53ceff481e3211eb66a574f8dd965049a054a029ecb7dd, amount 50 BTC)
+2024-05-23 11:03:38.067 [INF] MINR: Block submitted via CPU miner accepted (hash 3af50565ff90f25d5209ddd255774f12565a84e3cfccb31cbefaeb752920e943, amount 50 BTC)
+2024-05-23 11:03:38.067 [INF] MINR: Block submitted via CPU miner accepted (hash 49f3db2014b9cc046af94ee3c5fc41425fdcc91d64f5cf6d2eb15509be50701a, amount 50 BTC)
+2024-05-23 11:03:38.067 [INF] MINR: Block submitted via CPU miner accepted (hash 25a961bdcab83a13deb4df9b8ac113a883d1a5aed4f58d8c8dad9bad9cf3c3db, amount 50 BTC)
+2024-05-23 11:03:38.068 [INF] MINR: Block submitted via CPU miner accepted (hash 5df12439a49c72402cefdf9fd565b58e924e1696fb51ae940681b6cd82e9278b, amount 50 BTC)
+2024-05-23 11:03:38.071 [INF] MINR: Block submitted via CPU miner accepted (hash 0caa8c005983626d3507ee63b9da44c6e857c7275db2cf0b5755c8938c87df0d, amount 50 BTC)
+2024-05-23 11:03:38.071 [INF] MINR: Block submitted via CPU miner accepted (hash 0aeee77867391419b46082642af6d6dd70e40079971b56859b6b3d0316ff1b45, amount 50 BTC)
+2024-05-23 11:03:38.071 [INF] MINR: Block submitted via CPU miner accepted (hash 4ad97f37d360bf948bc50beec711b013bc687fbb2acca51d02e3d9cbef8b0bf0, amount 50 BTC)
+2024-05-23 11:03:38.072 [INF] MINR: Block submitted via CPU miner accepted (hash 5fc751f65351109517cbe841e29fbf94a7320fbd95f456e301c3779285da5a5c, amount 50 BTC)
+2024-05-23 11:03:38.072 [INF] MINR: Block submitted via CPU miner accepted (hash 1d374f002df0ccc086dfb5cb8e2c946da673030f7c32d9b3c245ac8ba47da743, amount 50 BTC)
+2024-05-23 11:03:38.072 [INF] MINR: Block submitted via CPU miner accepted (hash 3357a6f9e412fa804e4c9bfcdec9dbc611183a387b30b05980be59819f3939c0, amount 50 BTC)
+2024-05-23 11:03:38.072 [INF] MINR: Block submitted via CPU miner accepted (hash 7e2778149d2822ef3ecbab7f40c44b74d09ca5ad6a4e41c6d5229425ab90b889, amount 50 BTC)
+2024-05-23 11:03:38.072 [INF] MINR: Block submitted via CPU miner accepted (hash 03af2e84417419f67a283ff64418dac29f3898bbd52d0b46d94d0d15f9a77f85, amount 50 BTC)
+2024-05-23 11:03:38.072 [INF] MINR: Block submitted via CPU miner accepted (hash 5d5fa764a9ec7bed5f4771205fcdfe0b4f039134b1b0ffffb977ba54133f19f5, amount 50 BTC)
+2024-05-23 11:03:38.072 [INF] MINR: Block submitted via CPU miner accepted (hash 6a0cb29e1ee277133ce104665f6598a239f74d32612635eb033d24dad66e94ee, amount 50 BTC)
+2024-05-23 11:03:38.073 [INF] MINR: Block submitted via CPU miner accepted (hash 580480e817c3f262af44c85280a77780483b696b39e12d2bcc4f73893290a54c, amount 50 BTC)
+2024-05-23 11:03:38.076 [INF] MINR: Block submitted via CPU miner accepted (hash 762d80697e90fab94e256fbfa588af58588526496b8d9a6e4105f57dec23ef55, amount 50 BTC)
+2024-05-23 11:03:38.077 [INF] MINR: Block submitted via CPU miner accepted (hash 36d17d84e1ee3705cc5638f0e77fa39b45f5fcc4498356f0946b800a49d62778, amount 50 BTC)
+2024-05-23 11:03:38.077 [INF] MINR: Block submitted via CPU miner accepted (hash 73e40e4c2f867257ffc3af31dd7cd9c18a84030c86f6985034d1d6a8616390cb, amount 50 BTC)
+2024-05-23 11:03:38.077 [INF] MINR: Block submitted via CPU miner accepted (hash 4c442232ff295d3a4bddbe633a8bc79ef2a7b9635839b6781a9e0ed49be0f68a, amount 50 BTC)
+2024-05-23 11:03:38.081 [INF] MINR: Block submitted via CPU miner accepted (hash 7f3f573933f4f64ce1bb8196bdffa1f5af751914f9417151da731c8587c5a406, amount 50 BTC)
+2024-05-23 11:03:38.081 [INF] MINR: Block submitted via CPU miner accepted (hash 4c2dabac024bff631e0eb33742fddc63ec4f194262d4d6756f80827a1cfd09e5, amount 50 BTC)
+2024-05-23 11:03:38.081 [INF] MINR: Block submitted via CPU miner accepted (hash 66758316a9fcccfa02183982f14f25822787db46e823fdf877fff6f9b9fbe23f, amount 50 BTC)
+2024-05-23 11:03:38.086 [INF] MINR: Block submitted via CPU miner accepted (hash 08386335ecff8ce8382722237facf2118dc55a9288e92a0b74c35d6149e3a805, amount 50 BTC)
+2024-05-23 11:03:38.086 [INF] MINR: Block submitted via CPU miner accepted (hash 4765f373fb2ca772f40a8f0ddddcc076459300b617a95abd01ff1fca6051b0c3, amount 50 BTC)
+2024-05-23 11:03:38.086 [INF] MINR: Block submitted via CPU miner accepted (hash 3811588c162627402bfb03bbd6e3dce76d55455f0e82c18d77574f6cd8bc9296, amount 50 BTC)
+2024-05-23 11:03:38.087 [INF] MINR: Block submitted via CPU miner accepted (hash 44d6bdd73864190bb480d8eb5eb0b15a9a740a2c9cadefeddf29f0816eda54dd, amount 50 BTC)
+2024-05-23 11:03:38.090 [INF] MINR: Block submitted via CPU miner accepted (hash 7ba195f1fe066896b4c2e78ce8439e5f42fc3ae4358e5c7d77289f6b5badd89e, amount 50 BTC)
+2024-05-23 11:03:38.090 [INF] MINR: Block submitted via CPU miner accepted (hash 3d93acadb60986beb983e39eb9c2d0212096b072fa7dfb9b875dc131cdd35424, amount 50 BTC)
+2024-05-23 11:03:38.091 [INF] MINR: Block submitted via CPU miner accepted (hash 486a03c5aea47b6148dae31fc376cfa172518053cf529fdbce8867c193998223, amount 50 BTC)
+2024-05-23 11:03:38.091 [INF] MINR: Block submitted via CPU miner accepted (hash 4ce25e3a89a51c96694489bf3a5bb36c6918ce27837019e47e74eee294395477, amount 50 BTC)
+2024-05-23 11:03:38.091 [INF] MINR: Block submitted via CPU miner accepted (hash 6e66cb28e7584a959c229e975741a55d642f91027e99dd80dcb4aeb43a59bc50, amount 50 BTC)
+2024-05-23 11:03:38.091 [INF] MINR: Block submitted via CPU miner accepted (hash 12b05fd2434be90e9ed6a9eab21ffa64ce358f43fce30cdea6075e377e934bb7, amount 50 BTC)
+2024-05-23 11:03:38.091 [INF] MINR: Block submitted via CPU miner accepted (hash 377588a0b9c2a5b95198ce59f2f220ab86a616ae733898d726548cdb7e1da52a, amount 50 BTC)
+2024-05-23 11:03:38.091 [INF] MINR: Block submitted via CPU miner accepted (hash 5e4c4abfce68239dab7981e020fab2bab4f55c41c689f6a30b5ff52444e00fc4, amount 50 BTC)
+2024-05-23 11:03:38.092 [INF] MINR: Block submitted via CPU miner accepted (hash 68c61592aa30c84857eaaddd11f1c4f290827ef7d6d74dcd24e74991b229bce4, amount 50 BTC)
+2024-05-23 11:03:38.096 [INF] MINR: Block submitted via CPU miner accepted (hash 59800ed3e5ffece546546e5cd38ee2ea128ac1296efb7aae33e85860f0858665, amount 50 BTC)
+2024-05-23 11:03:38.096 [INF] MINR: Block submitted via CPU miner accepted (hash 133dfc96691f3a1aa8bc4eb3b90ca3f92d4dd84a3820a9b87ad9a63270f40648, amount 50 BTC)
+2024-05-23 11:03:38.096 [INF] MINR: Block submitted via CPU miner accepted (hash 6d3b779301e8fb251b79e04bc600dd406a6194679e4aacb60ee6d2ff717be5ee, amount 50 BTC)
+2024-05-23 11:03:38.101 [INF] MINR: Block submitted via CPU miner accepted (hash 6325b344550a374e64cac7071e1a4f845cf7268e1e79f85155133faaa74d6a06, amount 50 BTC)
+2024-05-23 11:03:38.101 [INF] MINR: Block submitted via CPU miner accepted (hash 1ce57b171c1a1d0257117e44b357fa3ebd1d6e948d8d829f9f74df386076603c, amount 50 BTC)
+2024-05-23 11:03:38.101 [INF] MINR: Block submitted via CPU miner accepted (hash 6403f3c1a18e38366d811fc2f958ff289380c8d2c637346eef98186b04383ee6, amount 50 BTC)
+2024-05-23 11:03:38.101 [INF] MINR: Block submitted via CPU miner accepted (hash 67b5ed18ee21d6a0e518e6035964a5e013f821e924d785ce6d46dac437bea64f, amount 50 BTC)
+2024-05-23 11:03:38.106 [INF] MINR: Block submitted via CPU miner accepted (hash 0e3cade3828adb28a365e93f02d312d4e1a790542c6cec521ffc03de8552523a, amount 50 BTC)
+2024-05-23 11:03:38.106 [INF] MINR: Block submitted via CPU miner accepted (hash 5fbc58d39aeee6a90ee63a8a5c1a895c891533362e50bcb7a8e7b7841697d50e, amount 50 BTC)
+2024-05-23 11:03:38.106 [INF] MINR: Block submitted via CPU miner accepted (hash 33a43dc06acff26343222708a5c4dcaefa940a5947c75b40c3bbb7fe125aecc7, amount 50 BTC)
+2024-05-23 11:03:38.107 [INF] MINR: Block submitted via CPU miner accepted (hash 335164590d1df0fbf21aa98eeeb86b907439fb37c1e4a12603d4c64f6ee5c834, amount 50 BTC)
+2024-05-23 11:03:38.110 [INF] MINR: Block submitted via CPU miner accepted (hash 0f933e6940af282c50c768e4763a7d71cfc35df34c1175312a8f1fec002ab704, amount 50 BTC)
+2024-05-23 11:03:38.110 [INF] MINR: Block submitted via CPU miner accepted (hash 2393513118b88f15ab01c89bedc887b824d481157cf62515f2e5942e9c963c11, amount 50 BTC)
+2024-05-23 11:03:38.110 [INF] MINR: Block submitted via CPU miner accepted (hash 45b96f497b7714a1ed8195d5fdf2807ee6b6bd15d893879bebf9d24c1068695d, amount 50 BTC)
+2024-05-23 11:03:38.111 [INF] MINR: Block submitted via CPU miner accepted (hash 3c15005c9740336eeca47717607aae6bcc9c8ffa0b0f382afef3c4767cfe19f5, amount 50 BTC)
+2024-05-23 11:03:38.111 [INF] MINR: Block submitted via CPU miner accepted (hash 7a76f744005544076a0c28e3361a5265ae6e27f4127f8037acbdd368870c161f, amount 50 BTC)
+2024-05-23 11:03:38.111 [INF] MINR: Block submitted via CPU miner accepted (hash 024396b6cc6e8320aba22ec5a062b9dd89e06dd28fde2dc4d97dfb760f42dbb7, amount 50 BTC)
+2024-05-23 11:03:38.111 [INF] MINR: Block submitted via CPU miner accepted (hash 4e24b5de85061320e8c8ff3429fdb603a27f7cc2393b914ba6cc37bb77a6d971, amount 50 BTC)
+2024-05-23 11:03:38.111 [INF] MINR: Block submitted via CPU miner accepted (hash 14f6aa0d161b1903f31791c54cae5d39b1066ea57b9d93647141215df4f9875f, amount 50 BTC)
+2024-05-23 11:03:38.111 [INF] MINR: Block submitted via CPU miner accepted (hash 5310fac7f2bc8ca15e5e03a50ecf52eb3bd0f0254887ca1e266dcbffeaccffb1, amount 50 BTC)
+2024-05-23 11:03:38.112 [INF] MINR: Block submitted via CPU miner accepted (hash 285cfa29821dbc7b877d300836707fcab681fd77a5035d87c8a4cbc4da4f1748, amount 50 BTC)
+2024-05-23 11:03:38.116 [INF] MINR: Block submitted via CPU miner accepted (hash 51ef81945d9020ba6481aaf692b1dfdc5737e87bbc5b6025742852ae1e837a49, amount 50 BTC)
+2024-05-23 11:03:38.116 [INF] MINR: Block submitted via CPU miner accepted (hash 4973dd89bf94042dc9991ab9be3db001ba4a4856b816d1b4f855545631f7c030, amount 50 BTC)
+2024-05-23 11:03:38.116 [INF] MINR: Block submitted via CPU miner accepted (hash 65675f37d3eea7df409f934dd57f678165dfb72514c2a910cf6613100f178200, amount 50 BTC)
+2024-05-23 11:03:38.116 [INF] MINR: Block submitted via CPU miner accepted (hash 0609da299d6f3384e485a819284edb5650ae724a2f0b9252f19a947b8849ec65, amount 50 BTC)
+2024-05-23 11:03:38.117 [INF] MINR: Block submitted via CPU miner accepted (hash 7c685acedd75a412bd4020ee9731ee480d1bd9dc9258a588af94f1f9ad5db05a, amount 50 BTC)
+2024-05-23 11:03:38.121 [INF] MINR: Block submitted via CPU miner accepted (hash 1d30c5df610c4b3324d4326b3ea821a4304e6caab92d71c320204ef62e1d1f79, amount 50 BTC)
+2024-05-23 11:03:38.121 [INF] MINR: Block submitted via CPU miner accepted (hash 033400805944010e3531bc017e2bd738ffde54785dfd0f99c6b373bdba8ad668, amount 50 BTC)
+2024-05-23 11:03:38.121 [INF] MINR: Block submitted via CPU miner accepted (hash 78a59118779c32536f943b98d10b89289afa43b38b4b8aeb80c80fbc38b04ad2, amount 50 BTC)
+2024-05-23 11:03:38.121 [INF] MINR: Block submitted via CPU miner accepted (hash 2efc886e3fdb6ad98bd4a5f00b5c44b96f80577495376a37f053b698d2770dbc, amount 50 BTC)
+2024-05-23 11:03:38.126 [INF] MINR: Block submitted via CPU miner accepted (hash 3934e70e8f81f201e2badb511e5c5a1dc21ede73d91b3bb4d16fdfaf42b8ba1e, amount 50 BTC)
+2024-05-23 11:03:38.126 [INF] MINR: Block submitted via CPU miner accepted (hash 12093ffb8a70ca4474a8c365251448d5c4833a0cb3baf20a56579420d0a65d79, amount 50 BTC)
+2024-05-23 11:03:38.126 [INF] MINR: Block submitted via CPU miner accepted (hash 1ba073a45b5b9bab2e0b35e81aa601cafe4b3be0faf77c675ec4f202c6ad0d9b, amount 50 BTC)
+2024-05-23 11:03:38.130 [INF] MINR: Block submitted via CPU miner accepted (hash 630346993fe32c8e3450dbb27c691e7601b8f9d8166c6ae9e16da5411ed688ad, amount 50 BTC)
+2024-05-23 11:03:38.130 [INF] MINR: Block submitted via CPU miner accepted (hash 6b4f1a50a00c1f56e88549df803c190bb670107460550f6f6bc0839323bf92cb, amount 50 BTC)
+2024-05-23 11:03:38.130 [INF] MINR: Block submitted via CPU miner accepted (hash 09852687d8870499ea967dc5dbaafa3414ce43d2f8af4292d30ba34703e53c29, amount 50 BTC)
+2024-05-23 11:03:38.131 [INF] MINR: Block submitted via CPU miner accepted (hash 38a5819efd63b8754940604d04ba5174d8c5ade54b3db32220bc0c82cf667ff0, amount 50 BTC)
+2024-05-23 11:03:38.131 [INF] MINR: Block submitted via CPU miner accepted (hash 2e04cb731fab58647805a4bce03f251165c7f01b13cc5c00954eb62e33614fdd, amount 50 BTC)
+2024-05-23 11:03:38.131 [INF] MINR: Block submitted via CPU miner accepted (hash 4531f5057fa7e5b4e9b5b9b8f3c8d2e61c5265ee26124dc97161bcd2b008ff52, amount 50 BTC)
+2024-05-23 11:03:38.131 [INF] MINR: Block submitted via CPU miner accepted (hash 1fd102e2aad9dda0b2c4fdf3674629d64dc1670517039dee1277ff47ab0a19be, amount 50 BTC)
+2024-05-23 11:03:38.131 [INF] MINR: Block submitted via CPU miner accepted (hash 79631b023d9e69855acd5a1a3faa1d2f8ca49128a3719adb06fa5d0889c15bb2, amount 50 BTC)
+2024-05-23 11:03:38.132 [INF] MINR: Block submitted via CPU miner accepted (hash 60897b27df50acad8bba05d4a0e1da61f887b6b55280a1eb8b0f5822da57a1ec, amount 50 BTC)
+2024-05-23 11:03:38.142 [INF] MINR: Block submitted via CPU miner accepted (hash 4d703f24cf1e2e4460c7c26171bbfeda4bfbc00ba81c06a5e8f2decf072a82f2, amount 50 BTC)
+2024-05-23 11:03:38.152 [INF] MINR: Block submitted via CPU miner accepted (hash 79345d8a5c1e5c9a3c1f3725809cfbc23d934a69e46e6d6db47bcb33799c67db, amount 50 BTC)
+2024-05-23 11:03:38.152 [INF] MINR: Block submitted via CPU miner accepted (hash 6e42170f5566c7528774a5057843de45f018a8ffe4cad4def232dcbb7b365efa, amount 50 BTC)
+2024-05-23 11:03:38.156 [INF] MINR: Block submitted via CPU miner accepted (hash 678a292f5fb7b439c44393afadd7305f14189a73a054f8d96d4b7bb634d74c89, amount 50 BTC)
+2024-05-23 11:03:38.157 [INF] MINR: Block submitted via CPU miner accepted (hash 1564c97f330d5393ebe2076fd385f40c53d4c7829631d15dba3a9084290bf155, amount 50 BTC)
+2024-05-23 11:03:38.161 [INF] MINR: Block submitted via CPU miner accepted (hash 527a24020d3f287c1f52f1d6f90b7836f53f4aa750d61b611bd9f531ab4f736d, amount 50 BTC)
+2024-05-23 11:03:38.161 [INF] MINR: Block submitted via CPU miner accepted (hash 6298532bc88f8417ca6d9dac7235f32f75c0c8edf9a8c8918427cbf770bd8cf7, amount 50 BTC)
+2024-05-23 11:03:38.161 [INF] MINR: Block submitted via CPU miner accepted (hash 4019be9ea9532da4d5adee532149a64d92a3ec24ceac44a66e3aa737b0dcbdf5, amount 50 BTC)
+2024-05-23 11:03:38.161 [INF] MINR: Block submitted via CPU miner accepted (hash 68c02b9663356e1d0f4d27c419957f6c1f6acf56eb2d7fecd16dcbd4c7a4ec52, amount 50 BTC)
+2024-05-23 11:03:38.162 [INF] MINR: Block submitted via CPU miner accepted (hash 42d6731b3774fb34073646a08fc39a0ffc272fc1cdcc0e42e11c8c71c0713b2f, amount 50 BTC)
+2024-05-23 11:03:38.162 [INF] MINR: Block submitted via CPU miner accepted (hash 3f5de81476e5d2c0c91ac836846e096e2205643ecb7d70b38e760db194d0ed0a, amount 50 BTC)
+2024-05-23 11:03:38.162 [INF] MINR: Block submitted via CPU miner accepted (hash 52b6ee4930d298f732fbaa359f95d6cf6d1a927b2ad385fc502717d8baf1da9a, amount 50 BTC)
+2024-05-23 11:03:38.162 [INF] MINR: Block submitted via CPU miner accepted (hash 167179df919316dcb4c1a4991d52297b98ac3f28bb8f9d92481599097a1d817e, amount 50 BTC)
+2024-05-23 11:03:38.163 [INF] MINR: Block submitted via CPU miner accepted (hash 67e851fbecf8e9b460a7cfcf1593172a3b51bbddf3d350eb3ca577da35c2254f, amount 50 BTC)
+2024-05-23 11:03:38.163 [INF] MINR: Block submitted via CPU miner accepted (hash 433f5d6e9cdd94fb4cc0b32aa2157bfbe44cc6b1c2d8fa946956ebaac54964f2, amount 50 BTC)
+2024-05-23 11:03:38.168 [INF] MINR: Block submitted via CPU miner accepted (hash 56b3f446803f8039bf20be2a6bdd25b1429bab1c62f9bcd9dd17f5feff5e86f0, amount 50 BTC)
+2024-05-23 11:03:38.168 [INF] MINR: Block submitted via CPU miner accepted (hash 52b3dd034ad828dff7f6bc617cca7c3f365761023ec5a495b99e206b14e193b5, amount 50 BTC)
+2024-05-23 11:03:38.173 [INF] MINR: Block submitted via CPU miner accepted (hash 246e27aba28eac6862c55eb11f929defd6cd00f8470a0b53eb991e79c52c176b, amount 50 BTC)
+2024-05-23 11:03:38.173 [INF] MINR: Block submitted via CPU miner accepted (hash 7e3db44b407d910e9b6f84ecfff3aec63d4a249fd7c0cf96ab1d3f153787887a, amount 50 BTC)
+2024-05-23 11:03:38.178 [INF] MINR: Block submitted via CPU miner accepted (hash 59cdd01f6a949beeb0f8c3b855d91c0f530175ebd61e8cf4de5b46108148441f, amount 50 BTC)
+2024-05-23 11:03:38.182 [INF] MINR: Block submitted via CPU miner accepted (hash 449fee046eddaa82ca4ed154cdf2b0584bcf1d29d129a542603130bc210a2374, amount 50 BTC)
+2024-05-23 11:03:38.182 [INF] MINR: Block submitted via CPU miner accepted (hash 5aee3180dbb840cf5ad26e988e6d09c839bb205919f8dc3a2f64b3a878ccf661, amount 50 BTC)
+2024-05-23 11:03:38.182 [INF] MINR: Block submitted via CPU miner accepted (hash 393e96fc4808f96680e6569e92cee8ea38c785aa1a176da3627422d85a6a0083, amount 50 BTC)
+2024-05-23 11:03:38.182 [INF] MINR: Block submitted via CPU miner accepted (hash 1c14e2d9c3b6d4ddb863388ed39d8bfd235a08d52d02b3c0baf04a2c642fb379, amount 50 BTC)
+2024-05-23 11:03:38.182 [INF] MINR: Block submitted via CPU miner accepted (hash 670a5d194972fa678be2be09fc88c984b1adc2e2d5cf354aea8daa7d0d7e3036, amount 50 BTC)
+2024-05-23 11:03:38.183 [INF] MINR: Block submitted via CPU miner accepted (hash 7a2f0a9c317c945a6efbd1d436aa908fb30e428be90495cce85e486c4a26c33c, amount 50 BTC)
+2024-05-23 11:03:38.183 [INF] MINR: Block submitted via CPU miner accepted (hash 785063172b08b9cdeac64ba09a1d06ac75378973ff76a13246ff973d393487c2, amount 50 BTC)
+2024-05-23 11:03:38.183 [INF] MINR: Block submitted via CPU miner accepted (hash 5d6482086999286a482a6c0a4a7d3b42a5bc6a49434e34dc3e7012f41e7f6ac1, amount 50 BTC)
+2024-05-23 11:03:38.183 [INF] MINR: Block submitted via CPU miner accepted (hash 737f1902bad2731ace7054a23a9c1d8e9195356c4b137ea9eaaa9418c9648c8f, amount 50 BTC)
+2024-05-23 11:03:38.183 [INF] MINR: Block submitted via CPU miner accepted (hash 748432c5c612580a46c73fef1c40b9eadda779eb93a0527224657b7dbcdf026c, amount 50 BTC)
+2024-05-23 11:03:38.183 [INF] MINR: Block submitted via CPU miner accepted (hash 2689d065f3acbdfbf6fe5980e86812a03555069f4f68f93b316935cc62faa391, amount 50 BTC)
+2024-05-23 11:03:38.183 [INF] MINR: Block submitted via CPU miner accepted (hash 7e4d1e210214902c70022b3aec2a375660d6dad45433209e34788e35ad68001c, amount 50 BTC)
+2024-05-23 11:03:38.184 [INF] MINR: Block submitted via CPU miner accepted (hash 54405811ed63ba99ea4020f68941ce727e34d00a1e49ff1bb6433c36dd49dd87, amount 50 BTC)
+2024-05-23 11:03:38.184 [INF] MINR: Block submitted via CPU miner accepted (hash 4ca9b16fb55aa5e77a44b21ec7c3a9cadefd8a7432ea60b1b8658bc16e9de438, amount 50 BTC)
+2024-05-23 11:03:38.188 [INF] MINR: Block submitted via CPU miner accepted (hash 6e9a3e44f341005cbfb1bd7f23a1bbbd64fc392befd571b7a8a2113b19eb38df, amount 50 BTC)
+2024-05-23 11:03:38.188 [INF] MINR: Block submitted via CPU miner accepted (hash 635b5031233354428afdbcd830b95ccfb914fdd135a5042741bb7b7784c58053, amount 50 BTC)
+2024-05-23 11:03:38.192 [INF] MINR: Block submitted via CPU miner accepted (hash 73b489f1dbb2f99780ea9c80946354301d7c3b9e1365697892386d969d3b9311, amount 50 BTC)
+2024-05-23 11:03:38.193 [INF] MINR: Block submitted via CPU miner accepted (hash 4466c4df18ce7965ec12126b0172f4c29c5ceb49e6fb1d237040e28498b54bbd, amount 50 BTC)
+2024-05-23 11:03:38.197 [INF] MINR: Block submitted via CPU miner accepted (hash 3eac97f3331f73bfac47778a56dd4b7ddc2e870abd21f6d20d2e10ee69ee4cb3, amount 50 BTC)
+2024-05-23 11:03:38.197 [INF] MINR: Block submitted via CPU miner accepted (hash 608774b8409508717d41f089d4707506ed7eba14d66fa60b402940741975c147, amount 50 BTC)
+2024-05-23 11:03:38.201 [INF] MINR: Block submitted via CPU miner accepted (hash 1bf871f321f1418bf7a17f03ab4653b09af7370d589e2edc17508b382b54aa35, amount 50 BTC)
+2024-05-23 11:03:38.201 [INF] MINR: Block submitted via CPU miner accepted (hash 540c618850d1552655c2df836c6731416542e2ba2e174fd1d4f8257d2cfb8e18, amount 50 BTC)
+2024-05-23 11:03:38.201 [INF] MINR: Block submitted via CPU miner accepted (hash 7b0d5ff390838169cbffb079ab7ddc567b61c814fee59970b340590938eec82c, amount 50 BTC)
+2024-05-23 11:03:38.201 [INF] MINR: Block submitted via CPU miner accepted (hash 1f2b866b9ce0c587e64f74775d6955138a7f188fadba0535284b089a3dedf1ed, amount 50 BTC)
+2024-05-23 11:03:38.201 [INF] MINR: Block submitted via CPU miner accepted (hash 2473438040110505153cd761171c17c176328cc2db48ced7864fd538a815e18c, amount 50 BTC)
+2024-05-23 11:03:38.201 [INF] MINR: Block submitted via CPU miner accepted (hash 179b7cc6d223a76cd99dddd6959d53b5180c129502ed767b2ac930f47c724335, amount 50 BTC)
+2024-05-23 11:03:38.202 [INF] MINR: Block submitted via CPU miner accepted (hash 473c2e004c97b91b876360810c3509f87763dc7064b6139e909d171595e26e6c, amount 50 BTC)
+2024-05-23 11:03:38.202 [INF] MINR: Block submitted via CPU miner accepted (hash 478db7e3887fce3b763b928824bdfc31d973a557a534b58d925b942d3f1282da, amount 50 BTC)
+2024-05-23 11:03:38.202 [INF] MINR: Block submitted via CPU miner accepted (hash 77103012931a1268b1bf7bb55b57582c2582d6ef179be56b7a4d7be60e4f8497, amount 50 BTC)
+2024-05-23 11:03:38.202 [INF] MINR: Block submitted via CPU miner accepted (hash 00a416c30cdfe5f1ef7d804daf7115535486377810b3a51660cf3706b69b0cb0, amount 50 BTC)
+2024-05-23 11:03:38.207 [INF] MINR: Block submitted via CPU miner accepted (hash 1f426089fbfcb95da226fd4ace65e0fdcec9464a1df63cea648e85cdc9c4442a, amount 50 BTC)
+2024-05-23 11:03:38.207 [INF] MINR: Block submitted via CPU miner accepted (hash 3d29c0af34f23549fa9aa05ccf8ee1e3b5d7eb708e5a9cebfe200e30069e4cf2, amount 50 BTC)
+2024-05-23 11:03:38.207 [INF] MINR: Block submitted via CPU miner accepted (hash 39d9af48bb15342732211722e621c1f50b05b5a0635c830f3eb2723020ad76de, amount 50 BTC)
+2024-05-23 11:03:38.208 [INF] MINR: Block submitted via CPU miner accepted (hash 2e4745ba0160086eae4d961b3d21e8bd1d0d0878b0739094e3dc71f083d100c1, amount 50 BTC)
+2024-05-23 11:03:38.208 [INF] MINR: Block submitted via CPU miner accepted (hash 1e6916d9df7a19ddf0360e0b0dc7a3caa9543103929bdd11fd1787b3393abb66, amount 50 BTC)
+2024-05-23 11:03:38.211 [INF] MINR: Block submitted via CPU miner accepted (hash 2879e83bb3b4b2d4c88ad1a6995e5a980102a58ca13e6eb7e1df7ab382ae0995, amount 50 BTC)
+2024-05-23 11:03:38.211 [INF] MINR: Block submitted via CPU miner accepted (hash 7f73ef5ce722f9ed5c95077c7dccefb970bb8019f0cafe724ecd0abc2df01eaf, amount 50 BTC)
+2024-05-23 11:03:38.212 [INF] MINR: Block submitted via CPU miner accepted (hash 735c766d9f41acacafe044d0732a3fe72acca5b9542451b055c1fc33c0375a73, amount 50 BTC)
+2024-05-23 11:03:38.212 [INF] MINR: Block submitted via CPU miner accepted (hash 3566697dd01aa76340e5b9796a812929d42af9ba4ec66cc7d4eabeb2918d8eff, amount 50 BTC)
+2024-05-23 11:03:38.216 [INF] MINR: Block submitted via CPU miner accepted (hash 23fcfe2db2ea5181956bfb7d6cc846b9425d77e9a4979ac9c36978e1b9c6c665, amount 50 BTC)
+2024-05-23 11:03:38.216 [INF] MINR: Block submitted via CPU miner accepted (hash 291b7635905b2d85482f1f182dff3d7e40a3a38750d308fea2acf033f2863e7c, amount 50 BTC)
+2024-05-23 11:03:38.216 [INF] MINR: Block submitted via CPU miner accepted (hash 383cc9e2c610a3a9d716409ce1853a084f04ce10d9614190ddaab05e692146d9, amount 50 BTC)
+2024-05-23 11:03:38.216 [INF] MINR: Block submitted via CPU miner accepted (hash 17b34ff63efe73ca8d8fd0bebaf3eb9b889445f4d50fddd66b5d335441209faa, amount 50 BTC)
+2024-05-23 11:04:21.987 [INF] MINR: Block submitted via CPU miner accepted (hash 4f1bf35f22c24dec4d211a64df9d2af56765cf27dbe88674f0ab06661b615adc, amount 50.00000144 BTC)
+2024-05-23 11:04:21.988 [INF] MINR: Block submitted via CPU miner accepted (hash 52e4aa9833ec1968deaa7a0cbdf4a9abee59708842a35961656b1e3f4b973c69, amount 50 BTC)
+2024-05-23 11:04:21.988 [INF] MINR: Block submitted via CPU miner accepted (hash 37d5a8eec6b7adf39586b73807304f599d5a54472d0d2cdd4269dd914a283eda, amount 50 BTC)
+2024-05-23 11:04:21.988 [INF] MINR: Block submitted via CPU miner accepted (hash 4d19126ba2c1bc9a88d27769efeba4a97dac23e18bd9523e8b9d1d3ecab6e9c3, amount 50 BTC)
+2024-05-23 11:04:21.988 [INF] MINR: Block submitted via CPU miner accepted (hash 5c7385ea5a1600e420a314b08dce17dc0b968d796b036405c0f57a35099df8b4, amount 50 BTC)
+2024-05-23 11:04:21.988 [INF] MINR: Block submitted via CPU miner accepted (hash 42856dc4d7c01eb21dc77665fe59e130239d0d33a9b5ff81b9ab078a9ba2741b, amount 50 BTC)
+2024-05-23 11:04:21.990 [INF] MINR: Block submitted via CPU miner accepted (hash 6a74005218d696018d966ed073b206bad272561446dbed0e699351451ac8e8ce, amount 50 BTC)
+2024-05-23 11:04:21.990 [INF] MINR: Block submitted via CPU miner accepted (hash 6224706a5a5edcb0affb26e5f0bd1d68907953da1f8d5ae2e778df32c0863c7f, amount 50 BTC)
+2024-05-23 11:04:21.990 [INF] MINR: Block submitted via CPU miner accepted (hash 3d92d2ce2daf4e0307ed8ee09d3a3fe2972c14452d286e4394c7584357d86e33, amount 50 BTC)
+2024-05-23 11:04:21.995 [INF] MINR: Block submitted via CPU miner accepted (hash 0cca5ee8ad44f42be7c959f4205d918d9f11774ad03a3819997c0eb0f3dfd824, amount 50 BTC)
+2024-05-23 11:04:21.996 [INF] MINR: Block submitted via CPU miner accepted (hash 0aec7791ce79078968dd7e69ff7b870a73523b35b6d590e0a45a244b0bdd47e0, amount 50 BTC)
+2024-05-23 11:04:21.996 [INF] MINR: Block submitted via CPU miner accepted (hash 41f96f0bf1a2eba33b57149a045fd994da6eebaef4530e5234612db9664a5184, amount 50 BTC)
+2024-05-23 11:04:22.000 [INF] MINR: Block submitted via CPU miner accepted (hash 5a57df2302cfb60acf80adddbceac396fe11e1726de57e0b786f2f1f94595d27, amount 50 BTC)
+2024-05-23 11:04:22.001 [INF] MINR: Block submitted via CPU miner accepted (hash 4b0f358b19cebe6fab39e03a946ca2d7b65236603685f2cca4d70adc4a73cb77, amount 50 BTC)
+2024-05-23 11:04:22.001 [INF] MINR: Block submitted via CPU miner accepted (hash 737d157dee656057926445e0b76cec195912c8859cef20d7d80525ad41ed15f9, amount 50 BTC)
+2024-05-23 11:04:22.001 [INF] MINR: Block submitted via CPU miner accepted (hash 2a5928c5c246d0fd765ea1593b421c0d9624be802dc5e7d893b9f2930f9ad051, amount 50 BTC)
+2024-05-23 11:04:22.001 [INF] MINR: Block submitted via CPU miner accepted (hash 3f3ebaad3f7173b71c75b9d6b9ee3b161d5368b1bbe7acc567bf96ec030fb61f, amount 50 BTC)
+2024-05-23 11:04:22.002 [INF] MINR: Block submitted via CPU miner accepted (hash 63e51f4df41470df9f9c14454cbde69a17b9849d9a7d2eb2ac87792372bf6be3, amount 50 BTC)
+2024-05-23 11:04:22.002 [INF] MINR: Block submitted via CPU miner accepted (hash 268ea0783a2a98310cd772469f386f15ffcca1ffc7c8da6b24c6675dccca4a94, amount 50 BTC)
+2024-05-23 11:04:22.002 [INF] MINR: Block submitted via CPU miner accepted (hash 3727ef54018e9efb2cf98d634e631d47bd43e411809ec83b45636b9cc8c9f215, amount 50 BTC)
+2024-05-23 11:04:22.003 [INF] MINR: Block submitted via CPU miner accepted (hash 3aebd0f2dff5eee8600ab565830f7d4480a36691956179dc0a75022405f232f8, amount 50 BTC)
+2024-05-23 11:04:22.003 [INF] MINR: Block submitted via CPU miner accepted (hash 1136599c5d4a3fae90deb73d8fee8af83ec32072ebb19a51c4fde18d54e8b7e1, amount 50 BTC)
+2024-05-23 11:04:22.007 [INF] MINR: Block submitted via CPU miner accepted (hash 78287f8f1f828b8a15950b93654047d5a1a2e2f492fbe566dc993e936927d09b, amount 50 BTC)
+2024-05-23 11:04:22.008 [INF] MINR: Block submitted via CPU miner accepted (hash 12ddacc5d47f7c5567fd008d48216b4576248db374a13adce227c1f1a14c1d66, amount 50 BTC)
+2024-05-23 11:04:22.009 [INF] MINR: Block submitted via CPU miner accepted (hash 1560594103b27b5ff7c3f220cc7726bc7234e0bfca6e81d6f24cb4b98fe205cc, amount 50 BTC)
+2024-05-23 11:04:22.009 [INF] MINR: Block submitted via CPU miner accepted (hash 57e6d820cd97349b9341e5b9ffa79b89858ef38988d78cfcfb3f26761bfa0d93, amount 50 BTC)
+2024-05-23 11:04:22.014 [INF] MINR: Block submitted via CPU miner accepted (hash 241f6c7d395fc5eb60b04340f79a79dda0c66339098bb2c963b2b7ee6b89c86d, amount 50 BTC)
+2024-05-23 11:04:22.014 [INF] MINR: Block submitted via CPU miner accepted (hash 7d6737363ca28d5c81d6cb5daf581d2f9b12c0800419fe0ea0e25c924d665fee, amount 50 BTC)
+2024-05-23 11:04:22.014 [INF] MINR: Block submitted via CPU miner accepted (hash 4d94b0ac77651e9c65964aa19afb1b94e58a81668c969da9dcc894e0adb5093f, amount 50 BTC)
+2024-05-23 11:04:22.018 [INF] MINR: Block submitted via CPU miner accepted (hash 79cd72e17931abb0653879c06f7406dcec2779bad0f62137433ed5876a425677, amount 50 BTC)
+2024-05-23 11:04:22.019 [INF] MINR: Block submitted via CPU miner accepted (hash 71cf0aa2d17bcf2d98feee5ec0d618368bdede85709dcb95f3fadc0b2741d7bc, amount 50 BTC)
+2024-05-23 11:04:22.019 [INF] MINR: Block submitted via CPU miner accepted (hash 63a32b400089c611a67c28b72c95b9004d9f1030174853ad5ab142ab5f3a47f7, amount 50 BTC)
+2024-05-23 11:04:22.020 [INF] MINR: Block submitted via CPU miner accepted (hash 21e1314ef07aa78b352fa4d0b7916f18296f995e254d1c72dbcaa238e0f355f5, amount 50 BTC)
+2024-05-23 11:04:22.023 [INF] MINR: Block submitted via CPU miner accepted (hash 6c16a5541ea921547b5d5e770a12f60961f88790962b1f5eb0d934abeb080190, amount 50 BTC)
+2024-05-23 11:04:22.024 [INF] MINR: Block submitted via CPU miner accepted (hash 21f5001963dd7c86f3711eb899ddb3ce25568bfe01046270017f3329f3f11fb7, amount 50 BTC)
+2024-05-23 11:04:22.024 [INF] MINR: Block submitted via CPU miner accepted (hash 1a7da71d48726ca0de1e7c98679cb98a5b6ec204e142ac22ba1f2b77cf1aa6a5, amount 50 BTC)
+2024-05-23 11:04:22.025 [INF] MINR: Block submitted via CPU miner accepted (hash 0942784bcbf47d8d516aa3e44c7c3b78afd30618c5bb0190e1146f5884d3736f, amount 50 BTC)
+2024-05-23 11:04:22.025 [INF] MINR: Block submitted via CPU miner accepted (hash 7fee3f2fbb4b317c8c2e4dfc339af29e151fa4cf6926771444813fa3a77626d8, amount 50 BTC)
+2024-05-23 11:04:22.029 [INF] MINR: Block submitted via CPU miner accepted (hash 417cddc5b1f0848759e97f2b6351a9179e4c9a60e588de0a16cd153bfd116dc9, amount 50 BTC)
+2024-05-23 11:04:22.030 [INF] MINR: Block submitted via CPU miner accepted (hash 591941b985d97e7bf57771fbb9c4f7c3d50189c974614794fe455905b6a5b909, amount 50 BTC)
+2024-05-23 11:04:22.030 [INF] MINR: Block submitted via CPU miner accepted (hash 5ca739f89368c47df68dcaa40d6d841e8ac8a1373b2549e4fe4bf1e2dc0e66b9, amount 50 BTC)
+2024-05-23 11:04:22.034 [INF] MINR: Block submitted via CPU miner accepted (hash 1605904eef516087e472727ae93641380a6326137ec4396ee4c50ee68aad039f, amount 50 BTC)
+2024-05-23 11:04:22.035 [INF] MINR: Block submitted via CPU miner accepted (hash 697040f19d67e931ea4418e5ba34c8ed13f92bfbd66c65f23f8db1904406991b, amount 50 BTC)
+2024-05-23 11:04:22.036 [INF] MINR: Block submitted via CPU miner accepted (hash 7f3d1d96818c197602f808321b62492afc586fdd0440aef5fa586ff0c6100af6, amount 50 BTC)
+2024-05-23 11:04:22.040 [INF] MINR: Block submitted via CPU miner accepted (hash 070bd854e1fde9ae284401c3c5ab12c2053ba34327aaf83e0c06671518ce266c, amount 50 BTC)
+2024-05-23 11:04:22.041 [INF] MINR: Block submitted via CPU miner accepted (hash 61f8ee6100b555652982ead5d20d88af121e1c9a53f274f9ff3177c32c6198aa, amount 50 BTC)
+2024-05-23 11:04:22.041 [INF] MINR: Block submitted via CPU miner accepted (hash 2ea490f45c06fa80832b8ae6be160e96c488b0a5000b5e312804e4271670b046, amount 50 BTC)
+2024-05-23 11:04:22.045 [INF] MINR: Block submitted via CPU miner accepted (hash 65e7d3556ffafc1971ec3df8dfd357c63451f3c924d5a83361b9c85d3b32bcd7, amount 50 BTC)
+2024-05-23 11:04:22.046 [INF] MINR: Block submitted via CPU miner accepted (hash 7edb4372269c2188904a91fd4b8e53756035d224f11c5f4a12b23229a5834f41, amount 50 BTC)
+2024-05-23 11:04:22.046 [INF] MINR: Block submitted via CPU miner accepted (hash 5e0946118c8d04713b7b87405610164eb49ee5b9891011d7e8e236496a9a22b7, amount 50 BTC)
+2024-05-23 11:04:22.046 [INF] MINR: Block submitted via CPU miner accepted (hash 0d282d721b66f58d32016689f97aec9904fc1e87f32e6f1fc3970f214df4571d, amount 50 BTC)
+2024-05-23 11:04:22.050 [INF] MINR: Block submitted via CPU miner accepted (hash 4bc488e86b55662e874afccd458a27d4d2a04b9ffade3ebde04162c559f6e23e, amount 50 BTC)
+2024-05-23 11:04:22.050 [INF] MINR: Block submitted via CPU miner accepted (hash 1314dd9f3d982112682ec1db4fb6afc449626f5d84d15bd3002d9bf83cb9eec4, amount 50 BTC)
+2024-05-23 11:04:22.050 [INF] MINR: Block submitted via CPU miner accepted (hash 37eafad3b311ce752e362f15f1f107f2c0eefff4f680e285428e19528e257061, amount 50 BTC)
+2024-05-23 11:04:22.051 [INF] MINR: Block submitted via CPU miner accepted (hash 2ba9cd870a14d79834558bb168480cfae3a085bcd7a1b10900cddbb309120521, amount 50 BTC)
+2024-05-23 11:04:22.051 [INF] MINR: Block submitted via CPU miner accepted (hash 64941381ae8d905d36fc6ee7001f6cf3c7e8c1c4ed30524d367b751664496b31, amount 50 BTC)
+2024-05-23 11:04:22.055 [INF] MINR: Block submitted via CPU miner accepted (hash 03fab15a1b4a0d6fe3988a5625177e48073bff7bc9e51cb4c5b20297bf8b1d10, amount 50 BTC)
+2024-05-23 11:04:22.055 [INF] MINR: Block submitted via CPU miner accepted (hash 4bc1bde930e156cd61d83c543be5f27e9bd1127f7df10fc7508b96e0476114e9, amount 50 BTC)
+2024-05-23 11:04:22.055 [INF] MINR: Block submitted via CPU miner accepted (hash 6c2dab2d27b41ee891e996675061debf7ce17007954798579f57d72097e67fb4, amount 50 BTC)
+2024-05-23 11:04:22.056 [INF] MINR: Block submitted via CPU miner accepted (hash 6928431a2c7945a01b609e15e93acc5eaa0f2651eeba7ed678d135d86060b9e3, amount 50 BTC)
+2024-05-23 11:04:22.060 [INF] MINR: Block submitted via CPU miner accepted (hash 3d3d332772b999eeddcdabbcb75c89ca3b99c58a3b8366d2b7933a25c5015a17, amount 50 BTC)
+2024-05-23 11:04:22.061 [INF] MINR: Block submitted via CPU miner accepted (hash 1fc13135af0d27a68d3132eca15a528154fe1e18a96e616d8ae0fc38ed97fafb, amount 50 BTC)
+2024-05-23 11:04:22.065 [INF] MINR: Block submitted via CPU miner accepted (hash 4ec6f2d893821e50e9d7fb88aca9becfe232a09e923816f73675cf393365f76b, amount 50 BTC)
+2024-05-23 11:04:22.066 [INF] MINR: Block submitted via CPU miner accepted (hash 4b6e72b1b0eb2c556599f0fa6a99e9bf4519dd0d105a52fcb2be51332a32c657, amount 50 BTC)
+2024-05-23 11:04:22.066 [INF] MINR: Block submitted via CPU miner accepted (hash 28c25f2f88ca2725ef3e7bf00dc2fd762111ca7afda00480a17eb64aed11b2ad, amount 50 BTC)
+2024-05-23 11:04:22.070 [INF] MINR: Block submitted via CPU miner accepted (hash 6e5658531d4934bd00c47e4ced34236aad77b52daa3938af44b891587a649f58, amount 50 BTC)
+2024-05-23 11:04:22.070 [INF] MINR: Block submitted via CPU miner accepted (hash 661eeec850dc6f96fc58095d3d4f47250ff68b7d92d10a039a69bc93d829ca93, amount 50 BTC)
+2024-05-23 11:04:22.070 [INF] MINR: Block submitted via CPU miner accepted (hash 0ce13428f7292840d785c522fb0cbacbc9f050a4bbd763e1c970cfe9168b3be0, amount 50 BTC)
+2024-05-23 11:04:22.070 [INF] MINR: Block submitted via CPU miner accepted (hash 70fc9ae70f3e20a3f5171a24254cb99d63cd30920316cf2fb0c03c4277b09dc1, amount 50 BTC)
+2024-05-23 11:04:22.074 [INF] MINR: Block submitted via CPU miner accepted (hash 25ede93e87c492945fa3c8710f324908667cf02b50626132dc6389f4cd526b58, amount 50 BTC)
+2024-05-23 11:04:22.074 [INF] MINR: Block submitted via CPU miner accepted (hash 40607f828c349700403521be47a61ff21e772c61ffaa9c394f5215627e383aaf, amount 50 BTC)
+2024-05-23 11:04:22.075 [INF] MINR: Block submitted via CPU miner accepted (hash 2bce76e9dbe20e48581c0600ada971f8f12be2baf7e2d3293fcb4c561f2cab93, amount 50 BTC)
+2024-05-23 11:04:22.079 [INF] MINR: Block submitted via CPU miner accepted (hash 1db9b76ed40a323a6ac971327ad6e1e1cea044636582359a4f20e8378c5f021e, amount 50 BTC)
+2024-05-23 11:04:22.079 [INF] MINR: Block submitted via CPU miner accepted (hash 7ff443724937fb963b7c36cd2e40c9c085937886bd2657a5a506c9ff4ff96759, amount 50 BTC)
+2024-05-23 11:04:22.080 [INF] MINR: Block submitted via CPU miner accepted (hash 3b6ce1f950d9ccf27cc99e09c6b4aab5e16488e51ef966ed7870a93dca51592c, amount 50 BTC)
+2024-05-23 11:04:22.080 [INF] MINR: Block submitted via CPU miner accepted (hash 030103cc47290c616bb6f94a7d42cd6e8ac3137191c417c2951bbeebf87a1e49, amount 50 BTC)
+2024-05-23 11:04:22.084 [INF] MINR: Block submitted via CPU miner accepted (hash 26ca208a8e9f4a09ea4e3984f12ab4c6b22c2264d38c9ec184ed0a4de0c2540d, amount 50 BTC)
+2024-05-23 11:04:22.084 [INF] MINR: Block submitted via CPU miner accepted (hash 687358b644474b4f16ea70601f6c1b26f9e59ac6d0afb95bc28f50a1585e2817, amount 50 BTC)
+2024-05-23 11:04:22.085 [INF] MINR: Block submitted via CPU miner accepted (hash 18b4ed7292a509cd26f8e69dae478b03370095d9b21e79e7ebef291453aa6761, amount 50 BTC)
+2024-05-23 11:04:22.085 [INF] MINR: Block submitted via CPU miner accepted (hash 12adebab57883834ec3fd7f8e12498163a32c953d7d0846ed5583e329a9a7bba, amount 50 BTC)
+2024-05-23 11:04:22.089 [INF] MINR: Block submitted via CPU miner accepted (hash 5b192f23c8e7214444f611cc9fb1cb943e3c0df9a3a6a552259286372be73cb7, amount 50 BTC)
+2024-05-23 11:04:22.089 [INF] MINR: Block submitted via CPU miner accepted (hash 54c074fecfe14bca61434e5fb9d8f0ab7099ccbc385a20937296b70aea91e9d1, amount 50 BTC)
+2024-05-23 11:04:22.090 [INF] MINR: Block submitted via CPU miner accepted (hash 0a5f90a5981c68930381426db9dd0a0de2c2f0b23f4364f0235616be28fa3869, amount 50 BTC)
+2024-05-23 11:04:22.090 [INF] MINR: Block submitted via CPU miner accepted (hash 5671b6ced108485d5e5bd5e69c5d75a4953aeb6ebeb56c87b3f3a22c8ecd17ea, amount 50 BTC)
+2024-05-23 11:04:22.094 [INF] MINR: Block submitted via CPU miner accepted (hash 1739a5ba0873bd17605d0f7cd0658037e9d5d20d8d4f8abca8b574b148004364, amount 50 BTC)
+2024-05-23 11:04:22.094 [INF] MINR: Block submitted via CPU miner accepted (hash 687f7bee3fd3a74dac61a1cbc8ed3cdc5e471557d1c5358c772de6e7d32d1479, amount 50 BTC)
+2024-05-23 11:04:22.095 [INF] MINR: Block submitted via CPU miner accepted (hash 4521fedfeb7519267cf64acacccef16f3b7971894329a7569d600c561a9c4bf7, amount 50 BTC)
+2024-05-23 11:04:22.099 [INF] MINR: Block submitted via CPU miner accepted (hash 1d097e3a5ad47037d2c8a0b7b7260309788f217f94f38adcd11ce1395a8a7503, amount 50 BTC)
+2024-05-23 11:04:22.099 [INF] MINR: Block submitted via CPU miner accepted (hash 398fae9d0a9ce95be4025cb82ca71894a570942b83c47d4ed7418e9785314ffb, amount 50 BTC)
+2024-05-23 11:04:22.100 [INF] MINR: Block submitted via CPU miner accepted (hash 747f1788d40753511192ddd0438b5a8968d215d2553ffaefe7ba6de1c96d55d4, amount 50 BTC)
+2024-05-23 11:04:22.104 [INF] MINR: Block submitted via CPU miner accepted (hash 12eaff21cdf5f5e7294edbb776beaa93a1fbe3f127942ca33cda8ac67c820dad, amount 50 BTC)
+2024-05-23 11:04:22.104 [INF] MINR: Block submitted via CPU miner accepted (hash 72d4b30ae6707f2009d0f54beb8cb266a2e34c13fd2f54ca43b335328551bac6, amount 50 BTC)
+2024-05-23 11:04:22.105 [INF] MINR: Block submitted via CPU miner accepted (hash 715ba14cb37d6b896690ed33789f666bffeb5efcae41f9ddb91cdcd6012df737, amount 50 BTC)
+2024-05-23 11:04:22.109 [INF] MINR: Block submitted via CPU miner accepted (hash 0debb34c0f4886220d69e3296c6e60ed2acfb5daa2342b79e40c525b1fa92885, amount 50 BTC)
+2024-05-23 11:04:22.109 [INF] MINR: Block submitted via CPU miner accepted (hash 5e1010c2970cec5c3e6e807781ef92d1dbfbe2e9fd2882e09562c3ff71544966, amount 50 BTC)
+2024-05-23 11:04:22.109 [INF] MINR: Block submitted via CPU miner accepted (hash 1c57842121216fccca6c2ee31aa3586edc946907181e6b31498e4fd5f01be426, amount 50 BTC)
+2024-05-23 11:04:22.113 [INF] MINR: Block submitted via CPU miner accepted (hash 613630689d74acec842df1701c47eb8718d363fa94449ffced44373b4e0e33ef, amount 50 BTC)
+2024-05-23 11:04:22.113 [INF] MINR: Block submitted via CPU miner accepted (hash 01177d588a2db0ae11c2c4c1605edc937c2c3f8fc419aa2250e69078ab7ceba6, amount 50 BTC)
+2024-05-23 11:04:22.113 [INF] MINR: Block submitted via CPU miner accepted (hash 5aad10ad7b6e1626cea41eaaacb9ad5398fe9e293a8da5e1a05f32c9b03da12f, amount 50 BTC)
+2024-05-23 11:04:22.114 [INF] MINR: Block submitted via CPU miner accepted (hash 27a2052c1d9f42f2f5ee68621cba2b84abcb55021f12d10a61753aff1a03868c, amount 50 BTC)
+2024-05-23 11:04:52.728 [INF] RPCS: New websocket client [::1]:50174
+2024-05-23 11:04:52.729 [INF] RPCS: New websocket client [::1]:50175
+2024-05-23 11:04:53.955 [ERR] RPCS: Websocket receive error from [::1]:50174: websocket: close 1006 unexpected EOF
+2024-05-23 11:04:53.955 [ERR] RPCS: Websocket receive error from [::1]:50175: websocket: close 1006 unexpected EOF
+2024-05-23 11:04:53.955 [INF] RPCS: Disconnected websocket client [::1]:50174
+2024-05-23 11:04:53.955 [INF] RPCS: Disconnected websocket client [::1]:50175
+2024-05-23 11:07:50.710 [INF] RPCS: New websocket client [::1]:50185
+2024-05-23 11:07:50.711 [INF] RPCS: New websocket client [::1]:50186
+2024-05-23 11:07:51.336 [ERR] RPCS: Websocket receive error from [::1]:50186: websocket: close 1006 unexpected EOF
+2024-05-23 11:07:51.336 [INF] RPCS: Disconnected websocket client [::1]:50186
+2024-05-23 11:07:51.336 [ERR] RPCS: Websocket receive error from [::1]:50185: websocket: close 1006 unexpected EOF
+2024-05-23 11:07:51.336 [INF] RPCS: Disconnected websocket client [::1]:50185
+2024-05-23 11:09:39.292 [INF] RPCS: New websocket client [::1]:50209
+2024-05-23 11:09:39.293 [INF] RPCS: New websocket client [::1]:50210
+2024-05-23 11:09:39.941 [ERR] RPCS: Websocket receive error from [::1]:50209: websocket: close 1006 unexpected EOF
+2024-05-23 11:09:39.942 [ERR] RPCS: Websocket receive error from [::1]:50210: websocket: close 1006 unexpected EOF
+2024-05-23 11:09:39.942 [INF] RPCS: Disconnected websocket client [::1]:50209
+2024-05-23 11:09:39.942 [INF] RPCS: Disconnected websocket client [::1]:50210
+2024-05-23 11:11:29.344 [INF] RPCS: New websocket client [::1]:50216
+2024-05-23 11:11:29.345 [INF] RPCS: New websocket client [::1]:50217
+2024-05-23 11:11:29.988 [ERR] RPCS: Websocket receive error from [::1]:50217: websocket: close 1006 unexpected EOF
+2024-05-23 11:11:29.988 [ERR] RPCS: Websocket receive error from [::1]:50216: websocket: close 1006 unexpected EOF
+2024-05-23 11:11:29.988 [INF] RPCS: Disconnected websocket client [::1]:50216
+2024-05-23 11:11:29.988 [INF] RPCS: Disconnected websocket client [::1]:50217
+2024-05-23 11:11:57.750 [INF] RPCS: New websocket client [::1]:50221
+2024-05-23 11:11:57.751 [INF] RPCS: New websocket client [::1]:50222
+2024-05-23 11:11:58.394 [ERR] RPCS: Websocket receive error from [::1]:50222: websocket: close 1006 unexpected EOF
+2024-05-23 11:11:58.394 [ERR] RPCS: Websocket receive error from [::1]:50221: websocket: close 1006 unexpected EOF
+2024-05-23 11:11:58.394 [INF] RPCS: Disconnected websocket client [::1]:50222
+2024-05-23 11:11:58.394 [INF] RPCS: Disconnected websocket client [::1]:50221
+2024-05-23 11:12:06.756 [INF] MINR: Block submitted via CPU miner accepted (hash 27f541ae82d8eb101afb676737fc9f9bf4ab0f3a827dcd291e829192c005a1ea, amount 50.00000144 BTC)
+2024-05-23 11:12:06.756 [INF] MINR: Block submitted via CPU miner accepted (hash 391bba4a425ce598a02df48b302b37ab68139228f2885e43e296261032d1c815, amount 50 BTC)
+2024-05-23 11:12:06.756 [INF] MINR: Block submitted via CPU miner accepted (hash 27ff59ed432618e5f187b8769fd00f56839cfa1eec9096a2b258064537fd8a37, amount 50 BTC)
+2024-05-23 11:12:06.757 [INF] MINR: Block submitted via CPU miner accepted (hash 631bc23d3ac827eeafb2b1917d62909df77cdeeb01964e2f3c04ef23f5cb1c24, amount 50 BTC)
+2024-05-23 11:12:06.757 [INF] MINR: Block submitted via CPU miner accepted (hash 57661485a55e17d2769200fd21d574dc3f4e644faa89fd1279d60b2c9a960383, amount 50 BTC)
+2024-05-23 11:12:06.757 [INF] MINR: Block submitted via CPU miner accepted (hash 1c44f57f83c707ecef4e9dc353f96004bf804b31120f27526ac430e792568814, amount 50 BTC)
+2024-05-23 11:12:06.757 [INF] MINR: Block submitted via CPU miner accepted (hash 2251ca8658a1e728b30ca893d3d0f56590352b43b2be15f2ff2d9c192391950a, amount 50 BTC)
+2024-05-23 11:12:06.757 [INF] MINR: Block submitted via CPU miner accepted (hash 679188bb0d686138d514c6d56ed6b0db8db1e32f9c1e7ee2f24fc19133507356, amount 50 BTC)
+2024-05-23 11:12:06.757 [INF] MINR: Block submitted via CPU miner accepted (hash 4cfa5744958ee618dc318c132563552b641875e0f31bfdef4b23ddfdbfab7b49, amount 50 BTC)
+2024-05-23 11:12:06.758 [INF] MINR: Block submitted via CPU miner accepted (hash 6d17bf3f3e2c8c9d254c6448a95641fc1dbb28e6a51cc0a3e3fe925b60839d0d, amount 50 BTC)
+2024-05-23 11:12:06.758 [INF] MINR: Block submitted via CPU miner accepted (hash 4fb19a27562904c659ee56a607d03c797ee5399eac2bbc61bb8e73a0288036fc, amount 50 BTC)
+2024-05-23 11:12:06.758 [INF] MINR: Block submitted via CPU miner accepted (hash 2af942be9c6cc480ea5268ddde8ee8cd1d624550c96dad8d63c40d682c6379bd, amount 50 BTC)
+2024-05-23 11:12:06.758 [INF] MINR: Block submitted via CPU miner accepted (hash 0a8425334b43d28113f5feeb2aeb903869f0907ee3057d69b3e7a41db58ea159, amount 50 BTC)
+2024-05-23 11:12:06.759 [INF] MINR: Block submitted via CPU miner accepted (hash 131f8490d24b83cd315a28514e01f3024cc08de4018e99d22f88cf42f6c7a88a, amount 50 BTC)
+2024-05-23 11:12:06.759 [INF] MINR: Block submitted via CPU miner accepted (hash 533dc1adf2c67874b424eaa4070c4765116e918d400119a64ab6abfa525bb6e8, amount 50 BTC)
+2024-05-23 11:12:06.763 [INF] MINR: Block submitted via CPU miner accepted (hash 67b54490c202021bb6815ec03860c36366a6f4abdc37b509fb75e1c7dc611b6b, amount 50 BTC)
+2024-05-23 11:12:06.763 [INF] MINR: Block submitted via CPU miner accepted (hash 6e5213ef72856c72511479a8930b13532d62ddec22c24e078beac5421f1364ef, amount 50 BTC)
+2024-05-23 11:12:06.763 [INF] MINR: Block submitted via CPU miner accepted (hash 3b310aaaf555d841d4b8e1ce4a31db444c0aa71a2c85a00c384ee3aa4b05ef63, amount 50 BTC)
+2024-05-23 11:12:06.769 [INF] MINR: Block submitted via CPU miner accepted (hash 39b1ba02da15d65ec40944e5464e8e19ebf1d09d63a8c62ac6cce1955ea8c301, amount 50 BTC)
+2024-05-23 11:12:06.769 [INF] MINR: Block submitted via CPU miner accepted (hash 14728c287797c49d23126da7873a7361b1b80a00cd22ff390a0041c2c9cebe62, amount 50 BTC)
+2024-05-23 11:12:06.769 [INF] MINR: Block submitted via CPU miner accepted (hash 35ef054e95b58ac1ecc1cce7777def00048bd99ddf9e79b02de3bcd8693baa97, amount 50 BTC)
+2024-05-23 11:12:06.770 [INF] MINR: Block submitted via CPU miner accepted (hash 189e82d9c8d146347e2c109d50a6f176356ead5fcc53e130b5101ac5deb81e0b, amount 50 BTC)
+2024-05-23 11:12:06.770 [INF] MINR: Block submitted via CPU miner accepted (hash 1015487ddaafc7842f404d523d3adf851614abb62611fc79026b6dc32513e009, amount 50 BTC)
+2024-05-23 11:12:06.770 [INF] MINR: Block submitted via CPU miner accepted (hash 5271469bff1b21581c3e5c2b8a3bcc8176fe8e38185042e6ba3756e3f1aebfbe, amount 50 BTC)
+2024-05-23 11:12:06.770 [INF] MINR: Block submitted via CPU miner accepted (hash 2bae2fc7e93890d329e53b177e6ba9dd45d135c877b10e4360aa451b795c11b0, amount 50 BTC)
+2024-05-23 11:12:06.770 [INF] MINR: Block submitted via CPU miner accepted (hash 0a03bc66c46fbf7a536bfcf947ac8fe8e7ccd36b9a97830bff408fccdb048010, amount 50 BTC)
+2024-05-23 11:12:06.770 [INF] MINR: Block submitted via CPU miner accepted (hash 1d37c6fb6bf2448a0d04c4b08a95eec439f2a7b4cd66b760454850453408450d, amount 50 BTC)
+2024-05-23 11:12:06.771 [INF] MINR: Block submitted via CPU miner accepted (hash 2316ccfa9cae02bd482838515935bd5c2b09de096f2b900df46301f821efeaeb, amount 50 BTC)
+2024-05-23 11:12:06.771 [INF] MINR: Block submitted via CPU miner accepted (hash 0c06e1b4ff4d0047bd8b98de219e46713dfe2f6781378ad1f0af22dabd40fb81, amount 50 BTC)
+2024-05-23 11:12:06.771 [INF] MINR: Block submitted via CPU miner accepted (hash 6128ef7bb63ea94fff3fc60c1423eee1d78279c10538ff0dc578e45871dc9cfa, amount 50 BTC)
+2024-05-23 11:12:06.771 [INF] MINR: Block submitted via CPU miner accepted (hash 49332a28a8f22b0a7ae95730b479395bf3a23d9c10a0bb5afcfc8b4603dc3275, amount 50 BTC)
+2024-05-23 11:12:06.772 [INF] MINR: Block submitted via CPU miner accepted (hash 1fbd02f2c8a82655bf72391fe6489ab36e52acd307887420df454afc0cbf3976, amount 50 BTC)
+2024-05-23 11:12:06.772 [INF] MINR: Block submitted via CPU miner accepted (hash 584067c63de05d4162a4075258f8aa7c28d07d84d47f53766768f39a52cd361b, amount 50 BTC)
+2024-05-23 11:12:06.772 [INF] MINR: Block submitted via CPU miner accepted (hash 13f1a46f44f0474c252a4e3fdac8c757376d93fd2c9bd795a5c27a60b7f5d9b8, amount 50 BTC)
+2024-05-23 11:12:06.776 [INF] MINR: Block submitted via CPU miner accepted (hash 262b2e725eebcc9d9f3c77ef326b2696a9df4990a45abe8fd05e3990ca470ef5, amount 50 BTC)
+2024-05-23 11:12:06.776 [INF] MINR: Block submitted via CPU miner accepted (hash 4376eeae4f3a1f46d52cfc40c6c6116ceaa4f7c94ff7488860778cc778a8ad86, amount 50 BTC)
+2024-05-23 11:12:06.777 [INF] MINR: Block submitted via CPU miner accepted (hash 3ab92b806f7e07e220b83d6d5e0d1494bfeed31a07c51445347b9f38720fe1bb, amount 50 BTC)
+2024-05-23 11:12:06.777 [INF] MINR: Block submitted via CPU miner accepted (hash 6b64a39563dda577475d782de13e917d92211cd45d0a72660e3dd91604520fdf, amount 50 BTC)
+2024-05-23 11:12:06.777 [INF] MINR: Block submitted via CPU miner accepted (hash 4adb33f6c6726c39fae980c5782815ea85269054dce14cdf3c60834a57e72aae, amount 50 BTC)
+2024-05-23 11:12:06.781 [INF] MINR: Block submitted via CPU miner accepted (hash 308fd3f5a6fca75f51979145c4ca7e7e9d59de77818ce73d0036fc25913919a3, amount 50 BTC)
+2024-05-23 11:12:06.782 [INF] MINR: Block submitted via CPU miner accepted (hash 4453584ee1c368e478be52f32f1f0374242daa9e623349c9863b9603cc1619f9, amount 50 BTC)
+2024-05-23 11:12:06.786 [INF] MINR: Block submitted via CPU miner accepted (hash 344a842fed0ce5e49dfc2bbacd1fc266a5856fd0fd180a1c134851d1ee6e98f2, amount 50 BTC)
+2024-05-23 11:12:06.786 [INF] MINR: Block submitted via CPU miner accepted (hash 1898825fe36ebbc6bb7085e55a5d0d857338f1088eeff28bc97661ef99cb5d9b, amount 50 BTC)
+2024-05-23 11:12:06.786 [INF] MINR: Block submitted via CPU miner accepted (hash 5a5f21c4e0ae044ac3d1cee34700d4d2b7454fc5e078bc8760818c20f515412a, amount 50 BTC)
+2024-05-23 11:12:06.787 [INF] MINR: Block submitted via CPU miner accepted (hash 32b84900b6efa805a59e6c0627456efafd97f27364adc08cc808c86151c6f81e, amount 50 BTC)
+2024-05-23 11:12:06.787 [INF] MINR: Block submitted via CPU miner accepted (hash 084ccb5f22e4db2bfc8b737dbbf47fab952c3886c203ae8dc25457efa3a16247, amount 50 BTC)
+2024-05-23 11:12:06.787 [INF] MINR: Block submitted via CPU miner accepted (hash 70aa28efc765feec0b6c4c8b21da77fbc9e980f39e2a03ab002f564d3cf90f2c, amount 50 BTC)
+2024-05-23 11:12:06.791 [INF] MINR: Block submitted via CPU miner accepted (hash 2f50d0bc2055e14174277371b0629d360ecc0b7d83ce0c607d4dd409a67a176b, amount 50 BTC)
+2024-05-23 11:12:06.792 [INF] MINR: Block submitted via CPU miner accepted (hash 79e98c4076efbc8a07975c890df99b8701d9a237e2429d8343b2a1e833a591a6, amount 50 BTC)
+2024-05-23 11:12:06.792 [INF] MINR: Block submitted via CPU miner accepted (hash 55153a59ce72e714ac99528725f6b0aea46a5d5d5361e440ca43c593f066f121, amount 50 BTC)
+2024-05-23 11:12:06.792 [INF] MINR: Block submitted via CPU miner accepted (hash 3f2f45a32df6056d11861103e4601a04097e0fe2fa1de8e30ff292d32d72f2d0, amount 50 BTC)
+2024-05-23 11:12:06.797 [INF] MINR: Block submitted via CPU miner accepted (hash 3e79fdae3ad44191a3fa059d71165bcddaef081b4ec1c3919eea6c81298b5d0e, amount 50 BTC)
+2024-05-23 11:12:06.797 [INF] MINR: Block submitted via CPU miner accepted (hash 3f90c0b7b617a321f44bb4888fc44f1157c87c31c2fd7acdcc1170f1226c3843, amount 50 BTC)
+2024-05-23 11:12:06.797 [INF] MINR: Block submitted via CPU miner accepted (hash 7e8518466f910cf8548029e0273ce29fa65009f8e9ca6030f0bfeff73698f465, amount 50 BTC)
+2024-05-23 11:12:06.801 [INF] MINR: Block submitted via CPU miner accepted (hash 1fbafa8ba3c2a521f8f76db6a08cd84a5ee5408dd6478c0e52ea02e9ba9f5d25, amount 50 BTC)
+2024-05-23 11:12:06.801 [INF] MINR: Block submitted via CPU miner accepted (hash 2b3406aff27c7df893747feae86024088435f1d45a54768fef1bd3449ea9020a, amount 50 BTC)
+2024-05-23 11:12:06.801 [INF] MINR: Block submitted via CPU miner accepted (hash 2f265282c26768b8f98b92521de7c4ab63d0281f2158a6eb023744622a03199f, amount 50 BTC)
+2024-05-23 11:12:06.802 [INF] MINR: Block submitted via CPU miner accepted (hash 08d649ef81d1229c06f1ce31a0b6f35e061a249b84fd16897cf175d4227fafb1, amount 50 BTC)
+2024-05-23 11:12:06.808 [INF] MINR: Block submitted via CPU miner accepted (hash 1387c148987cd35f89630a438689a06645ebc95ca1f38decf56b53aeb6713225, amount 50 BTC)
+2024-05-23 11:12:06.818 [INF] MINR: Block submitted via CPU miner accepted (hash 33bfd34666bff52418cb022ab9d3f03466ac1bf222ef89cfcdca2100e8516de0, amount 50 BTC)
+2024-05-23 11:12:06.818 [INF] MINR: Block submitted via CPU miner accepted (hash 62d41b9d161b0de6c1271c5afed5be159d29d1d56451f60a8b17a8840b541a04, amount 50 BTC)
+2024-05-23 11:12:06.823 [INF] MINR: Block submitted via CPU miner accepted (hash 724c90389f686190b997df0e7c7b3c77c64b221e2b8dd6216a956ce407ddc600, amount 50 BTC)
+2024-05-23 11:12:06.823 [INF] MINR: Block submitted via CPU miner accepted (hash 6e7e7d27491d9e96262953c836f3170f12c672f8ab8d68d7094d59ee036f2e47, amount 50 BTC)
+2024-05-23 11:12:06.823 [INF] MINR: Block submitted via CPU miner accepted (hash 00bf439c78c6719044681b40b38464ef253ee794dd1216348641e525662a65c3, amount 50 BTC)
+2024-05-23 11:12:06.827 [INF] MINR: Block submitted via CPU miner accepted (hash 49e9f9a95e7363622c9719746bfbc3bef7bfd9746018c5536335163abc736065, amount 50 BTC)
+2024-05-23 11:12:06.827 [INF] MINR: Block submitted via CPU miner accepted (hash 2eca326a1d348704c2fb98c5c50ddd75ed23427b86027b5da2c8152452ef76c2, amount 50 BTC)
+2024-05-23 11:12:06.828 [INF] MINR: Block submitted via CPU miner accepted (hash 11481b1169911e32bb2aac200016da8b5fc141733c1967425d4976464377c14e, amount 50 BTC)
+2024-05-23 11:12:06.828 [INF] MINR: Block submitted via CPU miner accepted (hash 265728a4ae9662a7f4c9ff5417ab20a2f90c07662585945b2c3ee1b0520fffee, amount 50 BTC)
+2024-05-23 11:12:06.828 [INF] MINR: Block submitted via CPU miner accepted (hash 6a02c67621e7a33bca8d5e62d39c8e43de3151554af84e69e9bc6003e61df46d, amount 50 BTC)
+2024-05-23 11:12:06.832 [INF] MINR: Block submitted via CPU miner accepted (hash 4439bf6f0154510b9cf0f7e1cdb10483323fbb36a4954e07a9250f49603e6208, amount 50 BTC)
+2024-05-23 11:12:06.832 [INF] MINR: Block submitted via CPU miner accepted (hash 2af2ac8dd400c3eeb9e3c0c2980108e94c7ee6ca40702c423ed98ed1e1b42dc4, amount 50 BTC)
+2024-05-23 11:12:06.832 [INF] MINR: Block submitted via CPU miner accepted (hash 1e0eee0e25c932fe0442fb27a6ffe69734ae11a0b3dc9791a0ebb3cb7365c2fe, amount 50 BTC)
+2024-05-23 11:12:06.832 [INF] MINR: Block submitted via CPU miner accepted (hash 61b631574a188c4cbb046ec99657407dae71cb3c1fdb579b24dd49b261c15966, amount 50 BTC)
+2024-05-23 11:12:06.833 [INF] MINR: Block submitted via CPU miner accepted (hash 23137ba2501bdeec877d21038645e62d7d985759c055866bcc4160cdfa8cde37, amount 50 BTC)
+2024-05-23 11:12:06.833 [INF] MINR: Block submitted via CPU miner accepted (hash 040ac1156dadec678a561404088b4ee878c6b49e8cb9f5aebf817e49102e38a6, amount 50 BTC)
+2024-05-23 11:12:06.833 [INF] MINR: Block submitted via CPU miner accepted (hash 78589dd6b8b9cfa83d8dd6995b80dba6d473ef10fce5a0352e7a23ce27fb9998, amount 50 BTC)
+2024-05-23 11:12:06.833 [INF] MINR: Block submitted via CPU miner accepted (hash 31123bea363bc568a42144bdd009e27142e3ac4c2b9bd6a8dc5df71346e9dad4, amount 50 BTC)
+2024-05-23 11:12:06.833 [INF] MINR: Block submitted via CPU miner accepted (hash 5f9ac10aec00ce3398e0979042e1a2011b2691e1d2d8591c5cde8754257a0f5c, amount 50 BTC)
+2024-05-23 11:12:06.839 [INF] MINR: Block submitted via CPU miner accepted (hash 61ecafe4c3385f33d807b5c13c6061894b214d1625ceb1aff21e5e3cd25eaf35, amount 50 BTC)
+2024-05-23 11:12:06.839 [INF] MINR: Block submitted via CPU miner accepted (hash 7ef50b96ba18323b7c1297663039a165fede7a3ffd7e16ae63f832c05f1aff43, amount 50 BTC)
+2024-05-23 11:12:06.839 [INF] MINR: Block submitted via CPU miner accepted (hash 7de11fd5d34dfde6df8d5355ecacb88f601048aa31249582ba4ecbe44d12893a, amount 50 BTC)
+2024-05-23 11:12:06.842 [INF] MINR: Block submitted via CPU miner accepted (hash 3edc47a6b0567f8048d5b28c0a12e0aa05b2b92d5d3340ce937376ea05441498, amount 50 BTC)
+2024-05-23 11:12:06.844 [INF] MINR: Block submitted via CPU miner accepted (hash 013cbeebb68acf2dd7c952b31d4712e729c745ff1a1e61af88ec8cddfd817f7d, amount 50 BTC)
+2024-05-23 11:12:06.844 [INF] MINR: Block submitted via CPU miner accepted (hash 5c759e5b580729780ed2e0e3d2175d6d6950cf95f28ba579d424a2196a89072a, amount 50 BTC)
+2024-05-23 11:12:06.848 [INF] MINR: Block submitted via CPU miner accepted (hash 768b1d7c90c35b8f52ab0397a9413e05f9d8c686282acb088b8f351c873f23bd, amount 50 BTC)
+2024-05-23 11:12:06.848 [INF] MINR: Block submitted via CPU miner accepted (hash 70a8476221bae549b40df05cccee546574d646b52016c1cb8464fc4f76e6f379, amount 50 BTC)
+2024-05-23 11:12:06.849 [INF] MINR: Block submitted via CPU miner accepted (hash 5bc08af281f250ce8c9e4d9e0042699b23ddbec5433b152ee8c178b6d9d78323, amount 50 BTC)
+2024-05-23 11:12:06.849 [INF] MINR: Block submitted via CPU miner accepted (hash 0b80ecbdbfe7dbd1a58baa535b8713b47ea4f8089e070623d718a5d3f37cf471, amount 50 BTC)
+2024-05-23 11:12:06.849 [INF] MINR: Block submitted via CPU miner accepted (hash 5cb72e7a2ed1259ab7e7f6aeb1238da377c7418e686181d3fe8efcf663b88459, amount 50 BTC)
+2024-05-23 11:12:06.853 [INF] MINR: Block submitted via CPU miner accepted (hash 0d3c8e92e6b694046ba2d07c0a417bd73c4edbcea6ab91e7994d3ead3c2c84ab, amount 50 BTC)
+2024-05-23 11:12:06.853 [INF] MINR: Block submitted via CPU miner accepted (hash 5e31f392226574d827ec143592fb94a283fccd3888aaf4ad825646a46cfc8a8a, amount 50 BTC)
+2024-05-23 11:12:06.853 [INF] MINR: Block submitted via CPU miner accepted (hash 706e3bdc92bdc1d4042fff65d705d7c32947b5349a2270cb847cd4805b7ea89e, amount 50 BTC)
+2024-05-23 11:12:06.853 [INF] MINR: Block submitted via CPU miner accepted (hash 766eff6e37fed822d6a16783b03ea3debe42391fc4ee371bf1fdd76f1ffdeddb, amount 50 BTC)
+2024-05-23 11:12:06.854 [INF] MINR: Block submitted via CPU miner accepted (hash 2e3600f7a808a532faabaa57f614f8c1d50e72ebafec947a766267d1a1bf86ab, amount 50 BTC)
+2024-05-23 11:12:06.854 [INF] MINR: Block submitted via CPU miner accepted (hash 36c26e31e636d3a87b81becf7237d6035539ac0f8d3367d841aeecbea92fc49c, amount 50 BTC)
+2024-05-23 11:12:06.854 [INF] MINR: Block submitted via CPU miner accepted (hash 098cfb993097f98c98cf3eb759e92050275005d19bee2eeb1a4b28ecd0a5406f, amount 50 BTC)
+2024-05-23 11:12:06.854 [INF] MINR: Block submitted via CPU miner accepted (hash 61600575b2d8a71592ebe2978b5515b700ef793159ac1ed652a9b3a4d20a4ca7, amount 50 BTC)
+2024-05-23 11:12:06.854 [INF] MINR: Block submitted via CPU miner accepted (hash 5344a13541bc0a8aa830cabe6e2b1e10c7ecfb214d64de1de1e87599527a23ed, amount 50 BTC)
+2024-05-23 11:12:06.859 [INF] MINR: Block submitted via CPU miner accepted (hash 43f3d32cc930e3a94f9d822e37dff3e44e8f15ae44822bee850c943b4a794358, amount 50 BTC)
+2024-05-23 11:12:06.860 [INF] MINR: Block submitted via CPU miner accepted (hash 1ca8e29ea9c535c9e3fdb233af2304567e94c05b273ac946a990e2a3cfd3c1e8, amount 50 BTC)
+2024-05-23 11:12:22.992 [INF] RPCS: New websocket client [::1]:50229
+2024-05-23 11:12:22.993 [INF] RPCS: New websocket client [::1]:50230
+2024-05-23 11:12:23.638 [ERR] RPCS: Websocket receive error from [::1]:50229: websocket: close 1006 unexpected EOF
+2024-05-23 11:12:23.638 [ERR] RPCS: Websocket receive error from [::1]:50230: websocket: close 1006 unexpected EOF
+2024-05-23 11:12:23.638 [INF] RPCS: Disconnected websocket client [::1]:50229
+2024-05-23 11:12:23.638 [INF] RPCS: Disconnected websocket client [::1]:50230
+2024-05-23 11:13:13.262 [INF] RPCS: New websocket client [::1]:50234
+2024-05-23 11:13:13.263 [INF] RPCS: New websocket client [::1]:50235
+2024-05-23 11:13:13.902 [ERR] RPCS: Websocket receive error from [::1]:50235: websocket: close 1006 unexpected EOF
+2024-05-23 11:13:13.902 [ERR] RPCS: Websocket receive error from [::1]:50234: websocket: close 1006 unexpected EOF
+2024-05-23 11:13:13.902 [INF] RPCS: Disconnected websocket client [::1]:50235
+2024-05-23 11:13:13.902 [INF] RPCS: Disconnected websocket client [::1]:50234
+2024-05-23 11:15:48.499 [INF] BTCD: Received signal (interrupt).  Shutting down...
+2024-05-23 11:15:48.499 [INF] BTCD: Gracefully shutting down the server...
+2024-05-23 11:15:48.499 [WRN] SRVR: Server shutting down
+2024-05-23 11:15:48.499 [WRN] RPCS: RPC server shutting down
+2024-05-23 11:15:48.499 [ERR] RPCS: Websocket receive error from [::1]:50145: read tcp6 [::1]:18556->[::1]:50145: use of closed network connection
+2024-05-23 11:15:48.499 [INF] RPCS: RPC server shutdown complete
+2024-05-23 11:15:48.499 [INF] RPCS: Disconnected websocket client [::1]:50145
+2024-05-23 11:15:48.500 [INF] SYNC: Sync manager shutting down
+2024-05-23 11:15:48.500 [INF] CHAN: Flushing UTXO cache of 97 MiB with 402 entries to disk. For large sizes, this can take up to several minutes...
+2024-05-23 11:15:48.550 [INF] AMGR: Address manager shutting down
+2024-05-23 11:15:48.550 [INF] SRVR: Server shutdown complete
+2024-05-23 11:15:48.550 [INF] BTCD: Gracefully shutting down the database...
+2024-05-23 11:15:48.569 [INF] BTCD: Shutdown complete
+2024-05-23 11:15:56.299 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-23 11:15:56.299 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-23 11:15:56.330 [INF] BTCD: Block database loaded
+2024-05-23 11:15:56.333 [INF] INDX: Transaction index is enabled
+2024-05-23 11:15:56.333 [INF] INDX: Committed filter index is enabled
+2024-05-23 11:15:56.333 [INF] CHAN: Pre-alloacting for 251 MiB: 
+2024-05-23 11:15:56.342 [INF] CHAN: Loading block index...
+2024-05-23 11:15:56.346 [INF] CHAN: Chain state (height 504, hash 1ca8e29ea9c535c9e3fdb233af2304567e94c05b273ac946a990e2a3cfd3c1e8, totaltx 507, work 1010)
+2024-05-23 11:15:56.347 [INF] AMGR: Loaded 0 addresses from file 'simnet/btcd/simnet/peers.json'
+2024-05-23 11:15:56.347 [INF] RPCS: RPC server listening on [::1]:18556
+2024-05-23 11:15:56.347 [INF] RPCS: RPC server listening on 127.0.0.1:18556
+2024-05-23 11:15:56.347 [INF] CMGR: Server listening on 0.0.0.0:18555
+2024-05-23 11:15:56.347 [INF] CMGR: Server listening on [::]:18555
+2024-05-23 11:16:03.508 [INF] RPCS: New websocket client [::1]:50259
+2024-05-23 11:16:03.565 [INF] RPCS: Beginning rescan for 4 addresses
+2024-05-23 11:16:03.566 [INF] RPCS: Finished rescan
+2024-05-23 11:16:48.164 [INF] BTCD: Received signal (interrupt).  Shutting down...
+2024-05-23 11:16:48.164 [INF] BTCD: Gracefully shutting down the server...
+2024-05-23 11:16:48.164 [WRN] SRVR: Server shutting down
+2024-05-23 11:16:48.164 [WRN] RPCS: RPC server shutting down
+2024-05-23 11:16:48.165 [ERR] RPCS: Websocket receive error from [::1]:50259: read tcp6 [::1]:18556->[::1]:50259: use of closed network connection
+2024-05-23 11:16:48.165 [INF] RPCS: Disconnected websocket client [::1]:50259
+2024-05-23 11:16:48.165 [INF] RPCS: RPC server shutdown complete
+2024-05-23 11:16:48.165 [INF] SYNC: Sync manager shutting down
+2024-05-23 11:16:48.165 [INF] CHAN: Flushing UTXO cache of 97 MiB with 0 entries to disk. For large sizes, this can take up to several minutes...
+2024-05-23 11:16:48.165 [INF] AMGR: Address manager shutting down
+2024-05-23 11:16:48.165 [INF] SRVR: Server shutdown complete
+2024-05-23 11:16:48.165 [INF] BTCD: Gracefully shutting down the database...
+2024-05-23 11:16:48.175 [INF] BTCD: Shutdown complete
+2024-05-23 11:16:54.884 [INF] BTCD: Version 0.24.2-betarc1
+2024-05-23 11:16:54.885 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-05-23 11:16:54.912 [INF] BTCD: Block database loaded
+2024-05-23 11:16:54.913 [INF] INDX: Transaction index is enabled
+2024-05-23 11:16:54.913 [INF] INDX: Committed filter index is enabled
+2024-05-23 11:16:54.913 [INF] CHAN: Pre-alloacting for 251 MiB: 
+2024-05-23 11:16:54.919 [INF] CHAN: Loading block index...
+2024-05-23 11:16:54.923 [INF] CHAN: Chain state (height 504, hash 1ca8e29ea9c535c9e3fdb233af2304567e94c05b273ac946a990e2a3cfd3c1e8, totaltx 507, work 1010)
+2024-05-23 11:16:54.923 [INF] AMGR: Loaded 0 addresses from file 'simnet/btcd/simnet/peers.json'
+2024-05-23 11:16:54.923 [INF] RPCS: RPC server listening on 127.0.0.1:18556
+2024-05-23 11:16:54.923 [INF] RPCS: RPC server listening on [::1]:18556
+2024-05-23 11:16:54.924 [INF] CMGR: Server listening on 0.0.0.0:18555
+2024-05-23 11:16:54.924 [INF] CMGR: Server listening on [::]:18555
+2024-05-23 11:17:03.173 [INF] RPCS: New websocket client [::1]:50269
+2024-05-23 11:17:03.238 [INF] RPCS: Beginning rescan for 5 addresses
+2024-05-23 11:17:03.238 [INF] RPCS: Finished rescan
+2024-05-23 11:17:16.328 [INF] MINR: Block submitted via CPU miner accepted (hash 1e4b4786553230d9065675252a3dba3565060541d9f82552ee4d4e2f16c26d5f, amount 50 BTC)
+2024-05-23 11:17:16.329 [INF] MINR: Block submitted via CPU miner accepted (hash 4849c65d2e1f6c61bd0aa1fae1947f38258f86c4ab495159b53db5e915343134, amount 50 BTC)
+2024-05-23 11:17:16.329 [INF] MINR: Block submitted via CPU miner accepted (hash 60edb0fa49ffa9249798dfe0238f5581effcf5f9e1c2661d8acdb136406496e3, amount 50 BTC)
+2024-05-23 11:17:16.329 [INF] MINR: Block submitted via CPU miner accepted (hash 25acd960803f8857619a2c485890689496e40b97c2ba3a3e19b50d4e721b3e80, amount 50 BTC)
+2024-05-23 11:17:16.329 [INF] MINR: Block submitted via CPU miner accepted (hash 042fada4d448ce5facbdb2b61a5a625dc96ec45a23249f7d652c45d514d69fc6, amount 50 BTC)
+2024-05-23 11:17:16.330 [INF] MINR: Block submitted via CPU miner accepted (hash 0980fe47bbbe7f91811d63ccc1db4ef719417c764aa00f5c47ad7b394ed305d6, amount 50 BTC)
+2024-05-23 11:17:16.330 [INF] MINR: Block submitted via CPU miner accepted (hash 79fd43e780b725adf8cb1a85b250d0d4550e92f35db880e742da79af77beac5d, amount 50 BTC)
+2024-05-23 11:17:16.330 [INF] MINR: Block submitted via CPU miner accepted (hash 164407a873bdff438eb6f2b51029a0f5da302e55e96e747f75c8391602646104, amount 50 BTC)
+2024-05-23 11:17:16.330 [INF] MINR: Block submitted via CPU miner accepted (hash 251347fc146ca905789a106ae12efc55a8465aae935ea42baf274e301d7f4082, amount 50 BTC)
+2024-05-23 11:17:16.331 [INF] MINR: Block submitted via CPU miner accepted (hash 0f42450dd010191fdec253dc88de4f37ddf4679d9e8dfa2387d6de629d114d3b, amount 50 BTC)
+2024-05-23 11:17:16.331 [INF] MINR: Block submitted via CPU miner accepted (hash 5c521805ac8ec7a8b09dd0bac950a534e924894f888900b563e3d3a4f9b14711, amount 50 BTC)
+2024-05-23 11:17:16.331 [INF] MINR: Block submitted via CPU miner accepted (hash 2c0ab3fb2890fb933de2fb6278588762d96afab914451acd6c1d6cb71b6d1a05, amount 50 BTC)
+2024-05-23 11:17:16.331 [INF] MINR: Block submitted via CPU miner accepted (hash 6a61fc5fb1f5b6be8872cc7356d0b5e1fe5bcf561485e233a7ca6b3c28c0a8a2, amount 50 BTC)
+2024-05-23 11:17:16.331 [INF] MINR: Block submitted via CPU miner accepted (hash 6dc572ea97eb7ac5a8bc139bacd7c15e382e768c3cfcbbee34acad0aae6a086e, amount 50 BTC)
+2024-05-23 11:17:16.332 [INF] MINR: Block submitted via CPU miner accepted (hash 6e3737f062db8a37a7d92884b4ce11225d0ab817d40170af44c1077b9f8a658d, amount 50 BTC)
+2024-05-23 11:17:16.333 [INF] MINR: Block submitted via CPU miner accepted (hash 7b26d052c856ec2182e030eeb570fe656480cb60091689f46ffa93bfda44a37e, amount 50 BTC)
+2024-05-23 11:17:16.333 [INF] MINR: Block submitted via CPU miner accepted (hash 1a90285b4b2356b02a761cfd2bfea9f57f5213c39280eae847a632ed24a4743a, amount 50 BTC)
+2024-05-23 11:17:16.334 [INF] MINR: Block submitted via CPU miner accepted (hash 0099bf4908da56fec6f71ba343cd5b2e9436258d13406c221010a2b3ab98e922, amount 50 BTC)
+2024-05-23 11:17:16.334 [INF] MINR: Block submitted via CPU miner accepted (hash 6ca9767be1db83ce3583c57ab774444246261be0c618684b042ff94ed8a6b94d, amount 50 BTC)
+2024-05-23 11:17:16.340 [INF] MINR: Block submitted via CPU miner accepted (hash 441095b56755b9b2c7f22af5801d0004e88679c5383bf161e5f9fdaf6cda17f6, amount 50 BTC)
+2024-05-23 11:17:16.344 [INF] MINR: Block submitted via CPU miner accepted (hash 55d4624abe08620f8693eb95442d789c485e88f322b5994ea2727b9cdb25af2a, amount 50 BTC)
+2024-05-23 11:17:16.344 [INF] MINR: Block submitted via CPU miner accepted (hash 42dbbc09e2ea07c9e507be6baa127b3a12406785a673134914e3d0e71906bfee, amount 50 BTC)
+2024-05-23 11:17:16.344 [INF] MINR: Block submitted via CPU miner accepted (hash 6f62efd16386336f31839280d54d3a24dbe1c466b1f0138f624b1a3844cf847f, amount 50 BTC)
+2024-05-23 11:17:16.345 [INF] MINR: Block submitted via CPU miner accepted (hash 701dab0b157381d878996e1a19ca9d06a84050cbcbdb51650984b97b2f60f87f, amount 50 BTC)
+2024-05-23 11:17:16.349 [INF] MINR: Block submitted via CPU miner accepted (hash 0b69ef54c47fd5754197b0d95a2a3e5f105d3b4c59cd2d93450e14fd8f8e6ca4, amount 50 BTC)
+2024-05-23 11:17:16.350 [INF] MINR: Block submitted via CPU miner accepted (hash 1b2126e6f086ec02da16f7d7984b7d16f9a94b65bb492bac8e04b58898494364, amount 50 BTC)
+2024-05-23 11:17:16.350 [INF] MINR: Block submitted via CPU miner accepted (hash 2ea040d93edb42f34f8dcf5cc52082cc5d54bab8f662d1c67c5ccd38a10ba1ee, amount 50 BTC)
+2024-05-23 11:17:16.354 [INF] MINR: Block submitted via CPU miner accepted (hash 7b15562bb1fd3b0b6e7a04a59fbce09cf876ac293d754b4c961d10afd4de9ad6, amount 50 BTC)
+2024-05-23 11:17:16.354 [INF] MINR: Block submitted via CPU miner accepted (hash 56586d5efa003a938fec286ba51cfca1205aa5ceb6f317ce0c4a8c528a09656a, amount 50 BTC)
+2024-05-23 11:17:16.354 [INF] MINR: Block submitted via CPU miner accepted (hash 07adfc4c800fd355a6ff4b58cf918c86a04956f4b0c13f2ed5424e8245ed2da4, amount 50 BTC)
+2024-05-23 11:17:16.355 [INF] MINR: Block submitted via CPU miner accepted (hash 574d69851f7e1da8876c16a2d6596f7c02096f88df93e90bc03d78d28985dba9, amount 50 BTC)
+2024-05-23 11:17:16.355 [INF] MINR: Block submitted via CPU miner accepted (hash 250b6a8034b170a09b949b97a3c98816252a21211dc8bfdeb28eb897e9093fcf, amount 50 BTC)
+2024-05-23 11:17:16.355 [INF] MINR: Block submitted via CPU miner accepted (hash 424209a82b22e19cfa60bdf7db193beaa2a09babcc25e8ab53ec7b1d585bf727, amount 50 BTC)
+2024-05-23 11:17:16.355 [INF] MINR: Block submitted via CPU miner accepted (hash 4a9404a91eae94b1713574b9bdf88b9eaaacfb2b47ebacd0ee1ae585b4a80028, amount 50 BTC)
+2024-05-23 11:17:16.356 [INF] MINR: Block submitted via CPU miner accepted (hash 76d143cb6cb479de4b6a7a979ad76416d166395c99d5cdeab94a122aaf8f12bc, amount 50 BTC)
+2024-05-23 11:17:16.356 [INF] MINR: Block submitted via CPU miner accepted (hash 4f59bc682eba0afc864b13e6c574500e10a4067f9b14f85109a7a7e057a72660, amount 50 BTC)
+2024-05-23 11:17:16.356 [INF] MINR: Block submitted via CPU miner accepted (hash 0f2509cde3d223dc7e0777b669eef9b3e11901004f896dc9f5a5fe943647ab61, amount 50 BTC)
+2024-05-23 11:17:16.359 [INF] MINR: Block submitted via CPU miner accepted (hash 6919d26ce44b8b2e9d274f851e3d153f6e20b26e191f5852fbd14385e02f5c31, amount 50 BTC)
+2024-05-23 11:17:16.360 [INF] MINR: Block submitted via CPU miner accepted (hash 3448c30d962742dc5c9dd2f1966aef861e7a8587a9c8933b5fce96d42405de86, amount 50 BTC)
+2024-05-23 11:17:16.360 [INF] MINR: Block submitted via CPU miner accepted (hash 7e95d3fefbd13ec7e12b363222e606b7ea3fe6ec8e98f28efd925899b683b440, amount 50 BTC)
+2024-05-23 11:17:16.364 [INF] MINR: Block submitted via CPU miner accepted (hash 1d18a699b3f3f2bbc272c742e7bd9d1dc6f44ca7365988e0166df48c59a1ac9e, amount 50 BTC)
+2024-05-23 11:17:16.364 [INF] MINR: Block submitted via CPU miner accepted (hash 36190a73d0e22ece97898bde5a7a223d12d141c141f41539c06ba59c5f4a8055, amount 50 BTC)
+2024-05-23 11:17:16.364 [INF] MINR: Block submitted via CPU miner accepted (hash 352a5c5913ff95b3be1ca2bbbb1e42295245132321c6402a1e4bb3764e0b36ef, amount 50 BTC)
+2024-05-23 11:17:16.369 [INF] MINR: Block submitted via CPU miner accepted (hash 0e97b995ff476d85b371122d34ea8bbeb3abf44d58638061f26e6a6ce81f96f1, amount 50 BTC)
+2024-05-23 11:17:16.369 [INF] MINR: Block submitted via CPU miner accepted (hash 673ec6fb37671a96a1dbf6181399890aea12f23288ab00a91a6e1d90a3952ae6, amount 50 BTC)
+2024-05-23 11:17:16.369 [INF] MINR: Block submitted via CPU miner accepted (hash 69f85a6a35f1df306f58463f7d343dd76b93a30c50cb67431fa9a598da9cf000, amount 50 BTC)
+2024-05-23 11:17:16.375 [INF] MINR: Block submitted via CPU miner accepted (hash 7c348c8d81400e6e3e17f19368ee4222e2c5124615a90be80e892ecd0d47009f, amount 50 BTC)
+2024-05-23 11:17:16.375 [INF] MINR: Block submitted via CPU miner accepted (hash 3ec74b0f5c126319873f2859ce4ddf477697b16e903da089eda96fe9fdfd5c05, amount 50 BTC)
+2024-05-23 11:17:16.386 [INF] MINR: Block submitted via CPU miner accepted (hash 633f25aa9141a5f62ae21022aad6758078b6979e794c770286d9405cdfd9b6f7, amount 50 BTC)
+2024-05-23 11:17:16.390 [INF] MINR: Block submitted via CPU miner accepted (hash 6620168af464d647bc22a62b9cfdea616e78cd7664d8a50a7183be22626c7e5c, amount 50 BTC)
+2024-05-23 11:17:16.390 [INF] MINR: Block submitted via CPU miner accepted (hash 6306f19678de456e75182b82dacfcf0bc872624261222579439017a878da848d, amount 50 BTC)
+2024-05-23 11:17:16.395 [INF] MINR: Block submitted via CPU miner accepted (hash 04a1df74feeeca19116211e6baa729375f2c857c18f9ab2b49f62eeced24c894, amount 50 BTC)
+2024-05-23 11:17:16.395 [INF] MINR: Block submitted via CPU miner accepted (hash 7947785bfadcd0ae9dc3c768625db51a3b773d41bc1a164ac70190f8b3d0d04a, amount 50 BTC)
+2024-05-23 11:17:16.395 [INF] MINR: Block submitted via CPU miner accepted (hash 17d8bbf5b155c0480fc6d25bff893f484f3fa99038644e91128cfdc9ac2d54e0, amount 50 BTC)
+2024-05-23 11:17:16.399 [INF] MINR: Block submitted via CPU miner accepted (hash 29e42c9e9452444a21b71540cbbf524f6884758232bcdea7b200044ebadf3b40, amount 50 BTC)
+2024-05-23 11:17:16.399 [INF] MINR: Block submitted via CPU miner accepted (hash 33997921ba954b1269ee58ba4f5652b3f203b13d0aa3f7401642b9a3a478cce2, amount 50 BTC)
+2024-05-23 11:17:16.400 [INF] MINR: Block submitted via CPU miner accepted (hash 7b075fb6ead109e2cf30c8022ecb6757952b64dd661a3922bbf7d438f208aa0a, amount 50 BTC)
+2024-05-23 11:17:16.400 [INF] MINR: Block submitted via CPU miner accepted (hash 308f8f037579dd4e57bca7f03bde6bd75d9cde63b9cdc5cf3607e8c3ec7382a4, amount 50 BTC)
+2024-05-23 11:17:16.405 [INF] MINR: Block submitted via CPU miner accepted (hash 45ff07aa15c159980de5738765f175d86f5ca3b888004ff86ae0c1d0e3ca10c9, amount 50 BTC)
+2024-05-23 11:17:16.405 [INF] MINR: Block submitted via CPU miner accepted (hash 7b94b74054ce5b9d12f396dd318dc9c4f350a1c8ea12317efe8f1a03a24fa288, amount 50 BTC)
+2024-05-23 11:17:16.405 [INF] MINR: Block submitted via CPU miner accepted (hash 7436001bc00887ac5b1c583659c92c351010358058e06bc3a365678f78f698e6, amount 50 BTC)
+2024-05-23 11:17:16.405 [INF] MINR: Block submitted via CPU miner accepted (hash 71f3fd642f90f3b0a88f5426b24538d78513661076bb5f292db423af765a1642, amount 50 BTC)
+2024-05-23 11:17:16.405 [INF] MINR: Block submitted via CPU miner accepted (hash 12a93180d70a19fa328546cf3bdb5f959a76be2509a8c6e4394e730b8323e111, amount 50 BTC)
+2024-05-23 11:17:16.406 [INF] MINR: Block submitted via CPU miner accepted (hash 3bd968972639107ffd47c623bbe49835a308e3805093723fc7543066c2f033c8, amount 50 BTC)
+2024-05-23 11:17:16.406 [INF] MINR: Block submitted via CPU miner accepted (hash 261c77b92f401e7560f38aa34943b73ce6a25a4cab21d30e438896b8d29e6920, amount 50 BTC)
+2024-05-23 11:17:16.406 [INF] MINR: Block submitted via CPU miner accepted (hash 3318aa2f2a50232e6d2b42e3a01a89bef54d86b244c9e84c6381f858fd4e54b1, amount 50 BTC)
+2024-05-23 11:17:16.406 [INF] MINR: Block submitted via CPU miner accepted (hash 1cbb8861590aaf035d1ed5b156d11f7b13b4ca5ae4c298306f175ef47b1a9f18, amount 50 BTC)
+2024-05-23 11:17:16.411 [INF] MINR: Block submitted via CPU miner accepted (hash 46faccc79293afbec72b19459a7607879a2d197c85b9fec5bb9a9ae390596717, amount 50 BTC)
+2024-05-23 11:17:16.411 [INF] MINR: Block submitted via CPU miner accepted (hash 1cb3bb722b544145ccb720d6d57b653d67da5bfe4d212cc15d708104935b3f69, amount 50 BTC)
+2024-05-23 11:17:16.412 [INF] MINR: Block submitted via CPU miner accepted (hash 06210fd464e47722718972fc904b96ea12a5e6708cda098eb9e9260567f929f3, amount 50 BTC)
+2024-05-23 11:17:16.412 [INF] MINR: Block submitted via CPU miner accepted (hash 34c481c0626e54aa4c7c00ced748ef1ecfc7c2b5a1ebfac1608ad5bdb946c6a9, amount 50 BTC)
+2024-05-23 11:17:16.416 [INF] MINR: Block submitted via CPU miner accepted (hash 221c7c7af1381480a2c2d6c0725f9ff42cfc883b0bbb54075ac30cd19c4df31d, amount 50 BTC)
+2024-05-23 11:17:16.416 [INF] MINR: Block submitted via CPU miner accepted (hash 3ba9832bcc03b21a47e4e46ec1b7aad9df3854caff2a759814f7286b9f84150e, amount 50 BTC)
+2024-05-23 11:17:16.416 [INF] MINR: Block submitted via CPU miner accepted (hash 0df5a91f17e92b481fddcdcbb393ca71b66e30c1968d3f9b0ba9a52fad9a9d50, amount 50 BTC)
+2024-05-23 11:17:16.417 [INF] MINR: Block submitted via CPU miner accepted (hash 247da55a7d124339ca32705ef0536134fe78ca897ae3135525e5aa4830398449, amount 50 BTC)
+2024-05-23 11:17:16.420 [INF] MINR: Block submitted via CPU miner accepted (hash 0d8de1cd2656574bb18f18e395a8e163a8456870bc27f93a6c21dc397ae95fb3, amount 50 BTC)
+2024-05-23 11:17:16.421 [INF] MINR: Block submitted via CPU miner accepted (hash 58dc032a5f8559cd1b7470e576e1f3f4686e08aca52c446a304796fa3dd64ba7, amount 50 BTC)
+2024-05-23 11:17:16.425 [INF] MINR: Block submitted via CPU miner accepted (hash 31b32d7ae82f902c28b60280307d404592dc4d42d9da1b948410a344a0d97d27, amount 50 BTC)
+2024-05-23 11:17:16.425 [INF] MINR: Block submitted via CPU miner accepted (hash 6f7f2b6ba3ab5f3ab98cddfed66f6b9802e1573715e766ee5f34326b57b69b99, amount 50 BTC)
+2024-05-23 11:17:16.425 [INF] MINR: Block submitted via CPU miner accepted (hash 23791af8a70cad1488de8a115d55a319000ee6e2021de9c30638e1fe538642b4, amount 50 BTC)
+2024-05-23 11:17:16.425 [INF] MINR: Block submitted via CPU miner accepted (hash 7f95080f64f9774afd9fb7e2f1e725dc84890fd43402723fa9ca02694bf2daf7, amount 50 BTC)
+2024-05-23 11:17:16.426 [INF] MINR: Block submitted via CPU miner accepted (hash 795e2195a402a88b61bf62605eaca1ce60f6ef5ccc2075461438c73511a6b06c, amount 50 BTC)
+2024-05-23 11:17:16.426 [INF] MINR: Block submitted via CPU miner accepted (hash 1f8bcf3b7d0383302fd3569107745ab3ebd5161ee595eacdbe5a58898bedd1c4, amount 50 BTC)
+2024-05-23 11:17:16.426 [INF] MINR: Block submitted via CPU miner accepted (hash 5e57c2ba6ee0c0d718abc9f4a88c3deccf1cb71cc50c1a0ee7c59e3673b204f6, amount 50 BTC)
+2024-05-23 11:17:16.426 [INF] MINR: Block submitted via CPU miner accepted (hash 31f9556d0ee4cd689b8c08355b0b82d93398cfdea40ca266c5e4cae711e8138d, amount 50 BTC)
+2024-05-23 11:17:16.426 [INF] MINR: Block submitted via CPU miner accepted (hash 776e460c013fc6b090d09ae7bb0b525586e27871ef3323000c9087683777c1c5, amount 50 BTC)
+2024-05-23 11:17:16.431 [INF] MINR: Block submitted via CPU miner accepted (hash 5608af9678052c6c97ed365dfba97ae05f4c686a9a85e5aff76d76bb5e375582, amount 50 BTC)
+2024-05-23 11:17:16.431 [INF] MINR: Block submitted via CPU miner accepted (hash 1a0dc9770eae64c2d542ecf8dcb9d17afd6a1e29314bd3180a404e36bcf43b6c, amount 50 BTC)
+2024-05-23 11:17:16.432 [INF] MINR: Block submitted via CPU miner accepted (hash 14f35ca9e2f79b594f12a5e1698b463b82218c9314790220f9ff5c779a57c273, amount 50 BTC)
+2024-05-23 11:17:16.436 [INF] MINR: Block submitted via CPU miner accepted (hash 56a81e9e4222bc04a1c39550c9cafb57b91718962b86414858e3dfa5b6c21ac7, amount 50 BTC)
+2024-05-23 11:17:16.436 [INF] MINR: Block submitted via CPU miner accepted (hash 2c165fa7d92087203148d342da3b640f02a9eb5804db5857242691207c300e59, amount 50 BTC)
+2024-05-23 11:17:16.437 [INF] MINR: Block submitted via CPU miner accepted (hash 3bf67f5ed22c930cd4addb24dbf74c1139e2a762986d4db71fa5a2e2e56068e6, amount 50 BTC)
+2024-05-23 11:17:16.437 [INF] MINR: Block submitted via CPU miner accepted (hash 5488eba2590344106f0aec548d48cef7fd5626f0ce9de3da782735d3bbc0e542, amount 50 BTC)
+2024-05-23 11:17:16.440 [INF] MINR: Block submitted via CPU miner accepted (hash 5e898df6a0090412475e5bf41ac161007f54d679c2434105ebf89a2c08c32cff, amount 50 BTC)
+2024-05-23 11:17:16.441 [INF] MINR: Block submitted via CPU miner accepted (hash 5be12f55b3ad63a3fb6e03d769bf01a2b7ff80918687a7e6ad594edeadc61499, amount 50 BTC)
+2024-05-23 11:17:16.441 [INF] MINR: Block submitted via CPU miner accepted (hash 34c9c7ded674bef2b26d1fc4088103517cb7e559b3e8e05eb1727942d1b3bdab, amount 50 BTC)
+2024-05-23 11:17:16.441 [INF] MINR: Block submitted via CPU miner accepted (hash 7578eee4a43cbd0cd5d66251cae8d93b9343d2a4518abb8f60a17c486adf16bb, amount 50 BTC)
+2024-05-23 11:17:16.446 [INF] MINR: Block submitted via CPU miner accepted (hash 2018838a275b0b7b269ed03b780ff804da02b946eb0995aefe5068644269191f, amount 50 BTC)
+2024-05-23 11:17:16.446 [INF] MINR: Block submitted via CPU miner accepted (hash 353a868158748f9528ea743f46a21de82ece5a9ce9da4e8aead20645267931cd, amount 50 BTC)
+2024-05-23 11:17:16.446 [INF] MINR: Block submitted via CPU miner accepted (hash 1d11101d1cfea35e4e0375f6dff0e4cd77a61a19232e0b9e9c2a51a96f647444, amount 50 BTC)
+2024-05-23 11:17:16.446 [INF] MINR: Block submitted via CPU miner accepted (hash 210249d0912a21e5c0faffecdb200951979d190be019bc256701b188ecd754d3, amount 50 BTC)
+2024-05-23 11:17:16.446 [INF] MINR: Block submitted via CPU miner accepted (hash 27d52d2eafb24f82bc179a053d13fd56dbbea7fa84c504f3081975cee40e373b, amount 50 BTC)
+2024-05-23 11:17:16.447 [INF] MINR: Block submitted via CPU miner accepted (hash 23ae57868aa3655fae311b1ebd40ef418d46c42405b836f7727fdb1e134a5fed, amount 50 BTC)
+2024-05-23 11:17:16.447 [INF] MINR: Block submitted via CPU miner accepted (hash 27910b9d07c381ac9988af1586cc10af772da6d4f22d638338caa1184fd00688, amount 50 BTC)
+2024-05-23 11:17:16.447 [INF] MINR: Block submitted via CPU miner accepted (hash 550cb6a68c932ae9091bc90d1f9932ebb5ab7191b50f484589d671cd16277815, amount 50 BTC)
+2024-05-23 11:17:16.447 [INF] MINR: Block submitted via CPU miner accepted (hash 4100e48db68d644ed2e6cd77d01632626843b739b65f5cfebfa01830d81549da, amount 50 BTC)
+2024-05-23 11:17:16.448 [INF] MINR: Block submitted via CPU miner accepted (hash 38691ffcca7e3a074a0f618ddb0782703bc432bca09fd8ab70aab901a36934a9, amount 50 BTC)
+2024-05-23 11:17:16.452 [INF] MINR: Block submitted via CPU miner accepted (hash 2f27d283512a82f3c1e33002571704b2b51ee97803f94f4b8a395294f85cb52e, amount 50 BTC)
+2024-05-23 11:17:16.452 [INF] MINR: Block submitted via CPU miner accepted (hash 711b4f6d794a72ccf3e91d6e2960891cb6168e1356c31c9b38ceac1b761be8b5, amount 50 BTC)
+2024-05-23 11:17:16.453 [INF] MINR: Block submitted via CPU miner accepted (hash 76ae42acbae85f4fa20f4470ce9156f80b4f89d3cd6bc0ee3ba1c689f1f5870d, amount 50 BTC)
+2024-05-23 11:17:16.457 [INF] MINR: Block submitted via CPU miner accepted (hash 50a04ea9bdc26a680b585d86f5501b72d4a97c68d15d7867c248b56e92459f77, amount 50 BTC)
+2024-05-23 11:17:16.457 [INF] MINR: Block submitted via CPU miner accepted (hash 0362eeb14b31c345995b05a9548a4f5dfe20594fe77fd1f388c2b6067b3887b6, amount 50 BTC)
+2024-05-23 11:17:16.458 [INF] MINR: Block submitted via CPU miner accepted (hash 43efd039f0ba2850417be2050a91bc9e9f4c96aa923d6306919547b389487f49, amount 50 BTC)
+2024-05-23 11:17:16.458 [INF] MINR: Block submitted via CPU miner accepted (hash 46949e11eed333043150ea4ff5a98607fed0144c58dbc94454c0a1877d8f9891, amount 50 BTC)
+2024-05-23 11:17:16.461 [INF] MINR: Block submitted via CPU miner accepted (hash 46d8e017b65942ebf8fbef250f579d0e8641a7d8f4e612cebd2b9ce573dc953a, amount 50 BTC)
+2024-05-23 11:17:16.462 [INF] MINR: Block submitted via CPU miner accepted (hash 7b671b9488bb4ed94344b2851f27364b86d49197d72787e95835154387693434, amount 50 BTC)
+2024-05-23 11:17:16.462 [INF] MINR: Block submitted via CPU miner accepted (hash 2bc7210a426d631c395fecf1c6ac22f1c2282416d9504030ee28dfd9a77d900f, amount 50 BTC)
+2024-05-23 11:17:16.466 [INF] MINR: Block submitted via CPU miner accepted (hash 096564e62da2a848085f826622fd89cca7ff4c584c8f72c49f9b6227c7a77049, amount 50 BTC)
+2024-05-23 11:17:16.466 [INF] MINR: Block submitted via CPU miner accepted (hash 05074a7a173e1fda6729075f063d0c4e4ca4893656a498324e8cccd0090db1a5, amount 50 BTC)
+2024-05-23 11:17:16.466 [INF] MINR: Block submitted via CPU miner accepted (hash 323affc04dd38afc9289f0aa2f5e240ada9a7c8eac9c10ef5034809d2e557048, amount 50 BTC)
+2024-05-23 11:17:16.466 [INF] MINR: Block submitted via CPU miner accepted (hash 4d2160f5978920688dbeebbba1e0d911b87057eeb74aa614f605cce7e6b62c06, amount 50 BTC)
+2024-05-23 11:17:16.466 [INF] MINR: Block submitted via CPU miner accepted (hash 626f80e9949909d36d31aba93167b766071efd3da94fe01f8cafdb4302b3e49a, amount 50 BTC)
+2024-05-23 11:17:16.467 [INF] MINR: Block submitted via CPU miner accepted (hash 6bd45d92cfb8a3186fdf477c13b89aae160474da4d2d8bd7973e75f515d82a3e, amount 50 BTC)
+2024-05-23 11:17:16.467 [INF] MINR: Block submitted via CPU miner accepted (hash 7ba3816683fba1692b0de908a141d4d826cce20b24b2c66ae10d63d5bd0a9c26, amount 50 BTC)
+2024-05-23 11:17:16.467 [INF] MINR: Block submitted via CPU miner accepted (hash 26fad93e31592642cef7bdad66f558315619d9ca172c7ad782e45da202b0d5f8, amount 50 BTC)
+2024-05-23 11:17:16.467 [INF] MINR: Block submitted via CPU miner accepted (hash 200f82dd0785ff3242a4b426aa099edeeeaa2ad77d414f5fb91356d1df028ca9, amount 50 BTC)
+2024-05-23 11:17:16.467 [INF] MINR: Block submitted via CPU miner accepted (hash 17daf6ca40c6f40b450ea83a7da76db8a64c5fd41ee4003da7c1de0e1f4a215d, amount 50 BTC)
+2024-05-23 11:17:16.472 [INF] MINR: Block submitted via CPU miner accepted (hash 54f52f4f8650795a67b1855784fae8d045a37caef6d68f0042c180cc406fb30f, amount 50 BTC)
+2024-05-23 11:17:16.472 [INF] MINR: Block submitted via CPU miner accepted (hash 5fa0f44146ba150891f7646a17dc78917630059e109bf2021c3b556c266660b0, amount 50 BTC)
+2024-05-23 11:17:16.473 [INF] MINR: Block submitted via CPU miner accepted (hash 44bfe5758115073295dda6f9e38a5067b70a3244d184b473fff5855de6700a8f, amount 50 BTC)
+2024-05-23 11:17:16.477 [INF] MINR: Block submitted via CPU miner accepted (hash 681cf27aa2ccdca70fd8d220408f5386833ab33a0692bcc9cf8525a4a12813d3, amount 50 BTC)
+2024-05-23 11:17:16.477 [INF] MINR: Block submitted via CPU miner accepted (hash 2111b0223006cb9e4c5a4783f74e41a997779d1c997a3c37ee9807126280c947, amount 50 BTC)
+2024-05-23 11:17:16.478 [INF] MINR: Block submitted via CPU miner accepted (hash 4feef6c0e757341f01bfd4f1962d6fa8e166c4ddf0c817cddf58af39b7017e1b, amount 50 BTC)
+2024-05-23 11:17:16.478 [INF] MINR: Block submitted via CPU miner accepted (hash 1a32618ab212933a3faf45df7562f6679c05aaabf5f732336130fe54736f89b7, amount 50 BTC)
+2024-05-23 11:17:16.481 [INF] MINR: Block submitted via CPU miner accepted (hash 04522a098163de57e17b34fc427e7232d48e13f25cb1c5f3d6ec57fdc3809d6f, amount 50 BTC)
+2024-05-23 11:17:16.482 [INF] MINR: Block submitted via CPU miner accepted (hash 1447fe66c53988a7c776cfae6a703071e040a0014f0c76c00c8af20d0d4601db, amount 50 BTC)
+2024-05-23 11:17:16.482 [INF] MINR: Block submitted via CPU miner accepted (hash 7de7e03046aeff4ca25d490950ef7e49fa8438054c168b4fbc92ca23cdeda791, amount 50 BTC)
+2024-05-23 11:17:16.482 [INF] MINR: Block submitted via CPU miner accepted (hash 0b0479ac552cda41cd13a866570d6ccd1d82b3a1a95739769b54cbd7b19f5c7a, amount 50 BTC)
+2024-05-23 11:17:16.486 [INF] MINR: Block submitted via CPU miner accepted (hash 4d8f575f0a0c9df95c75e3fc79519ece7b73891d79dffce1ebe6ffb168fd1a46, amount 50 BTC)
+2024-05-23 11:17:16.486 [INF] MINR: Block submitted via CPU miner accepted (hash 737e5d64747b6c9c2ace0a1434f664f3bd72495334ff319afc72cab7bab997c2, amount 50 BTC)
+2024-05-23 11:17:16.486 [INF] MINR: Block submitted via CPU miner accepted (hash 2038efde514c03ccbaa7b8f83623bde4a69f071a869d855171ef97137ba24402, amount 50 BTC)
+2024-05-23 11:17:16.486 [INF] MINR: Block submitted via CPU miner accepted (hash 2f8ac49a818fdf2787a6c6ea29ec902ae0d7bfcec4825580cf986dd544ba7c08, amount 50 BTC)
+2024-05-23 11:17:16.486 [INF] MINR: Block submitted via CPU miner accepted (hash 1bd7d47c2bd004d4f0e61f92298d3c992d4801ce69260065efc229dddc3fac92, amount 50 BTC)
+2024-05-23 11:17:16.487 [INF] MINR: Block submitted via CPU miner accepted (hash 6311cec5a5f59f303b4ba87df259b439a2ff45d6b72e461b029398212ec8da26, amount 50 BTC)
+2024-05-23 11:17:16.487 [INF] MINR: Block submitted via CPU miner accepted (hash 6b37d990df4aee21af6e802ae7ab1787d527615fa8384709248a8e5db029cb49, amount 50 BTC)
+2024-05-23 11:17:16.487 [INF] MINR: Block submitted via CPU miner accepted (hash 7a27d4e82a3216db9390880e31436da0ecd5dae81e28846ed0264f6a2b3bab7a, amount 50 BTC)
+2024-05-23 11:17:16.487 [INF] MINR: Block submitted via CPU miner accepted (hash 2ae975cd4482e5ed64ee704992cd2ea2e231c8f8e6c4f4ef6e7d18e8eb289d6a, amount 50 BTC)
+2024-05-23 11:17:16.492 [INF] MINR: Block submitted via CPU miner accepted (hash 7819475e5d9a7fb01c68ffbde05caebbb90fc470b198dc36e191e70e5f0a2c89, amount 50 BTC)
+2024-05-23 11:17:16.492 [INF] MINR: Block submitted via CPU miner accepted (hash 1abf38747027ff52ae77f1ac88188aa1bc06a0a7b0a28981dccf1f2d8b0ee00e, amount 50 BTC)
+2024-05-23 11:17:16.493 [INF] MINR: Block submitted via CPU miner accepted (hash 58c8695a5b3b17ac51bf1ff3e487d8cc3d6e52aa064e9e2c4bb57780290bfdc5, amount 50 BTC)
+2024-05-23 11:17:16.493 [INF] MINR: Block submitted via CPU miner accepted (hash 4cf40c0d2f2570fb94701343cbda536d3f0661d6c0721317190e4b7db2e78a07, amount 50 BTC)
+2024-05-23 11:17:16.497 [INF] MINR: Block submitted via CPU miner accepted (hash 5afb217610c9f49ce03b0ab2ce2adddd03f69098d6bf877190aab7baee2ca2c8, amount 50 BTC)
+2024-05-23 11:17:16.497 [INF] MINR: Block submitted via CPU miner accepted (hash 364b86964ebfb7c80a3465a90e1c1e61e6e1ba3b45564137f9e4916bda0202ed, amount 50 BTC)
+2024-05-23 11:17:16.498 [INF] MINR: Block submitted via CPU miner accepted (hash 4168372afda56b595ae8466d733e87aae23d6ba2929c52f9c76bea44cdd7e8d1, amount 50 BTC)
+2024-05-23 11:17:16.498 [INF] MINR: Block submitted via CPU miner accepted (hash 3e5a55966f3b7b305e3f60a03b64afd068ea47802e83561faf24a0633b840521, amount 50 BTC)
+2024-05-23 11:17:16.502 [INF] MINR: Block submitted via CPU miner accepted (hash 269421808e2377aba53b63663ebf4d813f20cd88435090b749967a0e78d34fd4, amount 50 BTC)
+2024-05-23 11:17:16.502 [INF] MINR: Block submitted via CPU miner accepted (hash 3281cfed42d288594774cbe691841d63df5bd65bdcd227598a8fc08ff68339b2, amount 50 BTC)
+2024-05-23 11:17:16.502 [INF] MINR: Block submitted via CPU miner accepted (hash 193307f51b5eb25b0057f3a1e5df55431a098af6e4162315dedcda80d3e33c81, amount 50 BTC)
+2024-05-23 11:17:16.507 [INF] MINR: Block submitted via CPU miner accepted (hash 7a060a45eef3dafd9d6032e4f8bd51eb87fa343eaaf7be8f1e7deb1c0d11d394, amount 50 BTC)
+2024-05-23 11:17:16.507 [INF] MINR: Block submitted via CPU miner accepted (hash 68c1b06955a02afdf686f030d0e57d2dc8f72ab0b4f4e8d277b0c8c0dba8c03c, amount 50 BTC)
+2024-05-23 11:17:16.507 [INF] MINR: Block submitted via CPU miner accepted (hash 4ba62fa43a7e6cceee18884cda0a516a4c14f6029fcace49f7ba8b5e599f452a, amount 50 BTC)
+2024-05-23 11:17:16.507 [INF] MINR: Block submitted via CPU miner accepted (hash 43c843019484e34cfa9096f5753ead7be45b22a69b7d7040ba167199fc46eeac, amount 50 BTC)
+2024-05-23 11:17:16.507 [INF] MINR: Block submitted via CPU miner accepted (hash 5b4940c95803a36e29df4eaaa2c53173400ceb53e6dc266bb5e9b27c2ac2d680, amount 50 BTC)
+2024-05-23 11:17:16.508 [INF] MINR: Block submitted via CPU miner accepted (hash 0c7a8b505d8707998f56de52ea37cdc7f41b3069179a81ec7279772aa7c947e6, amount 50 BTC)
+2024-05-23 11:17:16.508 [INF] MINR: Block submitted via CPU miner accepted (hash 75c89137ce05523d74dcb7e57b59565e5a03e57005076b5e722e2f416287c4ab, amount 50 BTC)
+2024-05-23 11:17:16.508 [INF] MINR: Block submitted via CPU miner accepted (hash 1dbb47dd423b1b1bee3d051a957864904d8e0fb013d026492aac5cd7be8efb81, amount 50 BTC)
+2024-05-23 11:17:16.508 [INF] MINR: Block submitted via CPU miner accepted (hash 457f9770cfb08a82b8aaea772b4a8ed50eb012b6ae8f66d4954e172b3f6159ec, amount 50 BTC)
+2024-05-23 11:17:16.513 [INF] MINR: Block submitted via CPU miner accepted (hash 2ccc7ab5c5d86f56e0ff33c8adce7dd4ce840e99d441511c36073e967bd66320, amount 50 BTC)
+2024-05-23 11:17:16.514 [INF] MINR: Block submitted via CPU miner accepted (hash 1d0be2d8669479cf683801bef015da849517e995426364650b0d599e7704b161, amount 50 BTC)
+2024-05-23 11:17:16.514 [INF] MINR: Block submitted via CPU miner accepted (hash 3038c8083baae6d81ff036e669ef52df518109f23e079efba9c123e7656a2ebf, amount 50 BTC)
+2024-05-23 11:17:16.518 [INF] MINR: Block submitted via CPU miner accepted (hash 32aebf21bf46144ba7aba969d17a7e12516f7839a9436d569d0f9c80f5fb0e74, amount 50 BTC)
+2024-05-23 11:17:16.518 [INF] MINR: Block submitted via CPU miner accepted (hash 73ac58b0b6a0978deba0f3548e79a16e3c1422a94433d69fc9d53f70d2c29778, amount 50 BTC)
+2024-05-23 11:17:16.518 [INF] MINR: Block submitted via CPU miner accepted (hash 73fbed55dadd3975e9394be6254f5d53f8d8e96e8d3599392b8676a1371f377d, amount 50 BTC)
+2024-05-23 11:17:16.522 [INF] MINR: Block submitted via CPU miner accepted (hash 1c4c45256dc28dfda5f1221220f2965df6d0760bd1ff8334ef7fca65f4ab2ec3, amount 50 BTC)
+2024-05-23 11:17:16.523 [INF] MINR: Block submitted via CPU miner accepted (hash 159b01c3027b8561012af10f270681cb086554abf944287e66b65a060c04d011, amount 50 BTC)
+2024-05-23 11:17:16.523 [INF] MINR: Block submitted via CPU miner accepted (hash 02ae4346d1708a316c524c819995a0f96e0cd7534d79ad37de1f362700040861, amount 50 BTC)
+2024-05-23 11:17:16.523 [INF] MINR: Block submitted via CPU miner accepted (hash 7dea9a9fd5324b0c35a3ba2eaf56e6fb7635f7c62f8fdfce634e0ddd52b6046f, amount 50 BTC)
+2024-05-23 11:17:16.523 [INF] MINR: Block submitted via CPU miner accepted (hash 049fc52ce375c7042e5f900de8dd3eb3f87c2c3d08880d62f053840859c469a4, amount 50 BTC)
+2024-05-23 11:17:16.528 [INF] MINR: Block submitted via CPU miner accepted (hash 7c0f8014df27e3eda09992890d8a6610f345e7ed8c25298c88c40e4f58a0774e, amount 50 BTC)
+2024-05-23 11:17:16.528 [INF] MINR: Block submitted via CPU miner accepted (hash 54bcb2daf51f6f7f02ce2b2937bdbe0aaf4a7f2a0fdf1677c24a460245340372, amount 50 BTC)
+2024-05-23 11:17:16.528 [INF] MINR: Block submitted via CPU miner accepted (hash 0fcecdde4287d924ccd690f26a2b98772d631246b8013863b257d34b6b2dc1d6, amount 50 BTC)
+2024-05-23 11:17:16.528 [INF] MINR: Block submitted via CPU miner accepted (hash 2c1f7efd4b6943404fc554fedf26ba55bea134f8c6ed12d72604787f42df9c91, amount 50 BTC)
+2024-05-23 11:17:16.528 [INF] MINR: Block submitted via CPU miner accepted (hash 3f38a56fbfb08cd6629edc072a20f8fd1f4d14c3097b6c6c5cdf6a93a4bca6b6, amount 50 BTC)
+2024-05-23 11:17:16.529 [INF] MINR: Block submitted via CPU miner accepted (hash 349b0523f431e1a5acf39c1c26eda186e18f31862d2239e32a41dd5411e369a7, amount 50 BTC)
+2024-05-23 11:17:16.529 [INF] MINR: Block submitted via CPU miner accepted (hash 040e6b6edb9d5292e5a8e4ae1d782e0a4fe2a4bfee35b61ef7aa4922d9ad5172, amount 50 BTC)
+2024-05-23 11:17:16.529 [INF] MINR: Block submitted via CPU miner accepted (hash 1067fbc3f57f5749b547b5d74a9b708f63eb2b6fabd909b7487cbac880bf3eaf, amount 50 BTC)
+2024-05-23 11:17:16.529 [INF] MINR: Block submitted via CPU miner accepted (hash 7973ebb2efa065e9eeaf7136e244a69c457492a9800b8356f804b68159d990fa, amount 50 BTC)
+2024-05-23 11:17:16.534 [INF] MINR: Block submitted via CPU miner accepted (hash 40735acbcd22e2d4db097ea09cf7716b057be570fc74f0086805a538e470081d, amount 50 BTC)
+2024-05-23 11:17:16.534 [INF] MINR: Block submitted via CPU miner accepted (hash 395a83132fe3856d69a45c71ada43e399febbe78e282b11c1c7ee7c73bc3a1d0, amount 50 BTC)
+2024-05-23 11:17:16.534 [INF] MINR: Block submitted via CPU miner accepted (hash 3322a20e7423a3498e33f49e7a54271229320f0cd9ebd39fb440900c8047cf5f, amount 50 BTC)
+2024-05-23 11:17:16.539 [INF] MINR: Block submitted via CPU miner accepted (hash 1bb34b6907bab1890a06ece480ff2efc01f736cfc03114d365c60935f4d2b13a, amount 50 BTC)
+2024-05-23 11:17:16.539 [INF] MINR: Block submitted via CPU miner accepted (hash 6269662037b7a2461d2b7d18a983a210756b323fb6b726f215ef5448377e43cc, amount 50 BTC)
+2024-05-23 11:17:16.539 [INF] MINR: Block submitted via CPU miner accepted (hash 3ecfec029039f762a07c53e1ae2130bd5b1577639cbe1479110ed541b3428fdb, amount 50 BTC)
+2024-05-23 11:17:16.540 [INF] MINR: Block submitted via CPU miner accepted (hash 278e24729f7307e0004fdc088fd5e039d856688a89f22bbe9b9130c992140197, amount 50 BTC)
+2024-05-23 11:17:16.543 [INF] MINR: Block submitted via CPU miner accepted (hash 3b81c579d1995b1116bca40ab0c0b0fdfb81c6a2d39068b9a02b1e6b2288f9cb, amount 50 BTC)
+2024-05-23 11:17:16.544 [INF] MINR: Block submitted via CPU miner accepted (hash 1437e09a8f2a9b71f5adb7d09bbec03d2ded9c7f042a03f37d59cb1fbf8d15f8, amount 50 BTC)
+2024-05-23 11:17:16.544 [INF] MINR: Block submitted via CPU miner accepted (hash 33ac0a329ff4a6950cef23cb2bbde16e34c3f89c0d2e297b9a6ecc7c437af5e4, amount 50 BTC)
+2024-05-23 11:17:16.545 [INF] MINR: Block submitted via CPU miner accepted (hash 29447d5c8f438457315906728b4f22de90871b2c8b023b53cb3d9ed96fb312f1, amount 50 BTC)
+2024-05-23 11:17:16.549 [INF] MINR: Block submitted via CPU miner accepted (hash 5f3147a204372c50644c52c1e280783f43418a783f16cd018168f5c320f95d23, amount 50 BTC)
+2024-05-23 11:17:16.549 [INF] MINR: Block submitted via CPU miner accepted (hash 451a68ac36203fc1a5faed56e9a8c17a29e2e3cb0b88261fafd0f033f2eb3377, amount 50 BTC)
+2024-05-23 11:17:16.549 [INF] MINR: Block submitted via CPU miner accepted (hash 160b8cae6d0e8cbf8b0e1efb157594b4e94ac725afd1dcd2ebf8b7c95640326d, amount 50 BTC)
+2024-05-23 11:17:35.238 [ERR] RPCS: Websocket receive error from [::1]:50269: websocket: close 1006 unexpected EOF
+2024-05-23 11:17:35.239 [INF] RPCS: Disconnected websocket client [::1]:50269
+2024-05-23 11:17:36.258 [INF] RPCS: New websocket client [::1]:50275
+2024-05-23 11:17:36.966 [INF] RPCS: Beginning rescan for 5 addresses
+2024-05-23 11:17:36.966 [INF] RPCS: Finished rescan
+2024-05-23 11:19:33.991 [INF] MINR: Block submitted via CPU miner accepted (hash 69952cce4b1f08e10a8d41673a98fd6e0f1e8e00c60c7e14a4fe96dfd4d0c776, amount 50.00000227 BTC)
+2024-05-23 11:19:33.991 [INF] MINR: Block submitted via CPU miner accepted (hash 2b8736d1d46824d04ec7306b4d036d408b64db70a4e438bcdd9fb983624dbde0, amount 50 BTC)
+2024-05-23 11:19:33.992 [INF] MINR: Block submitted via CPU miner accepted (hash 7e38fe44b71d9a210b9e7ae8e475e62a5e5b00c39eee5a1ef78f9636b540a114, amount 50 BTC)
+2024-05-23 11:19:33.992 [INF] MINR: Block submitted via CPU miner accepted (hash 2eaa60ec016d19a9a4ae01940e9e458dca760ad968c4b60f9fadc3e46b1cbeac, amount 50 BTC)
+2024-05-23 11:19:33.992 [INF] MINR: Block submitted via CPU miner accepted (hash 6995ba29bcf4d3d76bd76249d0cc4048bdbbb9156c215f4507ff08e9daf4957f, amount 50 BTC)
+2024-05-23 11:19:33.992 [INF] MINR: Block submitted via CPU miner accepted (hash 67cbcdb3c5bc101e76778fe8a3cd16d6af8e88ea7e6e24a7113235e7d6d1ebbe, amount 50 BTC)
+2024-05-23 11:19:33.993 [INF] MINR: Block submitted via CPU miner accepted (hash 441546fdf3ef692926abace6acc0f0686c96d49fc51151459b528437ca3011c3, amount 50 BTC)
+2024-05-23 11:19:33.993 [INF] MINR: Block submitted via CPU miner accepted (hash 607b995329f19dd0df16df40446deed908fddac41b9eb001ea50b2a99c687140, amount 50 BTC)
+2024-05-23 11:19:33.994 [INF] MINR: Block submitted via CPU miner accepted (hash 77b8e9ce721e1911e6279b08484f7ca2057c6eb0a9a00492b358c7eb474239bf, amount 50 BTC)
+2024-05-23 11:19:33.994 [INF] MINR: Block submitted via CPU miner accepted (hash 72da9137820868d0d36591f8e42381b61623ab500e0da3d22729c28972ffa3ef, amount 50 BTC)
+2024-05-23 11:19:33.998 [INF] MINR: Block submitted via CPU miner accepted (hash 7e5b9dadd0626ce4c37df9411680ee26bf56655a3bed313b4b32fa2714c6981d, amount 50 BTC)
+2024-05-23 11:19:33.999 [INF] MINR: Block submitted via CPU miner accepted (hash 5f7afc2dd50432f8c15a6036638c925fee5bad3f25c3d4648b7f6e5eb0ad8afd, amount 50 BTC)
+2024-05-23 11:19:34.003 [INF] MINR: Block submitted via CPU miner accepted (hash 4c2703ce4264ab6780fb90b16ee019f11a28396718113cbb7c2655a10644f8e3, amount 50 BTC)
+2024-05-23 11:19:34.003 [INF] MINR: Block submitted via CPU miner accepted (hash 34e355e1467d742c9fb29cfd1cedf47883b390eda4fc1b8cc54564729f081a42, amount 50 BTC)
+2024-05-23 11:19:34.003 [INF] MINR: Block submitted via CPU miner accepted (hash 14cf3603bb70f30300adeb441f31283aebc0466042e51aa7d5dc71d9b8dfaf34, amount 50 BTC)
+2024-05-23 11:19:34.003 [INF] MINR: Block submitted via CPU miner accepted (hash 11237cb36a3e239a74ff9341913e34623c9c26da33f90e4b316334d774850593, amount 50 BTC)
+2024-05-23 11:19:34.004 [INF] MINR: Block submitted via CPU miner accepted (hash 2bd73e3edc6a87783ffa46ea919337f23726e14f53e9f463a5fff778720ea790, amount 50 BTC)
+2024-05-23 11:19:34.004 [INF] MINR: Block submitted via CPU miner accepted (hash 77d81ab39e62312099a90dde60a285c25a0dab52784ef800d8c44a1173e34db4, amount 50 BTC)
+2024-05-23 11:19:34.008 [INF] MINR: Block submitted via CPU miner accepted (hash 6876049fd056982d7cf07bf05e21312c90cbbe8079f6744d185c74d0a4c77cad, amount 50 BTC)
+2024-05-23 11:19:34.008 [INF] MINR: Block submitted via CPU miner accepted (hash 64ad2f91e4e6d9df44d4a72fde83618d9ec0ce1ac8a10a43ee812528bfa55731, amount 50 BTC)
+2024-05-23 11:19:34.009 [INF] MINR: Block submitted via CPU miner accepted (hash 0ec628651604cd027f036e81525df6aac88ae06645f7b9d831d86236e7938578, amount 50 BTC)
+2024-05-23 11:19:34.009 [INF] MINR: Block submitted via CPU miner accepted (hash 223c841f1df298b71a0aad14b1e69d43e964821a856284d1b6cfbe687bd1497f, amount 50 BTC)
+2024-05-23 11:19:34.009 [INF] MINR: Block submitted via CPU miner accepted (hash 21436cfb5f654e6aa71d891f2d68f0d614183985148f22db05912f04a64f2a9b, amount 50 BTC)
+2024-05-23 11:19:34.010 [INF] MINR: Block submitted via CPU miner accepted (hash 3e11483f5c09e23ab6f97775f9cdea4ce9c9fc6d12212f4a411f362ff5861bde, amount 50 BTC)
+2024-05-23 11:19:34.016 [INF] MINR: Block submitted via CPU miner accepted (hash 4000397b1d9b1f6290951a332d738027bd06d642452faa0709e86a07a9e5feed, amount 50 BTC)
+2024-05-23 11:19:34.016 [INF] MINR: Block submitted via CPU miner accepted (hash 1dd01b97918f331e44027dff6d2bda0131f6ff5c79c6e43fea94486b1a23b894, amount 50 BTC)
+2024-05-23 11:19:34.017 [INF] MINR: Block submitted via CPU miner accepted (hash 007ea260ceb9603e89dc9856255a22cf0b088a62868e793adf8a682f8857ff78, amount 50 BTC)
+2024-05-23 11:19:34.021 [INF] MINR: Block submitted via CPU miner accepted (hash 54b98bb9d49ddccc2d44882243987712e578ee367fe6665647df95ab1f45db8f, amount 50 BTC)
+2024-05-23 11:19:34.021 [INF] MINR: Block submitted via CPU miner accepted (hash 16190db857cc251a9f9522ed99e6cc8f0c167dca756666e6f5bf34d063b50262, amount 50 BTC)
+2024-05-23 11:19:34.025 [INF] MINR: Block submitted via CPU miner accepted (hash 6e8722fb01a3e142c32b5d89b07c93e7343d674d84667eddb7ba8b7c2241ef08, amount 50 BTC)
+2024-05-23 11:19:34.025 [INF] MINR: Block submitted via CPU miner accepted (hash 4352e806ec3fa542309f4940a8f03fd08ececdfba09ab5ff38887c5f2ed5d434, amount 50 BTC)
+2024-05-23 11:19:34.025 [INF] MINR: Block submitted via CPU miner accepted (hash 4ae13dc4f7486e6a32a3ca98f5fac887e038a23e77eda884f534407674f06fb4, amount 50 BTC)
+2024-05-23 11:19:34.030 [INF] MINR: Block submitted via CPU miner accepted (hash 38b8d1197c2d476be610ba840a1aff5fd03c2e05268850094e48fc42abad850d, amount 50 BTC)
+2024-05-23 11:19:34.030 [INF] MINR: Block submitted via CPU miner accepted (hash 3b80646dd8f6a15b60e9ad96a52d9fa5407b5c2a23abab303030534af95ba7db, amount 50 BTC)
+2024-05-23 11:19:34.030 [INF] MINR: Block submitted via CPU miner accepted (hash 63cb9f79faa486793bdbe9b6e82e68a98da45705be7bc285d1e2d48bee4c5ccf, amount 50 BTC)
+2024-05-23 11:19:34.035 [INF] MINR: Block submitted via CPU miner accepted (hash 4c485800511042bf3ad144af3cf5035b4509765301f90d3a7089d25b10abfa9e, amount 50 BTC)
+2024-05-23 11:19:34.036 [INF] MINR: Block submitted via CPU miner accepted (hash 061dcc211789191b87e87ec5668a2151f9c567cd74634c11e3487d1417ad23a0, amount 50 BTC)
+2024-05-23 11:19:34.036 [INF] MINR: Block submitted via CPU miner accepted (hash 59dc109edd3f6d922d958c4bc6109367383c967ee5a8b4c5888d13ba6350cadf, amount 50 BTC)
+2024-05-23 11:19:34.036 [INF] MINR: Block submitted via CPU miner accepted (hash 6f5d7f9db11827afe4fa0fe83101a4c6109a200b4799521b671917ba91f9bca8, amount 50 BTC)
+2024-05-23 11:19:34.040 [INF] MINR: Block submitted via CPU miner accepted (hash 2a6fc9294d69425dc201ce6c6cbcd723786a917afe9a6df0244916e0c97f312c, amount 50 BTC)
+2024-05-23 11:19:34.040 [INF] MINR: Block submitted via CPU miner accepted (hash 06cdb5431aebd6c1c7e04c6d1a5e6b42ddbfc29c279a47354314e3c89fb210ed, amount 50 BTC)
+2024-05-23 11:19:34.040 [INF] MINR: Block submitted via CPU miner accepted (hash 513c7c07918e5996de4b5a2c429336e407f5786576218a78e572a7d9376a278c, amount 50 BTC)
+2024-05-23 11:19:34.040 [INF] MINR: Block submitted via CPU miner accepted (hash 0b1f71fd4bf84f3c0c7b4a64f5a0288d39e877cccc6abbde3ba14a4a8a0a5ca3, amount 50 BTC)
+2024-05-23 11:19:34.041 [INF] MINR: Block submitted via CPU miner accepted (hash 74c274fc617d0bae8aee95111d5bb964e538017872e46de16991272ae4dbdf7e, amount 50 BTC)
+2024-05-23 11:19:34.045 [INF] MINR: Block submitted via CPU miner accepted (hash 225e6bb81b193b1c7216276cfb488e79d036e1706f92e36951820a05224eeaad, amount 50 BTC)
+2024-05-23 11:19:34.045 [INF] MINR: Block submitted via CPU miner accepted (hash 12258990c7097d6e797b91c9e7ba82c222206cad3b33a28bccf1e204a37e0f8c, amount 50 BTC)
+2024-05-23 11:19:34.046 [INF] MINR: Block submitted via CPU miner accepted (hash 059ea04241975049a5281199632881bd3b5406c4ec3d7eb266ea99210c547efb, amount 50 BTC)
+2024-05-23 11:19:34.046 [INF] MINR: Block submitted via CPU miner accepted (hash 3829e478eda7d522b163c6b77cfc88d3c07ad1c40a66c6b1fb5acf90793345d4, amount 50 BTC)
+2024-05-23 11:19:34.050 [INF] MINR: Block submitted via CPU miner accepted (hash 34c5f47d46d66260ca82412f2cc0be73a47ad9194fed03a946e39147788d921c, amount 50 BTC)
+2024-05-23 11:19:34.050 [INF] MINR: Block submitted via CPU miner accepted (hash 639d2533a6ccad15da0c056abe11478c42b55c7bf76af3eda879966c71037166, amount 50 BTC)
+2024-05-23 11:19:34.051 [INF] MINR: Block submitted via CPU miner accepted (hash 73cec91998d6f72ca00bbef12ccb772e02c9d43004cbc6708abb4bae6da3f3b6, amount 50 BTC)
+2024-05-23 11:19:34.055 [INF] MINR: Block submitted via CPU miner accepted (hash 1261ce85aa5c9782257aa2addb9479f26dbe4903b172b78e60afc5e16e3c6ce1, amount 50 BTC)
+2024-05-23 11:19:34.055 [INF] MINR: Block submitted via CPU miner accepted (hash 6c7331616a19c769e8836c569e317155fc0a857d238bc5780cc783a5bb16970e, amount 50 BTC)
+2024-05-23 11:19:34.059 [INF] MINR: Block submitted via CPU miner accepted (hash 054e21b0219a41c7fee28dff26c9c0b13d68a058172b04bf86db3c922750bbae, amount 50 BTC)
+2024-05-23 11:19:34.060 [INF] MINR: Block submitted via CPU miner accepted (hash 7e1cbcba6a568315add5a109853436c4ed69aa0934ce3902aba18f74360f9d51, amount 50 BTC)
+2024-05-23 11:19:34.060 [INF] MINR: Block submitted via CPU miner accepted (hash 24eb9ace842739dfb540cf2c111b3fce8a6184f623c58dff657307820237fd29, amount 50 BTC)
+2024-05-23 11:19:34.065 [INF] MINR: Block submitted via CPU miner accepted (hash 59853b88df89cd9e691c7a0fed589449e8ba2cf955ef69143d29b6286b19bde9, amount 50 BTC)
+2024-05-23 11:19:34.065 [INF] MINR: Block submitted via CPU miner accepted (hash 6da94ac8c1cf86f6b2ae5065f14571ae0d96ef5da80bc1ec96005ebada01fc70, amount 50 BTC)
+2024-05-23 11:19:34.065 [INF] MINR: Block submitted via CPU miner accepted (hash 40b8b5e59264af792818a69b51524b0ec2a0739abfb53276dec8d75967cac8a7, amount 50 BTC)
+2024-05-23 11:19:34.070 [INF] MINR: Block submitted via CPU miner accepted (hash 44acd5a4e1b712fe59a5136c33f46646287950fc083e182856930d0dc02b4afe, amount 50 BTC)
+2024-05-23 11:19:34.070 [INF] MINR: Block submitted via CPU miner accepted (hash 6555d94e036ccdaad6ff8b5ee252202c983f12d1212c4c0fd3baba7f568ce973, amount 50 BTC)
+2024-05-23 11:19:34.071 [INF] MINR: Block submitted via CPU miner accepted (hash 3d56d54c6c1f31e95349ed8c5d25b872f4db1e7843b3008512b4765fe3ac3914, amount 50 BTC)
+2024-05-23 11:19:34.075 [INF] MINR: Block submitted via CPU miner accepted (hash 2eab6c7b460cfcb57b9aa42b4c05bf0427f7deeaccd8dc2d330d597378d3f665, amount 50 BTC)
+2024-05-23 11:19:34.076 [INF] MINR: Block submitted via CPU miner accepted (hash 3b8f3d0c3b0a7864dcfdef58349fb7f1299d46c3284319a5cdf2fa3d34508a2e, amount 50 BTC)
+2024-05-23 11:19:34.076 [INF] MINR: Block submitted via CPU miner accepted (hash 2a80334e78b51e6ab7df54a98e9ef6f64134a4b80596d0d73e2cc90ff2090ef1, amount 50 BTC)
+2024-05-23 11:19:34.079 [INF] MINR: Block submitted via CPU miner accepted (hash 77c66460ca5bdb6ece0589649a7704975e1f5945999f94da6580d14383aa8c07, amount 50 BTC)
+2024-05-23 11:19:34.080 [INF] MINR: Block submitted via CPU miner accepted (hash 06a7355aeb94f9e9b86daebefb7c9b6b726fd2dab0a948c21c6608a12d69cf24, amount 50 BTC)
+2024-05-23 11:19:34.080 [INF] MINR: Block submitted via CPU miner accepted (hash 55e12a8da8abf3c853884779be1bd46cb6540d8863c8430d2611ad71e3356e88, amount 50 BTC)
+2024-05-23 11:19:34.081 [INF] MINR: Block submitted via CPU miner accepted (hash 68447dffe6ae2c91463e303c84ba334087ec40795ddf62036fcbea88a1955c25, amount 50 BTC)
+2024-05-23 11:19:34.085 [INF] MINR: Block submitted via CPU miner accepted (hash 3dc7adfbc34eaf65041c6c6a279f5df066d4730a39d290b2ded793f20b455f23, amount 50 BTC)
+2024-05-23 11:19:34.085 [INF] MINR: Block submitted via CPU miner accepted (hash 36ed43b0a0761a5596434a1f7328e987948c6775ffefde4491ce49bc94dbdd3e, amount 50 BTC)
+2024-05-23 11:19:34.085 [INF] MINR: Block submitted via CPU miner accepted (hash 45367fc4ce6b0dba03c363b56caaf20e7dceca72b8d28e6ea28d067c4e439cf2, amount 50 BTC)
+2024-05-23 11:19:34.090 [INF] MINR: Block submitted via CPU miner accepted (hash 30c919c2bfaa7390f3f775f6bf12efeff6b705fcacf23013c104f8555707922a, amount 50 BTC)
+2024-05-23 11:19:34.090 [INF] MINR: Block submitted via CPU miner accepted (hash 1e96bf59e0fbf2d014981113b4c2c92a8b9667ab7e894ea6e27269baafe619aa, amount 50 BTC)
+2024-05-23 11:19:34.091 [INF] MINR: Block submitted via CPU miner accepted (hash 520dedc7fb197c321a809c5f41b476b03c0af49c7921aa24ab21e8fc94b4b010, amount 50 BTC)
+2024-05-23 11:19:34.091 [INF] MINR: Block submitted via CPU miner accepted (hash 58ac20838b55b426c543b84e170bacddc73961cad83375d617444a65a5eddf3b, amount 50 BTC)
+2024-05-23 11:19:34.095 [INF] MINR: Block submitted via CPU miner accepted (hash 68b43b16eb626338833657c3bb1c3400cd81eb03b4e55563f245e80698d6edab, amount 50 BTC)
+2024-05-23 11:19:34.095 [INF] MINR: Block submitted via CPU miner accepted (hash 42bdcccd252fca7b11dbe31125614031ca274a2605e1a64cd11df3e4a50affc9, amount 50 BTC)
+2024-05-23 11:19:34.099 [INF] MINR: Block submitted via CPU miner accepted (hash 640e1cac7e6e0a9c43427b74b1f4967a8732222ce29f5abf9ed1ff2e01bb41a1, amount 50 BTC)
+2024-05-23 11:19:34.100 [INF] MINR: Block submitted via CPU miner accepted (hash 4ca2de249553b8f99f4f5b6c85c66c692e33fb477db1a5091434ed2020bfb68f, amount 50 BTC)
+2024-05-23 11:19:34.100 [INF] MINR: Block submitted via CPU miner accepted (hash 38110671dbe5692fed35500fbbc88bc5f361284ec8b9df000654e9b98871d82c, amount 50 BTC)
+2024-05-23 11:19:34.100 [INF] MINR: Block submitted via CPU miner accepted (hash 5912e7b0c6038a689063bc5e93594f86bc565177d601f5ef23b7da17d6bff80b, amount 50 BTC)
+2024-05-23 11:19:34.100 [INF] MINR: Block submitted via CPU miner accepted (hash 2f1b97237309805c7bbaf993d37dda496e3b70cf08e6fda81839b4da2448819e, amount 50 BTC)
+2024-05-23 11:19:34.104 [INF] MINR: Block submitted via CPU miner accepted (hash 3a591d77bc259b7b8ccd96de774f5b146602dde2a3c6751f4d5b17dce0c17e6a, amount 50 BTC)
+2024-05-23 11:19:34.104 [INF] MINR: Block submitted via CPU miner accepted (hash 411b9e6bda26011fbc4f959ca69efbf56f2ba0176f60e59d4a41baa0046e6303, amount 50 BTC)
+2024-05-23 11:19:34.108 [INF] MINR: Block submitted via CPU miner accepted (hash 5f8a489186e908cb1804333434287a4b19b807caaf095ebc83f5f7af0ae85eea, amount 50 BTC)
+2024-05-23 11:19:34.108 [INF] MINR: Block submitted via CPU miner accepted (hash 3fb207a3bce60262364bf529f30872b52ab7e41d929b7bb0d96568c129524577, amount 50 BTC)
+2024-05-23 11:19:34.108 [INF] MINR: Block submitted via CPU miner accepted (hash 1a8f71390d534a2392adb2d60cccf665bd087e08016de9e3e2f9c3d2cb164fed, amount 50 BTC)
+2024-05-23 11:19:34.112 [INF] MINR: Block submitted via CPU miner accepted (hash 1477b7ce260a1227250bc6e00c629fbfa89c92d39d878671d77c9e2cc8371cfe, amount 50 BTC)
+2024-05-23 11:19:34.112 [INF] MINR: Block submitted via CPU miner accepted (hash 3ee8e449ce290459e8f7b98107cbcb1d5051719e82c5696802efe23ff950d7e9, amount 50 BTC)
+2024-05-23 11:19:34.116 [INF] MINR: Block submitted via CPU miner accepted (hash 7c705b61d975809fa392de43b18864767f79a450196e565284dafc78e2dbfedb, amount 50 BTC)
+2024-05-23 11:19:34.117 [INF] MINR: Block submitted via CPU miner accepted (hash 42be67e20bf6c98c51e6ace364e595c3ebff75466b0ae014d3f2ec9868c24d92, amount 50 BTC)
+2024-05-23 11:19:34.117 [INF] MINR: Block submitted via CPU miner accepted (hash 50610a2f760215f73558f35344710924c9e8eef904d8b2861972549f2190c190, amount 50 BTC)
+2024-05-23 11:19:34.117 [INF] MINR: Block submitted via CPU miner accepted (hash 5c6f5154faf1af9f340170881d0299c1b38754053658a3a7850fbcb400a3aaac, amount 50 BTC)
+2024-05-23 11:19:34.121 [INF] MINR: Block submitted via CPU miner accepted (hash 1511e4e617208787ae6074ae9fb16f6c0191639748283f5265807ac7eae15597, amount 50 BTC)
+2024-05-23 11:19:34.121 [INF] MINR: Block submitted via CPU miner accepted (hash 6c04b8c2927eb98d05a8eedcb12e7b292897d8137b8c963addf1ec52616b8686, amount 50 BTC)
+2024-05-23 11:19:34.121 [INF] MINR: Block submitted via CPU miner accepted (hash 5f8992e2ba9d0ba16d3e409af8eb9102e0299bf905b55a3e2c02f1d7566ddafd, amount 50 BTC)
+2024-05-23 11:19:34.126 [INF] MINR: Block submitted via CPU miner accepted (hash 4d1861f3dc2754f38d41c1e591e7ad1cc64a7efb3b4137bf4e8ffb9872c0056a, amount 50 BTC)
+2024-05-23 11:19:34.126 [INF] MINR: Block submitted via CPU miner accepted (hash 10e4433b2112b7eaeb38715ac17f5124a69359553dac02307188946c0e552387, amount 50 BTC)
+2024-05-23 11:19:34.127 [INF] MINR: Block submitted via CPU miner accepted (hash 5886d7a8672061f9ce95c700c8908f7a51a48f7e036b6521861eb41f3cb7643e, amount 50 BTC)
+2024-05-23 11:20:02.196 [INF] RPCS: New websocket client [::1]:50304
+2024-05-23 11:20:02.198 [INF] RPCS: New websocket client [::1]:50305
+2024-05-23 11:20:03.442 [ERR] RPCS: Websocket receive error from [::1]:50304: websocket: close 1006 unexpected EOF
+2024-05-23 11:20:03.442 [ERR] RPCS: Websocket receive error from [::1]:50305: websocket: close 1006 unexpected EOF
+2024-05-23 11:20:03.442 [INF] RPCS: Disconnected websocket client [::1]:50304
+2024-05-23 11:20:03.442 [INF] RPCS: Disconnected websocket client [::1]:50305
+2024-05-23 11:22:15.060 [INF] RPCS: New websocket client [::1]:50310
+2024-05-23 11:22:15.062 [INF] RPCS: New websocket client [::1]:50311
+2024-05-23 11:22:15.697 [ERR] RPCS: Websocket receive error from [::1]:50311: websocket: close 1006 unexpected EOF
+2024-05-23 11:22:15.697 [INF] RPCS: Disconnected websocket client [::1]:50311
+2024-05-23 11:22:15.697 [ERR] RPCS: Websocket receive error from [::1]:50310: websocket: close 1006 unexpected EOF
+2024-05-23 11:22:15.697 [INF] RPCS: Disconnected websocket client [::1]:50310
+2024-05-23 11:28:08.896 [INF] RPCS: New websocket client [::1]:50333
+2024-05-23 11:28:08.897 [INF] RPCS: New websocket client [::1]:50334
+2024-05-23 11:28:10.100 [INF] RPCS: Beginning rescan for 27 addresses
+2024-05-23 11:28:10.101 [INF] RPCS: Finished rescan
+2024-05-23 11:28:14.537 [ERR] RPCS: Websocket receive error from [::1]:50334: websocket: close 1006 unexpected EOF
+2024-05-23 11:28:14.537 [INF] RPCS: Disconnected websocket client [::1]:50334
+2024-05-23 11:28:14.537 [ERR] RPCS: Websocket receive error from [::1]:50333: websocket: close 1006 unexpected EOF
+2024-05-23 11:28:14.537 [INF] RPCS: Disconnected websocket client [::1]:50333
+2024-05-23 11:29:17.511 [INF] RPCS: New websocket client [::1]:50346
+2024-05-23 11:29:17.513 [INF] RPCS: New websocket client [::1]:50347
+2024-05-23 11:29:18.177 [INF] RPCS: Beginning rescan for 27 addresses
+2024-05-23 11:29:18.177 [INF] RPCS: Finished rescan
+2024-05-23 11:29:23.156 [ERR] RPCS: Websocket receive error from [::1]:50347: websocket: close 1006 unexpected EOF
+2024-05-23 11:29:23.156 [INF] RPCS: Disconnected websocket client [::1]:50347
+2024-05-23 11:29:23.156 [ERR] RPCS: Websocket receive error from [::1]:50346: websocket: close 1006 unexpected EOF
+2024-05-23 11:29:23.156 [INF] RPCS: Disconnected websocket client [::1]:50346
+2024-05-23 11:30:44.975 [INF] RPCS: New websocket client [::1]:50364
+2024-05-23 11:30:44.975 [INF] RPCS: New websocket client [::1]:50365
+2024-05-23 11:30:45.612 [INF] RPCS: Beginning rescan for 27 addresses
+2024-05-23 11:30:45.612 [INF] RPCS: Finished rescan
+2024-05-23 11:30:50.607 [ERR] RPCS: Websocket receive error from [::1]:50365: websocket: close 1006 unexpected EOF
+2024-05-23 11:30:50.607 [ERR] RPCS: Websocket receive error from [::1]:50364: websocket: close 1006 unexpected EOF
+2024-05-23 11:30:50.607 [INF] RPCS: Disconnected websocket client [::1]:50365
+2024-05-23 11:30:50.607 [INF] RPCS: Disconnected websocket client [::1]:50364

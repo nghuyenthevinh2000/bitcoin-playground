@@ -14,7 +14,7 @@ const (
 	MockBtcUser   = "regtest"
 	MockBtcPass   = "regtest"
 	MockBlockTime = 3 * time.Second
-	MiningAddress = "sb1qu8rtzymwzkyk5rfewwczt6hgq8sjxssuhrmw7w"
+	MiningAddress = "Sg3XPraEoadWBBcw4C7cDSDpmi1tymxqPX"
 
 	MockWalletHost = "localhost:18554"
 	MockWalletPass = "vinh"

@@ -108,10 +108,12 @@ func TestBtcdCreateWallet(t *testing.T) {
 	}
 	w.SynchronizeRPC(suite.walletChainClient)
 
-	res, err := w.Accounts(waddrmgr.KeyScopeBIP0084)
+	time.Sleep(5 * time.Second)
+
+	bals, err := w.AccountBalances(waddrmgr.KeyScopeBIP0044, 1)
 	assert.Nil(t, err)
-	assert.Less(t, 0, len(res.Accounts))
-	t.Logf("accounts: %+v", res)
+	assert.Equal(t, bals[0].AccountBalance, btcutil.Amount(3000000))
+	t.Logf("balances: %+v", bals)
 }
 
 // go test -v -run ^TestBallGameContract$ github.com/nghuyenthevinh2000/bitcoin-playground
@@ -177,8 +179,6 @@ func (s *TestSuite) setupSuite(t *testing.T) {
 	s.btcdChainConfig.DefaultPort = MockBtcdHost
 	// todo: determine what to do with bitcoin events for notification handlers
 	s.chainClient, err = rpcclient.New(s.btcdConnConfig, nil)
-	assert.Nil(t, err)
-	err = s.chainClient.NotifyBlocks()
 	assert.Nil(t, err)
 
 	// connect to bitcoin wallet simnet network
@@ -270,5 +270,7 @@ func (s *TestSuite) generateSeedString() string {
 
 // construct inputs and outputs to send a BTC amount to an address
 func (s *TestSuite) sendToAddress(addr btcutil.Address, amount btcutil.Amount) {
-
+	// Get unspent transaction outputs (UTXOs) for the from address
+	// utxos, err := s.walletClient.ListUnspent()
+	// assert.Nil(s.t, err)
 }
