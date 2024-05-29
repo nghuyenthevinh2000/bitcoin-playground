@@ -3,6 +3,7 @@ playground to mess around with bitcoin scripts
 
 1. learn-btc-script: https://github.com/supertestnet/learn-btc-script
 2. mastering bitcoin 3rd edition: https://github.com/bitcoinbook/bitcoinbook
+3. debug tool: https://github.com/bitcoin-core/btcdeb
 
 ## a list of useful bitcoin-cli commands
 1. bitcoin-cli generatetoaddress 101 bcrt1q2r5a8jsveqj98lcqyjy9vl08j6tfgtzfwvfnx4

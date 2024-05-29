@@ -436,3 +436,18 @@
 11:17:16.555193 table@remove removed @96
 11:17:16.555457 table@remove removed @93
 11:17:16.556075 table@remove removed @92
+15:55:02.695272 transaction@flush created L0@100 N·3317 S·203KiB "\x00\x00\x00..ate,v6187":"\x00\x00\x00..\x8d\x89^,v9502"
+15:55:02.695516 version@stat F·[1 1] S·579KiB[203KiB 376KiB] Sc·[0.25 0.00]
+15:55:02.707651 transaction@flush created L0@101 N·2 S·259B "\x00\x00\x00..loc,v9504":"\x00\x00\x00..\xe4^+,v9505"
+15:55:02.707682 version@stat F·[2 1] S·579KiB[203KiB 376KiB] Sc·[0.50 0.00]
+16:02:31.164835 table@compaction L0·2 -> L1·1 S·579KiB Q·9505
+16:02:31.175154 table@build created L1@102 N·9398 S·576KiB "\x00\x00\x00..ate,v6187":"bid..bid,v35"
+16:02:31.175181 version@stat F·[0 1] S·576KiB[0B 576KiB] Sc·[0.00 0.01]
+16:02:31.180135 table@compaction committed F-2 S-2KiB Ke·0 D·7 T·15.053334ms
+16:02:31.180462 table@remove removed @101
+16:02:31.180933 table@remove removed @100
+16:02:31.182443 table@remove removed @99
+16:11:16.463488 transaction@flush created L0@103 N·70 S·4KiB "\x00\x00\x00..ate,v9506":"\x00\x00\x00..\xc5\xf8\x11,v9575"
+16:11:16.463716 version@stat F·[1 1] S·581KiB[4KiB 576KiB] Sc·[0.25 0.01]
+16:11:16.473960 transaction@flush created L0@104 N·2 S·259B "\x00\x00\x00..loc,v9576":"\x00\x00\x00..\xbb/),v9577"
+16:11:16.473989 version@stat F·[2 1] S·581KiB[4KiB 576KiB] Sc·[0.50 0.01]
