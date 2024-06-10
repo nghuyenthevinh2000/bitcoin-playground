@@ -6,12 +6,14 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"strconv"
 	"strings"
 	"testing"
 	"time"
 
 	"github.com/stretchr/testify/assert"
 
+	"github.com/btcsuite/btcd/btcec/v2"
 	"github.com/btcsuite/btcd/btcutil"
 	"github.com/btcsuite/btcd/btcutil/hdkeychain"
 	"github.com/btcsuite/btcd/chaincfg"
@@ -149,49 +151,137 @@ func TestBallGameContract(t *testing.T) {
 	bobW, err := bob.CurrentAddress(0, waddrmgr.KeyScopeBIP0084)
 	assert.Nil(t, err)
 
-	// Alice bets that VN wins
-	// Bob bets that TL wins
-	builder := txscript.NewScriptBuilder()
-	builder.AddOp(txscript.OP_IF)
-	builder.AddOp(txscript.OP_SHA256).AddData(vn[:]).AddOp(txscript.OP_EQUALVERIFY)
-	builder.AddData(aliceW.ScriptAddress()).AddOp(txscript.OP_CHECKSIG)
-	builder.AddOp(txscript.OP_ELSE)
-	builder.AddOp(txscript.OP_SHA256).AddData(tl[:]).AddOp(txscript.OP_EQUALVERIFY)
-	builder.AddData(bobW.ScriptAddress()).AddOp(txscript.OP_CHECKSIG)
-	builder.AddOp(txscript.OP_ENDIF)
-	pkScript, err := builder.Script()
-	assert.Nil(t, err)
+	logBals := func(alice, bob *wallet.Wallet) {
+		bals, _ := alice.CalculateBalance(1)
+		t.Logf("Alice's balances: %+v", bals)
 
-	// create a P2WSH address
-	witnessScriptCommitment := sha256.Sum256(pkScript)
-	address, err := btcutil.NewAddressWitnessScriptHash(witnessScriptCommitment[:], suite.btcdChainConfig)
-	assert.Nil(t, err)
-	t.Logf("P2SH address: %s", address.EncodeAddress())
+		bals, _ = bob.CalculateBalance(1)
+		t.Logf("Bob's balances: %+v", bals)
+	}
 
-	// witness script funding transaction
-	commitHash, err := suite.walletClient.SendToAddress(address, btcutil.Amount(10000000))
+	logBals(alice, bob)
+
+	ballGameScript := func(aliceW, bobW btcutil.Address) []byte {
+		// Alice bets that VN wins
+		// Bob bets that TL wins
+		builder := txscript.NewScriptBuilder()
+		builder.AddOp(txscript.OP_IF)
+		builder.AddOp(txscript.OP_SHA256).AddData(vn[:]).AddOp(txscript.OP_EQUALVERIFY)
+		builder.AddData(aliceW.ScriptAddress()).AddOp(txscript.OP_CHECKSIG)
+		builder.AddOp(txscript.OP_ELSE)
+		builder.AddOp(txscript.OP_SHA256).AddData(tl[:]).AddOp(txscript.OP_EQUALVERIFY)
+		builder.AddData(bobW.ScriptAddress()).AddOp(txscript.OP_CHECKSIG)
+		builder.AddOp(txscript.OP_ENDIF)
+		pkScript, err := builder.Script()
+		assert.Nil(t, err)
+		return pkScript
+	}
+
+	ballGame := func(aliceW, bobW btcutil.Address) (*btcutil.AddressWitnessScriptHash, []byte) {
+		pkgScript := ballGameScript(aliceW, bobW)
+		witnessScriptCommitment := sha256.Sum256(pkgScript)
+		p2wsh, err := btcutil.NewAddressWitnessScriptHash(witnessScriptCommitment[:], suite.btcdChainConfig)
+		assert.Nil(t, err)
+		return p2wsh, pkgScript
+	}
+
+	// create a ballgame address
+	p2wsh, pkScript := ballGame(aliceW, bobW)
+	t.Log("p2wsh: ", p2wsh.EncodeAddress())
+	t.Log("pkScript: ", hex.EncodeToString(pkScript))
+
+	rewardAmount := btcutil.Amount(10000000)
+	commitHash, err := suite.walletClient.SendToAddress(p2wsh, rewardAmount)
 	assert.Nil(t, err)
 
 	// generate a block to confirm the transaction
 	suite.generateBlocks(1)
 
-	// settle the bet through unlocking that witness script
-	// if alice includes vn hash, then she can withdraw the funds
-	// if bob includes tl hash, then he can withdraw the funds
-	rawCommitTx, err := suite.chainClient.GetRawTransaction(commitHash)
+	// log the transaction: txid, index, input, output
+	rawTx, err := suite.walletClient.GetRawTransaction(commitHash)
 	assert.Nil(t, err)
 
-	// create a new psbt
-	tx := wire.NewMsgTx(2)
-	tx.AddTxIn(&wire.TxIn{
-		PreviousOutPoint: wire.OutPoint{
-			Hash:  *rawCommitTx.Hash(),
-			Index: 0,
-		},
-	})
-	// signing
-	alice.SignTransaction()
+	t.Log("txid: ", rawTx)
 
+	logBals(alice, bob)
+	withdrawFromBallgameAddress := func(w *wallet.Wallet, winHash [32]byte) {
+
+		tx := wire.NewMsgTx(2)
+		tx.AddTxIn(&wire.TxIn{
+			PreviousOutPoint: *wire.NewOutPoint(commitHash, 0),
+			Witness:          [][]byte{pkScript},
+		})
+
+		fee := btcutil.Amount(1000)
+		output := btcutil.Amount(10000000 - fee)
+
+		// check a winner
+		tx.AddTxOut(&wire.TxOut{
+			PkScript: aliceW.ScriptAddress(),
+			Value:    int64(output),
+		})
+
+		sigHashes := txscript.NewTxSigHashes(tx, txscript.NewCannedPrevOutputFetcher(pkScript, int64(output)))
+
+		// Sign the transaction
+		privKey := extractPrivateKey(w, t)
+		sigScript, err := txscript.WitnessSignature(tx, sigHashes, 0, int64(output), pkScript, txscript.SigHashAll, privKey, true)
+		assert.Nil(t, err)
+
+		fmt.Println("sigScript: ", (sigScript))
+
+		tx.TxIn[0].Witness = append(tx.TxIn[0].Witness, sigScript[0])
+		tx.TxIn[0].Witness = append(tx.TxIn[0].Witness, privKey.PubKey().SerializeCompressed())
+		tx.TxIn[0].Witness = append(tx.TxIn[0].Witness, winHash[:])
+
+		fmt.Println("witness: ", tx.TxIn[0].Witness)
+
+		// Broadcast the transaction
+		txHash, err := suite.walletClient.SendRawTransaction(tx, false)
+		assert.Nil(t, err)
+		t.Logf("txHash: %s", txHash)
+
+		// generate a block to confirm the transaction
+		suite.generateBlocks(1)
+
+		logBals(alice, bob)
+	}
+
+	// Simulate both outcomes and log the results
+	t.Logf("=== Simulating Alice wins ===")
+	withdrawFromBallgameAddress(alice, vn)
+
+	// t.Logf("=== Simulating Bob wins ===")
+	// withdrawFromBallgameAddress(bob, tl)
+}
+
+func extractPrivateKey(w *wallet.Wallet, t *testing.T) *btcec.PrivateKey {
+	// Create a channel with a sufficiently long timeout
+	timeout := make(chan time.Time, 1)
+	go func() {
+		time.Sleep(10 * time.Minute)
+		timeout <- time.Now()
+	}()
+
+	// Unlock the wallet using the private passphrase and timeout channel
+	err := w.Unlock([]byte("private"), timeout)
+	assert.Nil(t, err)
+
+	// Fetch the current address to get the corresponding private key
+	addr, err := w.CurrentAddress(0, waddrmgr.KeyScopeBIP0084)
+	assert.Nil(t, err)
+
+	// Dump the WIF format private key of the address
+	privKeyWIF, err := w.DumpWIFPrivateKey(addr)
+	assert.Nil(t, err)
+
+	// Decode the WIF format private key
+	wif, err := btcutil.DecodeWIF(privKeyWIF)
+	assert.Nil(t, err)
+
+	// Return the extracted private key
+	privKey := wif.PrivKey
+	return privKey
 }
 
 func (s *TestSuite) setupSuite(t *testing.T) {
@@ -299,11 +389,10 @@ func (s *TestSuite) fundWallet(wallet *wallet.Wallet, amount btcutil.Amount) {
 }
 
 func (s *TestSuite) generateBlocks(num int) {
-	num_string := string(rune(num))
-	s.t.Logf("num_string: %s", num_string)
+	num_string := strconv.Itoa(num)
+	fmt.Println("Run cmd: ", "btcctl", "--simnet", "--notls", "-u", MockBtcUser, "-P", MockBtcPass, "generate", num_string)
 	err := exec.Command("btcctl", "--simnet", "--notls", "-u", MockBtcUser, "-P", MockBtcPass, "generate", num_string).Run()
 	assert.Nil(s.t, err)
-
 	time.Sleep(3 * time.Second)
 }
 

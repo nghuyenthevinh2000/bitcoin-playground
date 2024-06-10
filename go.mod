@@ -7,7 +7,7 @@ require (
 	github.com/btcsuite/btcd/btcutil v1.1.5
 	github.com/btcsuite/btcwallet v0.16.10-0.20240410030101-6fe19a472a62
 	github.com/btcsuite/btcwallet/walletdb v1.4.2
-	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.0.1
+	github.com/gorilla/websocket v1.5.0
 	github.com/stretchr/testify v1.8.4
 )
 
@@ -25,6 +25,7 @@ require (
 	github.com/btcsuite/websocket v0.0.0-20150119174127-31079b680792 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/decred/dcrd/crypto/blake256 v1.0.0 // indirect
+	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.0.1 // indirect
 	github.com/decred/dcrd/lru v1.0.0 // indirect
 	github.com/kkdai/bstream v1.0.0 // indirect
 	github.com/kr/text v0.2.0 // indirect

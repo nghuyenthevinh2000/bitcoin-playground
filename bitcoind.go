@@ -74,6 +74,8 @@ func (reg *RegBitcoinProcess) RunBitcoinProcess(genBlock bool) {
 		Setpgid: true,
 	}
 
+	fmt.Println("btcd command: ", reg.BitcoinCmd)
+
 	// determine if there is already a running btcd process
 	if !isProcessRunning("btcd") {
 		if err := reg.BitcoinCmd.Start(); err != nil {

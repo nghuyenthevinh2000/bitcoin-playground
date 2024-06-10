@@ -2058,3 +2058,794 @@
 2024-05-23 22:31:54.911 [ERR] RPCS: Websocket receive error from [::1]:55620: websocket: close 1006 unexpected EOF
 2024-05-23 22:31:54.912 [INF] RPCS: Disconnected websocket client [::1]:55619
 2024-05-23 22:31:54.912 [INF] RPCS: Disconnected websocket client [::1]:55620
+2024-06-01 09:54:29.275 [INF] BTCD: Version 0.24.2-betarc1
+2024-06-01 09:54:29.276 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-06-01 09:54:29.362 [INF] BTCD: Block database loaded
+2024-06-01 09:54:29.364 [INF] INDX: Transaction index is enabled
+2024-06-01 09:54:29.364 [INF] INDX: Committed filter index is enabled
+2024-06-01 09:54:29.364 [INF] CHAN: Pre-alloacting for 251 MiB
+2024-06-01 09:54:29.366 [INF] CHAN: Loading block index...
+2024-06-01 09:54:29.375 [INF] CHAN: Reconstructing UTXO state after an unclean shutdown. The UTXO state is consistent at block 1ca8e29ea9c535c9e3fdb233af2304567e94c05b273ac946a990e2a3cfd3c1e8 (504) but the chainstate is at block 30cf6526ba3815ce44e403feea71b84b981a42e4cf43e880371cb39923a6b322 (811),  This may take a long time...
+2024-06-01 09:54:29.384 [INF] CHAN: Chain state (height 811, hash 30cf6526ba3815ce44e403feea71b84b981a42e4cf43e880371cb39923a6b322, totaltx 816, work 1624)
+2024-06-01 09:54:29.385 [INF] RPCS: RPC server listening on 127.0.0.1:18556
+2024-06-01 09:54:29.385 [INF] RPCS: RPC server listening on [::1]:18556
+2024-06-01 09:54:29.390 [INF] AMGR: Loaded 0 addresses from file 'simnet/btcd/simnet/peers.json'
+2024-06-01 09:54:29.392 [INF] CMGR: Server listening on [::]:18555
+2024-06-01 09:54:29.392 [INF] CMGR: Server listening on 0.0.0.0:18555
+2024-06-01 09:54:35.334 [INF] RPCS: New websocket client [::1]:51325
+2024-06-01 09:54:38.284 [INF] RPCS: New websocket client [::1]:51328
+2024-06-01 09:54:38.287 [INF] RPCS: New websocket client [::1]:51329
+2024-06-01 09:54:51.023 [ERR] RPCS: Websocket receive error from [::1]:51329: websocket: close 1006 unexpected EOF
+2024-06-01 09:54:51.023 [ERR] RPCS: Websocket receive error from [::1]:51328: websocket: close 1006 unexpected EOF
+2024-06-01 09:54:51.024 [INF] RPCS: Disconnected websocket client [::1]:51328
+2024-06-01 09:54:51.024 [INF] RPCS: Disconnected websocket client [::1]:51329
+2024-06-01 09:55:59.550 [INF] RPCS: New websocket client [::1]:51337
+2024-06-01 09:55:59.559 [INF] RPCS: New websocket client [::1]:51338
+2024-06-01 09:56:10.572 [ERR] RPCS: Websocket receive error from [::1]:51338: websocket: close 1006 unexpected EOF
+2024-06-01 09:56:10.572 [ERR] RPCS: Websocket receive error from [::1]:51337: websocket: close 1006 unexpected EOF
+2024-06-01 09:56:10.572 [INF] RPCS: Disconnected websocket client [::1]:51338
+2024-06-01 09:56:10.572 [INF] RPCS: Disconnected websocket client [::1]:51337
+2024-06-01 10:59:59.088 [INF] BTCD: Version 0.24.2-betarc1
+2024-06-01 10:59:59.088 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-06-01 10:59:59.117 [INF] BTCD: Block database loaded
+2024-06-01 10:59:59.120 [INF] INDX: Transaction index is enabled
+2024-06-01 10:59:59.120 [INF] INDX: Committed filter index is enabled
+2024-06-01 10:59:59.120 [INF] CHAN: Pre-alloacting for 251 MiB
+2024-06-01 10:59:59.122 [INF] CHAN: Loading block index...
+2024-06-01 10:59:59.127 [INF] CHAN: Reconstructing UTXO state after an unclean shutdown. The UTXO state is consistent at block 1ca8e29ea9c535c9e3fdb233af2304567e94c05b273ac946a990e2a3cfd3c1e8 (504) but the chainstate is at block 30cf6526ba3815ce44e403feea71b84b981a42e4cf43e880371cb39923a6b322 (811),  This may take a long time...
+2024-06-01 10:59:59.133 [INF] CHAN: Chain state (height 811, hash 30cf6526ba3815ce44e403feea71b84b981a42e4cf43e880371cb39923a6b322, totaltx 816, work 1624)
+2024-06-01 10:59:59.133 [INF] RPCS: RPC server listening on 127.0.0.1:18556
+2024-06-01 10:59:59.133 [INF] RPCS: RPC server listening on [::1]:18556
+2024-06-01 10:59:59.138 [INF] AMGR: Loaded 0 addresses from file 'simnet/btcd/simnet/peers.json'
+2024-06-01 10:59:59.138 [INF] CMGR: Server listening on 0.0.0.0:18555
+2024-06-01 10:59:59.139 [INF] CMGR: Server listening on [::]:18555
+2024-06-01 11:00:08.118 [INF] RPCS: New websocket client [::1]:51857
+2024-06-01 11:00:08.123 [INF] RPCS: New websocket client [::1]:51858
+2024-06-01 11:00:15.205 [INF] RPCS: New websocket client [::1]:51860
+2024-06-01 11:00:20.839 [ERR] RPCS: Websocket receive error from [::1]:51857: websocket: close 1006 unexpected EOF
+2024-06-01 11:00:20.839 [ERR] RPCS: Websocket receive error from [::1]:51858: websocket: close 1006 unexpected EOF
+2024-06-01 11:00:20.840 [INF] RPCS: Disconnected websocket client [::1]:51857
+2024-06-01 11:00:20.840 [INF] RPCS: Disconnected websocket client [::1]:51858
+2024-06-07 10:53:43.442 [INF] BTCD: Version 0.24.2-betarc1
+2024-06-07 10:53:43.442 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-06-07 10:53:43.475 [INF] BTCD: Block database loaded
+2024-06-07 10:53:43.477 [INF] INDX: Transaction index is enabled
+2024-06-07 10:53:43.478 [INF] INDX: Committed filter index is enabled
+2024-06-07 10:53:43.478 [INF] CHAN: Pre-alloacting for 251 MiB
+2024-06-07 10:53:43.479 [INF] CHAN: Loading block index...
+2024-06-07 10:53:43.484 [INF] CHAN: Reconstructing UTXO state after an unclean shutdown. The UTXO state is consistent at block 1ca8e29ea9c535c9e3fdb233af2304567e94c05b273ac946a990e2a3cfd3c1e8 (504) but the chainstate is at block 30cf6526ba3815ce44e403feea71b84b981a42e4cf43e880371cb39923a6b322 (811),  This may take a long time...
+2024-06-07 10:53:43.487 [INF] CHAN: Chain state (height 811, hash 30cf6526ba3815ce44e403feea71b84b981a42e4cf43e880371cb39923a6b322, totaltx 816, work 1624)
+2024-06-07 10:53:43.487 [INF] RPCS: RPC server listening on 127.0.0.1:18556
+2024-06-07 10:53:43.487 [INF] RPCS: RPC server listening on [::1]:18556
+2024-06-07 10:53:43.490 [INF] AMGR: Loaded 0 addresses from file 'simnet/btcd/simnet/peers.json'
+2024-06-07 10:53:43.490 [INF] CMGR: Server listening on 0.0.0.0:18555
+2024-06-07 10:53:43.490 [INF] CMGR: Server listening on [::]:18555
+2024-06-07 10:53:49.531 [INF] RPCS: New websocket client [::1]:61229
+2024-06-07 10:53:52.484 [INF] RPCS: New websocket client [::1]:61232
+2024-06-07 10:53:52.488 [INF] RPCS: New websocket client [::1]:61233
+2024-06-07 10:54:03.885 [ERR] RPCS: Websocket receive error from [::1]:61232: websocket: close 1006 unexpected EOF
+2024-06-07 10:54:03.885 [ERR] RPCS: Websocket receive error from [::1]:61233: websocket: close 1006 unexpected EOF
+2024-06-07 10:54:03.886 [INF] RPCS: Disconnected websocket client [::1]:61233
+2024-06-07 10:54:03.887 [INF] RPCS: Disconnected websocket client [::1]:61232
+2024-06-07 11:30:49.779 [INF] RPCS: New websocket client [::1]:61409
+2024-06-07 11:30:49.783 [INF] RPCS: New websocket client [::1]:61410
+2024-06-07 11:31:01.321 [ERR] RPCS: Websocket receive error from [::1]:61409: websocket: close 1006 unexpected EOF
+2024-06-07 11:31:01.321 [ERR] RPCS: Websocket receive error from [::1]:61410: websocket: close 1006 unexpected EOF
+2024-06-07 11:31:01.321 [INF] RPCS: Disconnected websocket client [::1]:61409
+2024-06-07 11:31:01.321 [INF] RPCS: Disconnected websocket client [::1]:61410
+2024-06-07 11:33:30.332 [INF] RPCS: New websocket client [::1]:61419
+2024-06-07 11:33:30.337 [INF] RPCS: New websocket client [::1]:61420
+2024-06-07 11:33:40.951 [ERR] RPCS: Websocket receive error from [::1]:61420: websocket: close 1006 unexpected EOF
+2024-06-07 11:33:40.951 [ERR] RPCS: Websocket receive error from [::1]:61419: websocket: close 1006 unexpected EOF
+2024-06-07 11:33:40.952 [INF] RPCS: Disconnected websocket client [::1]:61420
+2024-06-07 11:33:40.952 [INF] RPCS: Disconnected websocket client [::1]:61419
+2024-06-07 11:36:01.055 [INF] RPCS: New websocket client [::1]:61445
+2024-06-07 11:36:01.059 [INF] RPCS: New websocket client [::1]:61446
+2024-06-07 11:36:11.727 [ERR] RPCS: Websocket receive error from [::1]:61445: websocket: close 1006 unexpected EOF
+2024-06-07 11:36:11.727 [ERR] RPCS: Websocket receive error from [::1]:61446: websocket: close 1006 unexpected EOF
+2024-06-07 11:36:11.727 [INF] RPCS: Disconnected websocket client [::1]:61445
+2024-06-07 11:36:11.727 [INF] RPCS: Disconnected websocket client [::1]:61446
+2024-06-07 11:36:45.530 [INF] RPCS: New websocket client [::1]:61454
+2024-06-07 11:36:45.533 [INF] RPCS: New websocket client [::1]:61455
+2024-06-07 11:36:56.153 [ERR] RPCS: Websocket receive error from [::1]:61455: websocket: close 1006 unexpected EOF
+2024-06-07 11:36:56.154 [ERR] RPCS: Websocket receive error from [::1]:61454: websocket: close 1006 unexpected EOF
+2024-06-07 11:36:56.154 [INF] RPCS: Disconnected websocket client [::1]:61455
+2024-06-07 11:36:56.154 [INF] RPCS: Disconnected websocket client [::1]:61454
+2024-06-07 11:38:07.556 [INF] RPCS: New websocket client [::1]:61460
+2024-06-07 11:38:07.560 [INF] RPCS: New websocket client [::1]:61461
+2024-06-07 11:38:18.227 [ERR] RPCS: Websocket receive error from [::1]:61460: websocket: close 1006 unexpected EOF
+2024-06-07 11:38:18.227 [ERR] RPCS: Websocket receive error from [::1]:61461: websocket: close 1006 unexpected EOF
+2024-06-07 11:38:18.227 [INF] RPCS: Disconnected websocket client [::1]:61460
+2024-06-07 11:38:18.227 [INF] RPCS: Disconnected websocket client [::1]:61461
+2024-06-07 11:38:51.992 [INF] RPCS: New websocket client [::1]:61469
+2024-06-07 11:38:51.995 [INF] RPCS: New websocket client [::1]:61470
+2024-06-07 11:39:02.625 [ERR] RPCS: Websocket receive error from [::1]:61469: websocket: close 1006 unexpected EOF
+2024-06-07 11:39:02.625 [ERR] RPCS: Websocket receive error from [::1]:61470: websocket: close 1006 unexpected EOF
+2024-06-07 11:39:02.626 [INF] RPCS: Disconnected websocket client [::1]:61469
+2024-06-07 11:39:02.626 [INF] RPCS: Disconnected websocket client [::1]:61470
+2024-06-07 11:39:51.461 [INF] MINR: Block submitted via CPU miner accepted (hash 1983013aa44f57f927e513e699521c27f2ec6e8d0210b0de2c09b1ceca2e33da, amount 50.00001652 BTC)
+2024-06-07 11:39:52.614 [INF] RPCS: Beginning rescan for 21 addresses
+2024-06-07 11:39:52.616 [INF] RPCS: Finished rescan
+2024-06-07 11:41:30.193 [INF] MINR: Block submitted via CPU miner accepted (hash 38904c3a14c2cd7407cc68a0fa6abd8e7e3327a63918425eb4276d2a6554081e, amount 50.00001616 BTC)
+2024-06-07 11:41:44.435 [INF] RPCS: New websocket client [::1]:61492
+2024-06-07 11:41:44.439 [INF] RPCS: New websocket client [::1]:61493
+2024-06-07 11:41:45.441 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-07 11:41:45.442 [INF] RPCS: Finished rescan
+2024-06-07 11:41:55.067 [ERR] RPCS: Websocket receive error from [::1]:61492: websocket: close 1006 unexpected EOF
+2024-06-07 11:41:55.067 [ERR] RPCS: Websocket receive error from [::1]:61493: websocket: close 1006 unexpected EOF
+2024-06-07 11:41:55.067 [INF] RPCS: Disconnected websocket client [::1]:61492
+2024-06-07 11:41:55.067 [INF] RPCS: Disconnected websocket client [::1]:61493
+2024-06-07 11:44:21.946 [INF] RPCS: New websocket client [::1]:61507
+2024-06-07 11:44:21.952 [INF] RPCS: New websocket client [::1]:61508
+2024-06-07 11:44:22.739 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-07 11:44:22.740 [INF] RPCS: Finished rescan
+2024-06-07 11:44:23.417 [ERR] RPCS: Websocket receive error from [::1]:61507: websocket: close 1006 unexpected EOF
+2024-06-07 11:44:23.417 [ERR] RPCS: Websocket receive error from [::1]:61508: websocket: close 1006 unexpected EOF
+2024-06-07 11:44:23.417 [INF] RPCS: Disconnected websocket client [::1]:61507
+2024-06-07 11:44:23.417 [INF] RPCS: Disconnected websocket client [::1]:61508
+2024-06-07 11:44:53.756 [INF] RPCS: New websocket client [::1]:61513
+2024-06-07 11:44:53.761 [INF] RPCS: New websocket client [::1]:61514
+2024-06-07 11:44:54.546 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-07 11:44:54.546 [INF] RPCS: Finished rescan
+2024-06-07 11:45:01.419 [INF] MINR: Block submitted via CPU miner accepted (hash 524c43ed96f3b5526677a4e34ef094a3dc0a02da07c0478e03a948919f2eb59f, amount 50.00000472 BTC)
+2024-06-07 11:45:04.455 [ERR] RPCS: Websocket receive error from [::1]:61513: websocket: close 1006 unexpected EOF
+2024-06-07 11:45:04.455 [ERR] RPCS: Websocket receive error from [::1]:61514: websocket: close 1006 unexpected EOF
+2024-06-07 11:45:04.455 [INF] RPCS: Disconnected websocket client [::1]:61513
+2024-06-07 11:45:04.455 [INF] RPCS: Disconnected websocket client [::1]:61514
+2024-06-07 11:45:56.123 [INF] RPCS: New websocket client [::1]:61524
+2024-06-07 11:45:56.128 [INF] RPCS: New websocket client [::1]:61525
+2024-06-07 11:45:56.912 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-07 11:45:56.912 [INF] RPCS: Finished rescan
+2024-06-07 11:46:03.742 [INF] MINR: Block submitted via CPU miner accepted (hash 472d0aac7fa83438d4260a0b5da7f97619d4e845dcb6a3a6ce6b236625abf493, amount 50.00000236 BTC)
+2024-06-07 11:46:06.786 [ERR] RPCS: Websocket receive error from [::1]:61525: websocket: close 1006 unexpected EOF
+2024-06-07 11:46:06.786 [ERR] RPCS: Websocket receive error from [::1]:61524: websocket: close 1006 unexpected EOF
+2024-06-07 11:46:06.786 [INF] RPCS: Disconnected websocket client [::1]:61525
+2024-06-07 11:46:06.786 [INF] RPCS: Disconnected websocket client [::1]:61524
+2024-06-07 11:48:08.685 [INF] RPCS: New websocket client [::1]:61538
+2024-06-07 11:48:08.689 [INF] RPCS: New websocket client [::1]:61539
+2024-06-07 11:48:09.497 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-07 11:48:09.498 [INF] RPCS: Finished rescan
+2024-06-07 11:48:16.342 [INF] MINR: Block submitted via CPU miner accepted (hash 4c62ef85733a024791cc4548caa0c0e7042d0f7d4429ac4569080952a6884847, amount 50.00000236 BTC)
+2024-06-07 11:48:19.373 [ERR] RPCS: Websocket receive error from [::1]:61539: websocket: close 1006 unexpected EOF
+2024-06-07 11:48:19.373 [ERR] RPCS: Websocket receive error from [::1]:61538: websocket: close 1006 unexpected EOF
+2024-06-07 11:48:19.373 [INF] RPCS: Disconnected websocket client [::1]:61539
+2024-06-07 11:48:19.373 [INF] RPCS: Disconnected websocket client [::1]:61538
+2024-06-07 11:56:00.804 [INF] RPCS: New websocket client [::1]:61580
+2024-06-07 11:56:00.808 [INF] RPCS: New websocket client [::1]:61581
+2024-06-07 11:56:01.603 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-07 11:56:01.604 [INF] RPCS: Finished rescan
+2024-06-07 11:56:08.468 [INF] MINR: Block submitted via CPU miner accepted (hash 366433016d460323dc1e9e1009b0ad1fb04323dad2dfe55cbe115374e7e7b7d0, amount 50.00000236 BTC)
+2024-06-07 11:56:11.508 [ERR] RPCS: Websocket receive error from [::1]:61580: websocket: close 1006 unexpected EOF
+2024-06-07 11:56:11.508 [ERR] RPCS: Websocket receive error from [::1]:61581: websocket: close 1006 unexpected EOF
+2024-06-07 11:56:11.508 [INF] RPCS: Disconnected websocket client [::1]:61580
+2024-06-07 11:56:11.508 [INF] RPCS: Disconnected websocket client [::1]:61581
+2024-06-07 12:20:52.578 [INF] RPCS: New websocket client [::1]:61698
+2024-06-07 12:20:52.583 [INF] RPCS: New websocket client [::1]:61699
+2024-06-07 12:20:54.028 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-07 12:20:54.028 [INF] RPCS: Finished rescan
+2024-06-07 12:21:00.872 [INF] MINR: Block submitted via CPU miner accepted (hash 226f13347fa459faf1c42139f24d74360097fb80f70360a93bd1ebdc6caa002e, amount 50.00000236 BTC)
+2024-06-07 12:21:03.917 [ERR] RPCS: Websocket receive error from [::1]:61699: websocket: close 1006 unexpected EOF
+2024-06-07 12:21:03.918 [INF] RPCS: Disconnected websocket client [::1]:61699
+2024-06-07 12:21:03.918 [ERR] RPCS: Websocket receive error from [::1]:61698: websocket: close 1006 unexpected EOF
+2024-06-07 12:21:03.918 [INF] RPCS: Disconnected websocket client [::1]:61698
+2024-06-07 12:23:39.302 [INF] RPCS: New websocket client [::1]:61710
+2024-06-07 12:23:39.305 [INF] RPCS: New websocket client [::1]:61711
+2024-06-07 12:23:40.055 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-07 12:23:40.056 [INF] RPCS: Finished rescan
+2024-06-07 12:23:46.888 [INF] MINR: Block submitted via CPU miner accepted (hash 6fef41a39f82864e860a1f00de38a7b054650b2f45e046631af55b40e63782f7, amount 50.00000236 BTC)
+2024-06-07 12:23:49.936 [ERR] RPCS: Websocket receive error from [::1]:61711: websocket: close 1006 unexpected EOF
+2024-06-07 12:23:49.937 [INF] RPCS: Disconnected websocket client [::1]:61711
+2024-06-07 12:23:49.937 [ERR] RPCS: Websocket receive error from [::1]:61710: websocket: close 1006 unexpected EOF
+2024-06-07 12:23:49.937 [INF] RPCS: Disconnected websocket client [::1]:61710
+2024-06-07 12:26:59.246 [INF] RPCS: New websocket client [::1]:61733
+2024-06-07 12:26:59.250 [INF] RPCS: New websocket client [::1]:61734
+2024-06-07 12:27:00.015 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-07 12:27:00.016 [INF] RPCS: Finished rescan
+2024-06-07 12:27:06.844 [INF] MINR: Block submitted via CPU miner accepted (hash 0eba252421450625de5eeff99cb64f9194551909a6349e61f2e3d786ce87fb6c, amount 50.00000236 BTC)
+2024-06-07 12:27:09.899 [ERR] RPCS: Websocket receive error from [::1]:61734: websocket: close 1006 unexpected EOF
+2024-06-07 12:27:09.899 [ERR] RPCS: Websocket receive error from [::1]:61733: websocket: close 1006 unexpected EOF
+2024-06-07 12:27:09.900 [INF] RPCS: Disconnected websocket client [::1]:61734
+2024-06-07 12:27:09.900 [INF] RPCS: Disconnected websocket client [::1]:61733
+2024-06-07 12:29:03.334 [INF] RPCS: New websocket client [::1]:61748
+2024-06-07 12:29:03.337 [INF] RPCS: New websocket client [::1]:61749
+2024-06-07 12:29:04.164 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-07 12:29:04.164 [INF] RPCS: Finished rescan
+2024-06-07 12:29:10.981 [INF] MINR: Block submitted via CPU miner accepted (hash 3b1b879ea9a7b5dd6802f5045ccb0d920921853395979a1adc9ead9c44fd6983, amount 50.00000236 BTC)
+2024-06-07 12:29:14.050 [ERR] RPCS: Websocket receive error from [::1]:61748: websocket: close 1006 unexpected EOF
+2024-06-07 12:29:14.050 [ERR] RPCS: Websocket receive error from [::1]:61749: websocket: close 1006 unexpected EOF
+2024-06-07 12:29:14.050 [INF] RPCS: Disconnected websocket client [::1]:61748
+2024-06-07 12:29:14.050 [INF] RPCS: Disconnected websocket client [::1]:61749
+2024-06-07 12:30:43.447 [INF] RPCS: New websocket client [::1]:61757
+2024-06-07 12:30:43.451 [INF] RPCS: New websocket client [::1]:61758
+2024-06-07 12:30:44.218 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-07 12:30:44.218 [INF] RPCS: Finished rescan
+2024-06-07 12:30:50.994 [INF] MINR: Block submitted via CPU miner accepted (hash 66c1d6d7bbaf50a7e7d6cef9de5e4c6713ad0953c55e9132e1f917109e6e15c1, amount 50.00000236 BTC)
+2024-06-07 12:30:54.058 [ERR] RPCS: Websocket receive error from [::1]:61757: websocket: close 1006 unexpected EOF
+2024-06-07 12:30:54.058 [ERR] RPCS: Websocket receive error from [::1]:61758: websocket: close 1006 unexpected EOF
+2024-06-07 12:30:54.058 [INF] RPCS: Disconnected websocket client [::1]:61757
+2024-06-07 12:30:54.058 [INF] RPCS: Disconnected websocket client [::1]:61758
+2024-06-07 12:33:49.416 [INF] RPCS: New websocket client [::1]:61801
+2024-06-07 12:33:49.421 [INF] RPCS: New websocket client [::1]:61802
+2024-06-07 12:33:50.205 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-07 12:33:50.205 [INF] RPCS: Finished rescan
+2024-06-07 12:33:57.033 [INF] MINR: Block submitted via CPU miner accepted (hash 036a9f7ff521216f6de869c5d7b61a60ef881a354d0da1d224ac3fca9e06df30, amount 50.00000236 BTC)
+2024-06-07 12:34:00.807 [ERR] RPCS: Websocket receive error from [::1]:61801: websocket: close 1006 unexpected EOF
+2024-06-07 12:34:00.807 [ERR] RPCS: Websocket receive error from [::1]:61802: websocket: close 1006 unexpected EOF
+2024-06-07 12:34:00.807 [INF] RPCS: Disconnected websocket client [::1]:61801
+2024-06-07 12:34:00.807 [INF] RPCS: Disconnected websocket client [::1]:61802
+2024-06-07 12:34:44.402 [INF] RPCS: New websocket client [::1]:61813
+2024-06-07 12:34:44.406 [INF] RPCS: New websocket client [::1]:61814
+2024-06-07 12:34:45.195 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-07 12:34:45.195 [INF] RPCS: Finished rescan
+2024-06-07 12:34:51.992 [INF] MINR: Block submitted via CPU miner accepted (hash 56b835caac9bbae21f8e10c7a1bc3264890f069403a50a838cfcc5a9ed0fb2ea, amount 50.00000236 BTC)
+2024-06-07 12:34:55.774 [ERR] RPCS: Websocket receive error from [::1]:61814: websocket: close 1006 unexpected EOF
+2024-06-07 12:34:55.774 [ERR] RPCS: Websocket receive error from [::1]:61813: websocket: close 1006 unexpected EOF
+2024-06-07 12:34:55.774 [INF] RPCS: Disconnected websocket client [::1]:61814
+2024-06-07 12:34:55.774 [INF] RPCS: Disconnected websocket client [::1]:61813
+2024-06-07 12:36:11.649 [INF] RPCS: New websocket client [::1]:61821
+2024-06-07 12:36:11.653 [INF] RPCS: New websocket client [::1]:61822
+2024-06-07 12:36:12.425 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-07 12:36:12.425 [INF] RPCS: Finished rescan
+2024-06-07 12:36:19.212 [INF] MINR: Block submitted via CPU miner accepted (hash 771fce96ce45a6ad5a6d3de4b1c1a640fe4aca159c4d247e913221b8cdc77975, amount 50.00000236 BTC)
+2024-06-07 12:36:23.003 [INF] MINR: Block submitted via CPU miner accepted (hash 0efb2d9ffeffa8d35d251086f98af1199e3b707a01b3548a0961a726596db4d4, amount 50 BTC)
+2024-06-07 12:36:26.801 [INF] MINR: Block submitted via CPU miner accepted (hash 50fea88459daabe80d62e7080e68a080aa21085b20f484baba49a7ff3410d6fc, amount 50 BTC)
+2024-06-07 12:36:29.848 [ERR] RPCS: Websocket receive error from [::1]:61821: websocket: close 1006 unexpected EOF
+2024-06-07 12:36:29.848 [ERR] RPCS: Websocket receive error from [::1]:61822: websocket: close 1006 unexpected EOF
+2024-06-07 12:36:29.848 [INF] RPCS: Disconnected websocket client [::1]:61821
+2024-06-07 12:36:29.848 [INF] RPCS: Disconnected websocket client [::1]:61822
+2024-06-07 12:37:18.402 [INF] RPCS: New websocket client [::1]:61835
+2024-06-07 12:37:18.406 [INF] RPCS: New websocket client [::1]:61836
+2024-06-07 12:37:19.359 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-07 12:37:19.359 [INF] RPCS: Finished rescan
+2024-06-07 12:37:25.910 [INF] MINR: Block submitted via CPU miner accepted (hash 12e96c31f00ba758b2cb3c6462bdff2e44ce275cca801465d141444aadb21909, amount 50.00000236 BTC)
+2024-06-07 12:37:29.819 [INF] MINR: Block submitted via CPU miner accepted (hash 4bc02969687e34b193e314d1505322257733286ec1913598152f94cdfd5224e3, amount 50 BTC)
+2024-06-07 12:37:33.603 [INF] MINR: Block submitted via CPU miner accepted (hash 0c23ad169bbfc35affd8f20bf84714fbcf4c253da61d63d314dcbef6423e83d1, amount 50 BTC)
+2024-06-07 12:37:36.632 [ERR] RPCS: Websocket receive error from [::1]:61835: websocket: close 1006 unexpected EOF
+2024-06-07 12:37:36.632 [ERR] RPCS: Websocket receive error from [::1]:61836: websocket: close 1006 unexpected EOF
+2024-06-07 12:37:36.633 [INF] RPCS: Disconnected websocket client [::1]:61836
+2024-06-07 12:37:36.633 [INF] RPCS: Disconnected websocket client [::1]:61835
+2024-06-07 12:41:31.801 [INF] RPCS: New websocket client [::1]:61871
+2024-06-07 12:41:31.804 [INF] RPCS: New websocket client [::1]:61872
+2024-06-07 12:41:32.758 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-07 12:41:32.758 [INF] RPCS: Finished rescan
+2024-06-07 12:41:39.419 [INF] MINR: Block submitted via CPU miner accepted (hash 3cf52d1968c6e59396e959818fe20a36013da145ad77ee49eb182fa2f7716c89, amount 50.00000236 BTC)
+2024-06-07 12:41:43.372 [INF] MINR: Block submitted via CPU miner accepted (hash 5d397583be160e91d6becf76a15bf1e0049ade84752a1162ac3893f91d2b0c23, amount 50 BTC)
+2024-06-07 12:41:46.400 [ERR] RPCS: Websocket receive error from [::1]:61872: websocket: close 1006 unexpected EOF
+2024-06-07 12:41:46.400 [ERR] RPCS: Websocket receive error from [::1]:61871: websocket: close 1006 unexpected EOF
+2024-06-07 12:41:46.400 [INF] RPCS: Disconnected websocket client [::1]:61872
+2024-06-07 12:41:46.400 [INF] RPCS: Disconnected websocket client [::1]:61871
+2024-06-07 12:43:13.792 [INF] RPCS: New websocket client [::1]:61884
+2024-06-07 12:43:13.796 [INF] RPCS: New websocket client [::1]:61885
+2024-06-07 12:43:14.760 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-07 12:43:14.760 [INF] RPCS: Finished rescan
+2024-06-07 12:43:21.362 [INF] MINR: Block submitted via CPU miner accepted (hash 498c8c6243389ee111ee711f57290321ed09def04f924129173e55d40dfc0b1f, amount 50.00000236 BTC)
+2024-06-07 12:43:25.265 [INF] MINR: Block submitted via CPU miner accepted (hash 095b77d8130e8f7b4f2275c0a2a7bdc2f5427bce02b240fbc162a4085cd6dcfc, amount 50 BTC)
+2024-06-07 12:43:28.319 [ERR] RPCS: Websocket receive error from [::1]:61884: websocket: close 1006 unexpected EOF
+2024-06-07 12:43:28.319 [ERR] RPCS: Websocket receive error from [::1]:61885: websocket: close 1006 unexpected EOF
+2024-06-07 12:43:28.320 [INF] RPCS: Disconnected websocket client [::1]:61884
+2024-06-07 12:43:28.320 [INF] RPCS: Disconnected websocket client [::1]:61885
+2024-06-07 12:48:11.872 [INF] RPCS: New websocket client [::1]:61923
+2024-06-07 12:48:11.876 [INF] RPCS: New websocket client [::1]:61924
+2024-06-07 12:48:12.876 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-07 12:48:12.876 [INF] RPCS: Finished rescan
+2024-06-07 12:48:19.472 [INF] MINR: Block submitted via CPU miner accepted (hash 437d70901c33dfc0d39909682c79e37a6832cf6bbe51cbb31ecc60594b626184, amount 50.00000236 BTC)
+2024-06-07 12:48:23.428 [INF] MINR: Block submitted via CPU miner accepted (hash 2b46bca011942f60a48a0e519cdd425ea5ed34c824ffcb869c0aa3f4865d6f73, amount 50 BTC)
+2024-06-07 12:48:26.456 [ERR] RPCS: Websocket receive error from [::1]:61924: websocket: close 1006 unexpected EOF
+2024-06-07 12:48:26.457 [INF] RPCS: Disconnected websocket client [::1]:61924
+2024-06-07 12:48:26.457 [ERR] RPCS: Websocket receive error from [::1]:61923: websocket: close 1006 unexpected EOF
+2024-06-07 12:48:26.457 [INF] RPCS: Disconnected websocket client [::1]:61923
+2024-06-07 12:51:40.154 [INF] RPCS: New websocket client [::1]:61967
+2024-06-07 12:51:40.157 [INF] RPCS: New websocket client [::1]:61968
+2024-06-07 12:51:41.160 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-07 12:51:41.161 [INF] RPCS: Finished rescan
+2024-06-07 12:51:47.744 [INF] MINR: Block submitted via CPU miner accepted (hash 2caa16a7bafbf5f8de04ed12d4df30db6434fcab973a5dfee96f2e5995468164, amount 50.00000236 BTC)
+2024-06-07 12:51:52.275 [INF] MINR: Block submitted via CPU miner accepted (hash 74eb91f8d9ee7efd362f52320c8f8b39972a89b8d3ca61b483b52b4fa9e40026, amount 50 BTC)
+2024-06-07 12:51:55.320 [ERR] RPCS: Websocket receive error from [::1]:61968: websocket: close 1006 unexpected EOF
+2024-06-07 12:51:55.321 [ERR] RPCS: Websocket receive error from [::1]:61967: websocket: close 1006 unexpected EOF
+2024-06-07 12:51:55.321 [INF] RPCS: Disconnected websocket client [::1]:61968
+2024-06-07 12:51:55.321 [INF] RPCS: Disconnected websocket client [::1]:61967
+2024-06-07 12:57:48.893 [INF] RPCS: New websocket client [::1]:62012
+2024-06-07 12:57:48.897 [INF] RPCS: New websocket client [::1]:62013
+2024-06-07 12:57:49.886 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-07 12:57:49.886 [INF] RPCS: Finished rescan
+2024-06-07 12:57:56.500 [INF] MINR: Block submitted via CPU miner accepted (hash 60d57b8976c9b7c947f82d9423a64a78a9cb3d06dfbf26819eec8afa632b645b, amount 50.00000236 BTC)
+2024-06-07 12:58:01.049 [ERR] RPCS: Websocket receive error from [::1]:62013: websocket: close 1006 unexpected EOF
+2024-06-07 12:58:01.049 [INF] RPCS: Disconnected websocket client [::1]:62013
+2024-06-07 12:58:01.049 [ERR] RPCS: Websocket receive error from [::1]:62012: websocket: close 1006 unexpected EOF
+2024-06-07 12:58:01.049 [INF] RPCS: Disconnected websocket client [::1]:62012
+2024-06-08 09:59:56.726 [INF] RPCS: New websocket client [::1]:50761
+2024-06-08 09:59:56.734 [INF] RPCS: New websocket client [::1]:50762
+2024-06-08 09:59:58.901 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-08 09:59:58.907 [INF] RPCS: Finished rescan
+2024-06-08 10:00:05.794 [INF] MINR: Block submitted via CPU miner accepted (hash 09680ca80440dd90a418defeed8a54d4ff59d73f6c84e87ce3a1f93de95f2a01, amount 50.00000236 BTC)
+2024-06-08 10:00:10.226 [ERR] RPCS: Websocket receive error from [::1]:50762: websocket: close 1006 unexpected EOF
+2024-06-08 10:00:10.226 [ERR] RPCS: Websocket receive error from [::1]:50761: websocket: close 1006 unexpected EOF
+2024-06-08 10:00:10.226 [INF] RPCS: Disconnected websocket client [::1]:50762
+2024-06-08 10:00:10.226 [INF] RPCS: Disconnected websocket client [::1]:50761
+2024-06-09 10:05:40.936 [INF] RPCS: New websocket client [::1]:54252
+2024-06-09 10:05:40.940 [INF] RPCS: New websocket client [::1]:54253
+2024-06-09 10:05:43.294 [INF] RPCS: Beginning rescan for 27 addresses
+2024-06-09 10:05:43.296 [INF] RPCS: Finished rescan
+2024-06-09 10:05:48.049 [ERR] RPCS: Websocket receive error from [::1]:54252: websocket: close 1006 unexpected EOF
+2024-06-09 10:05:48.049 [INF] RPCS: Disconnected websocket client [::1]:54252
+2024-06-09 10:05:48.049 [ERR] RPCS: Websocket receive error from [::1]:54253: websocket: close 1006 unexpected EOF
+2024-06-09 10:05:48.050 [INF] RPCS: Disconnected websocket client [::1]:54253
+2024-06-09 10:06:13.388 [INF] RPCS: New websocket client [::1]:54258
+2024-06-09 10:06:13.395 [INF] RPCS: New websocket client [::1]:54259
+2024-06-09 10:06:14.213 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 10:06:14.213 [INF] RPCS: Finished rescan
+2024-06-09 10:06:21.102 [INF] MINR: Block submitted via CPU miner accepted (hash 20aa65b2b9602db0bbbbbd812bfda14b86d60eb3dbd52d99f8d5d61e296bf33d, amount 50.00000236 BTC)
+2024-06-09 10:06:24.158 [ERR] RPCS: Websocket receive error from [::1]:54258: websocket: close 1006 unexpected EOF
+2024-06-09 10:06:24.158 [ERR] RPCS: Websocket receive error from [::1]:54259: websocket: close 1006 unexpected EOF
+2024-06-09 10:06:24.158 [INF] RPCS: Disconnected websocket client [::1]:54258
+2024-06-09 10:06:24.158 [INF] RPCS: Disconnected websocket client [::1]:54259
+2024-06-09 10:12:13.815 [INF] RPCS: New websocket client [::1]:54279
+2024-06-09 10:12:13.819 [INF] RPCS: New websocket client [::1]:54280
+2024-06-09 10:12:14.583 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 10:12:14.584 [INF] RPCS: Finished rescan
+2024-06-09 10:12:21.390 [INF] MINR: Block submitted via CPU miner accepted (hash 59ced40b4a526956a27076b0cb1e76cdaec725b8107fdc731df1cc36de899da3, amount 50.00000236 BTC)
+2024-06-09 10:12:25.193 [ERR] RPCS: Websocket receive error from [::1]:54279: websocket: close 1006 unexpected EOF
+2024-06-09 10:12:25.193 [ERR] RPCS: Websocket receive error from [::1]:54280: websocket: close 1006 unexpected EOF
+2024-06-09 10:12:25.193 [INF] RPCS: Disconnected websocket client [::1]:54279
+2024-06-09 10:12:25.193 [INF] RPCS: Disconnected websocket client [::1]:54280
+2024-06-09 10:14:35.740 [INF] RPCS: New websocket client [::1]:54297
+2024-06-09 10:14:35.745 [INF] RPCS: New websocket client [::1]:54298
+2024-06-09 10:14:36.504 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 10:14:36.505 [INF] RPCS: Finished rescan
+2024-06-09 10:14:43.295 [INF] MINR: Block submitted via CPU miner accepted (hash 4a2b6686f270bf95603e17e24122099fc1cb01259a829c0a7ac70ed96478a0c2, amount 50.00000236 BTC)
+2024-06-09 10:14:47.085 [ERR] RPCS: Websocket receive error from [::1]:54297: websocket: close 1006 unexpected EOF
+2024-06-09 10:14:47.085 [ERR] RPCS: Websocket receive error from [::1]:54298: websocket: close 1006 unexpected EOF
+2024-06-09 10:14:47.085 [INF] RPCS: Disconnected websocket client [::1]:54297
+2024-06-09 10:14:47.085 [INF] RPCS: Disconnected websocket client [::1]:54298
+2024-06-09 10:25:56.347 [INF] RPCS: New websocket client [::1]:54345
+2024-06-09 10:25:56.351 [INF] RPCS: New websocket client [::1]:54346
+2024-06-09 10:25:57.805 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 10:25:57.805 [INF] RPCS: Finished rescan
+2024-06-09 10:26:04.728 [INF] MINR: Block submitted via CPU miner accepted (hash 5e49145bcb105c8c0a66c76e33cdbf2446c51a345543f6ecbb810269063ce528, amount 50.00000236 BTC)
+2024-06-09 10:26:08.523 [ERR] RPCS: Websocket receive error from [::1]:54345: websocket: close 1006 unexpected EOF
+2024-06-09 10:26:08.523 [ERR] RPCS: Websocket receive error from [::1]:54346: websocket: close 1006 unexpected EOF
+2024-06-09 10:26:08.523 [INF] RPCS: Disconnected websocket client [::1]:54345
+2024-06-09 10:26:08.523 [INF] RPCS: Disconnected websocket client [::1]:54346
+2024-06-09 10:29:28.802 [INF] RPCS: New websocket client [::1]:54404
+2024-06-09 10:29:28.804 [INF] RPCS: New websocket client [::1]:54405
+2024-06-09 10:29:29.563 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 10:29:29.564 [INF] RPCS: Finished rescan
+2024-06-09 10:29:36.376 [INF] MINR: Block submitted via CPU miner accepted (hash 5c9c7e5555d091e8aa6543ac7a54add0a6289ded4e934ea91f40884eda9f6aaa, amount 50.00000236 BTC)
+2024-06-09 10:29:40.171 [ERR] RPCS: Websocket receive error from [::1]:54404: websocket: close 1006 unexpected EOF
+2024-06-09 10:29:40.171 [ERR] RPCS: Websocket receive error from [::1]:54405: websocket: close 1006 unexpected EOF
+2024-06-09 10:29:40.171 [INF] RPCS: Disconnected websocket client [::1]:54404
+2024-06-09 10:29:40.171 [INF] RPCS: Disconnected websocket client [::1]:54405
+2024-06-09 10:31:19.319 [INF] RPCS: New websocket client [::1]:54423
+2024-06-09 10:31:19.323 [INF] RPCS: New websocket client [::1]:54424
+2024-06-09 10:31:20.093 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 10:31:20.093 [INF] RPCS: Finished rescan
+2024-06-09 10:31:26.948 [INF] MINR: Block submitted via CPU miner accepted (hash 55ca7dd291a598bbb485231a77692db62f67e2b2f509654a000090f4fdb6ef8f, amount 50.00000236 BTC)
+2024-06-09 10:31:30.753 [ERR] RPCS: Websocket receive error from [::1]:54424: websocket: close 1006 unexpected EOF
+2024-06-09 10:31:30.753 [ERR] RPCS: Websocket receive error from [::1]:54423: websocket: close 1006 unexpected EOF
+2024-06-09 10:31:30.754 [INF] RPCS: Disconnected websocket client [::1]:54424
+2024-06-09 10:31:30.754 [INF] RPCS: Disconnected websocket client [::1]:54423
+2024-06-09 10:32:16.872 [INF] RPCS: New websocket client [::1]:54438
+2024-06-09 10:32:16.876 [INF] RPCS: New websocket client [::1]:54439
+2024-06-09 10:32:17.651 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 10:32:17.652 [INF] RPCS: Finished rescan
+2024-06-09 10:32:24.472 [INF] MINR: Block submitted via CPU miner accepted (hash 1d2f000267d8d0d524183799c37c809114890388b1bcf923a46ef3c0b44f3dec, amount 50.00000236 BTC)
+2024-06-09 10:32:28.271 [ERR] RPCS: Websocket receive error from [::1]:54438: websocket: close 1006 unexpected EOF
+2024-06-09 10:32:28.271 [ERR] RPCS: Websocket receive error from [::1]:54439: websocket: close 1006 unexpected EOF
+2024-06-09 10:32:28.271 [INF] RPCS: Disconnected websocket client [::1]:54438
+2024-06-09 10:32:28.271 [INF] RPCS: Disconnected websocket client [::1]:54439
+2024-06-09 10:33:23.122 [INF] RPCS: New websocket client [::1]:54453
+2024-06-09 10:33:23.126 [INF] RPCS: New websocket client [::1]:54454
+2024-06-09 10:33:23.908 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 10:33:23.909 [INF] RPCS: Finished rescan
+2024-06-09 10:33:30.744 [INF] MINR: Block submitted via CPU miner accepted (hash 5de77bc1e0a7f64e7cc2e8f3dd572ccb96a944166affda219681cf0d8e472d78, amount 50.00000236 BTC)
+2024-06-09 10:33:34.526 [ERR] RPCS: Websocket receive error from [::1]:54454: websocket: close 1006 unexpected EOF
+2024-06-09 10:33:34.526 [ERR] RPCS: Websocket receive error from [::1]:54453: websocket: close 1006 unexpected EOF
+2024-06-09 10:33:34.526 [INF] RPCS: Disconnected websocket client [::1]:54454
+2024-06-09 10:33:34.526 [INF] RPCS: Disconnected websocket client [::1]:54453
+2024-06-09 10:35:12.664 [INF] RPCS: New websocket client [::1]:54478
+2024-06-09 10:35:12.672 [INF] RPCS: New websocket client [::1]:54479
+2024-06-09 10:35:13.416 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 10:35:13.417 [INF] RPCS: Finished rescan
+2024-06-09 10:35:20.229 [INF] MINR: Block submitted via CPU miner accepted (hash 3ed501c3060c46ab6cfa58ba4139c65cdae3dde1bab237ae4c71c5618009fbab, amount 50.00000236 BTC)
+2024-06-09 10:35:24.016 [ERR] RPCS: Websocket receive error from [::1]:54478: websocket: close 1006 unexpected EOF
+2024-06-09 10:35:24.016 [ERR] RPCS: Websocket receive error from [::1]:54479: websocket: close 1006 unexpected EOF
+2024-06-09 10:35:24.016 [INF] RPCS: Disconnected websocket client [::1]:54478
+2024-06-09 10:35:24.016 [INF] RPCS: Disconnected websocket client [::1]:54479
+2024-06-09 10:45:59.378 [INF] RPCS: New websocket client [::1]:54522
+2024-06-09 10:45:59.381 [INF] RPCS: New websocket client [::1]:54523
+2024-06-09 10:46:00.834 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 10:46:00.835 [INF] RPCS: Finished rescan
+2024-06-09 10:46:07.672 [INF] MINR: Block submitted via CPU miner accepted (hash 68cd1e48043a9c00086ec6c57299dac1899a6349d7374beb8b7b38fc3acaa9b0, amount 50.00000236 BTC)
+2024-06-09 10:46:11.461 [INF] MINR: Block submitted via CPU miner accepted (hash 0005f8082e6a4a01dd6b5fa2e6f5ead509a4cb4b178988920f1690e55ff087c7, amount 50 BTC)
+2024-06-09 10:46:15.269 [INF] MINR: Block submitted via CPU miner accepted (hash 6ad9abf28975ea5898c7f29d5c0df6630bc905def2fc37f93d65f385e0aa0445, amount 50 BTC)
+2024-06-09 10:46:18.329 [ERR] RPCS: Websocket receive error from [::1]:54522: websocket: close 1006 unexpected EOF
+2024-06-09 10:46:18.329 [ERR] RPCS: Websocket receive error from [::1]:54523: websocket: close 1006 unexpected EOF
+2024-06-09 10:46:18.330 [INF] RPCS: Disconnected websocket client [::1]:54522
+2024-06-09 10:46:18.330 [INF] RPCS: Disconnected websocket client [::1]:54523
+2024-06-09 10:51:08.479 [INF] RPCS: New websocket client [::1]:54550
+2024-06-09 10:51:08.484 [INF] RPCS: New websocket client [::1]:54551
+2024-06-09 10:51:09.461 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 10:51:09.462 [INF] RPCS: Finished rescan
+2024-06-09 10:51:16.085 [INF] MINR: Block submitted via CPU miner accepted (hash 325f50b181ab02fd0c24c84c01c1e0ce7ad934cda778e63d0db4c1b0c5a76d0c, amount 50.00000236 BTC)
+2024-06-09 10:51:20.041 [INF] MINR: Block submitted via CPU miner accepted (hash 7b01a448c2215ea3892020fb98711e202b9db191664a89693974ca85ac6eb050, amount 50 BTC)
+2024-06-09 10:51:23.852 [INF] MINR: Block submitted via CPU miner accepted (hash 56e71e4964082c6927ff73e6a10110ba6b12164b4b44bdb68c1652c4752ab1f9, amount 50 BTC)
+2024-06-09 10:51:26.897 [ERR] RPCS: Websocket receive error from [::1]:54550: websocket: close 1006 unexpected EOF
+2024-06-09 10:51:26.898 [INF] RPCS: Disconnected websocket client [::1]:54550
+2024-06-09 10:51:26.898 [ERR] RPCS: Websocket receive error from [::1]:54551: websocket: close 1006 unexpected EOF
+2024-06-09 10:51:26.898 [INF] RPCS: Disconnected websocket client [::1]:54551
+2024-06-09 11:00:32.638 [INF] RPCS: New websocket client [::1]:54601
+2024-06-09 11:00:32.643 [INF] RPCS: New websocket client [::1]:54602
+2024-06-09 11:00:33.598 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 11:00:33.598 [INF] RPCS: Finished rescan
+2024-06-09 11:00:40.211 [INF] MINR: Block submitted via CPU miner accepted (hash 3d17a97016f8dabd426b6e551d3eeb46add73ff12a7446347edf5ee93b81048e, amount 50.00000236 BTC)
+2024-06-09 11:00:44.175 [INF] MINR: Block submitted via CPU miner accepted (hash 18fb9c771078da150f2a6f1ddca766e14bed2f74e8880dfa1a83f273c159e990, amount 50 BTC)
+2024-06-09 11:00:47.972 [INF] MINR: Block submitted via CPU miner accepted (hash 124cc4e952ae64953d0449c2eb26fe8f27d268e268cd82d456f1175de71eab07, amount 50 BTC)
+2024-06-09 11:00:51.021 [ERR] RPCS: Websocket receive error from [::1]:54601: websocket: close 1006 unexpected EOF
+2024-06-09 11:00:51.021 [ERR] RPCS: Websocket receive error from [::1]:54602: websocket: close 1006 unexpected EOF
+2024-06-09 11:00:51.021 [INF] RPCS: Disconnected websocket client [::1]:54602
+2024-06-09 11:00:51.021 [INF] RPCS: Disconnected websocket client [::1]:54601
+2024-06-09 11:05:05.896 [INF] RPCS: New websocket client [::1]:54626
+2024-06-09 11:05:05.900 [INF] RPCS: New websocket client [::1]:54627
+2024-06-09 11:05:06.886 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 11:05:06.886 [INF] RPCS: Finished rescan
+2024-06-09 11:05:13.544 [INF] MINR: Block submitted via CPU miner accepted (hash 7362faf71d800126d242642ebc3fa4619527ca6c7b8fbf62d4e29c2374480635, amount 50.00000236 BTC)
+2024-06-09 11:05:17.472 [INF] MINR: Block submitted via CPU miner accepted (hash 38696a2f9ae7773ee0a87d06298e1e11b42bc8f265c01e52cf09afa4b3898c5f, amount 50 BTC)
+2024-06-09 11:05:21.248 [INF] MINR: Block submitted via CPU miner accepted (hash 4abee4ee805dff0731174e9f11bfb1ced6d366c8883ef0a267d434bd930aa69c, amount 50 BTC)
+2024-06-09 11:05:24.295 [ERR] RPCS: Websocket receive error from [::1]:54626: websocket: close 1006 unexpected EOF
+2024-06-09 11:05:24.295 [INF] RPCS: Disconnected websocket client [::1]:54626
+2024-06-09 11:05:24.295 [ERR] RPCS: Websocket receive error from [::1]:54627: websocket: close 1006 unexpected EOF
+2024-06-09 11:05:24.295 [INF] RPCS: Disconnected websocket client [::1]:54627
+2024-06-09 11:09:45.240 [INF] RPCS: New websocket client [::1]:54649
+2024-06-09 11:09:45.244 [INF] RPCS: New websocket client [::1]:54650
+2024-06-09 11:09:46.225 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 11:09:46.225 [INF] RPCS: Finished rescan
+2024-06-09 11:09:52.819 [INF] MINR: Block submitted via CPU miner accepted (hash 50ed0d2f439760e23396cacdb4b5adf984643f93fc44ac7228c6591b8ca2d797, amount 50.00000236 BTC)
+2024-06-09 11:09:56.735 [INF] MINR: Block submitted via CPU miner accepted (hash 1894f69c6d37cf27ad65d9c88cc9ba1bad5c27609c207eada5474b3396d8aede, amount 50 BTC)
+2024-06-09 11:10:00.556 [INF] MINR: Block submitted via CPU miner accepted (hash 2c8e3b1ea105702f5cbb71971604a48ff6b2aff78c6f8867ddb744aafc627659, amount 50 BTC)
+2024-06-09 11:10:03.598 [ERR] RPCS: Websocket receive error from [::1]:54649: websocket: close 1006 unexpected EOF
+2024-06-09 11:10:03.598 [ERR] RPCS: Websocket receive error from [::1]:54650: websocket: close 1006 unexpected EOF
+2024-06-09 11:10:03.598 [INF] RPCS: Disconnected websocket client [::1]:54649
+2024-06-09 11:10:03.598 [INF] RPCS: Disconnected websocket client [::1]:54650
+2024-06-09 11:10:35.231 [INF] RPCS: New websocket client [::1]:54666
+2024-06-09 11:10:35.236 [INF] RPCS: New websocket client [::1]:54667
+2024-06-09 11:10:36.250 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 11:10:36.251 [INF] RPCS: Finished rescan
+2024-06-09 11:10:42.833 [INF] MINR: Block submitted via CPU miner accepted (hash 7a36615e86fc5660e5b59940a04d6c71eb3f38d4e6a4529c5358d20eebbe34df, amount 50.00000236 BTC)
+2024-06-09 11:10:46.777 [INF] MINR: Block submitted via CPU miner accepted (hash 3690a0cbb5cf6b87a61aedef810525dfcefb832628f92a19c67843d792106714, amount 50 BTC)
+2024-06-09 11:10:49.806 [ERR] RPCS: Websocket receive error from [::1]:54667: websocket: close 1006 unexpected EOF
+2024-06-09 11:10:49.806 [ERR] RPCS: Websocket receive error from [::1]:54666: websocket: close 1006 unexpected EOF
+2024-06-09 11:10:49.806 [INF] RPCS: Disconnected websocket client [::1]:54667
+2024-06-09 11:10:49.806 [INF] RPCS: Disconnected websocket client [::1]:54666
+2024-06-09 11:14:52.725 [INF] RPCS: New websocket client [::1]:54763
+2024-06-09 11:14:52.729 [INF] RPCS: New websocket client [::1]:54764
+2024-06-09 11:14:53.704 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 11:14:53.705 [INF] RPCS: Finished rescan
+2024-06-09 11:15:00.343 [INF] MINR: Block submitted via CPU miner accepted (hash 7693262f0958f498ef295bbd6bc057884bad204d3395bdf2233a9b58615170d5, amount 50.00000236 BTC)
+2024-06-09 11:15:04.290 [INF] MINR: Block submitted via CPU miner accepted (hash 40f30a17e915f977c8812841145781643d9222aeb8e8459e0a80bfde21a5a984, amount 50 BTC)
+2024-06-09 11:15:07.334 [ERR] RPCS: Websocket receive error from [::1]:54763: websocket: close 1006 unexpected EOF
+2024-06-09 11:15:07.334 [ERR] RPCS: Websocket receive error from [::1]:54764: websocket: close 1006 unexpected EOF
+2024-06-09 11:15:07.335 [INF] RPCS: Disconnected websocket client [::1]:54763
+2024-06-09 11:15:07.335 [INF] RPCS: Disconnected websocket client [::1]:54764
+2024-06-09 11:17:53.365 [INF] RPCS: New websocket client [::1]:54812
+2024-06-09 11:17:53.369 [INF] RPCS: New websocket client [::1]:54813
+2024-06-09 11:17:54.352 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 11:17:54.352 [INF] RPCS: Finished rescan
+2024-06-09 11:18:00.962 [INF] MINR: Block submitted via CPU miner accepted (hash 5a650f95f0d712a69ed7aedf463248188327b135457fe0d4ea7a1379177bb2b5, amount 50.00000236 BTC)
+2024-06-09 11:18:04.903 [INF] MINR: Block submitted via CPU miner accepted (hash 2121a0d7a4477849003156b0124d01d24f7b3588da50891726c571583e9667a3, amount 50 BTC)
+2024-06-09 11:18:07.953 [ERR] RPCS: Websocket receive error from [::1]:54813: websocket: close 1006 unexpected EOF
+2024-06-09 11:18:07.953 [ERR] RPCS: Websocket receive error from [::1]:54812: websocket: close 1006 unexpected EOF
+2024-06-09 11:18:07.953 [INF] RPCS: Disconnected websocket client [::1]:54813
+2024-06-09 11:18:07.953 [INF] RPCS: Disconnected websocket client [::1]:54812
+2024-06-09 11:18:54.011 [INF] RPCS: New websocket client [::1]:54829
+2024-06-09 11:18:54.015 [INF] RPCS: New websocket client [::1]:54830
+2024-06-09 11:18:54.986 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 11:18:54.987 [INF] RPCS: Finished rescan
+2024-06-09 11:19:01.561 [INF] MINR: Block submitted via CPU miner accepted (hash 6b5955a6e06e786515f3f24fa420b667d1da0a0a7a522652f95dc6ea94ebb519, amount 50.00000236 BTC)
+2024-06-09 11:19:05.523 [INF] MINR: Block submitted via CPU miner accepted (hash 28587fdf8d7f24ed8551ccf38593aeaaef37c4deb2603d1c0e924ce72bc08003, amount 50 BTC)
+2024-06-09 11:19:08.570 [ERR] RPCS: Websocket receive error from [::1]:54829: websocket: close 1006 unexpected EOF
+2024-06-09 11:19:08.570 [ERR] RPCS: Websocket receive error from [::1]:54830: websocket: close 1006 unexpected EOF
+2024-06-09 11:19:08.570 [INF] RPCS: Disconnected websocket client [::1]:54829
+2024-06-09 11:19:08.570 [INF] RPCS: Disconnected websocket client [::1]:54830
+2024-06-09 11:20:56.463 [INF] RPCS: New websocket client [::1]:54842
+2024-06-09 11:20:56.468 [INF] RPCS: New websocket client [::1]:54843
+2024-06-09 11:20:57.438 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 11:20:57.439 [INF] RPCS: Finished rescan
+2024-06-09 11:21:04.047 [INF] MINR: Block submitted via CPU miner accepted (hash 7925bf9bf5161e92a2a66c61826d48c4ef6ee9ca2981d12f45fef2e2ebb68f7b, amount 50.00000236 BTC)
+2024-06-09 11:21:07.999 [INF] MINR: Block submitted via CPU miner accepted (hash 70cc91b26d46e42164b82dc13f78edd2e2f102ed7483050ce4fcbba4e59fc046, amount 50 BTC)
+2024-06-09 11:21:11.045 [ERR] RPCS: Websocket receive error from [::1]:54842: websocket: close 1006 unexpected EOF
+2024-06-09 11:21:11.045 [ERR] RPCS: Websocket receive error from [::1]:54843: websocket: close 1006 unexpected EOF
+2024-06-09 11:21:11.046 [INF] RPCS: Disconnected websocket client [::1]:54842
+2024-06-09 11:21:11.046 [INF] RPCS: Disconnected websocket client [::1]:54843
+2024-06-09 11:21:39.557 [INF] RPCS: New websocket client [::1]:54854
+2024-06-09 11:21:39.561 [INF] RPCS: New websocket client [::1]:54855
+2024-06-09 11:21:40.542 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 11:21:40.543 [INF] RPCS: Finished rescan
+2024-06-09 11:21:47.094 [INF] MINR: Block submitted via CPU miner accepted (hash 7c56f75326fcc3802fc1703e0006c9c12f34eeae6e17e05fa1825300e1aace03, amount 50.00000236 BTC)
+2024-06-09 11:21:51.028 [INF] MINR: Block submitted via CPU miner accepted (hash 5874701e85698939edd50e2af079190cf1064e5e4c9bb4b9b045c4bec60794a9, amount 50 BTC)
+2024-06-09 11:21:54.075 [ERR] RPCS: Websocket receive error from [::1]:54855: websocket: close 1006 unexpected EOF
+2024-06-09 11:21:54.075 [ERR] RPCS: Websocket receive error from [::1]:54854: websocket: close 1006 unexpected EOF
+2024-06-09 11:21:54.075 [INF] RPCS: Disconnected websocket client [::1]:54855
+2024-06-09 11:21:54.075 [INF] RPCS: Disconnected websocket client [::1]:54854
+2024-06-09 11:23:09.529 [INF] RPCS: New websocket client [::1]:54886
+2024-06-09 11:23:09.536 [INF] RPCS: New websocket client [::1]:54887
+2024-06-09 11:23:10.549 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 11:23:10.549 [INF] RPCS: Finished rescan
+2024-06-09 11:23:17.148 [INF] MINR: Block submitted via CPU miner accepted (hash 0257bf6769cb309ca64fc6113619938b47f42af1c0324ead7c6252cc13e61564, amount 50.00000236 BTC)
+2024-06-09 11:23:21.096 [INF] MINR: Block submitted via CPU miner accepted (hash 16dea052565e4d1da7e36b59c1bb279aa8a7b2c0e6b973e8b7ae5ab7b71254c7, amount 50 BTC)
+2024-06-09 11:23:24.139 [ERR] RPCS: Websocket receive error from [::1]:54886: websocket: close 1006 unexpected EOF
+2024-06-09 11:23:24.139 [ERR] RPCS: Websocket receive error from [::1]:54887: websocket: close 1006 unexpected EOF
+2024-06-09 11:23:24.139 [INF] RPCS: Disconnected websocket client [::1]:54886
+2024-06-09 11:23:24.139 [INF] RPCS: Disconnected websocket client [::1]:54887
+2024-06-09 11:36:34.270 [INF] RPCS: New websocket client [::1]:55064
+2024-06-09 11:36:34.274 [INF] RPCS: New websocket client [::1]:55065
+2024-06-09 11:36:35.933 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 11:36:35.933 [INF] RPCS: Finished rescan
+2024-06-09 11:36:42.550 [INF] MINR: Block submitted via CPU miner accepted (hash 166fc2448a432ad078ff3ada3b155b79f30b6850f7a1916402de261849b158c5, amount 50.00000236 BTC)
+2024-06-09 11:36:46.494 [INF] MINR: Block submitted via CPU miner accepted (hash 403a6684628b39eb3ced5ceae1bfa8ce4cebbfe0eecd085d6730c6f570ac3d6a, amount 50 BTC)
+2024-06-09 11:36:49.531 [ERR] RPCS: Websocket receive error from [::1]:55065: websocket: close 1006 unexpected EOF
+2024-06-09 11:36:49.531 [ERR] RPCS: Websocket receive error from [::1]:55064: websocket: close 1006 unexpected EOF
+2024-06-09 11:36:49.531 [INF] RPCS: Disconnected websocket client [::1]:55065
+2024-06-09 11:36:49.531 [INF] RPCS: Disconnected websocket client [::1]:55064
+2024-06-09 11:38:21.586 [INF] RPCS: New websocket client [::1]:55097
+2024-06-09 11:38:21.590 [INF] RPCS: New websocket client [::1]:55098
+2024-06-09 11:38:22.584 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 11:38:22.585 [INF] RPCS: Finished rescan
+2024-06-09 11:38:29.192 [INF] MINR: Block submitted via CPU miner accepted (hash 3e9b65f9ad9dc82ac9c3537964201a2adb798ccdafa666c2d73b9fc1d151b850, amount 50.00000236 BTC)
+2024-06-09 11:38:33.123 [INF] MINR: Block submitted via CPU miner accepted (hash 10a2c54a7902e140372ea28f68f76b6c2861da768e15a4c213ba4840f46b124b, amount 50 BTC)
+2024-06-09 11:38:36.147 [ERR] RPCS: Websocket receive error from [::1]:55097: websocket: close 1006 unexpected EOF
+2024-06-09 11:38:36.147 [ERR] RPCS: Websocket receive error from [::1]:55098: websocket: close 1006 unexpected EOF
+2024-06-09 11:38:36.147 [INF] RPCS: Disconnected websocket client [::1]:55098
+2024-06-09 11:38:36.147 [INF] RPCS: Disconnected websocket client [::1]:55097
+2024-06-09 11:44:21.487 [INF] RPCS: New websocket client [::1]:55196
+2024-06-09 11:44:21.491 [INF] RPCS: New websocket client [::1]:55197
+2024-06-09 11:44:22.476 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 11:44:22.477 [INF] RPCS: Finished rescan
+2024-06-09 11:44:29.087 [INF] MINR: Block submitted via CPU miner accepted (hash 2524084f4edf95b3df228575802f8e1334090aca9131bb1036f5f979b1dad958, amount 50.00000236 BTC)
+2024-06-09 11:44:33.018 [INF] MINR: Block submitted via CPU miner accepted (hash 56cd65a47eb0f543e97098cbad4fdf56bd52c85ac5768fab576e7eedc9c7dcef, amount 50 BTC)
+2024-06-09 11:44:36.067 [ERR] RPCS: Websocket receive error from [::1]:55196: websocket: close 1006 unexpected EOF
+2024-06-09 11:44:36.068 [INF] RPCS: Disconnected websocket client [::1]:55196
+2024-06-09 11:44:36.068 [ERR] RPCS: Websocket receive error from [::1]:55197: websocket: close 1006 unexpected EOF
+2024-06-09 11:44:36.068 [INF] RPCS: Disconnected websocket client [::1]:55197
+2024-06-09 11:45:12.271 [INF] RPCS: New websocket client [::1]:55208
+2024-06-09 11:45:12.275 [INF] RPCS: New websocket client [::1]:55209
+2024-06-09 11:45:13.262 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 11:45:13.263 [INF] RPCS: Finished rescan
+2024-06-09 11:45:19.852 [INF] MINR: Block submitted via CPU miner accepted (hash 7c7e9535a85121b6e850cfd4e85e0dc364cb3c9e286680da276e43356e6cdc47, amount 50.00000236 BTC)
+2024-06-09 11:45:23.801 [INF] MINR: Block submitted via CPU miner accepted (hash 4bc8d40242b1d3819ec48a86ba27523a500afd953b2c4c9f39a2666c7040e275, amount 50 BTC)
+2024-06-09 11:45:26.848 [ERR] RPCS: Websocket receive error from [::1]:55208: websocket: close 1006 unexpected EOF
+2024-06-09 11:45:26.848 [ERR] RPCS: Websocket receive error from [::1]:55209: websocket: close 1006 unexpected EOF
+2024-06-09 11:45:26.848 [INF] RPCS: Disconnected websocket client [::1]:55209
+2024-06-09 11:45:26.848 [INF] RPCS: Disconnected websocket client [::1]:55208
+2024-06-09 11:47:11.613 [INF] RPCS: New websocket client [::1]:55243
+2024-06-09 11:47:11.618 [INF] RPCS: New websocket client [::1]:55244
+2024-06-09 11:47:12.589 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 11:47:12.589 [INF] RPCS: Finished rescan
+2024-06-09 11:47:19.150 [INF] MINR: Block submitted via CPU miner accepted (hash 768386786ab9381c8a72b3f2a51178855410092808e241457c756f6ec7b4d355, amount 50.00000236 BTC)
+2024-06-09 11:47:23.079 [INF] MINR: Block submitted via CPU miner accepted (hash 314256084497d1a01c7fa864a71aeb2c9ac58c440c20ab88a09fdd3eb6fae305, amount 50 BTC)
+2024-06-09 11:47:26.117 [ERR] RPCS: Websocket receive error from [::1]:55243: websocket: close 1006 unexpected EOF
+2024-06-09 11:47:26.117 [ERR] RPCS: Websocket receive error from [::1]:55244: websocket: close 1006 unexpected EOF
+2024-06-09 11:47:26.117 [INF] RPCS: Disconnected websocket client [::1]:55243
+2024-06-09 11:47:26.117 [INF] RPCS: Disconnected websocket client [::1]:55244
+2024-06-09 11:51:19.932 [INF] RPCS: New websocket client [::1]:55279
+2024-06-09 11:51:19.934 [INF] RPCS: New websocket client [::1]:55280
+2024-06-09 11:51:20.893 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 11:51:20.893 [INF] RPCS: Finished rescan
+2024-06-09 11:51:27.535 [INF] MINR: Block submitted via CPU miner accepted (hash 09dadd5242563ab8c7e4d34c901e8a735a66d75b9bffcf4523159ecf2ab283f5, amount 50.00000236 BTC)
+2024-06-09 11:51:31.480 [INF] MINR: Block submitted via CPU miner accepted (hash 05c49ba2793d64b9acad5ef338ed632a1f9a58ce928107f99da7243cb5458915, amount 50 BTC)
+2024-06-09 11:51:34.525 [ERR] RPCS: Websocket receive error from [::1]:55280: websocket: close 1006 unexpected EOF
+2024-06-09 11:51:34.525 [ERR] RPCS: Websocket receive error from [::1]:55279: websocket: close 1006 unexpected EOF
+2024-06-09 11:51:34.528 [INF] RPCS: Disconnected websocket client [::1]:55279
+2024-06-09 11:51:34.528 [INF] RPCS: Disconnected websocket client [::1]:55280
+2024-06-09 11:55:21.923 [INF] RPCS: New websocket client [::1]:55334
+2024-06-09 11:55:21.928 [INF] RPCS: New websocket client [::1]:55335
+2024-06-09 11:55:22.871 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 11:55:22.872 [INF] RPCS: Finished rescan
+2024-06-09 11:55:29.436 [INF] MINR: Block submitted via CPU miner accepted (hash 4548de0b2192c4cf201b650af6a5b115c86b91dab9dceba72a56095d75f13b4d, amount 50.00000236 BTC)
+2024-06-09 11:55:32.483 [ERR] RPCS: Websocket receive error from [::1]:55334: websocket: close 1006 unexpected EOF
+2024-06-09 11:55:32.483 [ERR] RPCS: Websocket receive error from [::1]:55335: websocket: close 1006 unexpected EOF
+2024-06-09 11:55:32.484 [INF] RPCS: Disconnected websocket client [::1]:55334
+2024-06-09 11:55:32.484 [INF] RPCS: Disconnected websocket client [::1]:55335
+2024-06-09 11:58:30.759 [INF] RPCS: New websocket client [::1]:55353
+2024-06-09 11:58:30.763 [INF] RPCS: New websocket client [::1]:55354
+2024-06-09 11:58:31.512 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 11:58:31.512 [INF] RPCS: Finished rescan
+2024-06-09 11:58:38.336 [INF] MINR: Block submitted via CPU miner accepted (hash 10fa3dfe25b6682bef826b980e292d6273895bffe9dd5a38b864522adae4dbef, amount 50.00000236 BTC)
+2024-06-09 11:58:41.384 [ERR] RPCS: Websocket receive error from [::1]:55353: websocket: close 1006 unexpected EOF
+2024-06-09 11:58:41.384 [ERR] RPCS: Websocket receive error from [::1]:55354: websocket: close 1006 unexpected EOF
+2024-06-09 11:58:41.384 [INF] RPCS: Disconnected websocket client [::1]:55354
+2024-06-09 11:58:41.384 [INF] RPCS: Disconnected websocket client [::1]:55353
+2024-06-09 22:39:40.043 [INF] RPCS: New websocket client [::1]:57578
+2024-06-09 22:39:40.047 [INF] RPCS: New websocket client [::1]:57579
+2024-06-09 22:39:42.036 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 22:39:42.039 [INF] RPCS: Finished rescan
+2024-06-09 22:39:49.065 [INF] MINR: Block submitted via CPU miner accepted (hash 7685a0241f4ae3434d0e57e6d150cbeb5743938b9b18dad3b154efdff1c6134d, amount 50.00000236 BTC)
+2024-06-09 22:39:52.103 [ERR] RPCS: Websocket receive error from [::1]:57579: websocket: close 1006 unexpected EOF
+2024-06-09 22:39:52.103 [ERR] RPCS: Websocket receive error from [::1]:57578: websocket: close 1006 unexpected EOF
+2024-06-09 22:39:52.103 [INF] RPCS: Disconnected websocket client [::1]:57578
+2024-06-09 22:39:52.104 [INF] RPCS: Disconnected websocket client [::1]:57579
+2024-06-09 22:40:15.476 [INF] RPCS: New websocket client [::1]:57588
+2024-06-09 22:40:15.481 [INF] RPCS: New websocket client [::1]:57589
+2024-06-09 22:40:16.457 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 22:40:16.458 [INF] RPCS: Finished rescan
+2024-06-09 22:40:23.450 [INF] MINR: Block submitted via CPU miner accepted (hash 0b6a7e8b4471d98628089f4c34bd01fe8a0a7f4049dd56a3f582df897933bfe4, amount 50.00000236 BTC)
+2024-06-09 22:40:26.508 [ERR] RPCS: Websocket receive error from [::1]:57588: websocket: close 1006 unexpected EOF
+2024-06-09 22:40:26.508 [ERR] RPCS: Websocket receive error from [::1]:57589: websocket: close 1006 unexpected EOF
+2024-06-09 22:40:26.508 [INF] RPCS: Disconnected websocket client [::1]:57588
+2024-06-09 22:40:26.508 [INF] RPCS: Disconnected websocket client [::1]:57589
+2024-06-09 22:54:43.128 [INF] RPCS: New websocket client [::1]:57686
+2024-06-09 22:54:43.131 [INF] RPCS: New websocket client [::1]:57687
+2024-06-09 22:54:45.031 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 22:54:45.031 [INF] RPCS: Finished rescan
+2024-06-09 22:54:52.104 [INF] MINR: Block submitted via CPU miner accepted (hash 736c8c8bbdef2ea651dbab1c9147a7189b9e94c2a26be3d45e4f3ee56c1aa05a, amount 50.00000236 BTC)
+2024-06-09 22:54:55.172 [ERR] RPCS: Websocket receive error from [::1]:57686: websocket: close 1006 unexpected EOF
+2024-06-09 22:54:55.172 [ERR] RPCS: Websocket receive error from [::1]:57687: websocket: close 1006 unexpected EOF
+2024-06-09 22:54:55.172 [INF] RPCS: Disconnected websocket client [::1]:57686
+2024-06-09 22:54:55.172 [INF] RPCS: Disconnected websocket client [::1]:57687
+2024-06-09 23:01:31.972 [INF] BTCD: Version 0.24.2-betarc1
+2024-06-09 23:01:31.973 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-06-09 23:01:31.973 [ERR] BTCD: resource temporarily unavailable: resource temporarily unavailable
+2024-06-09 23:01:31.973 [INF] BTCD: Shutdown complete
+2024-06-09 23:01:47.701 [INF] BTCD: Version 0.24.2-betarc1
+2024-06-09 23:01:47.702 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-06-09 23:01:47.702 [ERR] BTCD: resource temporarily unavailable: resource temporarily unavailable
+2024-06-09 23:01:47.702 [INF] BTCD: Shutdown complete
+2024-06-09 23:01:53.729 [INF] BTCD: Version 0.24.2-betarc1
+2024-06-09 23:01:53.730 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-06-09 23:01:53.730 [ERR] BTCD: resource temporarily unavailable: resource temporarily unavailable
+2024-06-09 23:01:53.730 [INF] BTCD: Shutdown complete
+2024-06-09 23:01:58.252 [INF] BTCD: Version 0.24.2-betarc1
+2024-06-09 23:01:58.253 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-06-09 23:01:58.253 [ERR] BTCD: resource temporarily unavailable: resource temporarily unavailable
+2024-06-09 23:01:58.253 [INF] BTCD: Shutdown complete
+2024-06-09 23:03:21.115 [INF] RPCS: New websocket client [::1]:57746
+2024-06-09 23:03:21.124 [INF] RPCS: New websocket client [::1]:57747
+2024-06-09 23:03:22.128 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 23:03:22.129 [INF] RPCS: Finished rescan
+2024-06-09 23:03:29.204 [INF] MINR: Block submitted via CPU miner accepted (hash 53957c1e8ff464ab6bee6ae00aaa3d74ab334eb2b0a5b0ac65f8ae7f3b012eef, amount 50.00000236 BTC)
+2024-06-09 23:04:01.292 [ERR] RPCS: Websocket receive error from [::1]:57747: websocket: close 1006 unexpected EOF
+2024-06-09 23:04:01.292 [ERR] RPCS: Websocket receive error from [::1]:57746: websocket: close 1006 unexpected EOF
+2024-06-09 23:04:01.292 [INF] RPCS: Disconnected websocket client [::1]:57747
+2024-06-09 23:04:01.292 [INF] RPCS: Disconnected websocket client [::1]:57746
+2024-06-09 23:04:15.731 [INF] RPCS: New websocket client [::1]:57766
+2024-06-09 23:04:15.735 [INF] RPCS: New websocket client [::1]:57767
+2024-06-09 23:04:16.752 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 23:04:16.753 [INF] RPCS: Finished rescan
+2024-06-09 23:04:23.781 [INF] MINR: Block submitted via CPU miner accepted (hash 07126a952a9c49e68de2b93c94ba30ff7be52027a7611a4511a4fff51568776d, amount 50.00000236 BTC)
+2024-06-09 23:05:14.728 [ERR] RPCS: Websocket receive error from [::1]:57766: websocket: close 1006 unexpected EOF
+2024-06-09 23:05:14.728 [ERR] RPCS: Websocket receive error from [::1]:57767: websocket: close 1006 unexpected EOF
+2024-06-09 23:05:14.729 [INF] RPCS: Disconnected websocket client [::1]:57766
+2024-06-09 23:05:14.729 [INF] RPCS: Disconnected websocket client [::1]:57767
+2024-06-09 23:05:51.648 [INF] RPCS: New websocket client [::1]:57789
+2024-06-09 23:05:51.652 [INF] RPCS: New websocket client [::1]:57790
+2024-06-09 23:05:52.607 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 23:05:52.608 [INF] RPCS: Finished rescan
+2024-06-09 23:05:59.606 [INF] MINR: Block submitted via CPU miner accepted (hash 72408d4a73890c040dc5e0c62018800a2c12d88e8db5003354aed9588e6df81c, amount 50.00000236 BTC)
+2024-06-09 23:06:02.650 [ERR] RPCS: Websocket receive error from [::1]:57790: websocket: close 1006 unexpected EOF
+2024-06-09 23:06:02.650 [ERR] RPCS: Websocket receive error from [::1]:57789: websocket: close 1006 unexpected EOF
+2024-06-09 23:06:02.651 [INF] RPCS: Disconnected websocket client [::1]:57790
+2024-06-09 23:06:02.651 [INF] RPCS: Disconnected websocket client [::1]:57789
+2024-06-09 23:25:15.255 [INF] RPCS: New websocket client [::1]:57973
+2024-06-09 23:25:15.258 [INF] RPCS: New websocket client [::1]:57974
+2024-06-09 23:25:17.100 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 23:25:17.100 [INF] RPCS: Finished rescan
+2024-06-09 23:25:24.104 [INF] MINR: Block submitted via CPU miner accepted (hash 65ff343333264d1bc8f89d5c2a8299f67e2147a282287ed3a03ee1dba9aa3d62, amount 50.00000236 BTC)
+2024-06-09 23:25:27.197 [ERR] RPCS: Websocket receive error from [::1]:57974: websocket: close 1006 unexpected EOF
+2024-06-09 23:25:27.197 [ERR] RPCS: Websocket receive error from [::1]:57973: websocket: close 1006 unexpected EOF
+2024-06-09 23:25:27.197 [INF] RPCS: Disconnected websocket client [::1]:57974
+2024-06-09 23:25:27.197 [INF] RPCS: Disconnected websocket client [::1]:57973
+2024-06-09 23:52:31.175 [INF] RPCS: New websocket client [::1]:58276
+2024-06-09 23:52:31.186 [INF] RPCS: New websocket client [::1]:58277
+2024-06-09 23:52:33.030 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 23:52:33.034 [INF] RPCS: Finished rescan
+2024-06-09 23:52:40.027 [INF] MINR: Block submitted via CPU miner accepted (hash 2f92350dae5ab007f54fac006e7144a215740ec88a2e36af8ae9eeeed1d7a21c, amount 50.00000236 BTC)
+2024-06-09 23:52:43.097 [ERR] RPCS: Websocket receive error from [::1]:58277: websocket: close 1006 unexpected EOF
+2024-06-09 23:52:43.097 [ERR] RPCS: Websocket receive error from [::1]:58276: websocket: close 1006 unexpected EOF
+2024-06-09 23:52:43.097 [INF] RPCS: Disconnected websocket client [::1]:58277
+2024-06-09 23:52:43.097 [INF] RPCS: Disconnected websocket client [::1]:58276
+2024-06-09 23:54:17.556 [INF] RPCS: New websocket client [::1]:58308
+2024-06-09 23:54:17.560 [INF] RPCS: New websocket client [::1]:58309
+2024-06-09 23:54:18.561 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 23:54:18.561 [INF] RPCS: Finished rescan
+2024-06-09 23:54:25.549 [INF] MINR: Block submitted via CPU miner accepted (hash 52fa5e65b70becbd820d5b6728b7b280af715519c664d3c0e0e39f68b7629a8f, amount 50.00000236 BTC)
+2024-06-09 23:54:28.591 [ERR] RPCS: Websocket receive error from [::1]:58308: websocket: close 1006 unexpected EOF
+2024-06-09 23:54:28.591 [ERR] RPCS: Websocket receive error from [::1]:58309: websocket: close 1006 unexpected EOF
+2024-06-09 23:54:28.592 [INF] RPCS: Disconnected websocket client [::1]:58308
+2024-06-09 23:54:28.592 [INF] RPCS: Disconnected websocket client [::1]:58309
+2024-06-09 23:55:53.079 [INF] RPCS: New websocket client [::1]:58338
+2024-06-09 23:55:53.084 [INF] RPCS: New websocket client [::1]:58339
+2024-06-09 23:55:54.056 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-09 23:55:54.056 [INF] RPCS: Finished rescan
+2024-06-09 23:56:01.071 [INF] MINR: Block submitted via CPU miner accepted (hash 2a36370d6fdb4c405f6ff88467bedab780e8843adb0a97727d41f0a3182b00df, amount 50.00000236 BTC)
+2024-06-09 23:56:04.119 [ERR] RPCS: Websocket receive error from [::1]:58338: websocket: close 1006 unexpected EOF
+2024-06-09 23:56:04.119 [ERR] RPCS: Websocket receive error from [::1]:58339: websocket: close 1006 unexpected EOF
+2024-06-09 23:56:04.119 [INF] RPCS: Disconnected websocket client [::1]:58338
+2024-06-09 23:56:04.119 [INF] RPCS: Disconnected websocket client [::1]:58339
+2024-06-10 00:09:36.360 [INF] RPCS: New websocket client [::1]:58561
+2024-06-10 00:09:36.364 [INF] RPCS: New websocket client [::1]:58562
+2024-06-10 00:09:38.150 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-10 00:09:38.151 [INF] RPCS: Finished rescan
+2024-06-10 00:09:45.191 [INF] MINR: Block submitted via CPU miner accepted (hash 0e91fd9facffa07ac0add93ed5e04e6871d457738f00d27a252a8530a86b9672, amount 50.00000236 BTC)
+2024-06-10 00:09:49.227 [ERR] RPCS: Websocket receive error from [::1]:58561: websocket: close 1006 unexpected EOF
+2024-06-10 00:09:49.227 [ERR] RPCS: Websocket receive error from [::1]:58562: websocket: close 1006 unexpected EOF
+2024-06-10 00:09:49.227 [INF] RPCS: Disconnected websocket client [::1]:58562
+2024-06-10 00:09:49.227 [INF] RPCS: Disconnected websocket client [::1]:58561
+2024-06-10 00:11:40.900 [INF] RPCS: New websocket client [::1]:58593
+2024-06-10 00:11:40.904 [INF] RPCS: New websocket client [::1]:58594
+2024-06-10 00:11:41.900 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-10 00:11:41.900 [INF] RPCS: Finished rescan
+2024-06-10 00:11:48.898 [INF] MINR: Block submitted via CPU miner accepted (hash 53c860290e2a9d33753bc03500fdb249183b8aed41dd78609ff31dd5af887f0e, amount 50.00000236 BTC)
+2024-06-10 00:11:52.944 [INF] MINR: Block submitted via CPU miner accepted (hash 44b66e8e5106bb0e2d6c1a2c24d273255e8e7b854a77de53aefd5fa13b6ff000, amount 50 BTC)
+2024-06-10 00:11:55.994 [ERR] RPCS: Websocket receive error from [::1]:58593: websocket: close 1006 unexpected EOF
+2024-06-10 00:11:55.994 [ERR] RPCS: Websocket receive error from [::1]:58594: websocket: close 1006 unexpected EOF
+2024-06-10 00:11:55.994 [INF] RPCS: Disconnected websocket client [::1]:58593
+2024-06-10 00:11:55.994 [INF] RPCS: Disconnected websocket client [::1]:58594
+2024-06-10 00:12:31.747 [INF] RPCS: New websocket client [::1]:58623
+2024-06-10 00:12:31.751 [INF] RPCS: New websocket client [::1]:58624
+2024-06-10 00:12:33.002 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-10 00:12:33.002 [INF] RPCS: Finished rescan
+2024-06-10 00:12:39.722 [INF] MINR: Block submitted via CPU miner accepted (hash 20e6fc6b487b8ca79b38262e98db716eb9459940416a1ba5fa89bd0c1b3b8ad1, amount 50.00000236 BTC)
+2024-06-10 00:12:43.955 [INF] MINR: Block submitted via CPU miner accepted (hash 2e27c87f2dac62c4b16a7af2ed95a2406952c7e26dbfc954cda203b663729787, amount 50 BTC)
+2024-06-10 00:12:47.004 [ERR] RPCS: Websocket receive error from [::1]:58624: websocket: close 1006 unexpected EOF
+2024-06-10 00:12:47.004 [ERR] RPCS: Websocket receive error from [::1]:58623: websocket: close 1006 unexpected EOF
+2024-06-10 00:12:47.004 [INF] RPCS: Disconnected websocket client [::1]:58624
+2024-06-10 00:12:47.004 [INF] RPCS: Disconnected websocket client [::1]:58623
+2024-06-10 00:16:28.573 [INF] RPCS: New websocket client [::1]:58672
+2024-06-10 00:16:28.581 [INF] RPCS: New websocket client [::1]:58673
+2024-06-10 00:16:29.868 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-10 00:16:29.869 [INF] RPCS: Finished rescan
+2024-06-10 00:16:36.583 [INF] MINR: Block submitted via CPU miner accepted (hash 64c9bbe41d82c6533d911f65aa395b061f2e323078d43de8a57079af1aba9faa, amount 50.00000236 BTC)
+2024-06-10 00:16:40.817 [INF] MINR: Block submitted via CPU miner accepted (hash 1f6676352447bc03f9ea41d07aa1d5beb61dc8fdbbf19bd0681f69506a1df0f2, amount 50 BTC)
+2024-06-10 00:16:43.871 [ERR] RPCS: Websocket receive error from [::1]:58672: websocket: close 1006 unexpected EOF
+2024-06-10 00:16:43.871 [ERR] RPCS: Websocket receive error from [::1]:58673: websocket: close 1006 unexpected EOF
+2024-06-10 00:16:43.871 [INF] RPCS: Disconnected websocket client [::1]:58672
+2024-06-10 00:16:43.871 [INF] RPCS: Disconnected websocket client [::1]:58673
+2024-06-10 00:18:04.143 [INF] RPCS: New websocket client [::1]:58732
+2024-06-10 00:18:04.148 [INF] RPCS: New websocket client [::1]:58733
+2024-06-10 00:18:05.376 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-10 00:18:05.377 [INF] RPCS: Finished rescan
+2024-06-10 00:18:12.094 [INF] MINR: Block submitted via CPU miner accepted (hash 403d64d200394754b303d13c8caafa57f8bdc51130331acb2fb3a354b6e92bc7, amount 50.00000236 BTC)
+2024-06-10 00:18:16.274 [INF] MINR: Block submitted via CPU miner accepted (hash 7dc65871a082e126c71d55e9435c59e9a75d010b856e65123c5ea9a0d7626d23, amount 50 BTC)
+2024-06-10 00:18:19.301 [ERR] RPCS: Websocket receive error from [::1]:58733: websocket: close 1006 unexpected EOF
+2024-06-10 00:18:19.301 [ERR] RPCS: Websocket receive error from [::1]:58732: websocket: close 1006 unexpected EOF
+2024-06-10 00:18:19.301 [INF] RPCS: Disconnected websocket client [::1]:58733
+2024-06-10 00:18:19.301 [INF] RPCS: Disconnected websocket client [::1]:58732
+2024-06-10 00:19:06.317 [INF] RPCS: New websocket client [::1]:58750
+2024-06-10 00:19:06.322 [INF] RPCS: New websocket client [::1]:58751
+2024-06-10 00:19:07.577 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-10 00:19:07.578 [INF] RPCS: Finished rescan
+2024-06-10 00:19:14.282 [INF] MINR: Block submitted via CPU miner accepted (hash 5f39afaa3b93c90fea208beb0b8c7b5fe0c0f1f47babf8f196fbb4f5e4daad53, amount 50.00000236 BTC)
+2024-06-10 00:19:18.448 [INF] MINR: Block submitted via CPU miner accepted (hash 68a32497b8dfce64b3ff586f60d1af902565e0693b3694a142d31fb079d433a1, amount 50 BTC)
+2024-06-10 00:19:21.495 [ERR] RPCS: Websocket receive error from [::1]:58750: websocket: close 1006 unexpected EOF
+2024-06-10 00:19:21.495 [ERR] RPCS: Websocket receive error from [::1]:58751: websocket: close 1006 unexpected EOF
+2024-06-10 00:19:21.495 [INF] RPCS: Disconnected websocket client [::1]:58750
+2024-06-10 00:19:21.495 [INF] RPCS: Disconnected websocket client [::1]:58751
+2024-06-10 00:20:05.083 [INF] RPCS: New websocket client [::1]:58767
+2024-06-10 00:20:05.087 [INF] RPCS: New websocket client [::1]:58768
+2024-06-10 00:20:06.327 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-10 00:20:06.327 [INF] RPCS: Finished rescan
+2024-06-10 00:20:13.119 [INF] MINR: Block submitted via CPU miner accepted (hash 1a5b364bbf1e12f25865baad6ae4e67bd4f989a62f5a3051ce9d37a172efd390, amount 50.00000236 BTC)
+2024-06-10 00:20:17.360 [INF] MINR: Block submitted via CPU miner accepted (hash 1dbc36a47c624e2f7d5102d84802bcb9feddb3f6350b738bb2e9799332ee11a0, amount 50 BTC)
+2024-06-10 00:20:20.409 [ERR] RPCS: Websocket receive error from [::1]:58768: websocket: close 1006 unexpected EOF
+2024-06-10 00:20:20.409 [ERR] RPCS: Websocket receive error from [::1]:58767: websocket: close 1006 unexpected EOF
+2024-06-10 00:20:20.410 [INF] RPCS: Disconnected websocket client [::1]:58767
+2024-06-10 00:20:20.410 [INF] RPCS: Disconnected websocket client [::1]:58768
+2024-06-10 00:20:54.973 [INF] RPCS: New websocket client [::1]:58783
+2024-06-10 00:20:54.978 [INF] RPCS: New websocket client [::1]:58784
+2024-06-10 00:20:56.244 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-10 00:20:56.244 [INF] RPCS: Finished rescan
+2024-06-10 00:21:03.008 [INF] MINR: Block submitted via CPU miner accepted (hash 60af618462b8cc2270d1eb5e180b1024ad8509abcc1af84cc41dd8f24c06b242, amount 50.00000236 BTC)
+2024-06-10 00:21:07.240 [INF] MINR: Block submitted via CPU miner accepted (hash 27489689ef8eb29a6b0c79f7f9421b48fc03506aeccf7b07b579b98b39a10dfa, amount 50 BTC)
+2024-06-10 00:21:10.287 [ERR] RPCS: Websocket receive error from [::1]:58784: websocket: close 1006 unexpected EOF
+2024-06-10 00:21:10.287 [ERR] RPCS: Websocket receive error from [::1]:58783: websocket: close 1006 unexpected EOF
+2024-06-10 00:21:10.288 [INF] RPCS: Disconnected websocket client [::1]:58784
+2024-06-10 00:21:10.288 [INF] RPCS: Disconnected websocket client [::1]:58783
+2024-06-10 00:25:44.354 [INF] RPCS: New websocket client [::1]:58851
+2024-06-10 00:25:44.358 [INF] RPCS: New websocket client [::1]:58852
+2024-06-10 00:25:45.667 [INF] RPCS: Beginning rescan for 5 addresses
+2024-06-10 00:25:45.668 [INF] RPCS: Finished rescan
+2024-06-10 00:25:52.467 [INF] MINR: Block submitted via CPU miner accepted (hash 4009df3d4399b0752c70c4b9d3887bab4ff7f59facbd367aa641037479100e75, amount 50.00000236 BTC)
+2024-06-10 00:25:56.688 [INF] MINR: Block submitted via CPU miner accepted (hash 1c46a8ce968f5c4dd7abb3c9636de86e0a3c714c4ec94800ffb146342c39b450, amount 50 BTC)
+2024-06-10 00:25:59.746 [ERR] RPCS: Websocket receive error from [::1]:58851: websocket: close 1006 unexpected EOF
+2024-06-10 00:25:59.746 [ERR] RPCS: Websocket receive error from [::1]:58852: websocket: close 1006 unexpected EOF
+2024-06-10 00:25:59.746 [INF] RPCS: Disconnected websocket client [::1]:58851
+2024-06-10 00:25:59.746 [INF] RPCS: Disconnected websocket client [::1]:58852
