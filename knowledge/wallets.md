@@ -4,6 +4,8 @@
 2. https://bitcoin.stackexchange.com/questions/118127/how-to-recover-and-sweep-p2pk-coins/118130#118130
 3. https://bitcointalk.org/index.php?topic=5475186.0
 4. https://bitcointalk.org/index.php?topic=5469585.0
+5. https://github.com/bitcoinbook/bitcoinbook/blob/develop/ch05_wallets.adoc
+6. https://github.com/bitcoin/bitcoin/blob/master/doc/managing-wallets.md
 
 ## Legacy Wallets
 Legacy wallets are the traditional type of wallets that Bitcoin Core has used since its inception. They are based on the original wallet design, which **uses a collection of private keys**.
