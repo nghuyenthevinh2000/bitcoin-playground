@@ -9,6 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/btcsuite/btcd/blockchain"
+	btcec "github.com/btcsuite/btcd/btcec/v2"
 	"github.com/btcsuite/btcd/btcutil"
 	"github.com/btcsuite/btcd/btcutil/hdkeychain"
 	"github.com/btcsuite/btcd/chaincfg"
@@ -71,7 +72,8 @@ func TestSeedString(t *testing.T) {
 // go test -v -run ^TestBallGameContract$ github.com/nghuyenthevinh2000/bitcoin-playground
 // the test is highly flaky, probably due to the fact that different processes are not synced.
 // first run will always fail
-// second run will always pass
+// second run will always pass, but amount of alice is not updated
+// third run will always fail, but amount of alice is updated
 func TestBallGameContract(t *testing.T) {
 	suite := TestSuite{}
 	suite.setupSuite(t)
@@ -256,4 +258,15 @@ func (s *TestSuite) generateSeed() []byte {
 func (s *TestSuite) generateSeedString() string {
 	seed := s.generateSeed()
 	return hex.EncodeToString(seed)
+}
+
+func (s *TestSuite) generateKeyPair() ([]byte, *btcec.PublicKey, *btcec.PrivateKey) {
+	seed := s.generateSeed()
+	hd, err := hdkeychain.NewMaster(seed, s.btcdChainConfig)
+	assert.Nil(s.t, err)
+	pub, err := hd.ECPubKey()
+	assert.Nil(s.t, err)
+	priv, err := hd.ECPrivKey()
+
+	return seed, pub, priv
 }

@@ -519,3 +519,30 @@
 18:15:54.732035 version@stat F·[2 1] S·624KiB[5KiB 619KiB] Sc·[0.50 0.01]
 18:15:54.743315 transaction@flush created L0@122 N·2 S·259B "\x00\x00\x00..loc,v10273":"\x00\x00\x00..6;U,v10274"
 18:15:54.743354 version@stat F·[3 1] S·625KiB[5KiB 619KiB] Sc·[0.75 0.01]
+=============== Jun 11, 2024 (+07) ===============
+01:09:40.696613 transaction@flush created L0@123 N·50 S·3KiB "\x00\x00\x00..ate,v10275":"\x00\x00\x00..\x1d'd,v10324"
+01:09:40.697598 version@stat F·[4 1] S·628KiB[8KiB 619KiB] Sc·[1.00 0.01]
+01:09:40.713681 table@compaction L0·4 -> L1·1 S·628KiB Q·10274
+01:09:40.745155 transaction@flush created L0@124 N·2 S·1KiB "\x00\x00\x00..fee,v10325":"\x00\x00\x00..loc,v10326"
+01:09:40.745351 version@stat F·[5 1] S·629KiB[9KiB 619KiB] Sc·[1.25 0.01]
+01:09:40.823826 table@build created L1@125 N·10189 S·627KiB "\x00\x00\x00..ate,v10275":"bid..bid,v35"
+01:09:40.824436 version@stat F·[1 1] S·628KiB[1KiB 627KiB] Sc·[0.25 0.01]
+01:09:40.833488 table@compaction committed F-4 S-1KiB Ke·0 D·10 T·119.581916ms
+01:09:40.835103 table@remove removed @123
+01:09:40.837756 table@remove removed @122
+01:09:40.838704 table@remove removed @121
+01:09:40.840274 table@remove removed @119
+01:09:40.841969 table@remove removed @120
+01:09:41.106291 transaction@flush created L0@126 N·79 S·5KiB "\x00\x00\x00..loc,v10327":"\x00\x00\x00..ͱ\x01,v10388"
+01:09:41.106462 version@stat F·[2 1] S·633KiB[6KiB 627KiB] Sc·[0.50 0.01]
+01:09:41.113631 db@close closing
+01:09:41.113906 db@close done T·270.292µs
+=============== Jun 13, 2024 (+07) ===============
+23:02:53.951506 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+23:02:53.952292 version@stat F·[2 1] S·633KiB[6KiB 627KiB] Sc·[0.50 0.01]
+23:02:53.952312 db@open opening
+23:02:53.952373 journal@recovery F·1
+23:02:53.953486 journal@recovery recovering @111
+23:02:53.954031 version@stat F·[2 1] S·633KiB[6KiB 627KiB] Sc·[0.50 0.01]
+23:02:53.983979 db@janitor F·5 G·0
+23:02:53.984019 db@open done T·31.69975ms

@@ -2266,3 +2266,56 @@
 2024-06-10 18:16:39.562 [INF] RPCS: Disconnected websocket client [::1]:52719
 2024-06-10 18:16:39.562 [ERR] RPCS: Websocket receive error from [::1]:52718: websocket: close 1006 unexpected EOF
 2024-06-10 18:16:39.562 [INF] RPCS: Disconnected websocket client [::1]:52718
+2024-06-11 01:09:40.560 [INF] BTCD: Received signal (terminated).  Shutting down...
+2024-06-11 01:09:40.573 [INF] BTCD: Gracefully shutting down the server...
+2024-06-11 01:09:40.574 [WRN] SRVR: Server shutting down
+2024-06-11 01:09:40.574 [WRN] RPCS: RPC server shutting down
+2024-06-11 01:09:40.573 [ERR] RPCS: Websocket receive error from [::1]:52410: websocket: close 1006 unexpected EOF
+2024-06-11 01:09:40.576 [INF] RPCS: RPC server shutdown complete
+2024-06-11 01:09:40.651 [INF] RPCS: Disconnected websocket client [::1]:52410
+2024-06-11 01:09:40.778 [INF] SYNC: Sync manager shutting down
+2024-06-11 01:09:40.778 [INF] CHAN: Flushing UTXO cache of 97 MiB with 77 entries to disk. For large sizes, this can take up to several minutes...
+2024-06-11 01:09:41.085 [INF] AMGR: Address manager shutting down
+2024-06-11 01:09:41.089 [INF] SRVR: Server shutdown complete
+2024-06-11 01:09:41.089 [INF] BTCD: Gracefully shutting down the database...
+2024-06-11 01:09:41.114 [INF] BTCD: Shutdown complete
+2024-06-13 23:02:53.950 [INF] BTCD: Version 0.24.2-betarc1
+2024-06-13 23:02:53.950 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-06-13 23:02:53.984 [INF] BTCD: Block database loaded
+2024-06-13 23:02:53.985 [INF] INDX: Transaction index is enabled
+2024-06-13 23:02:53.985 [INF] INDX: Committed filter index is enabled
+2024-06-13 23:02:53.985 [INF] CHAN: Pre-alloacting for 251 MiB: 
+2024-06-13 23:02:53.993 [INF] CHAN: Loading block index...
+2024-06-13 23:02:53.997 [INF] CHAN: Chain state (height 847, hash 57b1df905e50330a4a5063a8617f2d62ed512c955dc68ef09fd06bc3ecc52309, totaltx 867, work 1696)
+2024-06-13 23:02:53.999 [INF] AMGR: Loaded 0 addresses from file 'simnet/btcd/simnet/peers.json'
+2024-06-13 23:02:53.999 [INF] RPCS: RPC server listening on [::1]:18556
+2024-06-13 23:02:53.999 [INF] RPCS: RPC server listening on 127.0.0.1:18556
+2024-06-13 23:02:53.999 [INF] CMGR: Server listening on 0.0.0.0:18555
+2024-06-13 23:02:53.999 [INF] CMGR: Server listening on [::]:18555
+2024-06-13 23:02:59.984 [INF] RPCS: New websocket client [::1]:53450
+2024-06-13 23:03:00.523 [INF] RPCS: Beginning rescan for 19 addresses
+2024-06-13 23:03:00.524 [INF] RPCS: Finished rescan
+2024-06-13 23:03:02.938 [INF] RPCS: New websocket client [::1]:53454
+2024-06-13 23:03:02.939 [INF] RPCS: New websocket client [::1]:53455
+2024-06-13 23:03:03.455 [ERR] RPCS: Websocket receive error from [::1]:53454: websocket: close 1006 unexpected EOF
+2024-06-13 23:03:03.455 [INF] RPCS: Disconnected websocket client [::1]:53454
+2024-06-13 23:03:03.455 [ERR] RPCS: Websocket receive error from [::1]:53455: websocket: close 1006 unexpected EOF
+2024-06-13 23:03:03.455 [INF] RPCS: Disconnected websocket client [::1]:53455
+2024-06-13 23:04:24.428 [INF] RPCS: New websocket client [::1]:53490
+2024-06-13 23:04:24.429 [INF] RPCS: New websocket client [::1]:53491
+2024-06-13 23:04:24.453 [ERR] RPCS: Websocket receive error from [::1]:53490: websocket: close 1006 unexpected EOF
+2024-06-13 23:04:24.453 [ERR] RPCS: Websocket receive error from [::1]:53491: websocket: close 1006 unexpected EOF
+2024-06-13 23:04:24.453 [INF] RPCS: Disconnected websocket client [::1]:53490
+2024-06-13 23:04:24.453 [INF] RPCS: Disconnected websocket client [::1]:53491
+2024-06-13 23:22:11.410 [INF] RPCS: New websocket client [::1]:53568
+2024-06-13 23:22:11.412 [INF] RPCS: New websocket client [::1]:53569
+2024-06-13 23:22:12.019 [ERR] RPCS: Websocket receive error from [::1]:53568: websocket: close 1006 unexpected EOF
+2024-06-13 23:22:12.019 [ERR] RPCS: Websocket receive error from [::1]:53569: websocket: close 1006 unexpected EOF
+2024-06-13 23:22:12.019 [INF] RPCS: Disconnected websocket client [::1]:53568
+2024-06-13 23:22:12.019 [INF] RPCS: Disconnected websocket client [::1]:53569
+2024-06-13 23:22:48.654 [INF] RPCS: New websocket client [::1]:53573
+2024-06-13 23:22:48.655 [INF] RPCS: New websocket client [::1]:53574
+2024-06-13 23:22:48.686 [ERR] RPCS: Websocket receive error from [::1]:53574: websocket: close 1006 unexpected EOF
+2024-06-13 23:22:48.686 [INF] RPCS: Disconnected websocket client [::1]:53574
+2024-06-13 23:22:48.686 [ERR] RPCS: Websocket receive error from [::1]:53573: websocket: close 1006 unexpected EOF
+2024-06-13 23:22:48.687 [INF] RPCS: Disconnected websocket client [::1]:53573
