@@ -37,18 +37,22 @@ func TestMuSig2(t *testing.T) {
 
 	// generate partial signatures for each participant
 	// sign already negates nonce with odd y - value
+	// s1, R
 	ps_1, err := musig2.Sign(nonce_1.SecNonce, priv_1, aggrNonces, pubKeys, msgBytes)
 	assert.Nil(s.t, err)
+	// s2, R
 	ps_2, err := musig2.Sign(nonce_2.SecNonce, priv_2, aggrNonces, pubKeys, msgBytes)
 	assert.Nil(s.t, err)
+	// s3, R
 	ps_3, err := musig2.Sign(nonce_3.SecNonce, priv_3, aggrNonces, pubKeys, msgBytes)
 	assert.Nil(s.t, err)
 
 	// aggregate partial signatures
-	schnorrSig := musig2.CombineSigs(aggrPubKey.FinalKey, []*musig2.PartialSignature{ps_1, ps_2, ps_3})
+	// the combined nonce is in each partial signature R value
+	schnorrSig := musig2.CombineSigs(ps_2.R, []*musig2.PartialSignature{ps_1, ps_2, ps_3})
 
 	// verify aggregated signature
-	// check after R value
+	// check aggregated R value, it should be the same as when signing
 	correct := schnorrSig.Verify(msgBytes[:], aggrPubKey.FinalKey)
 	assert.True(s.t, correct)
 }
