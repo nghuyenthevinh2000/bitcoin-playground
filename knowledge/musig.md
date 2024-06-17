@@ -16,3 +16,4 @@ To counter the key cancellation attack, each participant's pubkey is tweaked by 
 
 **PERSONAL RECOMMENDATION**: reader should spend 1 hour to figure out how this challenge factor can help safe guard against key cancellation attack.
 
+3. MuSig works for n of n only?

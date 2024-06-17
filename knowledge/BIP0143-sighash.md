@@ -1,5 +1,19 @@
 # BIP0143 - SigHash for SegWit
 
+the SIGHASH flag determines which parts of the transaction are signed and thus protected from modification
+* SIGHASH_ALL: This is the default flag. The signature commits to all inputs and outputs in the transaction
+* SIGHASH_NONE: The signature commits to all inputs, but not to any outputs. This allows the outputs to be changed without invalidating the signature.
+* SIGHASH_SINGLE: The signature commits to all inputs and the corresponding output (by index) in the transaction. If there is no corresponding output, the signature is invalid. This allows other outputs to be changed without invalidating the signature.
+* SIGHASH_ANYONECANPAY: The signature only commits to the single input it is attached to and not to the other inputs. This allows other inputs to be added or removed without invalidating the signature. SIGHASH_ANYONECANPAY can be combined with the three others:
+    * SIGHASH_ALL | SIGHASH_ANYONECANPAY
+    * SIGHASH_NONE | SIGHASH_ANYONECANPAY
+    * SIGHASH_SINGLE | SIGHASH_ANYONECANPAY
+
+Schnorr signature 65 bytes composition:
+* public nonces (R): 32 bytes
+* signature (s): 32 bytes
+* sighash flag: 1 bytes
+
 ## 1. Fixing Transaction Malleability
 Transaction malleability is an issue where the transaction ID (TxID) of a transaction can be altered without changing the underlying transaction's details (inputs and outputs). This can be problematic because:
 * It allows third parties to alter the transaction in a way that changes its ID but not its contents, potentially disrupting the transaction tracking.

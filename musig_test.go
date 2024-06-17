@@ -6,6 +6,7 @@ import (
 
 	btcec "github.com/btcsuite/btcd/btcec/v2"
 	"github.com/btcsuite/btcd/btcec/v2/schnorr/musig2"
+	"github.com/btcsuite/btcd/txscript"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -55,4 +56,32 @@ func TestMuSig2(t *testing.T) {
 	// check aggregated R value, it should be the same as when signing
 	correct := schnorrSig.Verify(msgBytes[:], aggrPubKey.FinalKey)
 	assert.True(s.t, correct)
+}
+
+// a test for 2/3 multisig using Taproot OP_CHECKSIGADD
+// first test will linearly combine the public keys
+// go test -v -run ^TestLinearTaprootMuSig$ github.com/nghuyenthevinh2000/bitcoin-playground
+func TestLinearTaprootMuSig(t *testing.T) {
+	s := TestSuite{}
+	s.setupSuite(t)
+
+}
+
+// second test will use three subset of two
+// public keys as spending conditions for multisg 2/3
+// go test -v -run ^TestSubsetTaprootMuSig$ github.com/nghuyenthevinh2000/bitcoin-playground
+func TestSubsetTaprootMuSig(t *testing.T) {
+	s := TestSuite{}
+	s.setupSuite(t)
+}
+
+// setup musig2 channel between alice and bob
+func (s *TestSuite) constructMuSig2Channel(alice_pub, bob_pub *btcec.PublicKey) {
+	// constructing an aggregate public key
+	pubKeys := []*btcec.PublicKey{alice_pub, bob_pub}
+	aggrPubKey, _, _, err := musig2.AggregateKeys(pubKeys, false)
+	assert.Nil(s.t, err)
+
+	builder := txscript.NewScriptBuilder()
+
 }
