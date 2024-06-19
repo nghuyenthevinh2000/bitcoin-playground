@@ -1,7 +1,6 @@
 package main
 
 import (
-	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
 	"os"
@@ -17,52 +16,70 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// this is an example of key spend path
 // go test -v -run ^TestMuSig2$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestMuSig2(t *testing.T) {
 	s := TestSuite{}
-	s.setupRegNetSuite(t)
-
-	// msg
-	msgBytes := sha256.Sum256([]byte("VN Bitcoin Builders"))
+	s.setupStaticSimNetSuite(t)
 
 	// create aggregated public key
-	_, pair_1 := s.newKeyPair("")
-	_, pair_2 := s.newKeyPair("")
-	_, pair_3 := s.newKeyPair("")
-	pubKeys := []*btcec.PublicKey{pair_1.pub, pair_2.pub, pair_3.pub}
-	aggrPubKey, _, _, err := musig2.AggregateKeys(pubKeys, false)
-	assert.Nil(s.t, err)
+	_, pair_1 := s.newKeyPair(ALICE_WALLET_SEED)
+	_, pair_2 := s.newKeyPair(BOB_WALLET_SEED)
+	pubPair := []*btcec.PublicKey{pair_1.pub, pair_2.pub}
+	q, trScript := s.constructMuSig2Channel(pubPair)
 
 	// create aggregated nonces
 	nonce_1, err := musig2.GenNonces(musig2.WithPublicKey(pair_1.pub))
 	assert.Nil(s.t, err)
 	nonce_2, err := musig2.GenNonces(musig2.WithPublicKey(pair_2.pub))
 	assert.Nil(s.t, err)
-	nonce_3, err := musig2.GenNonces(musig2.WithPublicKey(pair_3.pub))
+	aggrNonces, err := musig2.AggregateNonces([][66]byte{nonce_1.PubNonce, nonce_2.PubNonce})
 	assert.Nil(s.t, err)
-	aggrNonces, err := musig2.AggregateNonces([][66]byte{nonce_1.PubNonce, nonce_2.PubNonce, nonce_3.PubNonce})
-	assert.Nil(s.t, err)
-
-	// generate partial signatures for each participant
-	// sign already negates nonce with odd y - value
-	// s1, R
-	ps_1, err := musig2.Sign(nonce_1.SecNonce, pair_1.priv, aggrNonces, pubKeys, msgBytes)
-	assert.Nil(s.t, err)
-	// s2, R
-	ps_2, err := musig2.Sign(nonce_2.SecNonce, pair_2.priv, aggrNonces, pubKeys, msgBytes)
-	assert.Nil(s.t, err)
-	// s3, R
-	ps_3, err := musig2.Sign(nonce_3.SecNonce, pair_3.priv, aggrNonces, pubKeys, msgBytes)
-	assert.Nil(s.t, err)
-
-	// aggregate partial signatures
-	// the combined nonce is in each partial signature R value
-	schnorrSig := musig2.CombineSigs(ps_2.R, []*musig2.PartialSignature{ps_1, ps_2, ps_3})
 
 	// verify aggregated signature
 	// check aggregated R value, it should be the same as when signing
-	correct := schnorrSig.Verify(msgBytes[:], aggrPubKey.FinalKey)
-	assert.True(s.t, correct)
+	s.validateScript(trScript, func(t *testing.T, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness {
+		// calculating sighash
+		inputFetcher := txscript.NewCannedPrevOutputFetcher(
+			prevOut.PkScript,
+			prevOut.Value,
+		)
+		hType := txscript.SigHashDefault
+		var sigHash [32]byte
+		s, err := txscript.CalcTaprootSignatureHash(sigHashes, hType, tx, idx, inputFetcher)
+		assert.Nil(t, err)
+		copy(sigHash[:], s)
+
+		// generate partial signatures for each participant
+		// sign already negates nonce with odd y - value
+		// s1, R
+		ps_1, err := musig2.Sign(nonce_1.SecNonce, pair_1.priv, aggrNonces, pubPair, sigHash)
+		assert.Nil(t, err)
+		// s2, R
+		ps_2, err := musig2.Sign(nonce_2.SecNonce, pair_2.priv, aggrNonces, pubPair, sigHash)
+		assert.Nil(t, err)
+
+		// aggregate partial signatures
+		// the combined nonce is in each partial signature R value
+		schnorrSig := musig2.CombineSigs(ps_2.R, []*musig2.PartialSignature{ps_1, ps_2})
+
+		// I can add sighash flag to the end of the schnorr signature, thus changing sighash
+		// if sighash default, then 64 bytes in size, else 65 bytes
+		schnorrSigBytes := schnorrSig.Serialize()
+		if hType != txscript.SigHashDefault {
+			schnorrSigBytes = append(schnorrSigBytes, byte(hType))
+		}
+
+		// precheck the signature
+		res := schnorrSig.Verify(sigHash[:], q)
+		assert.True(t, res)
+
+		witness := wire.TxWitness{
+			schnorrSigBytes,
+		}
+
+		return witness
+	})
 }
 
 // a test for 2/3 multisig using Taproot OP_CHECKSIGADD
@@ -75,14 +92,6 @@ func TestLinearTaprootMuSig(t *testing.T) {
 	_, pair_1 := s.newKeyPair(ALICE_WALLET_SEED)
 	_, pair_2 := s.newKeyPair(BOB_WALLET_SEED)
 	_, pair_3 := s.newKeyPair(OLIVIA_WALLET_SEED)
-
-	fmt.Printf("pub_1: %s\n", s.bytesToHexStr(schnorr.SerializePubKey(pair_1.pub)))
-	fmt.Printf("pub_2: %s\n", s.bytesToHexStr(schnorr.SerializePubKey(pair_2.pub)))
-	fmt.Printf("pub_3: %s\n", s.bytesToHexStr(schnorr.SerializePubKey(pair_3.pub)))
-
-	fmt.Printf("priv_1: %s, pub_1: %s\n", s.bytesToHexStr(pair_1.priv.Serialize()), s.bytesToHexStr(pair_1.pub.SerializeCompressed()))
-	fmt.Printf("priv_2: %s, pub_2: %s\n", s.bytesToHexStr(pair_2.priv.Serialize()), s.bytesToHexStr(pair_2.pub.SerializeCompressed()))
-	fmt.Printf("priv_3: %s, pub_3: %s\n", s.bytesToHexStr(pair_3.priv.Serialize()), s.bytesToHexStr(pair_3.pub.SerializeCompressed()))
 
 	// STEP 1: BUILDING LINEAR MULTISIG SCRIPT
 	// OP_CHECKSIGADD is only available in Taproot
@@ -185,18 +194,140 @@ func TestLinearTaprootMuSig(t *testing.T) {
 
 // second test will use three subset of two
 // public keys as spending conditions for multisg 2/3
+// can I combine it with MuSig2?
+// I will try to spend with pair_1 and pair_3
 // go test -v -run ^TestSubsetTaprootMuSig$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestSubsetTaprootMuSig(t *testing.T) {
 	s := TestSuite{}
-	s.setupRegNetSuite(t)
+	s.setupStaticSimNetSuite(t)
+
+	_, pair_1 := s.newKeyPair(ALICE_WALLET_SEED)
+	_, pair_2 := s.newKeyPair(BOB_WALLET_SEED)
+	_, pair_3 := s.newKeyPair(OLIVIA_WALLET_SEED)
+
+	subset := [][]*btcec.PublicKey{
+		{pair_1.pub, pair_2.pub},
+		{pair_1.pub, pair_3.pub},
+		{pair_2.pub, pair_3.pub},
+	}
+
+	var tapLeaf []txscript.TapLeaf
+
+	// STEP 1: BUILDING SUBSET MULTISIG SCRIPT
+	for i := 0; i < len(subset); i++ {
+		// create subset of 2/3 multisig
+		aggrPub, _, _, err := musig2.AggregateKeys(subset[i], false)
+		s.t.Logf("Subset %d: %v\n", i, schnorr.SerializePubKey(aggrPub.PreTweakedKey))
+		assert.Nil(s.t, err)
+
+		builder := txscript.NewScriptBuilder()
+		builder.AddData(schnorr.SerializePubKey(aggrPub.PreTweakedKey))
+		builder.AddOp(txscript.OP_CHECKSIGVERIFY)
+		pkScript, err := builder.Script()
+		assert.Nil(t, err)
+		tapLeaf = append(tapLeaf, txscript.NewBaseTapLeaf(pkScript))
+	}
+
+	// STEP 2: CALCULATE TWEAKED PUBLIC KEY Q
+	// calculate tweak: create a taproot tree
+	taptree := txscript.AssembleTaprootScriptTree(tapLeaf...)
+
+	// get internal private key P
+	_, internal_pair := s.newKeyPair(OMNIMAN_WALLET_SEED)
+
+	// tr pub Q = P + t*G
+	taptreeRootCommitment := taptree.RootNode.TapHash()
+	fmt.Printf("Taproot tree: %s\n", hex.EncodeToString(taptreeRootCommitment[:]))
+
+	q := txscript.ComputeTaprootOutputKey(internal_pair.pub, taptreeRootCommitment[:])
+	assert.NotNil(t, q)
+	taproot, err := btcutil.NewAddressTaproot(schnorr.SerializePubKey(q), s.btcdChainConfig)
+	assert.Nil(t, err)
+	fmt.Printf("Taproot address: %s\n", taproot.String())
+
+	// STEP 3: CREATE WITNESS FOR EVALUATION
+	// OP_1 to signify SegWit v1: Taproot
+	p2trScript, err := txscript.
+		NewScriptBuilder().
+		AddOp(txscript.OP_1).
+		AddData(schnorr.SerializePubKey(q)).
+		Script()
+	assert.Nil(t, err)
+
+	// create control block
+	// get inclusion proof of tapleaf at position 1
+	inclusionProof := taptree.LeafMerkleProofs[1]
+	controlBlock := inclusionProof.ToControlBlock(
+		internal_pair.pub,
+	)
+	controlBlockBytes, err := controlBlock.ToBytes()
+	assert.Nil(t, err)
+
+	// enable tracing to see how the script is executed
+	backendLog := btclog.NewBackend(os.Stdout)
+	testLog := backendLog.Logger("MAIN")
+	testLog.SetLevel(btclog.LevelTrace)
+	txscript.UseLogger(testLog)
+
+	s.validateScript(p2trScript, func(t *testing.T, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness {
+		// create aggregated nonces
+		nonce_1, err := musig2.GenNonces(musig2.WithPublicKey(pair_1.pub))
+		assert.Nil(s.t, err)
+		nonce_2, err := musig2.GenNonces(musig2.WithPublicKey(pair_3.pub))
+		assert.Nil(s.t, err)
+		aggrNonces, err := musig2.AggregateNonces([][66]byte{nonce_1.PubNonce, nonce_2.PubNonce})
+		assert.Nil(s.t, err)
+
+		// construct MuSig2 aggregated signature
+		// calculating sighash
+		inputFetcher := txscript.NewCannedPrevOutputFetcher(
+			prevOut.PkScript,
+			prevOut.Value,
+		)
+		hType := txscript.SigHashDefault
+		var sigHash [32]byte
+		s, err := txscript.CalcTaprootSignatureHash(sigHashes, hType, tx, idx, inputFetcher)
+		fmt.Printf("sigHash: %v, hashType: %v, tx: %v, inputIndex: %v, prevOuts: %v\n", sigHashes, hType, tx, idx, inputFetcher)
+		assert.Nil(t, err)
+		copy(sigHash[:], s)
+		t.Logf("sighash: %v\n", sigHash[:])
+
+		// generate partial signatures for each participant
+		// sign already negates nonce with odd y - value
+		// s1, R
+		ps_1, err := musig2.Sign(nonce_1.SecNonce, pair_1.priv, aggrNonces, subset[1], sigHash)
+		assert.Nil(t, err)
+		// s2, R
+		ps_2, err := musig2.Sign(nonce_2.SecNonce, pair_3.priv, aggrNonces, subset[1], sigHash)
+		assert.Nil(t, err)
+
+		// aggregate partial signatures
+		// the combined nonce is in each partial signature R value
+		schnorrSig := musig2.CombineSigs(ps_2.R, []*musig2.PartialSignature{ps_1, ps_2})
+		schnorrSigBytes := schnorrSig.Serialize()
+
+		witness := wire.TxWitness{
+			schnorrSigBytes, tapLeaf[1].Script, controlBlockBytes,
+		}
+		return witness
+	})
 }
 
 // setup musig2 channel between alice and bob
-func (s *TestSuite) constructMuSig2Channel(alice_pub, bob_pub *btcec.PublicKey) {
+func (s *TestSuite) constructMuSig2Channel(pubPair []*btcec.PublicKey) (*btcec.PublicKey, []byte) {
+	// STEP 1: construct MuSig2 aggregated public key
 	// constructing an aggregate public key
-	// pubKeys := []*btcec.PublicKey{alice_pub, bob_pub}
-	// aggrPubKey, _, _, err := musig2.AggregateKeys(pubKeys, false)
-	// assert.Nil(s.t, err)
+	aggrPubKey, _, _, err := musig2.AggregateKeys(pubPair, false)
+	assert.Nil(s.t, err)
 
-	// builder := txscript.NewScriptBuilder()
+	// STEP 2: CREATE WITNESS FOR EVALUATION
+	// OP_1 to signify SegWit v1: Taproot
+	p2trScript, err := txscript.
+		NewScriptBuilder().
+		AddOp(txscript.OP_1).
+		AddData(schnorr.SerializePubKey(aggrPubKey.FinalKey)).
+		Script()
+	assert.Nil(s.t, err)
+
+	return aggrPubKey.FinalKey, p2trScript
 }
