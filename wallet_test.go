@@ -17,7 +17,7 @@ import (
 // go test -v -run ^TestExportPriv$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestExportPriv(t *testing.T) {
 	suite := TestSuite{}
-	suite.setupSuite(t)
+	suite.setupSimNetSuite(t)
 
 	// open bob wallet
 	bobWallet := suite.openWallet(t, BOB_WALLET_SEED, "bob")
@@ -31,7 +31,7 @@ func TestExportPriv(t *testing.T) {
 // create bob wallet and fund bob wallet with 1000 sats sent from btcd registered mining wallet
 func TestBtcdCreateWallet(t *testing.T) {
 	suite := TestSuite{}
-	suite.setupSuite(t)
+	suite.setupSimNetSuite(t)
 
 	// use a HD wallet seed
 	seedStr := strings.TrimSpace(strings.ToLower(BOB_WALLET_SEED))

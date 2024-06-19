@@ -9,7 +9,7 @@ import "testing"
 // execution oracle should not be able to execute the transaction without the witness signature
 func TestWitnessSignature(t *testing.T) {
 	s := TestSuite{}
-	s.setupSuite(t)
+	s.setupSimNetSuite(t)
 
 	// create a set of 2/3 multisig as witness oracle
 	// setup alice wallet as execution oracle

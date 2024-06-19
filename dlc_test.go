@@ -4,7 +4,7 @@ import "testing"
 
 func TestDLC(t *testing.T) {
 	s := TestSuite{}
-	s.setupSuite(t)
+	s.setupSimNetSuite(t)
 
 	// setup alice and bob
 	// _, alice_pub, alice_priv := s.generateKeyPair()

@@ -546,3 +546,35 @@
 23:02:53.954031 version@stat F·[2 1] S·633KiB[6KiB 627KiB] Sc·[0.50 0.01]
 23:02:53.983979 db@janitor F·5 G·0
 23:02:53.984019 db@open done T·31.69975ms
+=============== Jun 18, 2024 (+07) ===============
+01:14:34.673817 transaction@flush created L0@129 N·2 S·225B "\x00\x00\x00..fee,d10407":"\x00\x00\x00..loc,v10406"
+01:14:34.689782 version@stat F·[3 1] S·633KiB[6KiB 627KiB] Sc·[0.75 0.01]
+01:14:34.707720 transaction@flush created L0@130 N·2 S·1KiB "\x00\x00\x00..fee,v10408":"\x00\x00\x00..loc,v10409"
+01:14:34.707828 version@stat F·[4 1] S·634KiB[7KiB 627KiB] Sc·[1.00 0.01]
+01:14:34.726259 table@compaction L0·4 -> L1·1 S·634KiB Q·10409
+01:14:34.739414 transaction@flush created L0@132 N·2 S·266B "\x00\x00\x00..loc,v10410":"\x00\x00\x00..ncy,v10411"
+01:14:34.740041 version@stat F·[5 1] S·635KiB[7KiB 627KiB] Sc·[1.25 0.01]
+01:14:34.751761 db@close closing
+01:14:34.779890 table@build created L1@131 N·10234 S·631KiB "\x00\x00\x00..ate,v10275":"bid..bid,v35"
+01:14:34.779959 table@build exiting
+01:14:34.780003 table@build revert @131
+01:14:34.782112 db@close done T·30.279292ms
+=============== Jun 18, 2024 (+07) ===============
+11:23:58.576867 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+11:23:58.577484 version@stat F·[5 1] S·635KiB[7KiB 627KiB] Sc·[1.25 0.01]
+11:23:58.577497 db@open opening
+11:23:58.577542 journal@recovery F·1
+11:23:58.578596 journal@recovery recovering @127
+11:23:58.579584 version@stat F·[5 1] S·635KiB[7KiB 627KiB] Sc·[1.25 0.01]
+11:23:58.622978 db@janitor F·8 G·0
+11:23:58.623013 db@open done T·45.510083ms
+11:23:58.623066 table@compaction L0·5 -> L1·1 S·635KiB Q·10411
+11:23:58.640687 table@build created L1@135 N·10234 S·631KiB "\x00\x00\x00..ate,v10275":"bid..bid,v35"
+11:23:58.640919 version@stat F·[0 1] S·631KiB[0B 631KiB] Sc·[0.00 0.01]
+11:23:58.651142 table@compaction committed F-5 S-3KiB Ke·0 D·42 T·28.041333ms
+11:23:58.652566 table@remove removed @132
+11:23:58.652957 table@remove removed @130
+11:23:58.653318 table@remove removed @129
+11:23:58.653785 table@remove removed @126
+11:23:58.654241 table@remove removed @124
+11:23:58.655123 table@remove removed @125

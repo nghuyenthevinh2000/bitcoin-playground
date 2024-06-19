@@ -13,6 +13,7 @@ import (
 	"github.com/btcsuite/btcd/btcutil"
 	"github.com/btcsuite/btcd/btcutil/hdkeychain"
 	"github.com/btcsuite/btcd/chaincfg"
+	"github.com/btcsuite/btcd/chaincfg/chainhash"
 	"github.com/btcsuite/btcd/rpcclient"
 	"github.com/btcsuite/btcd/txscript"
 	"github.com/btcsuite/btcd/wire"
@@ -63,7 +64,7 @@ func TestMain(m *testing.M) {
 // go test -v -run ^TestSeedString$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestSeedString(t *testing.T) {
 	suite := TestSuite{}
-	suite.setupSuite(t)
+	suite.setupSimNetSuite(t)
 
 	seed := suite.generateSeedString()
 	t.Logf("seed: %s", seed)
@@ -76,7 +77,7 @@ func TestSeedString(t *testing.T) {
 // third run will always fail, but amount of alice is updated
 func TestBallGameContract(t *testing.T) {
 	suite := TestSuite{}
-	suite.setupSuite(t)
+	suite.setupSimNetSuite(t)
 
 	// Alice, Bob wallet
 	alice := suite.openWallet(t, ALICE_WALLET_SEED, "alice")
@@ -189,7 +190,19 @@ func TestBallGameContract(t *testing.T) {
 	// test that after alice amount is higher than previous alice amount
 }
 
-func (s *TestSuite) setupSuite(t *testing.T) {
+func (s *TestSuite) setupRegNetSuite(t *testing.T) {
+	s.t = t
+	s.btcdChainConfig = &chaincfg.RegressionNetParams
+	s.btcdChainConfig.DefaultPort = MockBtcdHost
+}
+
+func (s *TestSuite) setupStaticSimNetSuite(t *testing.T) {
+	s.t = t
+	s.btcdChainConfig = &chaincfg.SimNetParams
+	s.btcdChainConfig.DefaultPort = MockBtcdHost
+}
+
+func (s *TestSuite) setupSimNetSuite(t *testing.T) {
 	var err error
 
 	s.t = t
@@ -235,6 +248,10 @@ func (s *TestSuite) setupSuite(t *testing.T) {
 	assert.Nil(t, err)
 }
 
+func (s *TestSuite) bytesToHexStr(b []byte) string {
+	return hex.EncodeToString(b)
+}
+
 // this is for deriving witness pubkey hash from public key
 func (s *TestSuite) deriveWitnessPubkeyHash(wif *btcutil.WIF) string {
 	pubKey := wif.SerializePubKey()
@@ -260,13 +277,100 @@ func (s *TestSuite) generateSeedString() string {
 	return hex.EncodeToString(seed)
 }
 
-func (s *TestSuite) generateKeyPair() ([]byte, *btcec.PublicKey, *btcec.PrivateKey) {
-	seed := s.generateSeed()
-	hd, err := hdkeychain.NewMaster(seed, s.btcdChainConfig)
+type KeyPair struct {
+	pub  *btcec.PublicKey
+	priv *btcec.PrivateKey
+}
+
+func (s *TestSuite) newKeyPair(seed string) ([]byte, KeyPair) {
+	var seedBytes []byte
+
+	if seed == "" {
+		seedBytes = s.generateSeed()
+	} else {
+		var err error
+		seedBytes, err = hex.DecodeString(seed)
+		assert.Nil(s.t, err)
+	}
+
+	hd, err := hdkeychain.NewMaster(seedBytes, s.btcdChainConfig)
 	assert.Nil(s.t, err)
 	pub, err := hd.ECPubKey()
 	assert.Nil(s.t, err)
 	priv, err := hd.ECPrivKey()
+	assert.Nil(s.t, err)
 
-	return seed, pub, priv
+	return seedBytes, KeyPair{pub, priv}
+}
+
+func (s *TestSuite) convertPrivKeyToWIF(priv *btcec.PrivateKey) string {
+	wif, err := btcutil.NewWIF(priv, s.btcdChainConfig, true)
+	assert.Nil(s.t, err)
+
+	return wif.String()
+}
+
+// validate script creates a funding transaction and a spending transaction
+// the funding transaction will send funds to the test script
+// the spending transaction will spend the funds from the funding transaction with test witness
+func (s *TestSuite) validateScript(pkScript []byte, witnessFunc func(t *testing.T, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness) {
+	// create a random key pair
+	_, keypair := s.newKeyPair("")
+
+	// create a first random funding transaction to a pubkey
+	txHash, err := chainhash.NewHashFromStr("aff48a9b83dc525d330ded64e1b6a9e127c99339f7246e2c89e06cd83493af9b")
+	assert.Nil(s.t, err)
+	// create tx
+	tx_1 := wire.NewMsgTx(2)
+	tx_1.AddTxIn(&wire.TxIn{
+		PreviousOutPoint: wire.OutPoint{
+			Hash:  *txHash,
+			Index: uint32(0),
+		},
+	})
+
+	txOut := &wire.TxOut{
+		Value: 1000000000, PkScript: pkScript,
+	}
+	tx_1.AddTxOut(txOut)
+
+	sig, err := txscript.SignatureScript(tx_1, 0, []byte{}, txscript.SigHashDefault, keypair.priv, true)
+	assert.Nil(s.t, err)
+	tx_1.TxIn[0].SignatureScript = sig
+
+	// create a second spending transaction where the signature is verified against the pubkey
+	tx_2 := wire.NewMsgTx(2)
+	tx_2.AddTxIn(&wire.TxIn{
+		PreviousOutPoint: wire.OutPoint{
+			Hash:  tx_1.TxHash(),
+			Index: uint32(0),
+		},
+	})
+
+	txOut = &wire.TxOut{
+		Value: 1000000000, PkScript: nil,
+	}
+	tx_2.AddTxOut(txOut)
+
+	inputFetcher := txscript.NewCannedPrevOutputFetcher(
+		tx_1.TxOut[0].PkScript,
+		tx_1.TxOut[0].Value,
+	)
+	sigHashes := txscript.NewTxSigHashes(tx_2, inputFetcher)
+
+	witness := witnessFunc(s.t, tx_1.TxOut[0], tx_2, sigHashes, 0)
+	tx_2.TxIn[0].Witness = witness
+
+	// check that this tx in is valid before sending
+	blockUtxos := blockchain.NewUtxoViewpoint()
+	sigCache := txscript.NewSigCache(50000)
+	hashCache := txscript.NewHashCache(50000)
+
+	blockUtxos.AddTxOut(btcutil.NewTx(tx_1), 0, 1)
+	hashCache.AddSigHashes(tx_2, inputFetcher)
+
+	err = blockchain.ValidateTransactionScripts(
+		btcutil.NewTx(tx_2), blockUtxos, txscript.StandardVerifyFlags, sigCache, hashCache,
+	)
+	assert.Nil(s.t, err)
 }
