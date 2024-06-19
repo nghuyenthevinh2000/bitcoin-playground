@@ -14,6 +14,8 @@ Schnorr signature 65 bytes composition:
 * signature (s): 32 bytes
 * sighash flag: 1 bytes
 
+`sighash` is the message `m` to be signed by hashing together specific parts of the transaction.
+
 ## 1. Fixing Transaction Malleability
 Transaction malleability is an issue where the transaction ID (TxID) of a transaction can be altered without changing the underlying transaction's details (inputs and outputs). This can be problematic because:
 * It allows third parties to alter the transaction in a way that changes its ID but not its contents, potentially disrupting the transaction tracking.

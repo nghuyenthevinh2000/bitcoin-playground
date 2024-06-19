@@ -195,7 +195,7 @@ func TestLinearTaprootMuSig(t *testing.T) {
 // second test will use three subset of two
 // public keys as spending conditions for multisg 2/3
 // can I combine it with MuSig2?
-// I will try to spend with pair_1 and pair_3
+// I will try to spend with key 1 and key 3
 // go test -v -run ^TestSubsetTaprootMuSig$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestSubsetTaprootMuSig(t *testing.T) {
 	s := TestSuite{}
@@ -217,12 +217,12 @@ func TestSubsetTaprootMuSig(t *testing.T) {
 	for i := 0; i < len(subset); i++ {
 		// create subset of 2/3 multisig
 		aggrPub, _, _, err := musig2.AggregateKeys(subset[i], false)
-		s.t.Logf("Subset %d: %v\n", i, schnorr.SerializePubKey(aggrPub.PreTweakedKey))
 		assert.Nil(s.t, err)
 
 		builder := txscript.NewScriptBuilder()
-		builder.AddData(schnorr.SerializePubKey(aggrPub.PreTweakedKey))
-		builder.AddOp(txscript.OP_CHECKSIGVERIFY)
+		builder.AddData(schnorr.SerializePubKey(aggrPub.FinalKey))
+		//
+		builder.AddOp(txscript.OP_CHECKSIG)
 		pkScript, err := builder.Script()
 		assert.Nil(t, err)
 		tapLeaf = append(tapLeaf, txscript.NewBaseTapLeaf(pkScript))
@@ -286,11 +286,9 @@ func TestSubsetTaprootMuSig(t *testing.T) {
 		)
 		hType := txscript.SigHashDefault
 		var sigHash [32]byte
-		s, err := txscript.CalcTaprootSignatureHash(sigHashes, hType, tx, idx, inputFetcher)
-		fmt.Printf("sigHash: %v, hashType: %v, tx: %v, inputIndex: %v, prevOuts: %v\n", sigHashes, hType, tx, idx, inputFetcher)
+		s, err := txscript.CalcTapscriptSignaturehash(sigHashes, hType, tx, idx, inputFetcher, tapLeaf[1])
 		assert.Nil(t, err)
 		copy(sigHash[:], s)
-		t.Logf("sighash: %v\n", sigHash[:])
 
 		// generate partial signatures for each participant
 		// sign already negates nonce with odd y - value
@@ -305,6 +303,15 @@ func TestSubsetTaprootMuSig(t *testing.T) {
 		// the combined nonce is in each partial signature R value
 		schnorrSig := musig2.CombineSigs(ps_2.R, []*musig2.PartialSignature{ps_1, ps_2})
 		schnorrSigBytes := schnorrSig.Serialize()
+		if hType != txscript.SigHashDefault {
+			schnorrSigBytes = append(schnorrSigBytes, byte(hType))
+		}
+
+		// basic check
+		aggrPub, _, _, err := musig2.AggregateKeys(subset[1], false)
+		assert.Nil(t, err)
+		res := schnorrSig.Verify(sigHash[:], aggrPub.FinalKey)
+		assert.True(t, res)
 
 		witness := wire.TxWitness{
 			schnorrSigBytes, tapLeaf[1].Script, controlBlockBytes,
