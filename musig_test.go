@@ -38,25 +38,23 @@ func TestMuSig2(t *testing.T) {
 
 	// verify aggregated signature
 	// check aggregated R value, it should be the same as when signing
-	s.validateScript(trScript, func(t *testing.T, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness {
+	s.validateScript(trScript, 1, func(t *testing.T, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness {
 		// calculating sighash
 		inputFetcher := txscript.NewCannedPrevOutputFetcher(
 			prevOut.PkScript,
 			prevOut.Value,
 		)
 		hType := txscript.SigHashDefault
-		var sigHash [32]byte
-		s, err := txscript.CalcTaprootSignatureHash(sigHashes, hType, tx, idx, inputFetcher)
+		sigHash, err := txscript.CalcTaprootSignatureHash(sigHashes, hType, tx, idx, inputFetcher)
 		assert.Nil(t, err)
-		copy(sigHash[:], s)
 
 		// generate partial signatures for each participant
 		// sign already negates nonce with odd y - value
 		// s1, R
-		ps_1, err := musig2.Sign(nonce_1.SecNonce, pair_1.priv, aggrNonces, pubPair, sigHash)
+		ps_1, err := musig2.Sign(nonce_1.SecNonce, pair_1.priv, aggrNonces, pubPair, ([32]byte)(sigHash))
 		assert.Nil(t, err)
 		// s2, R
-		ps_2, err := musig2.Sign(nonce_2.SecNonce, pair_2.priv, aggrNonces, pubPair, sigHash)
+		ps_2, err := musig2.Sign(nonce_2.SecNonce, pair_2.priv, aggrNonces, pubPair, ([32]byte)(sigHash))
 		assert.Nil(t, err)
 
 		// aggregate partial signatures
@@ -167,7 +165,7 @@ func TestLinearTaprootMuSig(t *testing.T) {
 	testLog.SetLevel(btclog.LevelTrace)
 	txscript.UseLogger(testLog)
 
-	s.validateScript(p2trScript, func(t *testing.T, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness {
+	s.validateScript(p2trScript, 1, func(t *testing.T, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness {
 		sig_1 := []byte{}
 
 		sig_2, err := txscript.RawTxInTapscriptSignature(tx, sigHashes, idx, prevOut.Value, p2trScript, tapleaf, txscript.SigHashDefault, pair_2.priv)
@@ -192,9 +190,9 @@ func TestLinearTaprootMuSig(t *testing.T) {
 	})
 }
 
-// second test will use three subset of two
+// second test will use three subset of 2/2
 // public keys as spending conditions for multisg 2/3
-// can I combine it with MuSig2?
+// can I combine it with MuSig2? yes, I can use MuSig2
 // I will try to spend with key 1 and key 3
 // go test -v -run ^TestSubsetTaprootMuSig$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestSubsetTaprootMuSig(t *testing.T) {
@@ -269,7 +267,7 @@ func TestSubsetTaprootMuSig(t *testing.T) {
 	testLog.SetLevel(btclog.LevelTrace)
 	txscript.UseLogger(testLog)
 
-	s.validateScript(p2trScript, func(t *testing.T, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness {
+	s.validateScript(p2trScript, 1, func(t *testing.T, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness {
 		// create aggregated nonces
 		nonce_1, err := musig2.GenNonces(musig2.WithPublicKey(pair_1.pub))
 		assert.Nil(s.t, err)
@@ -285,18 +283,16 @@ func TestSubsetTaprootMuSig(t *testing.T) {
 			prevOut.Value,
 		)
 		hType := txscript.SigHashDefault
-		var sigHash [32]byte
-		s, err := txscript.CalcTapscriptSignaturehash(sigHashes, hType, tx, idx, inputFetcher, tapLeaf[1])
+		sigHash, err := txscript.CalcTapscriptSignaturehash(sigHashes, hType, tx, idx, inputFetcher, tapLeaf[1])
 		assert.Nil(t, err)
-		copy(sigHash[:], s)
 
 		// generate partial signatures for each participant
 		// sign already negates nonce with odd y - value
 		// s1, R
-		ps_1, err := musig2.Sign(nonce_1.SecNonce, pair_1.priv, aggrNonces, subset[1], sigHash)
+		ps_1, err := musig2.Sign(nonce_1.SecNonce, pair_1.priv, aggrNonces, subset[1], ([32]byte)(sigHash))
 		assert.Nil(t, err)
 		// s2, R
-		ps_2, err := musig2.Sign(nonce_2.SecNonce, pair_3.priv, aggrNonces, subset[1], sigHash)
+		ps_2, err := musig2.Sign(nonce_2.SecNonce, pair_3.priv, aggrNonces, subset[1], ([32]byte)(sigHash))
 		assert.Nil(t, err)
 
 		// aggregate partial signatures

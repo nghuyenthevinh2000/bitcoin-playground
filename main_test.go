@@ -61,6 +61,26 @@ func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
 
+// go test -v -run ^TestRetrieveBlocks$ github.com/nghuyenthevinh2000/bitcoin-playground
+func TestRetrieveBlocks(t *testing.T) {
+	s := TestSuite{}
+	s.setupSimNetSuite(t)
+
+	// block 10
+	hash, err := s.chainClient.GetBlockHash(10)
+	assert.Nil(t, err)
+	block_10, err := s.chainClient.GetBlock(hash)
+	assert.Nil(t, err)
+
+	// block 11
+	hash, err = s.chainClient.GetBlockHash(11)
+	assert.Nil(t, err)
+	block_11, err := s.chainClient.GetBlock(hash)
+	assert.Nil(t, err)
+
+	assert.Equal(t, block_10.Header.BlockHash(), block_11.Header.PrevBlock)
+}
+
 // go test -v -run ^TestSeedString$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestSeedString(t *testing.T) {
 	suite := TestSuite{}
@@ -272,9 +292,17 @@ func (s *TestSuite) generateSeed() []byte {
 	return seed
 }
 
+func (s *TestSuite) generate32BSeed() [hdkeychain.RecommendedSeedLen]byte {
+	var res [hdkeychain.RecommendedSeedLen]byte
+	seed, err := hdkeychain.GenerateSeed(hdkeychain.RecommendedSeedLen)
+	assert.Nil(s.t, err)
+	copy(res[:], seed)
+	return res
+}
+
 func (s *TestSuite) generateSeedString() string {
 	seed := s.generateSeed()
-	return hex.EncodeToString(seed)
+	return hex.EncodeToString(seed[:])
 }
 
 type KeyPair struct {
@@ -313,7 +341,7 @@ func (s *TestSuite) convertPrivKeyToWIF(priv *btcec.PrivateKey) string {
 // validate script creates a funding transaction and a spending transaction
 // the funding transaction will send funds to the test script
 // the spending transaction will spend the funds from the funding transaction with test witness
-func (s *TestSuite) validateScript(pkScript []byte, witnessFunc func(t *testing.T, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness) {
+func (s *TestSuite) validateScript(pkScript []byte, blockHeight int32, witnessFunc func(t *testing.T, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness) {
 	// create a random key pair
 	_, keypair := s.newKeyPair("")
 
@@ -351,6 +379,7 @@ func (s *TestSuite) validateScript(pkScript []byte, witnessFunc func(t *testing.
 		Value: 1000000000, PkScript: nil,
 	}
 	tx_2.AddTxOut(txOut)
+	tx_2.LockTime = uint32(blockHeight)
 
 	inputFetcher := txscript.NewCannedPrevOutputFetcher(
 		tx_1.TxOut[0].PkScript,
@@ -366,7 +395,7 @@ func (s *TestSuite) validateScript(pkScript []byte, witnessFunc func(t *testing.
 	sigCache := txscript.NewSigCache(50000)
 	hashCache := txscript.NewHashCache(50000)
 
-	blockUtxos.AddTxOut(btcutil.NewTx(tx_1), 0, 1)
+	blockUtxos.AddTxOut(btcutil.NewTx(tx_1), 0, blockHeight)
 	hashCache.AddSigHashes(tx_2, inputFetcher)
 
 	err = blockchain.ValidateTransactionScripts(
