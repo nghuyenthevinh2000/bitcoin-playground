@@ -217,18 +217,22 @@ func buildExecutionTx(fundTx *wire.MsgTx, pair_1, pair_2 KeyPair, amount_1, amou
 
 	// txOut1: pay to settlement script where A can withdraw by providing own sig and valid oracle's sign
 	// or B can withdraw after the delay time
-	txOut1 := &wire.TxOut{
-		Value: amount_1, PkScript: p2wshScript,
+	if amount_1 > 0 {
+		txOut1 := &wire.TxOut{
+			Value: amount_1, PkScript: p2wshScript,
+		}
+		executionTx.AddTxOut(txOut1)
 	}
-	executionTx.AddTxOut(txOut1)
 
 	p2pkScript, _ := P2PKScript(pair_2.pub)
 
 	// txOut2: pay to B address
-	txOut2 := &wire.TxOut{
-		Value: amount_2, PkScript: p2pkScript,
+	if amount_2 > 0 {
+		txOut2 := &wire.TxOut{
+			Value: amount_2, PkScript: p2pkScript,
+		}
+		executionTx.AddTxOut(txOut2)
 	}
-	executionTx.AddTxOut(txOut2)
 
 	return executionTx, err
 }
