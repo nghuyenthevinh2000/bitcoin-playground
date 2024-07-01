@@ -10,6 +10,8 @@ import (
 
 	"github.com/btcsuite/btcd/blockchain"
 	"github.com/btcsuite/btcd/btcec/v2"
+	"github.com/btcsuite/btcd/btcec/v2/schnorr"
+	"github.com/btcsuite/btcd/btcec/v2/schnorr/musig2"
 	"github.com/btcsuite/btcd/btcutil"
 	"github.com/btcsuite/btcd/chaincfg/chainhash"
 	"github.com/btcsuite/btcd/txscript"
@@ -154,6 +156,9 @@ func buildContract(suite TestSuite, fundTx *wire.MsgTx, deals [][]byte, alicePai
 		amountToB := totalAmount / int64(i+1)
 		amountToA := totalAmount - amountToB
 
+		// executionTx will has 2 output
+		// - pay to party with oracle sign
+		// - pay to counter party after delay time
 		aliceExecTx, err := buildExecutionTx(fundTx, alicePair, bobPair, amountToA, amountToB, pubm)
 		if err != nil {
 			return nil, err
@@ -177,23 +182,12 @@ func buildContract(suite TestSuite, fundTx *wire.MsgTx, deals [][]byte, alicePai
 }
 
 func signExecutionTx(fundTx, executionTx *wire.MsgTx, alicePair, bobPair KeyPair) error {
-	fundScript, err := FundScript(alicePair.pub, bobPair.pub)
+	witness, err := witsigForFundScriptMuSig2(fundTx, executionTx, alicePair, bobPair)
 	if err != nil {
 		return err
 	}
 
-	aliceSig, err := witsigForFundScript(fundTx, executionTx, fundScript, alicePair)
-	if err != nil {
-		return err
-	}
-	bobSig, err := witsigForFundScript(fundTx, executionTx, fundScript, bobPair)
-	if err != nil {
-		return err
-	}
-
-	wt := wire.TxWitness{[]byte{}, aliceSig, bobSig, fundScript}
-	executionTx.TxIn[0].Witness = wt
-
+	executionTx.TxIn[0].Witness = witness
 	return nil
 }
 
@@ -239,17 +233,12 @@ func buildExecutionTx(fundTx *wire.MsgTx, pair_1, pair_2 KeyPair, amount_1, amou
 
 func buildFundTx(alicePair, bobPair KeyPair, amount int64) (*wire.MsgTx, error) {
 
-	// 2-of-2 multisig script
-	fundScript, err := FundScript(alicePair.pub, bobPair.pub)
+	// P2WSH script
+	pubPair := []*btcec.PublicKey{alicePair.pub, bobPair.pub}
+	_, musig2Script, err := FundScriptMuSig2(pubPair)
 	if err != nil {
 		return nil, err
 	}
-
-	// P2WSH script
-	builder := txscript.NewScriptBuilder()
-	builder.AddOp(txscript.OP_0)
-	builder.AddData(chainhash.HashB(fundScript))
-	p2wshScript, err := builder.Script()
 
 	// Let's say this is a transaction where Alice can spent 0.1 BTC from
 	txHash, err := chainhash.NewHashFromStr("aff48a9b83dc525d330ded64e1b6a9e127c99339f7246e2c89e06cd83493af9b")
@@ -263,7 +252,7 @@ func buildFundTx(alicePair, bobPair KeyPair, amount int64) (*wire.MsgTx, error) 
 	})
 
 	txOut := &wire.TxOut{
-		Value: amount, PkScript: p2wshScript,
+		Value: amount, PkScript: musig2Script,
 	}
 	fundTx.AddTxOut(txOut)
 
@@ -300,22 +289,12 @@ func buildRefundTx(fundTx *wire.MsgTx, alicePair, bobPair KeyPair, amount int64,
 	refundTx.AddTxOut(txOut)
 	refundTx.LockTime = lockTime
 
-	fundScript, err := FundScript(alicePair.pub, bobPair.pub)
+	witness, err := witsigForFundScriptMuSig2(fundTx, refundTx, alicePair, bobPair)
 	if err != nil {
 		return nil, err
 	}
 
-	aliceSig, err := witsigForFundScript(fundTx, refundTx, fundScript, alicePair)
-	if err != nil {
-		return nil, err
-	}
-	bobSig, err := witsigForFundScript(fundTx, refundTx, fundScript, bobPair)
-	if err != nil {
-		return nil, err
-	}
-
-	wt := wire.TxWitness{[]byte{}, aliceSig, bobSig, fundScript}
-	refundTx.TxIn[0].Witness = wt
+	refundTx.TxIn[0].Witness = witness
 
 	// log hex encoded tx
 	// _ = logHexEncodedTx(refundTx, "Generated Refund Tx: ")
@@ -323,9 +302,63 @@ func buildRefundTx(fundTx *wire.MsgTx, alicePair, bobPair KeyPair, amount int64,
 	return refundTx, err
 }
 
-//////////////////////////////////////////////////////////
-////                       HELPER                     ////
-//////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////
+// //                       HELPER                     ////
+// ////////////////////////////////////////////////////////
+func witsigForFundScriptMuSig2(fundTx, outTx *wire.MsgTx, pair_1, pair_2 KeyPair) (wire.TxWitness, error) {
+	// create aggregated nonces
+	pubPair := []*btcec.PublicKey{pair_1.pub, pair_2.pub}
+	nonce_1, err := musig2.GenNonces(musig2.WithPublicKey(pair_1.pub))
+	if err != nil {
+		return nil, err
+	}
+	nonce_2, err := musig2.GenNonces(musig2.WithPublicKey(pair_2.pub))
+	if err != nil {
+		return nil, err
+	}
+	aggrNonces, err := musig2.AggregateNonces([][66]byte{nonce_1.PubNonce, nonce_2.PubNonce})
+	if err != nil {
+		return nil, err
+	}
+
+	inputFetcher := txscript.NewCannedPrevOutputFetcher(
+		fundTx.TxOut[0].PkScript,
+		fundTx.TxOut[0].Value,
+	)
+	sigHashes := txscript.NewTxSigHashes(outTx, inputFetcher)
+
+	hType := txscript.SigHashDefault
+	sigHash, err := txscript.CalcTaprootSignatureHash(sigHashes, hType, outTx, 0, inputFetcher)
+	if err != nil {
+		return nil, err
+	}
+
+	// generate partial signatures for each participant
+	// sign already negates nonce with odd y - value
+	// s1, R
+	ps_1, err := musig2.Sign(nonce_1.SecNonce, pair_1.priv, aggrNonces, pubPair, ([32]byte)(sigHash))
+	if err != nil {
+		return nil, err
+	}
+	// s2, R
+	ps_2, err := musig2.Sign(nonce_2.SecNonce, pair_2.priv, aggrNonces, pubPair, ([32]byte)(sigHash))
+	if err != nil {
+		return nil, err
+	}
+
+	// aggregate partial signatures
+	// the combined nonce is in each partial signature R value
+	schnorrSig := musig2.CombineSigs(ps_2.R, []*musig2.PartialSignature{ps_1, ps_2})
+
+	// I can add sighash flag to the end of the schnorr signature, thus changing sighash
+	// if sighash default, then 64 bytes in size, else 65 bytes
+	schnorrSigBytes := schnorrSig.Serialize()
+	if hType != txscript.SigHashDefault {
+		schnorrSigBytes = append(schnorrSigBytes, byte(hType))
+	}
+
+	return wire.TxWitness{schnorrSigBytes}, nil
+}
 
 func witsigForFundScript(fundTx, refundTx *wire.MsgTx, fundScript []byte, pair KeyPair) ([]byte, error) {
 	fout := fundTx.TxOut[0]
@@ -447,6 +480,29 @@ func ContractExecutionScript(puba, pubb, pubm *btcec.PublicKey) ([]byte, error) 
 	builder.AddOp(txscript.OP_ENDIF)
 	builder.AddOp(txscript.OP_CHECKSIG)
 	return builder.Script()
+}
+
+// setup musig2 channel between alice and bob
+func FundScriptMuSig2(pubPair []*btcec.PublicKey) (*btcec.PublicKey, []byte, error) {
+	// STEP 1: construct MuSig2 aggregated public key
+	// constructing an aggregate public key
+	aggrPubKey, _, _, err := musig2.AggregateKeys(pubPair, false)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	// STEP 2: CREATE WITNESS FOR EVALUATION
+	// OP_1 to signify SegWit v1: Taproot
+	p2trScript, err := txscript.
+		NewScriptBuilder().
+		AddOp(txscript.OP_1).
+		AddData(schnorr.SerializePubKey(aggrPubKey.FinalKey)).
+		Script()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	return aggrPubKey.FinalKey, p2trScript, nil
 }
 
 //////////////////////////////////////////////////////////
