@@ -2423,3 +2423,19 @@
 2024-06-23 11:54:36.233 [INF] RPCS: New websocket client [::1]:51097
 2024-06-23 11:54:36.325 [INF] RPCS: Beginning rescan for 19 addresses
 2024-06-23 11:54:36.326 [INF] RPCS: Finished rescan
+2024-07-02 12:51:47.076 [INF] BTCD: Version 0.24.2-betarc1
+2024-07-02 12:51:47.076 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-07-02 12:51:47.129 [INF] BTCD: Block database loaded
+2024-07-02 12:51:47.132 [INF] INDX: Transaction index is enabled
+2024-07-02 12:51:47.132 [INF] INDX: Committed filter index is enabled
+2024-07-02 12:51:47.132 [INF] CHAN: Pre-alloacting for 251 MiB: 
+2024-07-02 12:51:47.136 [INF] CHAN: Loading block index...
+2024-07-02 12:51:47.141 [INF] CHAN: Chain state (height 847, hash 57b1df905e50330a4a5063a8617f2d62ed512c955dc68ef09fd06bc3ecc52309, totaltx 867, work 1696)
+2024-07-02 12:51:47.141 [INF] RPCS: RPC server listening on [::1]:18556
+2024-07-02 12:51:47.141 [INF] RPCS: RPC server listening on 127.0.0.1:18556
+2024-07-02 12:51:47.143 [INF] AMGR: Loaded 0 addresses from file 'simnet/btcd/simnet/peers.json'
+2024-07-02 12:51:47.143 [INF] CMGR: Server listening on 0.0.0.0:18555
+2024-07-02 12:51:47.143 [INF] CMGR: Server listening on [::]:18555
+2024-07-02 12:51:53.127 [INF] RPCS: New websocket client [::1]:50220
+2024-07-02 12:51:53.679 [INF] RPCS: Beginning rescan for 19 addresses
+2024-07-02 12:51:53.680 [INF] RPCS: Finished rescan
