@@ -36,7 +36,7 @@ type Contract struct {
 	R   KeyPair
 }
 
-// go test -v -run ^TestDLCChannel$ github.com/nghuyenthevinh2000/bitcoin-playground
+// go test -v -run ^TestDLC$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestDLC(t *testing.T) {
 	suite := TestSuite{}
 	suite.setupSimNetSuite(t)
@@ -45,63 +45,78 @@ func TestDLC(t *testing.T) {
 	_, bobPair := suite.newKeyPair(BOB_WALLET_SEED)       // bob key pair
 	_, oliviaPair := suite.newKeyPair(OLIVIA_WALLET_SEED) // olivia key pair
 
-	// Situation:
+	// Scenario:
 	// On the occasion of Lunar New Year, boss Alice wants to congratulate hard-working employee Bob by giving him lucky money
 	// But she wanted to increase the chance of the game, so she made up the rules, she calls random oracle to get a random number from 1, 2 and 3
 	// - if random number is 1, Bob will get 0.1BTC
 	// - if random number is 2, Bob will get 0,05BTC
-	// - if random number is 3, Bob will get 0.0333BTC
+	// - if random number is 3, Bob will get 0.033BTC
 	// To do that Alice created a DLC with the participation of 3 parties - Alice(boss), Bob(employee), Olivia(random oracle)
 	amount := int64(10000000) // 0.1 BTC
 
 	// First, Alice prepares a transaction depoist 0.1BTC to the MuSig address
-	// Only require know about Bob pubkey, Alice will not broadcast this tx now but save it for later use
-	fundTx, err := buildFundTx(alicePair, bobPair, amount)
+	// - only require know about Bob pubkey
+	// - transaction has not been signed yet
+	// Thanks to SegWit, signatures will now no longer affect the transaction hash
+	fundTx, err := aliceBuildFundTx(alicePair, bobPair.pub, amount)
 	assert.Nil(suite.t, err)
 
-	lockTime := uint32(10) // 10 Bitcoin's blocks
+	refundLockTime := uint32(10) // lock until block 10, locked time for refundTx to be finalized
 	// Alice prepares a refund transaction, which will allow her to spend BTC from her previous funding
 	// into her wallet after delay time
 	// This will avoid BTC being locked in the MuSig address when some problem occurs
-	refundTx, err := buildRefundTx(fundTx, alicePair, bobPair, amount, lockTime)
+	// This requires both Both and Alice to participate
+	// Alice will send Bob the previously unsigned fundTx
+	refundTx, err := aliceAndBobBuildRefundTx(fundTx, alicePair, bobPair, amount, refundLockTime)
 
-	// validate refund BTC from fundTx to Alice wallet
+	// After having a backup plan, Alice will sign the fundTx then broadcast it to blockchain to start the DLC
+	err = aliceSignFundTx(fundTx, alicePair)
+
+	// validate Alice can withdraw BTC from fundTx using refundTx
 	err = validateTransactions(fundTx, refundTx)
 	assert.Nil(suite.t, err)
 
 	deals := [][]byte{
 		[]byte("1"), []byte("2"), []byte("3"),
 	}
-	// Cause, there are 3 possible cases with random numbers, Alice and Bob will build 3 pairs executionTx off-chain
-	// and after the oracle reveals the random number, they will select valid transactions from those tx to broadcast to the blockchain
-	contract, err := buildContract(suite, fundTx, deals, alicePair, bobPair, oliviaPair, amount)
+	// Alice, Bob and Olivia will build 3 pairs executionTx off-chain corresponding to 3 possible cases of random number
+	// Each executionTx will has one txin is fundingTx and two txout:
+	// - fisrt, pay to settlement script where A can withdraw by providing own sig and valid oracle's sign or B can withdraw after the delay time
+	// - second, pay to B address
+	// After the oracle reveals the random number, they will select valid transactions from those tx to broadcast to the blockchain
+	contract, err := alBoOlBuildContract(suite, fundTx, deals, alicePair, bobPair, oliviaPair, amount)
 	// validate all tx in contract
 	for _, execTx := range contract.txs {
-		// validate Alice tx
+		// validate Alice executionTx
 		err = validateTransactions(fundTx, execTx.aliceExecTx)
 		assert.Nil(suite.t, err)
 
-		// validate Bob tx
+		// validate Bob executionTx
 		err = validateTransactions(fundTx, execTx.bobExecTx)
 		assert.Nil(suite.t, err)
 	}
 
 	// Suppose that random number is "2"
 	randomIdx := 1
-	sign := Sign(oliviaPair.priv, contract.R.priv, deals[randomIdx])
+	// Oracle signs the selected random number
+	sign := OracleSign(oliviaPair.priv, contract.R.priv, deals[randomIdx])
 
-	// Either Alice or Bob can broadcast their executionTx and start building closeTx to withdraw BTC
-	// Alice
+	// At this point, either Alice or Bob can broadcast their valid executionTx and start building closeTx to withdraw BTC
+	// Let check both
+
+	// Alice combines her private key with the oracle's sign to generate a valid private key for a valid random number
 	privAlice := genAddSigToPrivkey(alicePair.priv, sign)
+	// Alice build closeTx to withdraw BTC from valid executionTx
 	closeTx, err := buildCloseTx(contract.txs[randomIdx].aliceExecTx, contract.txs[randomIdx].aliceScript, alicePair.pub, privAlice)
-	// validate Alice close tx
+	// validate Alice closeTx
 	err = validateTransactions(contract.txs[randomIdx].aliceExecTx, closeTx)
 	assert.Nil(suite.t, err)
 
-	// Bob
+	// Bob combines her private key with the oracle's sign to generate a valid private key for a valid random number
 	privBob := genAddSigToPrivkey(bobPair.priv, sign)
+	// Bob build closeTx to withdraw BTC from valid executionTx
 	closeTx, err = buildCloseTx(contract.txs[randomIdx].bobExecTx, contract.txs[randomIdx].bobScript, bobPair.pub, privBob)
-	// validate Bob close tx
+	// validate Bob closeTx
 	err = validateTransactions(contract.txs[randomIdx].bobExecTx, closeTx)
 	assert.Nil(suite.t, err)
 }
@@ -141,9 +156,10 @@ func buildCloseTx(execTx *wire.MsgTx, script []byte, pub *secp256k1.PublicKey, s
 	return closeTx, err
 }
 
-func buildContract(suite TestSuite, fundTx *wire.MsgTx, deals [][]byte, alicePair, bobPair, olivia KeyPair, totalAmount int64) (*Contract, error) {
+func alBoOlBuildContract(suite TestSuite, fundTx *wire.MsgTx, deals [][]byte, alicePair, bobPair, olivia KeyPair, totalAmount int64) (*Contract, error) {
 	var contract Contract
 
+	// Random secret R for contract
 	secret := suite.generate32BSeed()
 	Rpriv, _ := btcec.PrivKeyFromBytes(secret[:])
 
@@ -151,18 +167,21 @@ func buildContract(suite TestSuite, fundTx *wire.MsgTx, deals [][]byte, alicePai
 	contract.R.pub = Rpriv.PubKey()
 
 	for i, deal := range deals {
-		pubm := Commit(olivia.pub, Rpriv.PubKey(), deal)
+		// Oracle commit random number to executionTx
+		pubm := OracleCommit(olivia.pub, Rpriv.PubKey(), deal)
 
+		// - if random number is 1, Bob will get 0.1BTC
+		// - if random number is 2, Bob will get 0,05BTC
+		// - if random number is 3, Bob will get 0.0333BTC
 		amountToB := totalAmount / int64(i+1)
 		amountToA := totalAmount - amountToB
 
-		// executionTx will has 2 output
-		// - pay to party with oracle sign
-		// - pay to counter party after delay time
+		// Alice and Bob build executionTx for Alice
 		aliceExecTx, err := buildExecutionTx(fundTx, alicePair, bobPair, amountToA, amountToB, pubm)
 		if err != nil {
 			return nil, err
 		}
+		// Alice and Bob build executionTx for Bob
 		bobExecTx, err := buildExecutionTx(fundTx, bobPair, alicePair, amountToB, amountToA, pubm)
 		if err != nil {
 			return nil, err
@@ -231,10 +250,10 @@ func buildExecutionTx(fundTx *wire.MsgTx, pair_1, pair_2 KeyPair, amount_1, amou
 	return executionTx, err
 }
 
-func buildFundTx(alicePair, bobPair KeyPair, amount int64) (*wire.MsgTx, error) {
+func aliceBuildFundTx(alicePair KeyPair, bobPub *btcec.PublicKey, amount int64) (*wire.MsgTx, error) {
 
-	// P2WSH script
-	pubPair := []*btcec.PublicKey{alicePair.pub, bobPair.pub}
+	// MuSig2 script
+	pubPair := []*btcec.PublicKey{alicePair.pub, bobPub}
 	_, musig2Script, err := FundScriptMuSig2(pubPair)
 	if err != nil {
 		return nil, err
@@ -256,17 +275,19 @@ func buildFundTx(alicePair, bobPair KeyPair, amount int64) (*wire.MsgTx, error) 
 	}
 	fundTx.AddTxOut(txOut)
 
-	// Alice sign transaction
-	sig, err := txscript.SignatureScript(fundTx, 0, []byte{}, txscript.SigHashSingle, alicePair.priv, true)
-	fundTx.TxIn[0].SignatureScript = sig
-
 	// log hex encoded tx
 	// _ = logHexEncodedTx(fundTx, "Generated Fund Tx: ")
 
 	return fundTx, nil
 }
 
-func buildRefundTx(fundTx *wire.MsgTx, alicePair, bobPair KeyPair, amount int64, lockTime uint32) (*wire.MsgTx, error) {
+func aliceSignFundTx(fundTx *wire.MsgTx, _ KeyPair) error {
+	// Let's say this is the signature for txin of funding tx
+	fundTx.TxIn[0].Witness = wire.TxWitness{[]byte{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}}
+	return nil
+}
+
+func aliceAndBobBuildRefundTx(fundTx *wire.MsgTx, alicePair, bobPair KeyPair, amount int64, lockTime uint32) (*wire.MsgTx, error) {
 
 	// create refund tx
 	refundTx := wire.NewMsgTx(2)
@@ -465,7 +486,7 @@ func ContractExecutionScript(puba, pubb, pubm *btcec.PublicKey) ([]byte, error) 
 	y_val.SetBytes((*[32]byte)(Y.Bytes()))
 	pubam := btcec.NewPublicKey(&x_val, &y_val)
 	// ContractExecutionDelay is a delay used in ContractExecutionScript
-	const ContractExecutionDelay = 1 // 1 block ~ 10'
+	const ContractExecutionDelay = 144
 
 	delay := uint16(ContractExecutionDelay)
 	csvflg := uint32(0x00000000)
@@ -520,7 +541,7 @@ func FundScriptMuSig2(pubPair []*btcec.PublicKey) (*btcec.PublicKey, []byte, err
 //	R: R-point
 //	m: message
 //	V: oracle's public key
-func Commit(V, R *btcec.PublicKey, m []byte) *btcec.PublicKey {
+func OracleCommit(V, R *btcec.PublicKey, m []byte) *btcec.PublicKey {
 	// - h(R, m)
 	h := hash(R, m)
 	h = new(big.Int).Neg(h)
@@ -582,7 +603,7 @@ func addPubkeys(A, B *btcec.PublicKey) *btcec.PublicKey {
 //
 //	rpriv: random point EC private key opriv: oracle's EC private key
 //	m: message
-func Sign(opriv, rpriv *btcec.PrivateKey, m []byte) []byte {
+func OracleSign(opriv, rpriv *btcec.PrivateKey, m []byte) []byte {
 	R := rpriv.PubKey()
 	b1 := rpriv.Key.Bytes()
 	k := new(big.Int).SetBytes(b1[:])
