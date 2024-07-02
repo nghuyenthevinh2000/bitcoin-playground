@@ -84,10 +84,12 @@ func TestRetrieveBlocks(t *testing.T) {
 // go test -v -run ^TestSeedString$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestSeedString(t *testing.T) {
 	suite := TestSuite{}
-	suite.setupSimNetSuite(t)
+	suite.setupStaticSimNetSuite(t)
 
-	seed := suite.generateSeedString()
-	t.Logf("seed: %s", seed)
+	for i := 0; i < 3; i++ {
+		seed := suite.generateSeedString()
+		t.Logf("seed: %s", seed)
+	}
 }
 
 // go test -v -run ^TestBallGameContract$ github.com/nghuyenthevinh2000/bitcoin-playground

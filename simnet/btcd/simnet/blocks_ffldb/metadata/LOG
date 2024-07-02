@@ -605,3 +605,18 @@
 11:54:18.599353 version@stat F·[3 1] S·632KiB[1KiB 631KiB] Sc·[0.75 0.01]
 11:54:18.636215 db@janitor F·6 G·0
 11:54:18.636259 db@open done T·38.70575ms
+=============== Jul 2, 2024 (+07) ===============
+12:51:47.077651 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+12:51:47.078231 version@stat F·[3 1] S·632KiB[1KiB 631KiB] Sc·[0.75 0.01]
+12:51:47.078242 db@open opening
+12:51:47.078317 journal@recovery F·2
+12:51:47.079221 journal@recovery recovering @141
+12:51:47.079403 journal@recovery recovering @147
+12:51:47.079439 version@stat F·[3 1] S·632KiB[1KiB 631KiB] Sc·[0.75 0.01]
+12:51:47.116436 version@stat F·[3 1] S·632KiB[1KiB 631KiB] Sc·[0.75 0.01]
+12:51:47.126987 db@janitor F·10 G·4
+12:51:47.127007 db@janitor removing table-149
+12:51:47.128082 db@janitor removing table-152
+12:51:47.128827 db@janitor removing table-151
+12:51:47.129318 db@janitor removing table-150
+12:51:47.129508 db@open done T·51.2595ms
