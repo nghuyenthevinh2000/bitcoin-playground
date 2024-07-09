@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/sha256"
 	"encoding/hex"
 	"os"
 	"testing"
@@ -10,6 +11,7 @@ import (
 
 	"github.com/btcsuite/btcd/blockchain"
 	btcec "github.com/btcsuite/btcd/btcec/v2"
+	"github.com/btcsuite/btcd/btcec/v2/schnorr"
 	"github.com/btcsuite/btcd/btcutil"
 	"github.com/btcsuite/btcd/btcutil/hdkeychain"
 	"github.com/btcsuite/btcd/chaincfg"
@@ -210,6 +212,47 @@ func TestBallGameContract(t *testing.T) {
 	t.Logf("Alice balance: %d", amt)
 
 	// test that after alice amount is higher than previous alice amount
+}
+
+// go test -v -run ^TestSchnorr$ github.com/nghuyenthevinh2000/bitcoin-playground
+func TestSchnorr(t *testing.T) {
+	s := TestSuite{}
+	s.setupStaticSimNetSuite(t)
+
+	// s = t + e * d
+	_, t_pair := s.newKeyPair("")
+	t_priv := t_pair.priv.Key
+	R := new(btcec.JacobianPoint)
+	t_pair.pub.AsJacobian(R)
+	// Y - coordinate has to be even to determine exact point
+	if R.Y.IsOdd() {
+		R.Y.Negate(1)
+		t_priv.Negate()
+	}
+	_, d_pair := s.newKeyPair("")
+	d := d_pair.priv.Key
+	// Jacobian coordinates (X, Y, Z)
+	P := new(btcec.JacobianPoint)
+	d_pair.pub.AsJacobian(P)
+	// Affine coordinates (X, Y)
+	// Y - coordinate has to be even to determine exact point
+	P.ToAffine()
+	if P.Y.IsOdd() {
+		P.Y.Negate(1)
+		d.Negate()
+	}
+	// e = H("BIP0340/challenge" || R || P || m)
+	m := []byte("123")
+	hash_m := sha256.Sum256(m)
+
+	e := chainhash.TaggedHash(chainhash.TagBIP0340Challenge, t_pair.pub.SerializeCompressed()[1:], d_pair.pub.SerializeCompressed()[1:], hash_m[:])
+	var e_scalar btcec.ModNScalar
+	e_scalar.SetByteSlice(e[:])
+	S := new(btcec.ModNScalar).Mul2(&e_scalar, &d).Add(&t_priv)
+	sig := schnorr.NewSignature(&R.X, S)
+
+	ok := sig.Verify(hash_m[:], d_pair.pub)
+	assert.True(t, ok)
 }
 
 func (s *TestSuite) setupRegNetSuite(t *testing.T) {
