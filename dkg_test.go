@@ -23,18 +23,27 @@ var (
 	}
 )
 
-type Participant struct {
-	Pair         KeyPair
-	Secret       *btcec.ModNScalar
+type GennaroParticipant struct {
+	Pair KeyPair
+	// secret shares are calculated as f(i)
 	SecretShares map[int]*btcec.ModNScalar
 	// the reason for commitment shares here is for it to be multiplied with the secret shares to derive commitments
 	// as such, the secret shares cannot be changed without changing the commitment shares
 	CommitmentShares map[int]*btcec.ModNScalar
-	Commitments      []*btcec.PublicKey
+	// secret commitment is
+	SecretCommitments []*btcec.PublicKey
+	Commitments       []*btcec.PublicKey
+
+	// combined public point from all participants
+	CombinedPublicKey *btcec.PublicKey
+	// combined secret shares from all participants to derive this participant secret shares
+	CombinedSecretShares *btcec.ModNScalar
+	// combined commitment shares from all participants to derive this participant commitment shares
+	CombinedCommitmentShares *btcec.ModNScalar
 }
 
-// go test -v -run ^TestBasicPedersenDKG$ github.com/nghuyenthevinh2000/bitcoin-playground
-// Test the very basic Pedersen Distributed Key Generation (DKG) protocol
+// go test -v -run ^TestBasicGennaroDKG$ github.com/nghuyenthevinh2000/bitcoin-playground
+// Test the very basic Gennaro Distributed Key Generation (DKG) protocol
 // For verication of the shares,
 // f(x) = a_0 + a_1*x + a_2*x^2 + ... + a_t*x^t
 // h(x) = b_0 + b_1*x + b_2*x^2 + ... + b_t*x^t
@@ -51,58 +60,115 @@ type Participant struct {
 // TODO: make this works for randomized participants instead of (1, 2, 3, 4, 5)
 //
 // NOTICE: there are two kinds of commitments here, please make sure to not confuse them
-// 1. commitments of polynomial coefficients: E(k) = g^(a_k + b_k) = g^e_k
-// 2. commitments of secret shares: C(i) = g^(f(i) + h(i)) = prod(E(k)^i^k), k = [0, t]
-func TestBasicPedersenDKG(t *testing.T) {
+// 1. commitments of coefficients of both secret and commitment polynomial: E(k) = g^(a_k + b_k) = g^e_k
+// 2. commitments of coefficients of secret polynomial (the one that contains secret): A(k) = g^a_k
+// 3. commitments of secret shares: C(i) = g^(f(i) + h(i)) = prod(E(k)^i^k), k = [0, t]
+func TestBasicGennaroDKG(t *testing.T) {
 	s := TestSuite{}
 	s.setupStaticSimNetSuite(t)
 
 	// setup 7 participants
 	// threshold = 5
 	threshold := 5
-	participants := make([]*Participant, len(oracles))
-	for i, oracle := range oracles {
-		_, pair := s.newKeyPair(oracle)
-		participants[i] = &Participant{
-			Pair:             pair,
-			SecretShares:     make(map[int]*btcec.ModNScalar),
-			CommitmentShares: make(map[int]*btcec.ModNScalar),
-		}
-	}
+	participants := make([]*GennaroParticipant, len(oracles))
 
-	// In the Pedersen DKG scheme, each participant generates
+	// In the Gennaro DKG scheme, each participant generates
 	// two polynomials: one for the secret shares and another for the commitments.
 	// The commitments polynomial helps in proving that the shares
 	// are valid without revealing the actual secret.
 	// if each
 	for i := range participants {
-		participants[i] = s.participantDKG(threshold, len(oracles), participants[i])
+		participants[i] = s.newGennaroParticipantDKG(threshold, len(oracles))
+		_, pair := s.newKeyPair(oracles[i])
+		participants[i].Pair = pair
 	}
 
-	// verify the shares
+	// commitment round: Gennaro et al. demonstrate a weakness of Pedersen’s DKG such that a
+	// misbehaving participant can bias the distribution of the resulting shared secret by
+	// issuing complaints against a participant after seeing the shares issued to them by this
+	// participant, thereby disqualifying them from contributing to the key generation.
+	// To prevent adversaries from adaptively disqualifying participants based on their input,
+	// the authors add an additional “commitment round”, such that the value of the resulting secret
+	// is determined after participants perform this commitment round (before having revealed their inputs).
+	//
+	// participant i will then receive the shares from all other participants n in the network
+	// each participant will verify the shares they received
+	// each participant i receives f_k(i), and h_k(i) from all other participants k, k = [1, n]
+	// they then check if what they receives matches the commitments proposed by participant k
 	for i := 0; i < len(oracles); i++ {
+		this_participant_secret_shares := make(map[int]*btcec.ModNScalar)
+		this_pariticipant_commitment_shares := make(map[int]*btcec.ModNScalar)
 		for k := 0; k < len(oracles); k++ {
+			this_participant_secret_shares[k] = participants[k].SecretShares[i]
+			this_pariticipant_commitment_shares[k] = participants[k].CommitmentShares[i]
+
+			// verify the received shares
 			participant_scalar := new(btcec.ModNScalar)
-			participant_scalar.SetInt(uint32(k + 1))
-			s.verifyPublicShare(participants[i].SecretShares[k], participants[i].CommitmentShares[k], participants[i].Commitments, participant_scalar)
+			participant_scalar.SetInt(uint32(i + 1))
+			s.verifyGennaroPublicShares(this_participant_secret_shares[k], this_pariticipant_commitment_shares[k], participants[k].Commitments, participant_scalar)
 		}
 	}
 
-	// participant 1 will then broadcast the shares to all other participants in the network
-	// each participant will verify the shares
-	// then compute the secret
-	for i := 0; i < len(oracles); i++ {
-		secret_scalar := s.retrieveSecret(participants[i].SecretShares)
-		// verify the secret
-		assert.Equal(t, participants[i].Secret, secret_scalar)
+	// common public key derivation from a threshold number of participants
+	// assuming that only a threshold t = 5 participants are honest after commitment round
+	// verifying that the secret shares from each participant are verified against the secret commitments
+	honest_participants := []int{0, 2, 4, 5, 6}
+	for i := range honest_participants {
+		this_participant_secret_shares := make(map[int]*btcec.ModNScalar)
+		aggr_pub_point := new(btcec.JacobianPoint)
+		for k := range honest_participants {
+			this_participant_secret_shares[k] = participants[k].SecretShares[i]
+			// verify the received secret shares
+			participant_scalar := new(btcec.ModNScalar)
+			participant_scalar.SetInt(uint32(i + 1))
+			s.verifyPedersenPublicShares(this_participant_secret_shares[k], participants[k].SecretCommitments, participant_scalar)
+		}
+
+		// once verified, the participants will then calculate the combined public key, and secret shares
+		for k := range honest_participants {
+			// calculate the combined public point
+			point := new(btcec.JacobianPoint)
+			participants[k].SecretCommitments[0].AsJacobian(point)
+			btcec.AddNonConst(aggr_pub_point, point, aggr_pub_point)
+
+			// calculate the combined secret shares
+			participants[i].CombinedSecretShares.Add(this_participant_secret_shares[k])
+		}
+		// derive the combined public key
+		aggr_pub_point.ToAffine()
+		participants[i].CombinedPublicKey = btcec.NewPublicKey(&aggr_pub_point.X, &aggr_pub_point.Y)
+	}
+
+	// to retrieve the secret, each participants share their combined secret shares
+	for i := range honest_participants {
+		shared_combined_secret_shares := make(map[int]*btcec.ModNScalar)
+		for k := range honest_participants {
+			shared_combined_secret_shares[k] = participants[k].CombinedSecretShares
+		}
+
+		secret_scalar := s.retrieveSecret(shared_combined_secret_shares)
+		// verify the secret against public key
+		calculated_public_point := new(btcec.JacobianPoint)
+		btcec.ScalarBaseMultNonConst(secret_scalar, calculated_public_point)
+		calculated_public_point.ToAffine()
+		calculated_public_key := btcec.NewPublicKey(&calculated_public_point.X, &calculated_public_point.Y)
+		assert.Equal(t, participants[i].CombinedPublicKey, calculated_public_key)
 	}
 }
 
-func (s *TestSuite) participantDKG(threshold, participant_num int, participant *Participant) *Participant {
+func (s *TestSuite) newGennaroParticipantDKG(threshold, participant_num int) *GennaroParticipant {
+	participant := &GennaroParticipant{
+		SecretShares:             make(map[int]*btcec.ModNScalar),
+		CommitmentShares:         make(map[int]*btcec.ModNScalar),
+		CombinedPublicKey:        new(btcec.PublicKey),
+		CombinedSecretShares:     new(btcec.ModNScalar),
+		CombinedCommitmentShares: new(btcec.ModNScalar),
+	}
+
 	secretPolynomial := s.generatePolynomial(threshold - 1)
 	commitmentPolynomial := s.generatePolynomial(threshold - 1)
-	participant.Commitments = s.generateCommitments(secretPolynomial, commitmentPolynomial)
-	participant.Secret = secretPolynomial[0]
+	participant.SecretCommitments = s.generatePedersenCommitments(secretPolynomial)
+	participant.Commitments = s.generateGennaroCommitments(secretPolynomial, commitmentPolynomial)
 
 	// calculate shares for each participant
 	for j := 0; j < participant_num; j++ {
@@ -114,7 +180,7 @@ func (s *TestSuite) participantDKG(threshold, participant_num int, participant *
 		participant.CommitmentShares[j] = s.evaluatePolynomial(commitmentPolynomial, participant_scalar)
 	}
 
-	// verify internal shares
+	// verify internal commitment and secret aggregated shares
 	for i := 0; i < participant_num; i++ {
 		// expected commitment: g^(f(i) + h(i))
 		e := new(btcec.ModNScalar).Add2(participant.SecretShares[i], participant.CommitmentShares[i])
@@ -151,8 +217,48 @@ func (s *TestSuite) participantDKG(threshold, participant_num int, participant *
 		product := new(btcec.JacobianPoint)
 		btcec.ScalarBaseMultNonConst(sum_scalar, product)
 
+		expected_commitment.ToAffine()
+		product.ToAffine()
+
 		// check if the calculated commitment is equal to the expected commitment
 		assert.Equal(s.t, expected_commitment.X, product.X, "internal verification of shares failed")
+	}
+
+	// verify internal secret shares
+	// g^f(i) = g^(a_0 + a_1*i + a_2*i^2 + ... + a_t*i^t) = g^sum(a_k*i^k), k = [0, t]
+	// g^sum(a_k*i^k) = prod(A_k^i^k), k = [0, t]
+
+	for i := 0; i < participant_num; i++ {
+		// expected value
+		expected_secret := new(btcec.JacobianPoint)
+		btcec.ScalarBaseMultNonConst(participant.SecretShares[i], expected_secret)
+
+		participant_scalar := new(btcec.ModNScalar)
+		participant_scalar.SetInt(uint32(i + 1))
+
+		// calculate sum(a_k*i^k)
+		i_power := new(btcec.ModNScalar)
+		i_power.SetInt(1)
+		sum_scalar := new(btcec.ModNScalar)
+		sum_scalar.SetInt(0)
+		for k := 0; k < threshold; k++ {
+			// calculate term = a_k*i^k
+			term := new(btcec.ModNScalar).Mul2(secretPolynomial[k], i_power)
+			// calculate sum(a_k*i^k)
+			sum_scalar.Add(term)
+			// i^k
+			i_power.Mul(participant_scalar)
+		}
+
+		// calculate prod(A_k^i^k)
+		product := new(btcec.JacobianPoint)
+		btcec.ScalarBaseMultNonConst(sum_scalar, product)
+
+		expected_secret.ToAffine()
+		product.ToAffine()
+
+		// check if the calculated commitment is equal to the expected commitment
+		assert.Equal(s.t, expected_secret.X, product.X, "internal verification of secret shares failed")
 	}
 
 	return participant
@@ -177,7 +283,7 @@ func (s *TestSuite) generatePolynomial(degree int) []*btcec.ModNScalar {
 
 // calculate E_k = g^(a_k + b_k) = g^e_k
 // compute commitment points for each polynomial coefficients
-func (s *TestSuite) generateCommitments(secretPoly, commitmentPoly []*btcec.ModNScalar) []*btcec.PublicKey {
+func (s *TestSuite) generateGennaroCommitments(secretPoly, commitmentPoly []*btcec.ModNScalar) []*btcec.PublicKey {
 	commitments := make([]*btcec.PublicKey, len(secretPoly))
 	for i := 0; i < len(secretPoly); i++ {
 		// a_k + b_k
@@ -187,6 +293,19 @@ func (s *TestSuite) generateCommitments(secretPoly, commitmentPoly []*btcec.ModN
 		btcec.ScalarBaseMultNonConst(aggr_scalar, aggr_point)
 		aggr_point.ToAffine()
 		commitments[i] = btcec.NewPublicKey(&aggr_point.X, &aggr_point.Y)
+	}
+	return commitments
+}
+
+// calculate A(k) = g^a_k
+func (s *TestSuite) generatePedersenCommitments(secretPoly []*btcec.ModNScalar) []*btcec.PublicKey {
+	commitments := make([]*btcec.PublicKey, len(secretPoly))
+	for i := 0; i < len(secretPoly); i++ {
+		// g^a_k
+		point := new(btcec.JacobianPoint)
+		btcec.ScalarBaseMultNonConst(secretPoly[i], point)
+		point.ToAffine()
+		commitments[i] = btcec.NewPublicKey(&point.X, &point.Y)
 	}
 	return commitments
 }
@@ -219,7 +338,7 @@ func (s *TestSuite) evaluatePolynomial(polynomial []*btcec.ModNScalar, x *btcec.
 
 // each participant can verify share with (f(i), h(i), E)
 // prod(E_k^i^k) = g^sum(e_k*i^k), k = [0, t]
-func (s *TestSuite) verifyPublicShare(secretShares, commitmentShares *btcec.ModNScalar, commitments []*btcec.PublicKey, participant_scalar *btcec.ModNScalar) {
+func (s *TestSuite) verifyGennaroPublicShares(secretShares, commitmentShares *btcec.ModNScalar, commitments []*btcec.PublicKey, participant_scalar *btcec.ModNScalar) {
 	// calculate C(i) = g^f(i) * g^h(i) = g^(f(i) + h(i))
 	aggr_scalar := new(btcec.ModNScalar).Add2(secretShares, commitmentShares)
 	expected_c := new(btcec.JacobianPoint)
@@ -247,6 +366,34 @@ func (s *TestSuite) verifyPublicShare(secretShares, commitmentShares *btcec.ModN
 
 	// check if the calculated commitment is equal to the expected commitment
 	assert.Equal(s.t, expected_c.X, calculated_c.X)
+}
+
+func (s *TestSuite) verifyPedersenPublicShares(secretShares *btcec.ModNScalar, secretCommitments []*btcec.PublicKey, participant_scalar *btcec.ModNScalar) {
+	// calculate A(i) = g^f(i)
+	expected_a := new(btcec.JacobianPoint)
+	btcec.ScalarBaseMultNonConst(secretShares, expected_a)
+
+	// calculate prod(A_k^i^k)
+	product := new(btcec.ModNScalar)
+	product.SetInt(1)
+	i_power := new(btcec.ModNScalar)
+	i_power.SetInt(1)
+	calculated_a := new(btcec.JacobianPoint)
+	for i := 0; i < len(secretCommitments); i++ {
+		term := new(btcec.JacobianPoint)
+		secretCommitments[i].AsJacobian(term)
+		// calculate term = A_k^i^k = g^(a_k*i^k)
+		btcec.ScalarMultNonConst(i_power, term, term)
+		// calculate prod(A_k^i^k)
+		btcec.AddNonConst(calculated_a, term, calculated_a)
+		i_power.Mul(participant_scalar)
+	}
+
+	calculated_a.ToAffine()
+	expected_a.ToAffine()
+
+	// check if the calculated commitment is equal to the expected commitment
+	assert.Equal(s.t, expected_a.X, calculated_a.X)
 }
 
 // using Lagrange interpolation to reconstruct the secret polynomial

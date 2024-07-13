@@ -671,3 +671,36 @@
 21:44:39.767611 version@stat F·[3 1] S·632KiB[1KiB 631KiB] Sc·[0.75 0.01]
 21:44:39.791302 db@janitor F·6 G·0
 21:44:39.791336 db@open done T·25.406167ms
+=============== Jul 10, 2024 (+07) ===============
+04:53:06.210181 transaction@flush created L0@162 N·2 S·225B "\x00\x00\x00..fee,d10431":"\x00\x00\x00..loc,v10430"
+04:53:06.210968 version@stat F·[4 1] S·633KiB[1KiB 631KiB] Sc·[1.00 0.01]
+04:53:06.226428 table@compaction L0·4 -> L1·1 S·633KiB Q·10429
+04:53:06.239774 transaction@flush created L0@163 N·2 S·1KiB "\x00\x00\x00..fee,v10432":"\x00\x00\x00..loc,v10433"
+04:53:06.242012 version@stat F·[5 1] S·634KiB[2KiB 631KiB] Sc·[1.25 0.01]
+04:53:06.263402 transaction@flush created L0@165 N·2 S·266B "\x00\x00\x00..loc,v10434":"\x00\x00\x00..ncy,v10435"
+04:53:06.264306 version@stat F·[6 1] S·634KiB[3KiB 631KiB] Sc·[1.50 0.01]
+04:53:06.276921 db@close closing
+04:53:06.308358 table@build created L1@164 N·10236 S·631KiB "\x00\x00\x00..ate,v10275":"bid..bid,v35"
+04:53:06.308463 table@build exiting
+04:53:06.308520 table@build revert @164
+04:53:06.310621 db@close done T·33.693833ms
+=============== Jul 13, 2024 (+07) ===============
+21:46:09.598631 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+21:46:09.599296 version@stat F·[6 1] S·634KiB[3KiB 631KiB] Sc·[1.50 0.01]
+21:46:09.599308 db@open opening
+21:46:09.599360 journal@recovery F·1
+21:46:09.599671 journal@recovery recovering @160
+21:46:09.600157 version@stat F·[6 1] S·634KiB[3KiB 631KiB] Sc·[1.50 0.01]
+21:46:09.623577 db@janitor F·9 G·0
+21:46:09.623623 db@open done T·24.309167ms
+21:46:09.623761 table@compaction L0·6 -> L1·1 S·634KiB Q·10435
+21:46:09.649571 table@build created L1@168 N·10234 S·631KiB "\x00\x00\x00..ate,v10275":"bid..bid,v35"
+21:46:09.649685 version@stat F·[0 1] S·631KiB[0B 631KiB] Sc·[0.00 0.01]
+21:46:09.658138 table@compaction committed F-6 S-3KiB Ke·0 D·12 T·34.310166ms
+21:48:39.681815 table@remove removed @165
+21:48:39.682180 table@remove removed @163
+21:48:39.682281 table@remove removed @162
+21:48:39.682726 table@remove removed @159
+21:48:39.683113 table@remove removed @158
+21:48:39.683238 table@remove removed @157
+21:48:39.684540 table@remove removed @156
