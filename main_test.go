@@ -255,6 +255,62 @@ func TestSchnorr(t *testing.T) {
 	assert.True(t, ok)
 }
 
+// go test -v -run ^TestJacobianOdd$ github.com/nghuyenthevinh2000/bitcoin-playground
+func TestJacobianOdd(t *testing.T) {
+	s := TestSuite{}
+	s.setupStaticSimNetSuite(t)
+
+	d_seed := s.generate32BSeed()
+	e_seed := s.generate32BSeed()
+	d := new(btcec.ModNScalar)
+	d.SetBytes(&d_seed)
+	D := new(btcec.JacobianPoint)
+	btcec.ScalarBaseMultNonConst(d, D)
+	e := new(btcec.ModNScalar)
+	e.SetBytes(&e_seed)
+	E := new(btcec.JacobianPoint)
+	btcec.ScalarBaseMultNonConst(e, E)
+
+	p_seed := s.generate32BSeed()
+	p_R_seed := make([]byte, len(p_seed))
+	copy(p_R_seed, p_seed[:])
+	p := new(btcec.ModNScalar)
+	p.SetBytes(&p_seed)
+
+	// R = D*E^p
+	p_R := new(btcec.ModNScalar)
+	p_R.SetByteSlice(p_R_seed)
+	term1 := new(btcec.JacobianPoint)
+	btcec.ScalarMultNonConst(p_R, E, term1)
+	R := new(btcec.JacobianPoint)
+	btcec.AddNonConst(D, term1, R)
+	if R.Y.IsOdd() {
+		R.Y.Negate(1)
+		R.Y.Normalize()
+	}
+
+	// R1 = g^(d + e*p)
+	R1 := new(btcec.JacobianPoint)
+	term2 := new(btcec.ModNScalar)
+	term2.Mul2(e, p)
+	de := new(btcec.ModNScalar).Add2(d, term2)
+	btcec.ScalarBaseMultNonConst(de, R1)
+	if R1.Y.IsOdd() {
+		d.Negate()
+		e.Negate()
+	}
+	term2 = new(btcec.ModNScalar)
+	term2.Mul2(e, p)
+	de = new(btcec.ModNScalar).Add2(d, term2)
+	btcec.ScalarBaseMultNonConst(de, R1)
+
+	t.Logf("p: %v, p_R: %v\n", p, p_R)
+
+	R.ToAffine()
+	R1.ToAffine()
+	assert.Equal(t, R, R1)
+}
+
 func (s *TestSuite) setupRegNetSuite(t *testing.T) {
 	s.t = t
 	s.btcdChainConfig = &chaincfg.RegressionNetParams

@@ -44,10 +44,12 @@ type GennaroParticipant struct {
 type PedersonParticipant struct {
 	// used for testing only, not exposed privately
 	testPolynomial []*btcec.ModNScalar
+	threshold      int
+	n              int
 
 	// secret shares are calculated as f(i)
 	SecretShares map[int]*btcec.ModNScalar
-	// secret commitment is
+	// secret commitment is calculated as A_k = g^a_k, k = [0, t]
 	SecretCommitments []*btcec.PublicKey
 
 	// combined public point from all participants
@@ -125,10 +127,10 @@ func TestBasicGennaroDKG(t *testing.T) {
 	// assuming that only a threshold t = 5 participants are honest after commitment round
 	// verifying that the secret shares from each participant are verified against the secret commitments
 	honest_participants := []int{0, 2, 3, 5, 6}
-	for i := range honest_participants {
+	for _, i := range honest_participants {
 		this_participant_secret_shares := make(map[int]*btcec.ModNScalar)
 		aggr_pub_point := new(btcec.JacobianPoint)
-		for k := range honest_participants {
+		for _, k := range honest_participants {
 			this_participant_secret_shares[k] = participants[k].SecretShares[i]
 			// verify the received secret shares
 			participant_scalar := new(btcec.ModNScalar)
@@ -137,7 +139,7 @@ func TestBasicGennaroDKG(t *testing.T) {
 		}
 
 		// once verified, the participants will then calculate the combined public key, and secret shares
-		for k := range honest_participants {
+		for _, k := range honest_participants {
 			// calculate the combined public point
 			point := new(btcec.JacobianPoint)
 			participants[k].SecretCommitments[0].AsJacobian(point)
@@ -152,9 +154,9 @@ func TestBasicGennaroDKG(t *testing.T) {
 	}
 
 	// to retrieve the secret, each participants share their combined secret shares
-	for i := range honest_participants {
+	for _, i := range honest_participants {
 		shared_combined_secret_shares := make(map[int]*btcec.ModNScalar)
-		for k := range honest_participants {
+		for _, k := range honest_participants {
 			shared_combined_secret_shares[k] = participants[k].CombinedSecretShares
 		}
 
@@ -325,6 +327,8 @@ func (s *TestSuite) verifyGennaroPublicShares(secretShares, commitmentShares *bt
 
 func (s *TestSuite) newPedersonParticipantDKG(threshold, participant_num int) *PedersonParticipant {
 	participant := &PedersonParticipant{
+		threshold:            threshold,
+		n:                    participant_num,
 		SecretShares:         make(map[int]*btcec.ModNScalar),
 		CombinedPublicKey:    new(btcec.PublicKey),
 		CombinedSecretShares: new(btcec.ModNScalar),
@@ -471,9 +475,9 @@ func (s *TestSuite) evaluatePolynomial(polynomial []*btcec.ModNScalar, x *btcec.
 // Larange interpolation:
 func (s *TestSuite) retrieveSecret(secret_shares map[int]*btcec.ModNScalar) *btcec.ModNScalar {
 	secret := new(btcec.ModNScalar).SetInt(0)
-	for i := 0; i < len(secret_shares); i++ {
+	for i := range secret_shares {
 		mul_j := new(btcec.ModNScalar).SetInt(1)
-		for j := 0; j < len(secret_shares); j++ {
+		for j := range secret_shares {
 			if j != i {
 				x_j := new(btcec.ModNScalar).SetInt(uint32(j + 1))
 				x_i := new(btcec.ModNScalar).SetInt(uint32(i + 1))
@@ -488,4 +492,21 @@ func (s *TestSuite) retrieveSecret(secret_shares map[int]*btcec.ModNScalar) *btc
 	}
 
 	return secret
+}
+
+// calculate the Lagrange coefficient at i over a set
+func (s *TestSuite) calculate_lagrange_coeff(i int, set []int) *btcec.ModNScalar {
+	mul_j := new(btcec.ModNScalar).SetInt(1)
+	for _, j := range set {
+		if j != i {
+			x_j := new(btcec.ModNScalar).SetInt(uint32(j + 1))
+			x_i := new(btcec.ModNScalar).SetInt(uint32(i + 1))
+			numerator := new(btcec.ModNScalar).NegateVal(x_j)
+			denominator := new(btcec.ModNScalar).NegateVal(x_j).Add(x_i)
+			mul_j.Mul(numerator)
+			mul_j.Mul(denominator.InverseNonConst())
+		}
+	}
+
+	return mul_j
 }
