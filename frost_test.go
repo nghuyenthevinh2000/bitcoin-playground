@@ -14,11 +14,6 @@ import (
 var (
 	// FROST_TAG is the tag used in the commitment hash
 	FROST_TAG = []byte("FROST_TAG")
-
-	pub_test   = new(btcec.ModNScalar)
-	Yc_test    = new(btcec.ModNScalar)
-	z_test     = new(btcec.ModNScalar)
-	nonce_test = new(btcec.ModNScalar)
 )
 
 type FrostParticipant struct {
@@ -215,28 +210,6 @@ func TestFrostSignature(t *testing.T) {
 		z.Add(z_i)
 	}
 
-	test1 := new(btcec.JacobianPoint)
-	btcec.ScalarBaseMultNonConst(pub_test, test1)
-	test1.ToAffine()
-	test2 := btcec.NewPublicKey(&test1.X, &test1.Y)
-
-	suite.t.Logf("test: %v, pubkey: %v", test2, participants[honest[0]].CombinedPublicKey)
-
-	btcec.ScalarBaseMultNonConst(nonce_test, test1)
-	test1.ToAffine()
-
-	suite.t.Logf("nonce: %v, aggr_nonce: %v", test1, participants[honest[0]].aggr_nonce_commitment)
-
-	btcec.ScalarBaseMultNonConst(Yc_test, test1)
-	test1.ToAffine()
-
-	suite.t.Logf("eP: %v", test1)
-
-	btcec.ScalarBaseMultNonConst(z_test, test1)
-	test1.ToAffine()
-
-	suite.t.Logf("sG: %v", test1)
-
 	// z = \sum_{i=1}^{t} r_i + \sum_{i=1}^{t} \lambda_i * s_i * c
 	// g^z = R * g^(\sum_{i=1}^{t} \lambda_i * s_i * c)
 	// g^z = R * Y^c
@@ -385,7 +358,7 @@ func (participant *FrostParticipant) generateSigningNonces(s *TestSuite) {
 // where B is the set of public nonces from t participants
 // and m is the message to be signed
 // and i is the participant's position
-func (participant *FrostParticipant) calculatePublicNonceCommitments(suite *TestSuite, honest []int) {
+func (participant *FrostParticipant) calculatePublicNonceCommitments(_ *TestSuite, honest []int) {
 	// calculate p_i for each honest participants
 	p_data := make([]byte, 0)
 	p_data = append(p_data, participant.message_hash[:]...)
@@ -488,29 +461,7 @@ func (participant *FrostParticipant) partialSign(suite *TestSuite, honest []int)
 	// d_i + e_i * p_i + \lambda_i * s_i * c
 	z_i := new(btcec.ModNScalar).Add2(term1, term2)
 
-	// Y_i^-(\lambda_i * c)
-	term2.Negate()
-	test := new(btcec.JacobianPoint)
-	btcec.ScalarBaseMultNonConst(term2, test)
-	test.ToAffine()
-	suite.t.Logf("participant %d, verify Y_i^-(\\lambda_i * c) = %v", participant.position, test)
-
-	// g^z_i
-	test1 := new(btcec.JacobianPoint)
-	btcec.ScalarBaseMultNonConst(z_i, test1)
-	test1.ToAffine()
-	suite.t.Logf("participant %d, g^z_i = %v", participant.position, test1)
-
 	sig := schnorr.NewSignature(&R_i.X, z_i)
-
-	test_term := new(btcec.ModNScalar).Mul2(lamba, s_i)
-	pub_test.Add(test_term)
-	suite.t.Logf("c = %v\n", c)
-	c.Negate()
-	test_term.Mul(c)
-	Yc_test.Add(test_term)
-	z_test.Add(z_i)
-	nonce_test.Add(term1)
 
 	return sig
 }
@@ -610,13 +561,9 @@ func (participant *FrostParticipant) verifyPartialSig(suite *TestSuite, sig *sch
 	// Y_i^-(\lambda_i * c)
 	term1 := new(btcec.JacobianPoint)
 	btcec.ScalarMultNonConst(term, Y_i, term1)
-	term1.ToAffine()
-	suite.t.Logf("verify participant %d, Y_i^-(\\lambda_i * c) = %v", other_posi+1, term1)
 	// g^z_i
 	term2 := new(btcec.JacobianPoint)
 	btcec.ScalarBaseMultNonConst(z, term2)
-	term2.ToAffine()
-	suite.t.Logf("verify participant %d, g^z_i = %v", other_posi+1, term2)
 	// R_i = g^z_i * Y_i^-(\lambda_i * c)
 	R := new(btcec.JacobianPoint)
 	btcec.AddNonConst(term2, term1, R)
@@ -629,6 +576,7 @@ func (participant *FrostParticipant) verifyPartialSig(suite *TestSuite, sig *sch
 	assert.False(suite.t, is_infinity, "verify partial sig proof: R is the point at infinity")
 
 	R.ToAffine()
+
 	// verify R point equals provided R_X
 	assert.Equal(suite.t, &R.X, R_X, "verify partial sig proof: R.X does not match provided R_X")
 }
