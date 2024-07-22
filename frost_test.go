@@ -8,6 +8,7 @@ import (
 	"github.com/btcsuite/btcd/btcec/v2/schnorr"
 	"github.com/btcsuite/btcd/chaincfg/chainhash"
 	secp "github.com/decred/dcrd/dcrec/secp256k1/v4"
+	"github.com/nghuyenthevinh2000/bitcoin-playground/testhelper"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -45,13 +46,13 @@ type FrostParticipant struct {
 
 // go test -v -count=10 -run ^TestCreateFrostParticipant$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestCreateFrostParticipant(t *testing.T) {
-	suite := TestSuite{}
-	suite.setupStaticSimNetSuite(t)
+	suite := testhelper.TestSuite{}
+	suite.SetupStaticSimNetSuite(t)
 
 	n := 7
 	thres := 5
 
-	suite.newFrostParticipantDKG(thres, n, 1)
+	newFrostParticipantDKG(&suite, thres, n, 1)
 }
 
 // this is a minimal FROST implementation for educational purposes
@@ -59,8 +60,8 @@ func TestCreateFrostParticipant(t *testing.T) {
 // our setting has n = 7 participants, with threshold t = 5 participants
 // go test -v -run ^TestFrostSignature$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestFrostSignature(t *testing.T) {
-	suite := TestSuite{}
-	suite.setupStaticSimNetSuite(t)
+	suite := testhelper.TestSuite{}
+	suite.SetupStaticSimNetSuite(t)
 
 	n := 7
 	thres := 5
@@ -69,7 +70,7 @@ func TestFrostSignature(t *testing.T) {
 	// 1.1: each participant generates their Pederson secret shares, and secret commitments
 	participants := make([]*FrostParticipant, n)
 	for i := 0; i < n; i++ {
-		participants[i] = suite.newFrostParticipantDKG(thres, n, i+1)
+		participants[i] = newFrostParticipantDKG(&suite, thres, n, i+1)
 	}
 
 	// 1.2: participant broadcast secret public commitments and secret proofs
@@ -101,7 +102,7 @@ func TestFrostSignature(t *testing.T) {
 
 			participant_scalar := new(btcec.ModNScalar)
 			participant_scalar.SetInt(uint32(i + 1))
-			suite.verifyPedersenPublicShares(this_participant_secret_shares[j], participants[j].SecretCommitments, participant_scalar)
+			verifyPedersenPublicShares(&suite, this_participant_secret_shares[j], participants[j].SecretCommitments, participant_scalar)
 		}
 
 		participants[i].derivePublicVerificationShares(this_participant_secret_shares)
@@ -139,7 +140,7 @@ func TestFrostSignature(t *testing.T) {
 	// verify that the combined signing_verification_shares equals the combined public key
 	calculated_y := new(btcec.JacobianPoint)
 	for i := 0; i < n; i++ {
-		lambda_i := suite.calculate_lagrange_coeff(i, []int{0, 1, 2, 3, 4, 5, 6})
+		lambda_i := suite.CalculateLagrangeCoeff(i, []int{0, 1, 2, 3, 4, 5, 6})
 		// Y_i^(\lambda_i)
 		term := new(btcec.JacobianPoint)
 		btcec.ScalarMultNonConst(lambda_i, participants[i].signing_verification_shares, term)
@@ -186,7 +187,7 @@ func TestFrostSignature(t *testing.T) {
 	// check that all participants have the same combined public nonce commitment
 	for i := range honest {
 		for j := i; j < len(honest); j++ {
-			assert.Equal(suite.t, participants[honest[i]].aggr_nonce_commitment, participants[honest[j]].aggr_nonce_commitment, "mismatch aggregated nonce commitment")
+			assert.Equal(suite.T, participants[honest[i]].aggr_nonce_commitment, participants[honest[j]].aggr_nonce_commitment, "mismatch aggregated nonce commitment")
 		}
 	}
 
@@ -221,7 +222,7 @@ func TestFrostSignature(t *testing.T) {
 
 // for a new frost participant, they need to keep private (r, secret polynomial)
 // and public (secret_proofs, secret_commitment, secret_shares)
-func (s *TestSuite) newFrostParticipantDKG(thres, n, position int) *FrostParticipant {
+func newFrostParticipantDKG(s *testhelper.TestSuite, thres, n, position int) *FrostParticipant {
 	participant := &FrostParticipant{
 		position:                          position,
 		other_nonces:                      make(map[int][2]*btcec.JacobianPoint),
@@ -232,10 +233,10 @@ func (s *TestSuite) newFrostParticipantDKG(thres, n, position int) *FrostPartici
 		other_secret_commitments:          make(map[int][]*btcec.PublicKey),
 		other_signing_verification_shares: make(map[int]*btcec.JacobianPoint),
 	}
-	participant.PedersonParticipant = s.newPedersonParticipantDKG(thres, n)
+	participant.PedersonParticipant = newPedersonParticipantDKG(s, thres, n)
 
 	// calculating this participant secret proof
-	nonce := s.generate32BSeed()
+	nonce := s.Generate32BSeed()
 	r := new(btcec.ModNScalar)
 	r.SetBytes(&nonce)
 	R := new(btcec.JacobianPoint)
@@ -245,7 +246,7 @@ func (s *TestSuite) newFrostParticipantDKG(thres, n, position int) *FrostPartici
 		r.Negate()
 	}
 
-	secret := participant.testPolynomial[0]
+	secret := participant.testSecretPolynomial[0]
 	secret_commitment_bytes := participant.SecretCommitments[0].SerializeCompressed()
 	if secret_commitment_bytes[0] == secp.PubKeyFormatCompressedOdd {
 		secret.Negate()
@@ -301,12 +302,12 @@ func (participant *FrostParticipant) calculateOtherPublicVerificationShares(othe
 	other_posi_scalar.SetInt(uint32(other_posi + 1))
 
 	Y := new(btcec.JacobianPoint)
-	for i := 0; i < participant.n; i++ {
+	for i := 0; i < participant.N; i++ {
 		i_power := new(btcec.ModNScalar)
 		i_power.SetInt(1)
 		// \prod_{j=0}^{t-1} A_ij^i^k
 		term := new(btcec.JacobianPoint)
-		for j := 0; j < participant.threshold; j++ {
+		for j := 0; j < participant.Threshold; j++ {
 			// A_ij
 			A_ij := new(btcec.JacobianPoint)
 			participant.other_secret_commitments[i][j].AsJacobian(A_ij)
@@ -327,11 +328,11 @@ func (participant *FrostParticipant) calculateOtherPublicVerificationShares(othe
 }
 
 // generate two nonces (d, e)
-func (participant *FrostParticipant) generateSigningNonces(s *TestSuite) {
+func (participant *FrostParticipant) generateSigningNonces(s *testhelper.TestSuite) {
 	// generate nonces (d, e) for each signing
 	// for pi = 1 number of pairs
-	d_seed := s.generate32BSeed()
-	e_seed := s.generate32BSeed()
+	d_seed := s.Generate32BSeed()
+	e_seed := s.Generate32BSeed()
 
 	d := new(btcec.ModNScalar)
 	d.SetBytes(&d_seed)
@@ -358,7 +359,7 @@ func (participant *FrostParticipant) generateSigningNonces(s *TestSuite) {
 // where B is the set of public nonces from t participants
 // and m is the message to be signed
 // and i is the participant's position
-func (participant *FrostParticipant) calculatePublicNonceCommitments(_ *TestSuite, honest []int) {
+func (participant *FrostParticipant) calculatePublicNonceCommitments(_ *testhelper.TestSuite, honest []int) {
 	// calculate p_i for each honest participants
 	p_data := make([]byte, 0)
 	p_data = append(p_data, participant.message_hash[:]...)
@@ -400,7 +401,7 @@ func (participant *FrostParticipant) calculatePublicNonceCommitments(_ *TestSuit
 // s_i is the long-term secret share of participant i
 // c = H(R, Y, m)
 // TODO: have not checked for even or odd Y - coordinates
-func (participant *FrostParticipant) partialSign(suite *TestSuite, honest []int) *schnorr.Signature {
+func (participant *FrostParticipant) partialSign(suite *testhelper.TestSuite, honest []int) *schnorr.Signature {
 	// calculate c
 	commitment_data := make([]byte, 0)
 	commitment_data = append(commitment_data, participant.aggr_nonce_commitment.X.Bytes()[:]...)
@@ -446,12 +447,12 @@ func (participant *FrostParticipant) partialSign(suite *TestSuite, honest []int)
 
 	s_i := participant.signing_shares
 	if participant.CombinedPublicKey.SerializeCompressed()[0] == secp.PubKeyFormatCompressedOdd {
-		suite.t.Logf("participant %d, CombinedPublicKey is odd", participant.position)
+		suite.T.Logf("participant %d, CombinedPublicKey is odd", participant.position)
 		s_i.Negate()
 	}
 
 	// calculate larange coefficient
-	lamba := suite.calculate_lagrange_coeff(participant.position-1, honest)
+	lamba := suite.CalculateLagrangeCoeff(participant.position-1, honest)
 	// e_i * p_i
 	term = new(btcec.ModNScalar).Mul2(e_i, p_i_scalar)
 	// d_i + e_i * p_i
@@ -471,7 +472,7 @@ func (participant *FrostParticipant) partialSign(suite *TestSuite, honest []int)
 // thus, g^\mu_i = g^k_i * g^{a_i0 * c} = R_i * A_i0^c
 // thus R_i = g^\mu_i * A_i0^-c
 // schnorr pubkey contains only the x-coordinate, thus need to be careful around working with schnorr - compatible public key since it requires only x - coordinate
-func (participant *FrostParticipant) verifyFrostSecretProof(suite *TestSuite, other_posi int, secret_proof *schnorr.Signature, secret_commitment_bytes []byte, stamp_hash [32]byte) {
+func (participant *FrostParticipant) verifyFrostSecretProof(suite *testhelper.TestSuite, other_posi int, secret_proof *schnorr.Signature, secret_commitment_bytes []byte, stamp_hash [32]byte) {
 	// recalculating commitment hash c
 	secret_proof_bytes := secret_proof.Serialize()
 	R_bytes := secret_proof_bytes[0:32]
@@ -495,7 +496,7 @@ func (participant *FrostParticipant) verifyFrostSecretProof(suite *TestSuite, ot
 	R := new(btcec.JacobianPoint)
 	// A_i0^-c
 	secret_commitment_pubkey, err := schnorr.ParsePubKey(secret_commitment_bytes)
-	assert.Nil(suite.t, err)
+	assert.Nil(suite.T, err)
 	secret_commitment_point := new(btcec.JacobianPoint)
 	secret_commitment_pubkey.AsJacobian(secret_commitment_point)
 	term := new(btcec.JacobianPoint)
@@ -512,21 +513,21 @@ func (participant *FrostParticipant) verifyFrostSecretProof(suite *TestSuite, ot
 	if (R.X.IsZero() && R.Y.IsZero()) || R.Z.IsZero() {
 		is_infinity = true
 	}
-	assert.False(suite.t, is_infinity, "verify frost secret proof: R is the point at infinity")
+	assert.False(suite.T, is_infinity, "verify frost secret proof: R is the point at infinity")
 
 	// R_Y cannot be odd
 	R.ToAffine()
-	assert.False(suite.t, R.Y.IsOdd(), "verify frost secret proof: R.Y is odd")
+	assert.False(suite.T, R.Y.IsOdd(), "verify frost secret proof: R.Y is odd")
 
 	// verify R point equals provided R_X
-	assert.Equal(suite.t, &R.X, R_X, "verify frost secret proof: R.X does not match provided R_X")
+	assert.Equal(suite.T, &R.X, R_X, "verify frost secret proof: R.X does not match provided R_X")
 }
 
 // verifying the partial signature from each honest participant
 // recall that: z_i = d_i + e_i * p_i + \lambda_i * s_i * c
 // thus, g^z_i = R_i * g^(\lambda_i * s_i * c) = R_i * Y_i^(\lambda_i * c)
 // thus, R_i = g^z_i * Y_i^-(\lambda_i * c)
-func (participant *FrostParticipant) verifyPartialSig(suite *TestSuite, sig *schnorr.Signature, other_posi int, honest []int) {
+func (participant *FrostParticipant) verifyPartialSig(suite *testhelper.TestSuite, sig *schnorr.Signature, other_posi int, honest []int) {
 	// derive z and R_X
 	sig_bytes := sig.Serialize()
 	R_bytes := sig_bytes[0:32]
@@ -556,7 +557,7 @@ func (participant *FrostParticipant) verifyPartialSig(suite *TestSuite, sig *sch
 
 	// \lambda_i * c
 	term := new(btcec.ModNScalar)
-	lambda := suite.calculate_lagrange_coeff(other_posi, honest)
+	lambda := suite.CalculateLagrangeCoeff(other_posi, honest)
 	term.Mul2(lambda, c)
 	// Y_i^-(\lambda_i * c)
 	term1 := new(btcec.JacobianPoint)
@@ -573,10 +574,10 @@ func (participant *FrostParticipant) verifyPartialSig(suite *TestSuite, sig *sch
 	if (R.X.IsZero() && R.Y.IsZero()) || R.Z.IsZero() {
 		is_infinity = true
 	}
-	assert.False(suite.t, is_infinity, "verify partial sig proof: R is the point at infinity")
+	assert.False(suite.T, is_infinity, "verify partial sig proof: R is the point at infinity")
 
 	R.ToAffine()
 
 	// verify R point equals provided R_X
-	assert.Equal(suite.t, &R.X, R_X, "verify partial sig proof: R.X does not match provided R_X")
+	assert.Equal(suite.T, &R.X, R_X, "verify partial sig proof: R.X does not match provided R_X")
 }

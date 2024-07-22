@@ -704,3 +704,15 @@
 21:48:39.683113 table@remove removed @158
 21:48:39.683238 table@remove removed @157
 21:48:39.684540 table@remove removed @156
+=============== Jul 23, 2024 (+07) ===============
+00:02:40.015957 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+00:02:40.016657 version@stat F·[0 1] S·631KiB[0B 631KiB] Sc·[0.00 0.01]
+00:02:40.016669 db@open opening
+00:02:40.016709 journal@recovery F·1
+00:02:40.017545 journal@recovery recovering @166
+00:02:40.018020 version@stat F·[0 1] S·631KiB[0B 631KiB] Sc·[0.00 0.01]
+00:02:40.047007 db@janitor F·6 G·3
+00:02:40.047028 db@janitor removing table-170
+00:02:40.047753 db@janitor removing table-171
+00:02:40.048135 db@janitor removing table-169
+00:02:40.048344 db@open done T·31.669166ms

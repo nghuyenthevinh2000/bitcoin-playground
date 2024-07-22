@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	secp "github.com/decred/dcrd/dcrec/secp256k1/v4"
+	"github.com/nghuyenthevinh2000/bitcoin-playground/testhelper"
 
 	"github.com/btcsuite/btcd/btcec/v2"
 	"github.com/btcsuite/btcd/btcec/v2/schnorr"
@@ -24,16 +25,16 @@ import (
 
 // go test -v -run ^TestPTLCAliceSig$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestPTLCAliceSig(t *testing.T) {
-	s := TestSuite{}
-	s.setupStaticSimNetSuite(t)
+	s := testhelper.TestSuite{}
+	s.SetupStaticSimNetSuite(t)
 
 	// Alice, Bob key pair
-	_, pair_1 := s.newKeyPair(ALICE_WALLET_SEED)
-	_, pair_2 := s.newKeyPair(BOB_WALLET_SEED)
+	_, pair_1 := s.NewKeyPair(ALICE_WALLET_SEED)
+	_, pair_2 := s.NewKeyPair(BOB_WALLET_SEED)
 	var alice_pub_point btcec.JacobianPoint
-	pair_1.pub.AsJacobian(&alice_pub_point)
+	pair_1.Pub.AsJacobian(&alice_pub_point)
 	var bob_pub_point btcec.JacobianPoint
-	pair_2.pub.AsJacobian(&bob_pub_point)
+	pair_2.Pub.AsJacobian(&bob_pub_point)
 	// P' = P_A + P_B
 	var aggr_key_point btcec.JacobianPoint
 	btcec.AddNonConst(&alice_pub_point, &bob_pub_point, &aggr_key_point)
@@ -41,14 +42,12 @@ func TestPTLCAliceSig(t *testing.T) {
 	aggrKey := btcec.NewPublicKey(&aggr_key_point.X, &aggr_key_point.Y)
 
 	// generate a random 32 bytes (btec has a way to generate deterministic nonce)
-	secret := s.generate32BSeed()
-	nonce := s.generate32BSeed()
+	secret := s.Generate32BSeed()
+	nonce := s.Generate32BSeed()
 
-	secret_t, T := btcec.PrivKeyFromBytes(secret[:])
-	t.Logf("t: %v, T: %v\n", secret_t, T)
+	secret_t, _ := btcec.PrivKeyFromBytes(secret[:])
 
-	r, R := btcec.PrivKeyFromBytes(nonce[:])
-	t.Logf("r: %v, R: %v\n", r, R)
+	r, _ := btcec.PrivKeyFromBytes(nonce[:])
 
 	// calculate r + t
 	var secret_r_t btcec.ModNScalar
@@ -59,21 +58,21 @@ func TestPTLCAliceSig(t *testing.T) {
 	// sign with custom nonce: r + t
 	// s_A = r + t + H(R + T, P_A + P_B, m) * p_A
 	sigHashes := sha256.Sum256([]byte("signature hash"))
-	s.customPTLCSignA(r.Key, secret_t.Key, aggrKey, pair_1.priv, sigHashes)
+	customPTLCSignA(&s, r.Key, secret_t.Key, aggrKey, pair_1.GetTestPriv(), sigHashes)
 }
 
 // go test -v -run ^TestPTLCCombinedSig$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestPTLCCombinedSig(t *testing.T) {
-	s := TestSuite{}
-	s.setupStaticSimNetSuite(t)
+	s := testhelper.TestSuite{}
+	s.SetupStaticSimNetSuite(t)
 
 	// Alice, Bob key pair
-	_, pair_1 := s.newKeyPair(ALICE_WALLET_SEED)
-	_, pair_2 := s.newKeyPair(BOB_WALLET_SEED)
+	_, pair_1 := s.NewKeyPair(ALICE_WALLET_SEED)
+	_, pair_2 := s.NewKeyPair(BOB_WALLET_SEED)
 	var alice_pub_point btcec.JacobianPoint
-	pair_1.pub.AsJacobian(&alice_pub_point)
+	pair_1.Pub.AsJacobian(&alice_pub_point)
 	var bob_pub_point btcec.JacobianPoint
-	pair_2.pub.AsJacobian(&bob_pub_point)
+	pair_2.Pub.AsJacobian(&bob_pub_point)
 	// P' = P_A + P_B
 	var aggr_key_point btcec.JacobianPoint
 	btcec.AddNonConst(&alice_pub_point, &bob_pub_point, &aggr_key_point)
@@ -81,8 +80,8 @@ func TestPTLCCombinedSig(t *testing.T) {
 	aggrKey := btcec.NewPublicKey(&aggr_key_point.X, &aggr_key_point.Y)
 
 	// generate a random 32 bytes (btec has a way to generate deterministic nonce)
-	secret := s.generate32BSeed()
-	nonce := s.generate32BSeed()
+	secret := s.Generate32BSeed()
+	nonce := s.Generate32BSeed()
 
 	// T, R here is not yet normalized to ensure that y - value is even
 	secret_t, _ := btcec.PrivKeyFromBytes(secret[:])
@@ -92,10 +91,10 @@ func TestPTLCCombinedSig(t *testing.T) {
 	// sign with custom nonce: r + t
 	// s_A = r + t + H(R + T, P_A + P_B, m) * p_A
 	sigHashes := sha256.Sum256([]byte("signature hash"))
-	R, T, sig_A, parityFactor := s.customPTLCSignA(r.Key, secret_t.Key, aggrKey, pair_1.priv, sigHashes)
+	R, T, sig_A, parityFactor := customPTLCSignA(&s, r.Key, secret_t.Key, aggrKey, pair_1.GetTestPriv(), sigHashes)
 
 	// STEP 2: Bob creates adaptor signture with secret (s', R, T)
-	sig_B := s.customPTLCSignB(R, T, aggrKey, pair_2.priv, sigHashes)
+	sig_B := customPTLCSignB(&s, R, T, aggrKey, pair_2.GetTestPriv(), sigHashes)
 
 	// step 3: Alice construct combined signature of sig_A + t + sig_B to claim the funds
 	sig_A_bytes := sig_A.Serialize()
@@ -128,18 +127,18 @@ func TestPTLCCombinedSig(t *testing.T) {
 // go test -v -run ^TestPTLC$ github.com/nghuyenthevinh2000/bitcoin-playground
 // the PTLC is between Alice and Bob, and Bob has to send Alice 1 btc, if Alice can provide private data x
 func TestPTLC(t *testing.T) {
-	s := TestSuite{}
-	s.setupStaticSimNetSuite(t)
+	s := testhelper.TestSuite{}
+	s.SetupStaticSimNetSuite(t)
 
 	// Alice, Bob key pair
-	_, pair_1 := s.newKeyPair(ALICE_WALLET_SEED)
-	_, pair_2 := s.newKeyPair(BOB_WALLET_SEED)
+	_, pair_1 := s.NewKeyPair(ALICE_WALLET_SEED)
+	_, pair_2 := s.NewKeyPair(BOB_WALLET_SEED)
 
 	// Alice, Bob aggregated pubkey
 	var alice_pub_point btcec.JacobianPoint
-	pair_1.pub.AsJacobian(&alice_pub_point)
+	pair_1.Pub.AsJacobian(&alice_pub_point)
 	var bob_pub_point btcec.JacobianPoint
-	pair_2.pub.AsJacobian(&bob_pub_point)
+	pair_2.Pub.AsJacobian(&bob_pub_point)
 	// P' = P_A + P_B
 	var aggr_key_point btcec.JacobianPoint
 	btcec.AddNonConst(&alice_pub_point, &bob_pub_point, &aggr_key_point)
@@ -165,7 +164,7 @@ func TestPTLC(t *testing.T) {
 	builder_2.AddInt64(5)
 	builder_2.AddOp(txscript.OP_CHECKLOCKTIMEVERIFY)
 	builder_2.AddOp(txscript.OP_DROP)
-	builder_2.AddData(schnorr.SerializePubKey(pair_2.pub))
+	builder_2.AddData(schnorr.SerializePubKey(pair_2.Pub))
 	builder_2.AddOp(txscript.OP_CHECKSIG)
 	pkScript_2, err := builder_2.Script()
 	assert.Nil(t, err)
@@ -175,9 +174,9 @@ func TestPTLC(t *testing.T) {
 
 	// calculate tweaked public key
 	tapTreeCommitment := tapTree.RootNode.TapHash()
-	_, internal_pair := s.newKeyPair(OMNIMAN_WALLET_SEED)
-	q := txscript.ComputeTaprootOutputKey(internal_pair.pub, tapTreeCommitment[:])
-	taproot, err := btcutil.NewAddressTaproot(schnorr.SerializePubKey(q), s.btcdChainConfig)
+	_, internal_pair := s.NewKeyPair(OMNIMAN_WALLET_SEED)
+	q := txscript.ComputeTaprootOutputKey(internal_pair.Pub, tapTreeCommitment[:])
+	taproot, err := btcutil.NewAddressTaproot(schnorr.SerializePubKey(q), s.BtcdChainConfig)
 	assert.Nil(t, err)
 	fmt.Printf("Taproot address: %s\n", taproot.String())
 
@@ -197,7 +196,7 @@ func TestPTLC(t *testing.T) {
 
 	// control block bytes for leaf 0
 	inclusionProof_0 := tapTree.LeafMerkleProofs[0]
-	controlBlock_0 := inclusionProof_0.ToControlBlock(internal_pair.pub)
+	controlBlock_0 := inclusionProof_0.ToControlBlock(internal_pair.Pub)
 	ctrlBlockBytes_0, err := controlBlock_0.ToBytes()
 	assert.Nil(t, err)
 
@@ -205,7 +204,7 @@ func TestPTLC(t *testing.T) {
 	var bob_adaptor_sig []byte
 	var alice_combined_sig []byte
 	var alice_secret []byte
-	s.validateScript(p2tr, 1, func(t *testing.T, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness {
+	s.ValidateScript(p2tr, 1, func(t *testing.T, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness {
 		// calculating sighash
 		inputFetcher := txscript.NewCannedPrevOutputFetcher(
 			prevOut.PkScript,
@@ -216,18 +215,18 @@ func TestPTLC(t *testing.T) {
 		assert.Nil(t, err)
 
 		// STEP 1: Alice gives her adaptor signature to Bob (s_A', R, T)
-		secret := s.generate32BSeed()
-		nonce := s.generate32BSeed()
+		secret := s.Generate32BSeed()
+		nonce := s.Generate32BSeed()
 
 		secret_t, _ := btcec.PrivKeyFromBytes(secret[:])
 		alice_secret = secret[:]
 		r, _ := btcec.PrivKeyFromBytes(nonce[:])
 
-		R, T, sig_A, parityFactor := s.customPTLCSignA(r.Key, secret_t.Key, aggrKey, pair_1.priv, ([32]byte)(sigHash))
+		R, T, sig_A, parityFactor := customPTLCSignA(&s, r.Key, secret_t.Key, aggrKey, pair_1.GetTestPriv(), ([32]byte)(sigHash))
 		alice_adaptor_sig = sig_A.Serialize()
 
 		// STEP 2: Bob gives his adaptor signature to Alice (s_B)
-		sig_B := s.customPTLCSignB(R, T, aggrKey, pair_2.priv, ([32]byte)(sigHash))
+		sig_B := customPTLCSignB(&s, R, T, aggrKey, pair_2.GetTestPriv(), ([32]byte)(sigHash))
 		bob_adaptor_sig = sig_B.Serialize()
 
 		// STEP 3: Alice reveals (s_A' + t + s_B) to claim the funds
@@ -290,13 +289,13 @@ func TestPTLC(t *testing.T) {
 	// SCENARIO 2: timeout and Bob retrieves his funds
 	// control block bytes for leaf 1
 	inclusionProof_1 := tapTree.LeafMerkleProofs[1]
-	controlBlock_1 := inclusionProof_1.ToControlBlock(internal_pair.pub)
+	controlBlock_1 := inclusionProof_1.ToControlBlock(internal_pair.Pub)
 	ctrlBlockBytes_1, err := controlBlock_1.ToBytes()
 	assert.Nil(t, err)
 
-	s.validateScript(p2tr, 10, func(t *testing.T, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness {
+	s.ValidateScript(p2tr, 10, func(t *testing.T, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness {
 		// Bob signature
-		sig, err := txscript.RawTxInTapscriptSignature(tx, sigHashes, idx, prevOut.Value, p2tr, tapLeafs[1], txscript.SigHashDefault, pair_2.priv)
+		sig, err := txscript.RawTxInTapscriptSignature(tx, sigHashes, idx, prevOut.Value, p2tr, tapLeafs[1], txscript.SigHashDefault, pair_2.GetTestPriv())
 		assert.Nil(t, err)
 
 		witness := wire.TxWitness{
@@ -310,7 +309,7 @@ func TestPTLC(t *testing.T) {
 // these are the information that A has access to
 // s_A = r + t + H(R + T, P_A + P_B, m) * p_A
 // return (even - y R, even - y T, s)
-func (suite *TestSuite) customPTLCSignA(r, t btcec.ModNScalar, aggrPubKey *btcec.PublicKey, signingA *btcec.PrivateKey, m [32]byte) (*btcec.PublicKey, *btcec.PublicKey, *schnorr.Signature, *btcec.ModNScalar) {
+func customPTLCSignA(suite *testhelper.TestSuite, r, t btcec.ModNScalar, aggrPubKey *btcec.PublicKey, signingA *btcec.PrivateKey, m [32]byte) (*btcec.PublicKey, *btcec.PublicKey, *schnorr.Signature, *btcec.ModNScalar) {
 	// rt = r + t
 	var rt btcec.ModNScalar
 	rt.Add2(&r, &t)
@@ -340,7 +339,6 @@ func (suite *TestSuite) customPTLCSignA(r, t btcec.ModNScalar, aggrPubKey *btcec
 		t.Negate()
 		parityFactor.Negate()
 	}
-	fmt.Printf("custom RT.X: %v, RT.Y: %v\n", RT.X, RT.Y)
 
 	// e = tagged_hash("BIP0340/challenge", bytes(RT) || bytes(P_A + P_B) || m) mod n
 	commitment := chainhash.TaggedHash(
@@ -348,8 +346,7 @@ func (suite *TestSuite) customPTLCSignA(r, t btcec.ModNScalar, aggrPubKey *btcec
 	)
 	var e btcec.ModNScalar
 	overflow := e.SetBytes((*[32]byte)(commitment))
-	assert.Equal(suite.t, overflow, uint32(0), "overflow")
-	fmt.Printf("in A, e: %v\n", e)
+	assert.Equal(suite.T, overflow, uint32(0), "overflow")
 
 	// s = r + t + e*p_A mod n
 	s := new(btcec.ModNScalar).Mul2(&e, &p_A_scalar).Add(&r).Add(&t)
@@ -383,14 +380,10 @@ func (suite *TestSuite) customPTLCSignA(r, t btcec.ModNScalar, aggrPubKey *btcec
 	// sG == R + T + eP_A
 	RT_eP.ToAffine()
 	sG.ToAffine()
-	assert.Equal(suite.t, RT_eP.X, sG.X)
+	assert.Equal(suite.T, RT_eP.X, sG.X)
 	// R + T == sG - eP_A
 	sG_eP.ToAffine()
-	assert.Equal(suite.t, sig_r, sG_eP.X)
-
-	var P btcec.JacobianPoint
-	aggrPubKey.AsJacobian(&P)
-	fmt.Printf("custom s: %v, e: %v, P: %v\n", s, e, P)
+	assert.Equal(suite.T, sig_r, sG_eP.X)
 
 	// s' = s - t
 	s.Add(t.Negate())
@@ -402,7 +395,7 @@ func (suite *TestSuite) customPTLCSignA(r, t btcec.ModNScalar, aggrPubKey *btcec
 
 // these are the information that B has access to
 // B return a signature adaptor to A with only s_B = e*p_B mod n
-func (suite *TestSuite) customPTLCSignB(R, T, aggrPubKey *btcec.PublicKey, signingB *btcec.PrivateKey, m [32]byte) *schnorr.Signature {
+func customPTLCSignB(suite *testhelper.TestSuite, R, T, aggrPubKey *btcec.PublicKey, signingB *btcec.PrivateKey, m [32]byte) *schnorr.Signature {
 	// calculate H(R + T, P_A + P_B, m)
 	var p_B_scalar btcec.ModNScalar
 	p_B_scalar.Set(&signingB.Key)
@@ -422,7 +415,7 @@ func (suite *TestSuite) customPTLCSignB(R, T, aggrPubKey *btcec.PublicKey, signi
 	T.AsJacobian(&tG)
 	btcec.AddNonConst(&rG, &tG, &RT)
 	RT.ToAffine()
-	assert.False(suite.t, RT.Y.IsOdd(), "RT.Y is odd")
+	assert.False(suite.T, RT.Y.IsOdd(), "RT.Y is odd")
 
 	// calculate challenge e
 	// e = tagged_hash("BIP0340/challenge", bytes(RT) || bytes(P_A + P_B) || m) mod n
@@ -431,8 +424,7 @@ func (suite *TestSuite) customPTLCSignB(R, T, aggrPubKey *btcec.PublicKey, signi
 	)
 	var e btcec.ModNScalar
 	overflow := e.SetBytes((*[32]byte)(commitment))
-	assert.Equal(suite.t, overflow, uint32(0), "overflow")
-	fmt.Printf("in B, e: %v\n", e)
+	assert.Equal(suite.T, overflow, uint32(0), "overflow")
 
 	// calculate s =  e*p_B mod n
 	s := new(btcec.ModNScalar).Mul2(&e, &p_B_scalar)
