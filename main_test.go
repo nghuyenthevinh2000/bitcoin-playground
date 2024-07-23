@@ -83,7 +83,7 @@ func TestSchnorr(t *testing.T) {
 	s.SetupStaticSimNetSuite(t)
 
 	// s = t + e * d
-	_, t_pair := s.NewKeyPair("")
+	_, t_pair := s.NewHDKeyPairFromSeed("")
 	t_priv := t_pair.GetTestPriv().Key
 	R := new(btcec.JacobianPoint)
 	t_pair.Pub.AsJacobian(R)
@@ -92,7 +92,7 @@ func TestSchnorr(t *testing.T) {
 		R.Y.Negate(1)
 		t_priv.Negate()
 	}
-	_, d_pair := s.NewKeyPair("")
+	_, d_pair := s.NewHDKeyPairFromSeed("")
 	d := d_pair.GetTestPriv().Key
 	// Jacobian coordinates (X, Y, Z)
 	P := new(btcec.JacobianPoint)

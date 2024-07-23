@@ -24,8 +24,8 @@ func TestMuSig2(t *testing.T) {
 	s.SetupStaticSimNetSuite(t)
 
 	// create aggregated public key
-	_, pair_1 := s.NewKeyPair(ALICE_WALLET_SEED)
-	_, pair_2 := s.NewKeyPair(BOB_WALLET_SEED)
+	_, pair_1 := s.NewHDKeyPairFromSeed(ALICE_WALLET_SEED)
+	_, pair_2 := s.NewHDKeyPairFromSeed(BOB_WALLET_SEED)
 	pubPair := []*btcec.PublicKey{pair_1.Pub, pair_2.Pub}
 	q, trScript := constructMuSig2Channel(&s, pubPair)
 
@@ -88,9 +88,9 @@ func TestLinearTaprootMuSig(t *testing.T) {
 	s := testhelper.TestSuite{}
 	s.SetupStaticSimNetSuite(t)
 
-	_, pair_1 := s.NewKeyPair(ALICE_WALLET_SEED)
-	_, pair_2 := s.NewKeyPair(BOB_WALLET_SEED)
-	_, pair_3 := s.NewKeyPair(OLIVIA_WALLET_SEED)
+	_, pair_1 := s.NewHDKeyPairFromSeed(ALICE_WALLET_SEED)
+	_, pair_2 := s.NewHDKeyPairFromSeed(BOB_WALLET_SEED)
+	_, pair_3 := s.NewHDKeyPairFromSeed(OLIVIA_WALLET_SEED)
 
 	// STEP 1: BUILDING LINEAR MULTISIG SCRIPT
 	// OP_CHECKSIGADD is only available in Taproot
@@ -129,7 +129,7 @@ func TestLinearTaprootMuSig(t *testing.T) {
 
 	// get internal private key P
 	// pub hex: 7dec1d4eb66497d20ad3ce1a8f7e99d207e5dadf4a093a3dede664dd89d9ac10
-	_, internal_pair := s.NewKeyPair(OMNIMAN_WALLET_SEED)
+	_, internal_pair := s.NewHDKeyPairFromSeed(OMNIMAN_WALLET_SEED)
 	fmt.Printf("pub_internal: %s\n", s.BytesToHexStr(schnorr.SerializePubKey(internal_pair.Pub)))
 
 	// tr pub Q = P + t*G
@@ -196,9 +196,9 @@ func TestSubsetTaprootMuSig(t *testing.T) {
 	s := testhelper.TestSuite{}
 	s.SetupStaticSimNetSuite(t)
 
-	_, pair_1 := s.NewKeyPair(ALICE_WALLET_SEED)
-	_, pair_2 := s.NewKeyPair(BOB_WALLET_SEED)
-	_, pair_3 := s.NewKeyPair(OLIVIA_WALLET_SEED)
+	_, pair_1 := s.NewHDKeyPairFromSeed(ALICE_WALLET_SEED)
+	_, pair_2 := s.NewHDKeyPairFromSeed(BOB_WALLET_SEED)
+	_, pair_3 := s.NewHDKeyPairFromSeed(OLIVIA_WALLET_SEED)
 
 	subset := [][]*btcec.PublicKey{
 		{pair_1.Pub, pair_2.Pub},
@@ -228,7 +228,7 @@ func TestSubsetTaprootMuSig(t *testing.T) {
 	taptree := txscript.AssembleTaprootScriptTree(tapLeaf...)
 
 	// get internal private key P
-	_, internal_pair := s.NewKeyPair(OMNIMAN_WALLET_SEED)
+	_, internal_pair := s.NewHDKeyPairFromSeed(OMNIMAN_WALLET_SEED)
 
 	// tr pub Q = P + t*G
 	taptreeRootCommitment := taptree.RootNode.TapHash()

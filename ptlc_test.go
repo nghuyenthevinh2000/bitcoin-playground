@@ -29,8 +29,8 @@ func TestPTLCAliceSig(t *testing.T) {
 	s.SetupStaticSimNetSuite(t)
 
 	// Alice, Bob key pair
-	_, pair_1 := s.NewKeyPair(ALICE_WALLET_SEED)
-	_, pair_2 := s.NewKeyPair(BOB_WALLET_SEED)
+	_, pair_1 := s.NewHDKeyPairFromSeed(ALICE_WALLET_SEED)
+	_, pair_2 := s.NewHDKeyPairFromSeed(BOB_WALLET_SEED)
 	var alice_pub_point btcec.JacobianPoint
 	pair_1.Pub.AsJacobian(&alice_pub_point)
 	var bob_pub_point btcec.JacobianPoint
@@ -67,8 +67,8 @@ func TestPTLCCombinedSig(t *testing.T) {
 	s.SetupStaticSimNetSuite(t)
 
 	// Alice, Bob key pair
-	_, pair_1 := s.NewKeyPair(ALICE_WALLET_SEED)
-	_, pair_2 := s.NewKeyPair(BOB_WALLET_SEED)
+	_, pair_1 := s.NewHDKeyPairFromSeed(ALICE_WALLET_SEED)
+	_, pair_2 := s.NewHDKeyPairFromSeed(BOB_WALLET_SEED)
 	var alice_pub_point btcec.JacobianPoint
 	pair_1.Pub.AsJacobian(&alice_pub_point)
 	var bob_pub_point btcec.JacobianPoint
@@ -131,8 +131,8 @@ func TestPTLC(t *testing.T) {
 	s.SetupStaticSimNetSuite(t)
 
 	// Alice, Bob key pair
-	_, pair_1 := s.NewKeyPair(ALICE_WALLET_SEED)
-	_, pair_2 := s.NewKeyPair(BOB_WALLET_SEED)
+	_, pair_1 := s.NewHDKeyPairFromSeed(ALICE_WALLET_SEED)
+	_, pair_2 := s.NewHDKeyPairFromSeed(BOB_WALLET_SEED)
 
 	// Alice, Bob aggregated pubkey
 	var alice_pub_point btcec.JacobianPoint
@@ -174,7 +174,7 @@ func TestPTLC(t *testing.T) {
 
 	// calculate tweaked public key
 	tapTreeCommitment := tapTree.RootNode.TapHash()
-	_, internal_pair := s.NewKeyPair(OMNIMAN_WALLET_SEED)
+	_, internal_pair := s.NewHDKeyPairFromSeed(OMNIMAN_WALLET_SEED)
 	q := txscript.ComputeTaprootOutputKey(internal_pair.Pub, tapTreeCommitment[:])
 	taproot, err := btcutil.NewAddressTaproot(schnorr.SerializePubKey(q), s.BtcdChainConfig)
 	assert.Nil(t, err)

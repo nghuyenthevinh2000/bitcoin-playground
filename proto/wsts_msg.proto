@@ -1,0 +1,9 @@
+syntax = "proto3";
+package proto;
+
+option go_package = "github.com/nghuyenthevinh2000/bitcoin-playground/wsts";
+
+message MsgUpdateVP {
+    int64 source = 1;
+    bytes vp = 2;
+}

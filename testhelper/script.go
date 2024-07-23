@@ -16,7 +16,7 @@ import (
 // the spending transaction will spend the funds from the funding transaction with test witness
 func (s *TestSuite) ValidateScript(pkScript []byte, blockHeight int32, witnessFunc func(t *testing.T, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness) {
 	// create a random key pair
-	_, keypair := s.NewKeyPair("")
+	_, keypair := s.NewHDKeyPairFromSeed("")
 
 	// create a first random funding transaction to a pubkey
 	txHash, err := chainhash.NewHashFromStr("aff48a9b83dc525d330ded64e1b6a9e127c99339f7246e2c89e06cd83493af9b")

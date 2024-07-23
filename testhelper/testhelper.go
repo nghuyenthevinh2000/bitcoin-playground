@@ -117,7 +117,8 @@ func (key *KeyPair) GetTestPriv() *btcec.PrivateKey {
 	return key.priv
 }
 
-func (s *TestSuite) NewKeyPair(seed string) ([]byte, KeyPair) {
+// empty seed string will generate new keypair
+func (s *TestSuite) NewHDKeyPairFromSeed(seed string) ([]byte, KeyPair) {
 	var seedBytes []byte
 
 	if seed == "" {
@@ -136,6 +137,20 @@ func (s *TestSuite) NewKeyPair(seed string) ([]byte, KeyPair) {
 	assert.Nil(s.T, err)
 
 	return seedBytes, KeyPair{pub, priv}
+}
+
+// empty bytes will generate new keypair
+func (s *TestSuite) NewKeyPairFromBytes(bytes []byte) KeyPair {
+	var keyBytes []byte
+
+	if bytes == nil {
+		keyBytes = s.GenerateSeed()
+	} else {
+		keyBytes = bytes
+	}
+
+	priv, pub := btcec.PrivKeyFromBytes(keyBytes)
+	return KeyPair{pub, priv}
 }
 
 // this is for deriving witness pubkey hash from public key
