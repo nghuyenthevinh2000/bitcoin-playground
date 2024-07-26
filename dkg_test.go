@@ -55,6 +55,17 @@ type PedersonParticipant struct {
 	CombinedSecretShares *btcec.ModNScalar
 }
 
+// go test -v -run ^TestCreatePerdersonParticipant$ github.com/nghuyenthevinh2000/bitcoin-playground
+func TestCreatePerdersonParticipant(t *testing.T) {
+	suite := testhelper.TestSuite{}
+	suite.SetupStaticSimNetSuite(t)
+
+	threshold := 5
+	participant_num := 7
+	participant := newPedersonParticipantDKG(&suite, threshold, participant_num)
+	assert.NotNil(t, participant)
+}
+
 // go test -v -run ^TestBasicGennaroDKG$ github.com/nghuyenthevinh2000/bitcoin-playground
 // Test the very basic Gennaro Distributed Key Generation (DKG) protocol
 // For verication of the shares,
@@ -180,9 +191,9 @@ func newGennaroParticipantDKG(s *testhelper.TestSuite, threshold, participant_nu
 		CombinedCommitmentShares: new(btcec.ModNScalar),
 	}
 
-	secretPolynomial := s.GeneratePolynomial(threshold - 1)
+	secretPolynomial := s.GeneratePolynomial(int64(threshold - 1))
 	participant.testSecretPolynomial = secretPolynomial
-	commitmentPolynomial := s.GeneratePolynomial(threshold - 1)
+	commitmentPolynomial := s.GeneratePolynomial(int64(threshold - 1))
 	participant.testCommitmentPolynomial = commitmentPolynomial
 	participant.SecretCommitments = participant.generatePedersenCommitments()
 	participant.Commitments = participant.generateGennaroCommitments()
@@ -337,7 +348,7 @@ func newPedersonParticipantDKG(s *testhelper.TestSuite, threshold, participant_n
 		CombinedSecretShares: new(btcec.ModNScalar),
 	}
 
-	secretPolynomial := s.GeneratePolynomial(threshold - 1)
+	secretPolynomial := s.GeneratePolynomial(int64(threshold - 1))
 	participant.testSecretPolynomial = secretPolynomial
 	participant.SecretCommitments = participant.generatePedersenCommitments()
 
@@ -361,18 +372,7 @@ func newPedersonParticipantDKG(s *testhelper.TestSuite, threshold, participant_n
 		participant_scalar.SetInt(uint32(i + 1))
 
 		// calculate sum(a_k*i^k)
-		i_power := new(btcec.ModNScalar)
-		i_power.SetInt(1)
-		sum_scalar := new(btcec.ModNScalar)
-		sum_scalar.SetInt(0)
-		for k := 0; k < threshold; k++ {
-			// calculate term = a_k*i^k
-			term := new(btcec.ModNScalar).Mul2(secretPolynomial[k], i_power)
-			// calculate sum(a_k*i^k)
-			sum_scalar.Add(term)
-			// i^k
-			i_power.Mul(participant_scalar)
-		}
+		sum_scalar := s.EvaluatePolynomial(secretPolynomial, participant_scalar)
 
 		// calculate prod(A_k^i^k)
 		product := new(btcec.JacobianPoint)

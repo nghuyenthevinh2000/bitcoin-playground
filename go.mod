@@ -13,7 +13,6 @@ require (
 	github.com/btcsuite/btcwallet/walletdb v1.4.2
 	github.com/cosmos/cosmos-sdk v0.50.8
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.2.0
-	github.com/gogo/protobuf v1.3.2
 	github.com/stretchr/testify v1.9.0
 	google.golang.org/protobuf v1.33.0
 )
@@ -51,6 +50,7 @@ require (
 	github.com/getsentry/sentry-go v0.27.0 // indirect
 	github.com/go-kit/log v0.2.1 // indirect
 	github.com/go-logfmt/logfmt v0.6.0 // indirect
+	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/btree v1.1.2 // indirect

@@ -55,6 +55,16 @@ func TestCreateFrostParticipant(t *testing.T) {
 	newFrostParticipantDKG(&suite, thres, n, 1)
 }
 
+// go test -v -run ^TestFrostCalculateShares$ github.com/nghuyenthevinh2000/bitcoin-playground
+func TestFrostCalculateShares(t *testing.T) {
+	suite := new(testhelper.TestSuite)
+	suite.SetupStaticSimNetSuite(t)
+	participant := testhelper.NewFrostParticipant(suite, 5, 3, 1, nil)
+	assert.NotNil(t, participant)
+
+	participant.CalculateSecretShares()
+}
+
 // this is a minimal FROST implementation for educational purposes
 // an overview os its Schnorr signature:
 // our setting has n = 7 participants, with threshold t = 5 participants
