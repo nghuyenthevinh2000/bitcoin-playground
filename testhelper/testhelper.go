@@ -2,36 +2,84 @@ package testhelper
 
 import (
 	"encoding/hex"
+	"os"
+	"path/filepath"
 	"testing"
 
+	"github.com/btcsuite/btcd/blockchain"
 	btcec "github.com/btcsuite/btcd/btcec/v2"
+	"github.com/btcsuite/btcd/btcec/v2/schnorr"
 	"github.com/btcsuite/btcd/btcutil"
 	"github.com/btcsuite/btcd/btcutil/hdkeychain"
 	"github.com/btcsuite/btcd/chaincfg"
+	"github.com/btcsuite/btcd/database"
+	_ "github.com/btcsuite/btcd/database/ffldb"
 	"github.com/btcsuite/btcd/rpcclient"
+	"github.com/btcsuite/btcd/txscript"
+	"github.com/btcsuite/btcd/wire"
 	"github.com/btcsuite/btcwallet/chain"
 	"github.com/stretchr/testify/assert"
 )
 
 type TestSuite struct {
-	T                 *testing.T
+	T *testing.T
+
+	// this is for bitcoin live network
 	ChainClient       *rpcclient.Client
 	WalletClient      *rpcclient.Client
 	WalletChainClient *chain.RPCClient
 	BtcdConnConfig    *rpcclient.ConnConfig
 	BtcdChainConfig   *chaincfg.Params
+
+	// this is for bitcoin synthetic test
+	Blockchain         *blockchain.BlockChain
+	blockchainTearDown func()
+}
+
+func (s *TestSuite) StaticSimNetTearDown() {
+	assert.NotNil(s.T, s.blockchainTearDown)
+	s.blockchainTearDown()
 }
 
 func (s *TestSuite) SetupRegNetSuite(t *testing.T) {
 	s.T = t
 	s.BtcdChainConfig = &chaincfg.RegressionNetParams
-	s.BtcdChainConfig.DefaultPort = MockBtcdHost
 }
 
 func (s *TestSuite) SetupStaticSimNetSuite(t *testing.T) {
 	s.T = t
 	s.BtcdChainConfig = &chaincfg.SimNetParams
-	s.BtcdChainConfig.DefaultPort = MockBtcdHost
+	// coin base maturity is set to 1 for testing
+	// this is to allow coinbase transaction to be spendable immediately after 1 block
+	s.BtcdChainConfig.CoinbaseMaturity = 1
+
+	var db database.DB
+	err := os.MkdirAll("../debug", 0700)
+	assert.NoError(s.T, err)
+	// Create a new database to store the accepted blocks into.
+	dbPath := filepath.Join("../debug", "testdb")
+	_ = os.RemoveAll(dbPath)
+	ndb, err := database.Create("ffldb", dbPath, wire.SimNet)
+	assert.NoError(s.T, err)
+	db = ndb
+
+	// Setup a teardown function for cleaning up.  This function is
+	// returned to the caller to be invoked when it is done testing.
+	s.blockchainTearDown = func() {
+		db.Close()
+		os.RemoveAll(dbPath)
+	}
+
+	// Create the main chain instance.
+	chain, err := blockchain.New(&blockchain.Config{
+		DB:          db,
+		ChainParams: s.BtcdChainConfig,
+		Checkpoints: nil,
+		TimeSource:  blockchain.NewMedianTime(),
+		SigCache:    txscript.NewSigCache(1000),
+	})
+	s.Blockchain = chain
+	assert.NoError(s.T, err)
 }
 
 func (s *TestSuite) SetupSimNetSuite(t *testing.T) {
@@ -160,6 +208,13 @@ func (s *TestSuite) DeriveWitnessPubkeyHash(wif *btcutil.WIF) string {
 	witness, err := btcutil.NewAddressWitnessPubKeyHash(pubKeyHash, s.BtcdChainConfig)
 	assert.Nil(s.T, err)
 	return witness.EncodeAddress()
+}
+
+func (s *TestSuite) ConvertPubKeyToTrAddress(pub *btcec.PublicKey) string {
+	pub_schnorr := schnorr.SerializePubKey(pub)
+	address, err := btcutil.NewAddressTaproot(pub_schnorr, s.BtcdChainConfig)
+	assert.Nil(s.T, err)
+	return address.EncodeAddress()
 }
 
 func (s *TestSuite) ConvertPrivKeyToWIF(priv *btcec.PrivateKey) string {

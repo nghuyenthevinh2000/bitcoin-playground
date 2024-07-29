@@ -21,8 +21,10 @@ import (
 
 const (
 	// protocol storage
-	VP_STORE_KEY        = "vp"
-	KEY_RANGE_STORE_KEY = "key_range"
+	VP_STORE_KEY                = "vp"
+	KEY_RANGE_STORE_KEY         = "key_range"
+	NONCE_COMMITMENTS_STORE_KEY = "nonce_commitments"
+	TRANSACTION_STORE_KEY       = "transactions"
 
 	// local storage
 	SECRET_SHARES_STORE_KEY     = "secret_shares"
@@ -30,10 +32,12 @@ const (
 )
 
 var (
-	MSG_VP_TYPE       = byte(0)
-	MSG_PROOFS_TYPE   = byte(1)
-	MSG_SECRET_SHARES = byte(2)
-	MSG_STOP          = byte(3)
+	MSG_VP_TYPE                  = byte(0)
+	MSG_PROOFS_TYPE              = byte(1)
+	MSG_SECRET_SHARES            = byte(2)
+	MSG_STOP                     = byte(3)
+	MSG_UPDATE_NONCE_COMMITMENTS = byte(4)
+	MSG_WITHDRAW_BATCH           = byte(5)
 )
 
 var (
@@ -115,6 +119,22 @@ func (v *MockValidator) ReceiveMessageOnChainLoop() {
 				v.frost.VerifySecretProofs(CONTEXT_HASH, secretProofs, msg.Source, secretCommitments)
 				// store polynomial commitments
 				v.storePolyCommitments(msg.Source, msg.PolynomialCommitments)
+			case MSG_UPDATE_NONCE_COMMITMENTS:
+				msg := &MsgUpdateNonceCommitments{}
+				err := proto.Unmarshal(msgBytes, msg)
+				assert.NoError(v.suite.T, err)
+				// store nonce commitments
+				for i, nonceCommitment := range msg.NonceCommitments {
+					nonceStructBytes, err := proto.Marshal(nonceCommitment)
+					assert.NoError(v.suite.T, err)
+					v.storeNonceCommitments(msg.Source, int64(i), nonceStructBytes)
+				}
+			case MSG_WITHDRAW_BATCH:
+				msg := &MsgBatchWithdraw{}
+				err := proto.Unmarshal(msgBytes, msg)
+				assert.NoError(v.suite.T, err)
+				// store new transactions on - chain
+				v.storeTxs(msg.WithdrawBatch)
 			case MSG_STOP:
 				return
 			default:
@@ -204,7 +224,7 @@ func (v *MockValidator) DeriveAndSendProofs() {
 
 	polynomialCommitmentsBytes := make([][]byte, v.frost.Theshold+1)
 	for i := int64(0); i <= v.frost.Theshold; i++ {
-		polynomialCommitmentsBytes[i] = v.frost.PolynomialCommitments[v.position][i].SerializeUncompressed()
+		polynomialCommitmentsBytes[i] = v.frost.PolynomialCommitments[v.position][i].SerializeCompressed()
 	}
 
 	// self - update
@@ -283,6 +303,39 @@ func (v *MockValidator) DeriveAndSendSecretShares() {
 	}
 }
 
+func (v *MockValidator) DeriveAndSendNonces() {
+	// calculate nonce commitments
+	// send nonce commitments to all other validators
+	nonceCommitments := v.frost.GenerateSigningNonces(1)
+
+	// store this validator nonce commitments
+	nonceCommitmentsArr := make([]*NonceCommitments, len(nonceCommitments))
+	for i, nonceCommitment := range nonceCommitments {
+		nonceStruct := &NonceCommitments{
+			D: nonceCommitment[0].SerializeCompressed(),
+			E: nonceCommitment[1].SerializeCompressed(),
+		}
+		nonceCommitmentsArr[i] = nonceStruct
+		nonceStructBytes, err := proto.Marshal(nonceStruct)
+		assert.NoError(v.suite.T, err)
+
+		v.storeNonceCommitments(v.position, int64(i), nonceStructBytes)
+	}
+
+	// send to all other validators
+	for _, otherVal := range v.otherVals {
+		msg := MsgUpdateNonceCommitments{
+			Source:           v.position,
+			NonceCommitments: nonceCommitmentsArr,
+		}
+
+		msgBytes, err := proto.Marshal(&msg)
+		assert.NoError(v.suite.T, err)
+
+		otherVal.SendMessageOnChain(append([]byte{MSG_UPDATE_NONCE_COMMITMENTS}, msgBytes...))
+	}
+}
+
 // determine how many keys a validator will produce
 // based on the latest vp
 func (v *MockValidator) DeriveRangeOfKeys() map[int64][2]int64 {
@@ -323,28 +376,6 @@ func (v *MockValidator) DeriveRangeOfKeys() map[int64][2]int64 {
 	assert.Equal(v.suite.T, v.party_num, int64(len(range_keys)))
 
 	return range_keys
-}
-
-func (v *MockValidator) storePolyCommitments(posi int64, commitments [][]byte) {
-	var err error
-	poly_commitments := make([]*btcec.PublicKey, v.frost.Theshold+1)
-	for i := int64(0); i <= v.frost.Theshold; i++ {
-		poly_commitments[i], err = btcec.ParsePubKey(commitments[i])
-		assert.NoError(v.suite.T, err)
-	}
-	v.frost.UpdatePolynomialCommitments(posi, poly_commitments)
-}
-
-func (v *MockValidator) getPolyCommitments(posi int64) []*btcec.PublicKey {
-	return v.frost.PolynomialCommitments[posi]
-}
-
-func (v *MockValidator) getAllPolyCommitments() map[int64][]*btcec.PublicKey {
-	commitments := make(map[int64][]*btcec.PublicKey)
-	for i := int64(1); i <= v.party_num; i++ {
-		commitments[i] = v.getPolyCommitments(i)
-	}
-	return commitments
 }
 
 func (v *MockValidator) verifySharesAndCalculateLongTermKey() {
@@ -400,10 +431,79 @@ func (v *MockValidator) verifySharesAndCalculateLongTermKey() {
 	v.logger.Printf("group public key: %v\n", groupkey)
 }
 
+func (v *MockValidator) storePolyCommitments(posi int64, commitments [][]byte) {
+	var err error
+	poly_commitments := make([]*btcec.PublicKey, v.frost.Theshold+1)
+	for i := int64(0); i <= v.frost.Theshold; i++ {
+		poly_commitments[i], err = btcec.ParsePubKey(commitments[i])
+		assert.NoError(v.suite.T, err)
+	}
+	v.frost.UpdatePolynomialCommitments(posi, poly_commitments)
+}
+
+func (v *MockValidator) getPolyCommitments(posi int64) []*btcec.PublicKey {
+	return v.frost.PolynomialCommitments[posi]
+}
+
+func (v *MockValidator) getAllPolyCommitments() map[int64][]*btcec.PublicKey {
+	commitments := make(map[int64][]*btcec.PublicKey)
+	for i := int64(1); i <= v.party_num; i++ {
+		commitments[i] = v.getPolyCommitments(i)
+	}
+	return commitments
+}
+
+func (v *MockValidator) storeTxs(txs []*MsgWithdraw) {
+	for i, tx := range txs {
+		txBytes, err := proto.Marshal(tx)
+		assert.NoError(v.suite.T, err)
+		v.protocolStorage.store[TRANSACTION_STORE_KEY][strconv.Itoa(i)] = txBytes
+	}
+}
+
+func (v *MockValidator) getAllTxs() []*MsgWithdraw {
+	txs := make([]*MsgWithdraw, 0)
+	for i := 0; ; i++ {
+		txBytes := v.protocolStorage.store[TRANSACTION_STORE_KEY][strconv.Itoa(i)]
+		if len(txBytes) == 0 {
+			break
+		}
+		tx := &MsgWithdraw{}
+		err := proto.Unmarshal(txBytes, tx)
+		assert.NoError(v.suite.T, err)
+		txs = append(txs, tx)
+	}
+
+	return txs
+}
+
+func (v *MockValidator) storeNonceCommitments(posi, signing_index int64, commitments []byte) {
+	substore_key := NONCE_COMMITMENTS_STORE_KEY + strconv.FormatInt(signing_index, 10)
+	v.protocolStorage.store[substore_key] = make(map[string][]byte)
+	v.protocolStorage.store[substore_key][strconv.FormatInt(posi, 10)] = commitments
+}
+
+func (v *MockValidator) getNonceCommitments(signing_index, posi int64) [2]*btcec.PublicKey {
+	substore_key := NONCE_COMMITMENTS_STORE_KEY + strconv.FormatInt(signing_index, 10)
+	commitment_bytes := v.protocolStorage.store[substore_key][strconv.FormatInt(posi, 10)]
+	commitment := &NonceCommitments{}
+	err := proto.Unmarshal(commitment_bytes, commitment)
+	assert.NoError(v.suite.T, err)
+
+	D, err := btcec.ParsePubKey(commitment.D)
+	assert.NoError(v.suite.T, err)
+
+	E, err := btcec.ParsePubKey(commitment.E)
+	assert.NoError(v.suite.T, err)
+
+	return [2]*btcec.PublicKey{D, E}
+}
+
 // serving as mock on - chain storage in each mock validator
 // and all validator need to have the same storage data
 //
 // TODO: implement a merkle tree to verify the data consistency among validators
+// TODO: I need to move these store functions from MockProtocolStorage to MockValidator. I have mistakenly put them in MockProtocolStorage
 type MockProtocolStorage struct {
 	store map[string]map[string][]byte
 }
@@ -463,6 +563,7 @@ func (s *MockProtocolStorage) GetLongTermSecretShares(key int64) *btcec.ModNScal
 func TestPersistKeyRange(t *testing.T) {
 	suite := testhelper.TestSuite{}
 	suite.SetupStaticSimNetSuite(t)
+	defer suite.StaticSimNetTearDown()
 
 	storage := MockProtocolStorage{
 		store: make(map[string]map[string][]byte),
@@ -486,10 +587,12 @@ func TestPersistKeyRange(t *testing.T) {
 func TestNewMockValidatorSet(t *testing.T) {
 	suite := testhelper.TestSuite{}
 	suite.SetupStaticSimNetSuite(t)
+	defer suite.StaticSimNetTearDown()
 
 	n := int64(4)
 	n_keys := int64(10)
 	threshold := int64(7)
+	message_num := 10
 	validators := make([]*MockValidator, n)
 	for i := int64(0); i < n; i++ {
 		frost := testhelper.NewFrostParticipant(&suite, n_keys, threshold, i+1, nil)
@@ -535,6 +638,7 @@ func TestNewMockValidatorSet(t *testing.T) {
 
 	t.Logf("Secret proofs have been sent")
 
+	// key generation phase second round
 	// each validator then sends secret shares to all other validators through secure, private channel
 	for i := int64(0); i < n; i++ {
 		wgGroup.Add(1)
@@ -547,7 +651,40 @@ func TestNewMockValidatorSet(t *testing.T) {
 
 	t.Logf("Secret shares have been sent")
 
-	// key generation phase second round
+	// signing phase
+	// each validator will prepare nonce commitments and send to all other validators
+	for i := int64(0); i < n; i++ {
+		wgGroup.Add(1)
+		go func(posi int64) {
+			validators[posi].DeriveAndSendNonces()
+			wgGroup.Done()
+		}(i)
+	}
+	wgGroup.Wait()
+
+	t.Logf("Nonce commitments have been sent")
+
+	// users will submit requests to validators
+	// for brevity, users will submit withdraw transactions to a bitcoin vault address
+	// validators will then sign these transactions, producing signature adaptors
+	message_list := generateMsgWithdrawList(&suite, message_num)
+
+	for i := int64(0); i < n; i++ {
+		wgGroup.Add(1)
+		go func(posi int64) {
+			msgStruct := &MsgBatchWithdraw{
+				WithdrawBatch: message_list,
+			}
+			msgBytes, err := proto.Marshal(msgStruct)
+			assert.NoError(t, err)
+
+			validators[posi].SendMessageOnChain(append([]byte{MSG_WITHDRAW_BATCH}, msgBytes...))
+			wgGroup.Done()
+		}(i)
+	}
+	wgGroup.Wait()
+
+	// each validator will derive and send signature adaptors to all other validators
 
 	// stop all validators
 	for i := int64(0); i < n; i++ {
@@ -585,10 +722,13 @@ func NewMockValidator(suite *testhelper.TestSuite, frost *testhelper.FrostPartic
 	// initialize protocol storage for vp
 	validator.protocolStorage.store[VP_STORE_KEY] = make(map[string][]byte)
 
-	// initialize local storage for key ranges
+	// initialize protocol storage for key ranges
 	validator.protocolStorage.store[KEY_RANGE_STORE_KEY] = make(map[string][]byte)
 
-	// initialize protocol storage for secret shares from each validator
+	// initialize protocol storage for transactions
+	validator.protocolStorage.store[TRANSACTION_STORE_KEY] = make(map[string][]byte)
+
+	// initialize local storage for secret shares from each validator
 	validator.localStorage.store[SECRET_SHARES_STORE_KEY] = make(map[string][]byte)
 
 	// initialize local storage for long term secret shares
@@ -642,4 +782,23 @@ func vpToBytes(suite *testhelper.TestSuite, vp math.LegacyDec) []byte {
 	assert.NoError(suite.T, err)
 
 	return bytes
+}
+
+func generateMsgWithdrawList(suite *testhelper.TestSuite, message_num int) []*MsgWithdraw {
+	msgList := make([]*MsgWithdraw, message_num)
+	for i := 0; i < message_num; i++ {
+		// random amount
+		amount := rand.Int63n(1000000000)
+		// random address
+		_, key_pair := suite.NewHDKeyPairFromSeed("")
+		// p2tr pubkey
+		addr_str := suite.ConvertPubKeyToTrAddress(key_pair.Pub)
+
+		msgList[i] = &MsgWithdraw{
+			Receiver: addr_str,
+			Amount:   amount,
+		}
+	}
+
+	return msgList
 }

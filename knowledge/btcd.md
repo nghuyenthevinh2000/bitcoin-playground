@@ -31,3 +31,6 @@ btcd is the main provider of Bitcoin go library
 5. check total balances: `btcctl --simnet -P regtest -u regtest --notls --wallet getbalance`
 6. check all spendable UTXOs: `btcctl --simnet -P regtest -u regtest --notls --wallet listunspent`
 7. send: `btcctl --simnet -P regtest -u regtest --notls --wallet sendtoaddress`
+
+## test suite
+1. chainSetup(): helps setup a mock chain in btcd, should explore this more

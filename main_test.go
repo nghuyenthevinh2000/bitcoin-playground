@@ -70,6 +70,7 @@ func TestRetrieveBlocks(t *testing.T) {
 func TestSeedString(t *testing.T) {
 	suite := testhelper.TestSuite{}
 	suite.SetupStaticSimNetSuite(t)
+	defer suite.StaticSimNetTearDown()
 
 	for i := 0; i < 3; i++ {
 		seed := suite.GenerateSeedString()
@@ -81,6 +82,7 @@ func TestSeedString(t *testing.T) {
 func TestSchnorr(t *testing.T) {
 	s := testhelper.TestSuite{}
 	s.SetupStaticSimNetSuite(t)
+	defer s.StaticSimNetTearDown()
 
 	// s = t + e * d
 	_, t_pair := s.NewHDKeyPairFromSeed("")
@@ -122,6 +124,7 @@ func TestSchnorr(t *testing.T) {
 func TestJacobianOdd(t *testing.T) {
 	s := testhelper.TestSuite{}
 	s.SetupStaticSimNetSuite(t)
+	defer s.StaticSimNetTearDown()
 
 	d_seed := s.Generate32BSeed()
 	e_seed := s.Generate32BSeed()

@@ -48,6 +48,7 @@ type FrostParticipant struct {
 func TestCreateFrostParticipant(t *testing.T) {
 	suite := testhelper.TestSuite{}
 	suite.SetupStaticSimNetSuite(t)
+	defer suite.StaticSimNetTearDown()
 
 	n := 7
 	thres := 5
@@ -59,6 +60,7 @@ func TestCreateFrostParticipant(t *testing.T) {
 func TestFrostCalculateShares(t *testing.T) {
 	suite := new(testhelper.TestSuite)
 	suite.SetupStaticSimNetSuite(t)
+	defer suite.StaticSimNetTearDown()
 	participant := testhelper.NewFrostParticipant(suite, 5, 3, 1, nil)
 	assert.NotNil(t, participant)
 
@@ -72,6 +74,7 @@ func TestFrostCalculateShares(t *testing.T) {
 func TestFrostSignature(t *testing.T) {
 	suite := testhelper.TestSuite{}
 	suite.SetupStaticSimNetSuite(t)
+	defer suite.StaticSimNetTearDown()
 
 	n := 7
 	thres := 5

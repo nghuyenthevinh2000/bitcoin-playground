@@ -11,6 +11,7 @@ import (
 func TestFrostSignature1(t *testing.T) {
 	suite := testhelper.TestSuite{}
 	suite.SetupStaticSimNetSuite(t)
+	defer suite.StaticSimNetTearDown()
 
 	// frost
 	n := int64(7)

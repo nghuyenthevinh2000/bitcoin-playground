@@ -27,6 +27,7 @@ import (
 func TestPTLCAliceSig(t *testing.T) {
 	s := testhelper.TestSuite{}
 	s.SetupStaticSimNetSuite(t)
+	defer s.StaticSimNetTearDown()
 
 	// Alice, Bob key pair
 	_, pair_1 := s.NewHDKeyPairFromSeed(ALICE_WALLET_SEED)
@@ -65,6 +66,7 @@ func TestPTLCAliceSig(t *testing.T) {
 func TestPTLCCombinedSig(t *testing.T) {
 	s := testhelper.TestSuite{}
 	s.SetupStaticSimNetSuite(t)
+	defer s.StaticSimNetTearDown()
 
 	// Alice, Bob key pair
 	_, pair_1 := s.NewHDKeyPairFromSeed(ALICE_WALLET_SEED)
@@ -129,6 +131,7 @@ func TestPTLCCombinedSig(t *testing.T) {
 func TestPTLC(t *testing.T) {
 	s := testhelper.TestSuite{}
 	s.SetupStaticSimNetSuite(t)
+	defer s.StaticSimNetTearDown()
 
 	// Alice, Bob key pair
 	_, pair_1 := s.NewHDKeyPairFromSeed(ALICE_WALLET_SEED)

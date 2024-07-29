@@ -28,10 +28,12 @@ type FrostParticipant struct {
 
 	secretPolynomial []*btcec.ModNScalar
 	secretShares     []*btcec.ModNScalar
+	nonces           [][2]*btcec.ModNScalar
 
 	PolynomialCommitments map[int64][]*btcec.PublicKey
 	PublicSigningShares   map[int64]*btcec.PublicKey
 	GroupPublicKey        *btcec.PublicKey
+	NonceCommitments      [][2]*btcec.PublicKey
 }
 
 func NewFrostParticipant(suite *TestSuite, n, theshold, posi int64, secret *btcec.ModNScalar) *FrostParticipant {
@@ -294,4 +296,36 @@ func (p *FrostParticipant) CalculateGroupPublicKey(party_num int64) *btcec.Publi
 	p.GroupPublicKey = btcec.NewPublicKey(&Y.X, &Y.Y)
 
 	return p.GroupPublicKey
+}
+
+func (p *FrostParticipant) GenerateSigningNonces(usage_time int64) [][2]*btcec.PublicKey {
+	p.nonces = make([][2]*btcec.ModNScalar, usage_time)
+	p.NonceCommitments = make([][2]*btcec.PublicKey, usage_time)
+	for i := int64(0); i < usage_time; i++ {
+		// generate nonces (d, e) for each signing
+		// for pi = 1 number of pairs
+		d_seed := p.suite.Generate32BSeed()
+		e_seed := p.suite.Generate32BSeed()
+
+		d := new(btcec.ModNScalar)
+		d.SetBytes(&d_seed)
+		D := new(btcec.JacobianPoint)
+		btcec.ScalarBaseMultNonConst(d, D)
+
+		e := new(btcec.ModNScalar)
+		e.SetBytes(&e_seed)
+		E := new(btcec.JacobianPoint)
+		btcec.ScalarBaseMultNonConst(e, E)
+
+		// normalize Z before shipping off (D, E) to other participants
+		D.ToAffine()
+		E.ToAffine()
+
+		p.nonces[i] = [2]*btcec.ModNScalar{d, e}
+		D_Pub := btcec.NewPublicKey(&D.X, &D.Y)
+		E_Pub := btcec.NewPublicKey(&E.X, &E.Y)
+		p.NonceCommitments[i] = [2]*btcec.PublicKey{D_Pub, E_Pub}
+	}
+
+	return p.NonceCommitments
 }

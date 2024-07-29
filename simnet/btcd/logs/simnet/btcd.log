@@ -2641,3 +2641,16 @@
 2024-07-23 15:26:39.534 [INF] RPCS: New websocket client [::1]:53771
 2024-07-23 15:26:40.189 [INF] RPCS: Beginning rescan for 23 addresses
 2024-07-23 15:26:40.190 [INF] RPCS: Finished rescan
+2024-07-27 03:16:50.692 [INF] BTCD: Received signal (terminated).  Shutting down...
+2024-07-27 03:16:50.696 [INF] BTCD: Gracefully shutting down the server...
+2024-07-27 03:16:50.697 [WRN] SRVR: Server shutting down
+2024-07-27 03:16:50.698 [WRN] RPCS: RPC server shutting down
+2024-07-27 03:16:50.702 [INF] RPCS: RPC server shutdown complete
+2024-07-27 03:16:50.702 [ERR] RPCS: Websocket receive error from [::1]:53771: read tcp6 [::1]:18556->[::1]:53771: use of closed network connection
+2024-07-27 03:16:50.704 [INF] RPCS: Disconnected websocket client [::1]:53771
+2024-07-27 03:16:50.769 [INF] SYNC: Sync manager shutting down
+2024-07-27 03:16:50.770 [INF] CHAN: Flushing UTXO cache of 97 MiB with 0 entries to disk. For large sizes, this can take up to several minutes...
+2024-07-27 03:16:50.772 [INF] AMGR: Address manager shutting down
+2024-07-27 03:16:50.775 [INF] SRVR: Server shutdown complete
+2024-07-27 03:16:50.775 [INF] BTCD: Gracefully shutting down the database...
+2024-07-27 03:16:50.825 [INF] BTCD: Shutdown complete

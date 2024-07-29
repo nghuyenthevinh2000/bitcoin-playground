@@ -248,6 +248,218 @@ func (x *SecretShares) GetSecretShares() []byte {
 	return nil
 }
 
+type MsgUpdateNonceCommitments struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Source           int64               `protobuf:"varint,1,opt,name=source,proto3" json:"source,omitempty"`
+	NonceCommitments []*NonceCommitments `protobuf:"bytes,2,rep,name=nonce_commitments,json=nonceCommitments,proto3" json:"nonce_commitments,omitempty"`
+}
+
+func (x *MsgUpdateNonceCommitments) Reset() {
+	*x = MsgUpdateNonceCommitments{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_wsts_msg_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MsgUpdateNonceCommitments) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MsgUpdateNonceCommitments) ProtoMessage() {}
+
+func (x *MsgUpdateNonceCommitments) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wsts_msg_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MsgUpdateNonceCommitments.ProtoReflect.Descriptor instead.
+func (*MsgUpdateNonceCommitments) Descriptor() ([]byte, []int) {
+	return file_proto_wsts_msg_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *MsgUpdateNonceCommitments) GetSource() int64 {
+	if x != nil {
+		return x.Source
+	}
+	return 0
+}
+
+func (x *MsgUpdateNonceCommitments) GetNonceCommitments() []*NonceCommitments {
+	if x != nil {
+		return x.NonceCommitments
+	}
+	return nil
+}
+
+type NonceCommitments struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	D []byte `protobuf:"bytes,1,opt,name=d,proto3" json:"d,omitempty"`
+	E []byte `protobuf:"bytes,2,opt,name=e,proto3" json:"e,omitempty"`
+}
+
+func (x *NonceCommitments) Reset() {
+	*x = NonceCommitments{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_wsts_msg_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *NonceCommitments) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NonceCommitments) ProtoMessage() {}
+
+func (x *NonceCommitments) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wsts_msg_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NonceCommitments.ProtoReflect.Descriptor instead.
+func (*NonceCommitments) Descriptor() ([]byte, []int) {
+	return file_proto_wsts_msg_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *NonceCommitments) GetD() []byte {
+	if x != nil {
+		return x.D
+	}
+	return nil
+}
+
+func (x *NonceCommitments) GetE() []byte {
+	if x != nil {
+		return x.E
+	}
+	return nil
+}
+
+type MsgWithdraw struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Receiver string `protobuf:"bytes,1,opt,name=receiver,proto3" json:"receiver,omitempty"`
+	Amount   int64  `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
+}
+
+func (x *MsgWithdraw) Reset() {
+	*x = MsgWithdraw{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_wsts_msg_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MsgWithdraw) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MsgWithdraw) ProtoMessage() {}
+
+func (x *MsgWithdraw) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wsts_msg_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MsgWithdraw.ProtoReflect.Descriptor instead.
+func (*MsgWithdraw) Descriptor() ([]byte, []int) {
+	return file_proto_wsts_msg_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *MsgWithdraw) GetReceiver() string {
+	if x != nil {
+		return x.Receiver
+	}
+	return ""
+}
+
+func (x *MsgWithdraw) GetAmount() int64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+type MsgBatchWithdraw struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	WithdrawBatch []*MsgWithdraw `protobuf:"bytes,1,rep,name=withdraw_batch,json=withdrawBatch,proto3" json:"withdraw_batch,omitempty"`
+}
+
+func (x *MsgBatchWithdraw) Reset() {
+	*x = MsgBatchWithdraw{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_wsts_msg_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MsgBatchWithdraw) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MsgBatchWithdraw) ProtoMessage() {}
+
+func (x *MsgBatchWithdraw) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wsts_msg_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MsgBatchWithdraw.ProtoReflect.Descriptor instead.
+func (*MsgBatchWithdraw) Descriptor() ([]byte, []int) {
+	return file_proto_wsts_msg_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *MsgBatchWithdraw) GetWithdrawBatch() []*MsgWithdraw {
+	if x != nil {
+		return x.WithdrawBatch
+	}
+	return nil
+}
+
 var File_proto_wsts_msg_proto protoreflect.FileDescriptor
 
 var file_proto_wsts_msg_proto_rawDesc = []byte{
@@ -275,11 +487,31 @@ var file_proto_wsts_msg_proto_rawDesc = []byte{
 	0x73, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x6f, 0x73, 0x69, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52,
 	0x04, 0x70, 0x6f, 0x73, 0x69, 0x12, 0x23, 0x0a, 0x0d, 0x73, 0x65, 0x63, 0x72, 0x65, 0x74, 0x5f,
 	0x73, 0x68, 0x61, 0x72, 0x65, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x0c, 0x73, 0x65,
-	0x63, 0x72, 0x65, 0x74, 0x53, 0x68, 0x61, 0x72, 0x65, 0x73, 0x42, 0x37, 0x5a, 0x35, 0x67, 0x69,
-	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6e, 0x67, 0x68, 0x75, 0x79, 0x65, 0x6e,
-	0x74, 0x68, 0x65, 0x76, 0x69, 0x6e, 0x68, 0x32, 0x30, 0x30, 0x30, 0x2f, 0x62, 0x69, 0x74, 0x63,
-	0x6f, 0x69, 0x6e, 0x2d, 0x70, 0x6c, 0x61, 0x79, 0x67, 0x72, 0x6f, 0x75, 0x6e, 0x64, 0x2f, 0x77,
-	0x73, 0x74, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x63, 0x72, 0x65, 0x74, 0x53, 0x68, 0x61, 0x72, 0x65, 0x73, 0x22, 0x79, 0x0a, 0x19, 0x4d, 0x73,
+	0x67, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4e, 0x6f, 0x6e, 0x63, 0x65, 0x43, 0x6f, 0x6d, 0x6d,
+	0x69, 0x74, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x6f, 0x75, 0x72, 0x63,
+	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x12,
+	0x44, 0x0a, 0x11, 0x6e, 0x6f, 0x6e, 0x63, 0x65, 0x5f, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x6d,
+	0x65, 0x6e, 0x74, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x2e, 0x4e, 0x6f, 0x6e, 0x63, 0x65, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x6d, 0x65,
+	0x6e, 0x74, 0x73, 0x52, 0x10, 0x6e, 0x6f, 0x6e, 0x63, 0x65, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74,
+	0x6d, 0x65, 0x6e, 0x74, 0x73, 0x22, 0x2e, 0x0a, 0x10, 0x4e, 0x6f, 0x6e, 0x63, 0x65, 0x43, 0x6f,
+	0x6d, 0x6d, 0x69, 0x74, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x12, 0x0c, 0x0a, 0x01, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x0c, 0x52, 0x01, 0x64, 0x12, 0x0c, 0x0a, 0x01, 0x65, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x0c, 0x52, 0x01, 0x65, 0x22, 0x41, 0x0a, 0x0b, 0x4d, 0x73, 0x67, 0x57, 0x69, 0x74, 0x68,
+	0x64, 0x72, 0x61, 0x77, 0x12, 0x1a, 0x0a, 0x08, 0x72, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x72,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x72, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x72,
+	0x12, 0x16, 0x0a, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0x4d, 0x0a, 0x10, 0x4d, 0x73, 0x67, 0x42,
+	0x61, 0x74, 0x63, 0x68, 0x57, 0x69, 0x74, 0x68, 0x64, 0x72, 0x61, 0x77, 0x12, 0x39, 0x0a, 0x0e,
+	0x77, 0x69, 0x74, 0x68, 0x64, 0x72, 0x61, 0x77, 0x5f, 0x62, 0x61, 0x74, 0x63, 0x68, 0x18, 0x01,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4d, 0x73, 0x67,
+	0x57, 0x69, 0x74, 0x68, 0x64, 0x72, 0x61, 0x77, 0x52, 0x0d, 0x77, 0x69, 0x74, 0x68, 0x64, 0x72,
+	0x61, 0x77, 0x42, 0x61, 0x74, 0x63, 0x68, 0x42, 0x37, 0x5a, 0x35, 0x67, 0x69, 0x74, 0x68, 0x75,
+	0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6e, 0x67, 0x68, 0x75, 0x79, 0x65, 0x6e, 0x74, 0x68, 0x65,
+	0x76, 0x69, 0x6e, 0x68, 0x32, 0x30, 0x30, 0x30, 0x2f, 0x62, 0x69, 0x74, 0x63, 0x6f, 0x69, 0x6e,
+	0x2d, 0x70, 0x6c, 0x61, 0x79, 0x67, 0x72, 0x6f, 0x75, 0x6e, 0x64, 0x2f, 0x77, 0x73, 0x74, 0x73,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -294,20 +526,26 @@ func file_proto_wsts_msg_proto_rawDescGZIP() []byte {
 	return file_proto_wsts_msg_proto_rawDescData
 }
 
-var file_proto_wsts_msg_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_proto_wsts_msg_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_proto_wsts_msg_proto_goTypes = []interface{}{
-	(*MsgUpdateVP)(nil),     // 0: proto.MsgUpdateVP
-	(*MsgUpdateProofs)(nil), // 1: proto.MsgUpdateProofs
-	(*MsgSecretShares)(nil), // 2: proto.MsgSecretShares
-	(*SecretShares)(nil),    // 3: proto.SecretShares
+	(*MsgUpdateVP)(nil),               // 0: proto.MsgUpdateVP
+	(*MsgUpdateProofs)(nil),           // 1: proto.MsgUpdateProofs
+	(*MsgSecretShares)(nil),           // 2: proto.MsgSecretShares
+	(*SecretShares)(nil),              // 3: proto.SecretShares
+	(*MsgUpdateNonceCommitments)(nil), // 4: proto.MsgUpdateNonceCommitments
+	(*NonceCommitments)(nil),          // 5: proto.NonceCommitments
+	(*MsgWithdraw)(nil),               // 6: proto.MsgWithdraw
+	(*MsgBatchWithdraw)(nil),          // 7: proto.MsgBatchWithdraw
 }
 var file_proto_wsts_msg_proto_depIdxs = []int32{
 	3, // 0: proto.MsgSecretShares.secret_shares:type_name -> proto.SecretShares
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	5, // 1: proto.MsgUpdateNonceCommitments.nonce_commitments:type_name -> proto.NonceCommitments
+	6, // 2: proto.MsgBatchWithdraw.withdraw_batch:type_name -> proto.MsgWithdraw
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_proto_wsts_msg_proto_init() }
@@ -364,6 +602,54 @@ func file_proto_wsts_msg_proto_init() {
 				return nil
 			}
 		}
+		file_proto_wsts_msg_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MsgUpdateNonceCommitments); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_wsts_msg_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*NonceCommitments); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_wsts_msg_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MsgWithdraw); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_wsts_msg_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MsgBatchWithdraw); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -371,7 +657,7 @@ func file_proto_wsts_msg_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_proto_wsts_msg_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
