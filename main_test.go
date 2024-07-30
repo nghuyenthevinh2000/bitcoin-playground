@@ -11,7 +11,10 @@ import (
 
 	btcec "github.com/btcsuite/btcd/btcec/v2"
 	"github.com/btcsuite/btcd/btcec/v2/schnorr"
+	"github.com/btcsuite/btcd/btcutil"
 	"github.com/btcsuite/btcd/chaincfg/chainhash"
+	"github.com/btcsuite/btcd/txscript"
+	"github.com/btcsuite/btcd/wire"
 	_ "github.com/btcsuite/btcwallet/walletdb/bdb"
 )
 
@@ -46,6 +49,28 @@ func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
 
+// go test -v -run ^TestUtxoViewpoint$ github.com/nghuyenthevinh2000/bitcoin-playground
+func TestUtxoViewpoint(t *testing.T) {
+	s := testhelper.TestSuite{}
+	s.SetupStaticSimNetSuite(t)
+
+	_, key_pair := s.NewHDKeyPairFromSeed("")
+	trScript, err := txscript.PayToTaprootScript(key_pair.Pub)
+	assert.Nil(t, err)
+	// create a new transaction
+	tx := s.NewMockFirstTx(trScript, 100)
+	// add tx to utxo viewpoint
+	s.UtxoViewpoint.AddTxOut(btcutil.NewTx(tx), 0, 0)
+
+	// try fetching
+	tx_out := s.UtxoViewpoint.FetchPrevOutput(wire.OutPoint{
+		Hash:  tx.TxHash(),
+		Index: 0,
+	})
+
+	assert.Equal(t, tx.TxOut[0], tx_out)
+}
+
 // go test -v -run ^TestRetrieveBlocks$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestRetrieveBlocks(t *testing.T) {
 	s := testhelper.TestSuite{}
@@ -70,7 +95,6 @@ func TestRetrieveBlocks(t *testing.T) {
 func TestSeedString(t *testing.T) {
 	suite := testhelper.TestSuite{}
 	suite.SetupStaticSimNetSuite(t)
-	defer suite.StaticSimNetTearDown()
 
 	for i := 0; i < 3; i++ {
 		seed := suite.GenerateSeedString()
@@ -82,7 +106,6 @@ func TestSeedString(t *testing.T) {
 func TestSchnorr(t *testing.T) {
 	s := testhelper.TestSuite{}
 	s.SetupStaticSimNetSuite(t)
-	defer s.StaticSimNetTearDown()
 
 	// s = t + e * d
 	_, t_pair := s.NewHDKeyPairFromSeed("")
@@ -124,7 +147,6 @@ func TestSchnorr(t *testing.T) {
 func TestJacobianOdd(t *testing.T) {
 	s := testhelper.TestSuite{}
 	s.SetupStaticSimNetSuite(t)
-	defer s.StaticSimNetTearDown()
 
 	d_seed := s.Generate32BSeed()
 	e_seed := s.Generate32BSeed()

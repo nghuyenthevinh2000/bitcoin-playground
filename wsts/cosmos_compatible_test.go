@@ -13,7 +13,6 @@ import (
 func TestCosmosCompatibleKey(t *testing.T) {
 	suite := testhelper.TestSuite{}
 	suite.SetupStaticSimNetSuite(t)
-	defer suite.StaticSimNetTearDown()
 
 	priv := cosmossecp.GenPrivKey()
 	cosmosPubBytes := priv.PubKey().Bytes()

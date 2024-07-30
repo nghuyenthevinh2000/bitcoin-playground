@@ -460,6 +460,124 @@ func (x *MsgBatchWithdraw) GetWithdrawBatch() []*MsgWithdraw {
 	return nil
 }
 
+type BtcCheckPoint struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Height   int64  `protobuf:"varint,1,opt,name=height,proto3" json:"height,omitempty"`
+	OutHash  string `protobuf:"bytes,2,opt,name=out_hash,json=outHash,proto3" json:"out_hash,omitempty"`
+	OutIndex uint32 `protobuf:"varint,3,opt,name=out_index,json=outIndex,proto3" json:"out_index,omitempty"`
+}
+
+func (x *BtcCheckPoint) Reset() {
+	*x = BtcCheckPoint{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_wsts_msg_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *BtcCheckPoint) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BtcCheckPoint) ProtoMessage() {}
+
+func (x *BtcCheckPoint) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wsts_msg_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BtcCheckPoint.ProtoReflect.Descriptor instead.
+func (*BtcCheckPoint) Descriptor() ([]byte, []int) {
+	return file_proto_wsts_msg_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *BtcCheckPoint) GetHeight() int64 {
+	if x != nil {
+		return x.Height
+	}
+	return 0
+}
+
+func (x *BtcCheckPoint) GetOutHash() string {
+	if x != nil {
+		return x.OutHash
+	}
+	return ""
+}
+
+func (x *BtcCheckPoint) GetOutIndex() uint32 {
+	if x != nil {
+		return x.OutIndex
+	}
+	return 0
+}
+
+type MsgUpdateAdaptSig struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Source   int64  `protobuf:"varint,1,opt,name=source,proto3" json:"source,omitempty"`
+	AdaptSig []byte `protobuf:"bytes,2,opt,name=adapt_sig,json=adaptSig,proto3" json:"adapt_sig,omitempty"`
+}
+
+func (x *MsgUpdateAdaptSig) Reset() {
+	*x = MsgUpdateAdaptSig{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_wsts_msg_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MsgUpdateAdaptSig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MsgUpdateAdaptSig) ProtoMessage() {}
+
+func (x *MsgUpdateAdaptSig) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_wsts_msg_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MsgUpdateAdaptSig.ProtoReflect.Descriptor instead.
+func (*MsgUpdateAdaptSig) Descriptor() ([]byte, []int) {
+	return file_proto_wsts_msg_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *MsgUpdateAdaptSig) GetSource() int64 {
+	if x != nil {
+		return x.Source
+	}
+	return 0
+}
+
+func (x *MsgUpdateAdaptSig) GetAdaptSig() []byte {
+	if x != nil {
+		return x.AdaptSig
+	}
+	return nil
+}
+
 var File_proto_wsts_msg_proto protoreflect.FileDescriptor
 
 var file_proto_wsts_msg_proto_rawDesc = []byte{
@@ -507,11 +625,22 @@ var file_proto_wsts_msg_proto_rawDesc = []byte{
 	0x77, 0x69, 0x74, 0x68, 0x64, 0x72, 0x61, 0x77, 0x5f, 0x62, 0x61, 0x74, 0x63, 0x68, 0x18, 0x01,
 	0x20, 0x03, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4d, 0x73, 0x67,
 	0x57, 0x69, 0x74, 0x68, 0x64, 0x72, 0x61, 0x77, 0x52, 0x0d, 0x77, 0x69, 0x74, 0x68, 0x64, 0x72,
-	0x61, 0x77, 0x42, 0x61, 0x74, 0x63, 0x68, 0x42, 0x37, 0x5a, 0x35, 0x67, 0x69, 0x74, 0x68, 0x75,
-	0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6e, 0x67, 0x68, 0x75, 0x79, 0x65, 0x6e, 0x74, 0x68, 0x65,
-	0x76, 0x69, 0x6e, 0x68, 0x32, 0x30, 0x30, 0x30, 0x2f, 0x62, 0x69, 0x74, 0x63, 0x6f, 0x69, 0x6e,
-	0x2d, 0x70, 0x6c, 0x61, 0x79, 0x67, 0x72, 0x6f, 0x75, 0x6e, 0x64, 0x2f, 0x77, 0x73, 0x74, 0x73,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x61, 0x77, 0x42, 0x61, 0x74, 0x63, 0x68, 0x22, 0x5f, 0x0a, 0x0d, 0x42, 0x74, 0x63, 0x43, 0x68,
+	0x65, 0x63, 0x6b, 0x50, 0x6f, 0x69, 0x6e, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x68, 0x65, 0x69, 0x67,
+	0x68, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x68, 0x65, 0x69, 0x67, 0x68, 0x74,
+	0x12, 0x19, 0x0a, 0x08, 0x6f, 0x75, 0x74, 0x5f, 0x68, 0x61, 0x73, 0x68, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x07, 0x6f, 0x75, 0x74, 0x48, 0x61, 0x73, 0x68, 0x12, 0x1b, 0x0a, 0x09, 0x6f,
+	0x75, 0x74, 0x5f, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x08,
+	0x6f, 0x75, 0x74, 0x49, 0x6e, 0x64, 0x65, 0x78, 0x22, 0x48, 0x0a, 0x11, 0x4d, 0x73, 0x67, 0x55,
+	0x70, 0x64, 0x61, 0x74, 0x65, 0x41, 0x64, 0x61, 0x70, 0x74, 0x53, 0x69, 0x67, 0x12, 0x16, 0x0a,
+	0x06, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x73,
+	0x6f, 0x75, 0x72, 0x63, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x61, 0x64, 0x61, 0x70, 0x74, 0x5f, 0x73,
+	0x69, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x08, 0x61, 0x64, 0x61, 0x70, 0x74, 0x53,
+	0x69, 0x67, 0x42, 0x37, 0x5a, 0x35, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
+	0x2f, 0x6e, 0x67, 0x68, 0x75, 0x79, 0x65, 0x6e, 0x74, 0x68, 0x65, 0x76, 0x69, 0x6e, 0x68, 0x32,
+	0x30, 0x30, 0x30, 0x2f, 0x62, 0x69, 0x74, 0x63, 0x6f, 0x69, 0x6e, 0x2d, 0x70, 0x6c, 0x61, 0x79,
+	0x67, 0x72, 0x6f, 0x75, 0x6e, 0x64, 0x2f, 0x77, 0x73, 0x74, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -526,7 +655,7 @@ func file_proto_wsts_msg_proto_rawDescGZIP() []byte {
 	return file_proto_wsts_msg_proto_rawDescData
 }
 
-var file_proto_wsts_msg_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_proto_wsts_msg_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_proto_wsts_msg_proto_goTypes = []interface{}{
 	(*MsgUpdateVP)(nil),               // 0: proto.MsgUpdateVP
 	(*MsgUpdateProofs)(nil),           // 1: proto.MsgUpdateProofs
@@ -536,6 +665,8 @@ var file_proto_wsts_msg_proto_goTypes = []interface{}{
 	(*NonceCommitments)(nil),          // 5: proto.NonceCommitments
 	(*MsgWithdraw)(nil),               // 6: proto.MsgWithdraw
 	(*MsgBatchWithdraw)(nil),          // 7: proto.MsgBatchWithdraw
+	(*BtcCheckPoint)(nil),             // 8: proto.BtcCheckPoint
+	(*MsgUpdateAdaptSig)(nil),         // 9: proto.MsgUpdateAdaptSig
 }
 var file_proto_wsts_msg_proto_depIdxs = []int32{
 	3, // 0: proto.MsgSecretShares.secret_shares:type_name -> proto.SecretShares
@@ -650,6 +781,30 @@ func file_proto_wsts_msg_proto_init() {
 				return nil
 			}
 		}
+		file_proto_wsts_msg_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BtcCheckPoint); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_wsts_msg_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MsgUpdateAdaptSig); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -657,7 +812,7 @@ func file_proto_wsts_msg_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_proto_wsts_msg_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -59,7 +59,6 @@ type PedersonParticipant struct {
 func TestCreatePerdersonParticipant(t *testing.T) {
 	suite := testhelper.TestSuite{}
 	suite.SetupStaticSimNetSuite(t)
-	defer suite.StaticSimNetTearDown()
 
 	threshold := 5
 	participant_num := 7
@@ -91,7 +90,6 @@ func TestCreatePerdersonParticipant(t *testing.T) {
 func TestBasicGennaroDKG(t *testing.T) {
 	s := testhelper.TestSuite{}
 	s.SetupStaticSimNetSuite(t)
-	defer s.StaticSimNetTearDown()
 
 	// setup 7 participants
 	// threshold = 5

@@ -2,8 +2,6 @@ package testhelper
 
 import (
 	"encoding/hex"
-	"os"
-	"path/filepath"
 	"testing"
 
 	"github.com/btcsuite/btcd/blockchain"
@@ -12,11 +10,9 @@ import (
 	"github.com/btcsuite/btcd/btcutil"
 	"github.com/btcsuite/btcd/btcutil/hdkeychain"
 	"github.com/btcsuite/btcd/chaincfg"
-	"github.com/btcsuite/btcd/database"
 	_ "github.com/btcsuite/btcd/database/ffldb"
 	"github.com/btcsuite/btcd/rpcclient"
 	"github.com/btcsuite/btcd/txscript"
-	"github.com/btcsuite/btcd/wire"
 	"github.com/btcsuite/btcwallet/chain"
 	"github.com/stretchr/testify/assert"
 )
@@ -32,13 +28,9 @@ type TestSuite struct {
 	BtcdChainConfig   *chaincfg.Params
 
 	// this is for bitcoin synthetic test
-	Blockchain         *blockchain.BlockChain
-	blockchainTearDown func()
-}
-
-func (s *TestSuite) StaticSimNetTearDown() {
-	assert.NotNil(s.T, s.blockchainTearDown)
-	s.blockchainTearDown()
+	UtxoViewpoint *blockchain.UtxoViewpoint
+	SigCache      *txscript.SigCache
+	HashCache     *txscript.HashCache
 }
 
 func (s *TestSuite) SetupRegNetSuite(t *testing.T) {
@@ -49,37 +41,11 @@ func (s *TestSuite) SetupRegNetSuite(t *testing.T) {
 func (s *TestSuite) SetupStaticSimNetSuite(t *testing.T) {
 	s.T = t
 	s.BtcdChainConfig = &chaincfg.SimNetParams
-	// coin base maturity is set to 1 for testing
-	// this is to allow coinbase transaction to be spendable immediately after 1 block
-	s.BtcdChainConfig.CoinbaseMaturity = 1
 
-	var db database.DB
-	err := os.MkdirAll("../debug", 0700)
-	assert.NoError(s.T, err)
-	// Create a new database to store the accepted blocks into.
-	dbPath := filepath.Join("../debug", "testdb")
-	_ = os.RemoveAll(dbPath)
-	ndb, err := database.Create("ffldb", dbPath, wire.SimNet)
-	assert.NoError(s.T, err)
-	db = ndb
-
-	// Setup a teardown function for cleaning up.  This function is
-	// returned to the caller to be invoked when it is done testing.
-	s.blockchainTearDown = func() {
-		db.Close()
-		os.RemoveAll(dbPath)
-	}
-
-	// Create the main chain instance.
-	chain, err := blockchain.New(&blockchain.Config{
-		DB:          db,
-		ChainParams: s.BtcdChainConfig,
-		Checkpoints: nil,
-		TimeSource:  blockchain.NewMedianTime(),
-		SigCache:    txscript.NewSigCache(1000),
-	})
-	s.Blockchain = chain
-	assert.NoError(s.T, err)
+	// setup new utxo viewpoint
+	s.UtxoViewpoint = blockchain.NewUtxoViewpoint()
+	s.SigCache = txscript.NewSigCache(50000)
+	s.HashCache = txscript.NewHashCache(50000)
 }
 
 func (s *TestSuite) SetupSimNetSuite(t *testing.T) {

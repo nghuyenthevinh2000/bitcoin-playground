@@ -22,7 +22,6 @@ import (
 func TestMuSig2(t *testing.T) {
 	s := testhelper.TestSuite{}
 	s.SetupStaticSimNetSuite(t)
-	defer s.StaticSimNetTearDown()
 
 	// create aggregated public key
 	_, pair_1 := s.NewHDKeyPairFromSeed(ALICE_WALLET_SEED)
@@ -196,7 +195,6 @@ func TestLinearTaprootMuSig(t *testing.T) {
 func TestSubsetTaprootMuSig(t *testing.T) {
 	s := testhelper.TestSuite{}
 	s.SetupStaticSimNetSuite(t)
-	defer s.StaticSimNetTearDown()
 
 	_, pair_1 := s.NewHDKeyPairFromSeed(ALICE_WALLET_SEED)
 	_, pair_2 := s.NewHDKeyPairFromSeed(BOB_WALLET_SEED)

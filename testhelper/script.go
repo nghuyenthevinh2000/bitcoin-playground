@@ -18,14 +18,11 @@ func (s *TestSuite) ValidateScript(pkScript []byte, blockHeight int32, witnessFu
 	// create a random key pair
 	_, keypair := s.NewHDKeyPairFromSeed("")
 
-	// create a first random funding transaction to a pubkey
-	txHash, err := chainhash.NewHashFromStr("aff48a9b83dc525d330ded64e1b6a9e127c99339f7246e2c89e06cd83493af9b")
-	assert.Nil(s.T, err)
 	// create tx
 	tx_1 := wire.NewMsgTx(2)
 	tx_1.AddTxIn(&wire.TxIn{
 		PreviousOutPoint: wire.OutPoint{
-			Hash:  *txHash,
+			Hash:  chainhash.Hash{},
 			Index: uint32(0),
 		},
 	})
@@ -75,4 +72,30 @@ func (s *TestSuite) ValidateScript(pkScript []byte, blockHeight int32, witnessFu
 		btcutil.NewTx(tx_2), blockUtxos, txscript.StandardVerifyFlags, sigCache, hashCache,
 	)
 	assert.Nil(s.T, err)
+}
+
+// first tx is used to create a challenge for the second tx
+func (s *TestSuite) NewMockFirstTx(pkScript []byte, value int64) *wire.MsgTx {
+	tx := wire.NewMsgTx(2)
+
+	_, keypair := s.NewHDKeyPairFromSeed("")
+
+	// first tx will always have their outpoint hash as empty
+	tx.AddTxIn(&wire.TxIn{
+		PreviousOutPoint: wire.OutPoint{
+			Hash:  chainhash.Hash{},
+			Index: uint32(0),
+		},
+	})
+
+	txOut := &wire.TxOut{
+		Value: value, PkScript: pkScript,
+	}
+	tx.AddTxOut(txOut)
+
+	sig, err := txscript.SignatureScript(tx, 0, []byte{}, txscript.SigHashDefault, keypair.priv, true)
+	assert.Nil(s.T, err)
+	tx.TxIn[0].SignatureScript = sig
+
+	return tx
 }

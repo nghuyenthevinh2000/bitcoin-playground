@@ -35,29 +35,27 @@ func (s *TestSuite) GeneratePolynomial(degree int64) []*btcec.ModNScalar {
 // their own. Even if some participants collude, as long as their number
 // is below the threshold, the secret remains protected.
 // polynomial definition: https://byjus.com/maths/polynomial
+//
+// polynomial is evaluated using Horner's Method
 func (s *TestSuite) EvaluatePolynomial(polynomial []*btcec.ModNScalar, x *btcec.ModNScalar) *btcec.ModNScalar {
 	result := new(btcec.ModNScalar)
-	result.SetInt(0)
-	x_power := new(btcec.ModNScalar)
-	x_power.SetInt(1)
-	for _, coeff := range polynomial {
-		// evaluate the term a_i * x^i
-		term := new(btcec.ModNScalar).Mul2(coeff, x_power)
-		// add the term to the result
-		result.Add(term)
-		// raise x to the next power
-		x_power.Mul(x)
+	result.Set(polynomial[len(polynomial)-1])
+	for i := len(polynomial) - 2; i >= 0; i-- {
+		// term a_n*x + a_n-1
+		result.Mul(x)
+		result.Add(polynomial[i])
 	}
 	return result
 }
 
 // calculate the Lagrange coefficient at i over a set
-func (s *TestSuite) CalculateLagrangeCoeff(i int, set []int) *btcec.ModNScalar {
+// requires exact position, all values start with 1
+func (s *TestSuite) CalculateLagrangeCoeff(i int64, set []int64) *btcec.ModNScalar {
 	mul_j := new(btcec.ModNScalar).SetInt(1)
 	for _, j := range set {
 		if j != i {
-			x_j := new(btcec.ModNScalar).SetInt(uint32(j + 1))
-			x_i := new(btcec.ModNScalar).SetInt(uint32(i + 1))
+			x_j := new(btcec.ModNScalar).SetInt(uint32(j))
+			x_i := new(btcec.ModNScalar).SetInt(uint32(i))
 			numerator := new(btcec.ModNScalar).NegateVal(x_j)
 			denominator := new(btcec.ModNScalar).NegateVal(x_j).Add(x_i)
 			mul_j.Mul(numerator)

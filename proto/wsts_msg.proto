@@ -42,3 +42,14 @@ message MsgWithdraw {
 message MsgBatchWithdraw {
     repeated MsgWithdraw withdraw_batch = 1;
 }
+
+message BtcCheckPoint {
+    int64 height = 1;
+    string out_hash = 2;
+    uint32 out_index = 3;
+}
+
+message MsgUpdateAdaptSig {
+    int64 source = 1;
+    bytes adapt_sig = 2;
+}

@@ -1,6 +1,7 @@
 package testhelper
 
 import (
+	"log"
 	"sync"
 
 	btcec "github.com/btcsuite/btcd/btcec/v2"
@@ -17,8 +18,10 @@ var (
 	TagFROSTChallenge = []byte("FROST/challenge")
 )
 
+// multiple signing usages are meant to sign multiple messages with this Frost setup
 type FrostParticipant struct {
-	suite *TestSuite
+	suite  *TestSuite
+	logger *log.Logger
 
 	N        int64
 	Theshold int64
@@ -28,22 +31,28 @@ type FrostParticipant struct {
 
 	secretPolynomial []*btcec.ModNScalar
 	secretShares     []*btcec.ModNScalar
-	nonces           [][2]*btcec.ModNScalar
+	// nonce commitments for multiples signing usages
+	nonces [][2]*btcec.ModNScalar
 
 	PolynomialCommitments map[int64][]*btcec.PublicKey
 	PublicSigningShares   map[int64]*btcec.PublicKey
 	GroupPublicKey        *btcec.PublicKey
-	NonceCommitments      [][2]*btcec.PublicKey
+	// contains the nonce commitments for multiple signing usages
+	NonceCommitments [][2]*btcec.PublicKey
+	// contains the aggregated nonce commitments for multiple signing usages
+	AggrNonceCommitment map[int64]*btcec.JacobianPoint
 }
 
-func NewFrostParticipant(suite *TestSuite, n, theshold, posi int64, secret *btcec.ModNScalar) *FrostParticipant {
+func NewFrostParticipant(suite *TestSuite, logger *log.Logger, n, theshold, posi int64, secret *btcec.ModNScalar) *FrostParticipant {
 	frost := &FrostParticipant{
 		suite:                 suite,
+		logger:                logger,
 		N:                     n,
 		Theshold:              theshold,
 		Position:              posi,
 		PolynomialCommitments: make(map[int64][]*btcec.PublicKey),
 		PublicSigningShares:   make(map[int64]*btcec.PublicKey),
+		AggrNonceCommitment:   make(map[int64]*secp.JacobianPoint),
 	}
 
 	// generate secret polynomial
@@ -298,10 +307,10 @@ func (p *FrostParticipant) CalculateGroupPublicKey(party_num int64) *btcec.Publi
 	return p.GroupPublicKey
 }
 
-func (p *FrostParticipant) GenerateSigningNonces(usage_time int64) [][2]*btcec.PublicKey {
-	p.nonces = make([][2]*btcec.ModNScalar, usage_time)
-	p.NonceCommitments = make([][2]*btcec.PublicKey, usage_time)
-	for i := int64(0); i < usage_time; i++ {
+func (p *FrostParticipant) GenerateSigningNonces(signing_time int64) [][2]*btcec.PublicKey {
+	p.nonces = make([][2]*btcec.ModNScalar, signing_time)
+	p.NonceCommitments = make([][2]*btcec.PublicKey, signing_time)
+	for i := int64(0); i < signing_time; i++ {
 		// generate nonces (d, e) for each signing
 		// for pi = 1 number of pairs
 		d_seed := p.suite.Generate32BSeed()
@@ -328,4 +337,305 @@ func (p *FrostParticipant) GenerateSigningNonces(usage_time int64) [][2]*btcec.P
 	}
 
 	return p.NonceCommitments
+}
+
+// with provided public nonces from other participants, calculate the aggregated public nonce commitments
+// R_i = D_i * E_i ^ p_i
+// p_i = H(i, m, B)
+// B = {D_1, E_1, ..., D_t, E_t}
+// where B is the set of public nonces from t participants
+// and m is the message to be signed
+// and i is the participant's position
+//
+// honest would be a list of exact position starting from 1
+func (p *FrostParticipant) CalculatePublicNonceCommitments(signing_index int64, honest []int64, message_hash [32]byte, public_nonces map[int64][2]*btcec.PublicKey) map[int64]*btcec.PublicKey {
+	// calculate p_i for each honest participants
+	p_data := make([]byte, 0)
+	p_data = append(p_data, message_hash[:]...)
+	for _, j := range honest {
+		D := new(btcec.JacobianPoint)
+		public_nonces[j][0].AsJacobian(D)
+		E := new(btcec.JacobianPoint)
+		public_nonces[j][1].AsJacobian(E)
+
+		p_data = append(p_data, D.X.Bytes()[:]...)
+		p_data = append(p_data, E.X.Bytes()[:]...)
+	}
+
+	p_list := make(map[int64]*btcec.ModNScalar)
+	for _, i := range honest {
+		p_i_data := append([]byte{byte(i)}, p_data...)
+		p := chainhash.HashB(p_i_data)
+		p_scalar := new(btcec.ModNScalar)
+		p_scalar.SetByteSlice(p)
+
+		p_list[i] = p_scalar
+	}
+
+	// calculate R and R_i
+	nonce_commitments := make(map[int64]*btcec.PublicKey)
+	p.AggrNonceCommitment[signing_index] = new(btcec.JacobianPoint)
+
+	for _, i := range honest {
+		D_i := new(btcec.JacobianPoint)
+		public_nonces[i][0].AsJacobian(D_i)
+		E_i := new(btcec.JacobianPoint)
+		public_nonces[i][1].AsJacobian(E_i)
+
+		// E_i ^ p_i
+		term := new(btcec.JacobianPoint)
+		btcec.ScalarMultNonConst(p_list[i], E_i, term)
+		// R_i = D_i * E_i ^ p_i
+		R_i := new(btcec.JacobianPoint)
+		btcec.AddNonConst(D_i, term, R_i)
+		R_i.ToAffine()
+
+		nonce_commitments[i] = btcec.NewPublicKey(&R_i.X, &R_i.Y)
+		btcec.AddNonConst(p.AggrNonceCommitment[signing_index], R_i, p.AggrNonceCommitment[signing_index])
+	}
+	p.AggrNonceCommitment[signing_index].ToAffine()
+
+	return nonce_commitments
+}
+
+// construct z_i = d_i + e_i * p_i + \lambda_i * s_i * c
+// \lambda_i is the Lagrange coefficient for the participant i over the honest participants
+// s_i is the long-term secret share of participant i
+// c = H(R, Y, m)
+// TODO: have not checked for even or odd Y - coordinates
+func (p *FrostParticipant) PartialSign(position, signing_index int64, honest_party []int64, message_hash [32]byte, public_nonces map[int64][2]*btcec.PublicKey, signing_shares *btcec.ModNScalar) *schnorr.Signature {
+	// calculate c
+	commitment_data := make([]byte, 0)
+	commitment_data = append(commitment_data, p.AggrNonceCommitment[signing_index].X.Bytes()[:]...)
+	commitment_data = append(commitment_data, schnorr.SerializePubKey(p.GroupPublicKey)...)
+	commitment_data = append(commitment_data, message_hash[:]...)
+	commitment_hash := chainhash.TaggedHash(chainhash.TagBIP0340Challenge, commitment_data)
+	c := new(btcec.ModNScalar)
+	c.SetByteSlice(commitment_hash[:])
+
+	// calculate p_i
+	p_i_data := make([]byte, 0)
+	p_i_data = append(p_i_data, byte(position))
+	p_i_data = append(p_i_data, message_hash[:]...)
+	for _, i := range honest_party {
+		D := new(btcec.JacobianPoint)
+		public_nonces[i][0].AsJacobian(D)
+		E := new(btcec.JacobianPoint)
+		public_nonces[i][1].AsJacobian(E)
+		p_i_data = append(p_i_data, D.X.Bytes()[:]...)
+		p_i_data = append(p_i_data, E.X.Bytes()[:]...)
+	}
+	p_i := chainhash.HashB(p_i_data)
+	p_i_scalar := new(btcec.ModNScalar)
+	p_i_scalar.SetByteSlice(p_i)
+
+	// d_i, e_i: create new instances to avoid modifying the original values
+	d_i := new(btcec.ModNScalar).Set(p.nonces[signing_index][0])
+	e_i := new(btcec.ModNScalar).Set(p.nonces[signing_index][1])
+	// e_i * p_i
+	term := new(btcec.ModNScalar).Mul2(e_i, p_i_scalar)
+	// d_i + e_i * p_i
+	term1 := new(btcec.ModNScalar).Add2(d_i, term)
+	R_i := new(btcec.JacobianPoint)
+	btcec.ScalarBaseMultNonConst(term1, R_i)
+	R_i.ToAffine()
+
+	// some R_i might have even Y coordinate, but total R can have odd Y coordinate
+	// thus, we need to negate all d_i and e_i to satisfy even Y coordinate for R
+	// this will conflict with any even Y coordinate in R_i
+	// this is such dilema that we should not check for oddness in R_i
+	if p.AggrNonceCommitment[signing_index].Y.IsOdd() {
+		d_i.Negate()
+		e_i.Negate()
+	}
+
+	s_i := new(btcec.ModNScalar).Set(signing_shares)
+	if p.GroupPublicKey.SerializeCompressed()[0] == secp.PubKeyFormatCompressedOdd {
+		s_i.Negate()
+	}
+
+	// calculate larange coefficient
+	lamba := p.suite.CalculateLagrangeCoeff(position, honest_party)
+	// e_i * p_i
+	term = new(btcec.ModNScalar).Mul2(e_i, p_i_scalar)
+	// d_i + e_i * p_i
+	term1 = new(btcec.ModNScalar).Add2(d_i, term)
+	// \lambda_i * s_i * c
+	term2 := new(btcec.ModNScalar).Mul2(lamba, s_i).Mul(c)
+	// d_i + e_i * p_i + \lambda_i * s_i * c
+	z_i := new(btcec.ModNScalar).Add2(term1, term2)
+
+	sig := schnorr.NewSignature(&R_i.X, z_i)
+
+	return sig
+}
+
+// construct z_i = d_i + e_i * p_i + \sum_{K_i} \lambda_{ik} * s_{ik} * c, K_i is the threshold set of honest keys of participant i
+// \lambda_i is the Lagrange coefficient for the participant i over the honest participants
+// s_i is the long-term secret share of participant i
+// c = H(R, Y, m)
+// TODO: have not checked for even or odd Y - coordinates
+//
+// a different variant of partial sign for wsts
+func (p *FrostParticipant) WeightedPartialSign(position, signing_index int64, honest_party, honest_keys []int64, message_hash [32]byte, public_nonces map[int64][2]*btcec.PublicKey, signing_shares map[int64]*btcec.ModNScalar) *schnorr.Signature {
+	// calculate c
+	commitment_data := make([]byte, 0)
+	commitment_data = append(commitment_data, p.AggrNonceCommitment[signing_index].X.Bytes()[:]...)
+	commitment_data = append(commitment_data, schnorr.SerializePubKey(p.GroupPublicKey)...)
+	commitment_data = append(commitment_data, message_hash[:]...)
+	commitment_hash := chainhash.TaggedHash(chainhash.TagBIP0340Challenge, commitment_data)
+	c := new(btcec.ModNScalar)
+	c.SetByteSlice(commitment_hash[:])
+
+	p.logger.Printf("sign c: %v\n", c)
+
+	// calculate p_i
+	p_i_data := make([]byte, 0)
+	p_i_data = append(p_i_data, byte(position))
+	p_i_data = append(p_i_data, message_hash[:]...)
+	for _, i := range honest_party {
+		D := new(btcec.JacobianPoint)
+		public_nonces[i][0].AsJacobian(D)
+		E := new(btcec.JacobianPoint)
+		public_nonces[i][1].AsJacobian(E)
+		p_i_data = append(p_i_data, D.X.Bytes()[:]...)
+		p_i_data = append(p_i_data, E.X.Bytes()[:]...)
+	}
+	p_i := chainhash.HashB(p_i_data)
+	p_i_scalar := new(btcec.ModNScalar)
+	p_i_scalar.SetByteSlice(p_i)
+
+	// d_i, e_i: create new instances to avoid modifying the original values
+	d_i := new(btcec.ModNScalar).Set(p.nonces[signing_index][0])
+	e_i := new(btcec.ModNScalar).Set(p.nonces[signing_index][1])
+	// e_i * p_i
+	term := new(btcec.ModNScalar).Mul2(e_i, p_i_scalar)
+	// d_i + e_i * p_i
+	term1 := new(btcec.ModNScalar).Add2(d_i, term)
+	R_i := new(btcec.JacobianPoint)
+	btcec.ScalarBaseMultNonConst(term1, R_i)
+	R_i.ToAffine()
+
+	// some R_i might have even Y coordinate, but total R can have odd Y coordinate
+	// thus, we need to negate all d_i and e_i to satisfy even Y coordinate for R
+	// this will conflict with any even Y coordinate in R_i
+	// this is such dilema that we should not check for oddness in R_i
+	if p.AggrNonceCommitment[signing_index].Y.IsOdd() {
+		d_i.Negate()
+		e_i.Negate()
+	}
+
+	// signing for wsts
+	z_i := new(btcec.ModNScalar)
+	// e_i * p_i
+	term = new(btcec.ModNScalar).Mul2(e_i, p_i_scalar)
+	// d_i + e_i * p_i
+	term1 = new(btcec.ModNScalar).Add2(d_i, term)
+	// \sum_{K_i} \lambda_{ik} * s_{ik} * c
+	term3 := new(btcec.ModNScalar).SetInt(0)
+	for key_index, shares := range signing_shares {
+		s_i := new(btcec.ModNScalar).Set(shares)
+		if p.GroupPublicKey.SerializeCompressed()[0] == secp.PubKeyFormatCompressedOdd {
+			s_i.Negate()
+		}
+
+		// check shares
+		temp := new(btcec.JacobianPoint)
+		btcec.ScalarBaseMultNonConst(s_i, temp)
+		temp.ToAffine()
+		p.logger.Printf("sign key_index %d: signing shares verification %v\n", key_index, temp)
+
+		// calculate larange coefficient
+		lamba := p.suite.CalculateLagrangeCoeff(key_index, honest_keys)
+		// \lambda_{ik} * s_{ik} * c
+		term2 := new(btcec.ModNScalar).Mul2(lamba, s_i).Mul(c)
+		// \sum_{K_i} \lambda_{ik} * s_{ik} * c
+		term3.Add(term2)
+	}
+	// d_i + e_i * p_i + \sum_{K_i} \lambda_{ik} * s_{ik} * c
+	z_i.Add2(term1, term3)
+
+	sig := schnorr.NewSignature(&R_i.X, z_i)
+
+	return sig
+}
+
+// verifying the partial signature from each honest participant
+// recall that: z_i = d_i + e_i * p_i + \sum_{K_i} \lambda_{ik} * s_{ik} * c
+// thus, g^z_i = R_i * g^(\sum_{K_i} \lambda_{ik} * s_{ik} * c) = R_i * \prod_{K_i} Y_{ik}^(\lambda_{ik} * c)
+// thus, R_i = g^z_i * \prod_{K_i} Y_{ik}^-(\lambda_{ik} * c)
+//
+// a different variant of partial sign for wsts
+func (p *FrostParticipant) WeightedPartialVerification(sig *schnorr.Signature, signing_index, posi int64, message_hash [32]byte, honest_keys []int64, signing_verification_shares map[int64]*btcec.PublicKey) bool {
+	// derive z and R_X
+	sig_bytes := sig.Serialize()
+	R_bytes := sig_bytes[0:32]
+	R_X := new(btcec.FieldVal)
+	R_X.SetByteSlice(R_bytes)
+	z_bytes := sig_bytes[32:64]
+	z := new(btcec.ModNScalar)
+	z.SetByteSlice(z_bytes)
+
+	// calculate c = H(R, Y, m)
+	commitment_data := make([]byte, 0)
+	commitment_data = append(commitment_data, p.AggrNonceCommitment[signing_index].X.Bytes()[:]...)
+	commitment_data = append(commitment_data, schnorr.SerializePubKey(p.GroupPublicKey)...)
+	commitment_data = append(commitment_data, message_hash[:]...)
+	commitment_hash := chainhash.TaggedHash(chainhash.TagBIP0340Challenge, commitment_data)
+	c := new(btcec.ModNScalar)
+	c.SetByteSlice(commitment_hash[:])
+
+	p.logger.Printf("message_hash: %v\n", message_hash)
+	p.logger.Printf("verify c: %v\n", c)
+
+	c.Negate()
+
+	// calculate \prod_{K_i} Y_{ik}^-(\lambda_{ik} * c)
+	prod := new(btcec.JacobianPoint)
+	for key_index, shares := range signing_verification_shares {
+		Y_i := new(btcec.JacobianPoint)
+		shares.AsJacobian(Y_i)
+		if p.GroupPublicKey.SerializeCompressed()[0] == secp.PubKeyFormatCompressedOdd {
+			Y_i.Y.Negate(1)
+			Y_i.Y.Normalize()
+		}
+
+		// check shares
+		Y_i.ToAffine()
+		p.logger.Printf("verify key_index %d: signing verification shares %v\n", key_index, Y_i)
+
+		// calculate \lambda_{ik} * -c
+		term := new(btcec.ModNScalar)
+		lambda := p.suite.CalculateLagrangeCoeff(key_index, honest_keys)
+		term.Mul2(lambda, c)
+
+		// Y_{ik}^-(\lambda_{ik} * c)
+		term1 := new(btcec.JacobianPoint)
+		btcec.ScalarMultNonConst(term, Y_i, term1)
+
+		btcec.AddNonConst(prod, term1, prod)
+	}
+
+	// g^z_i
+	term2 := new(btcec.JacobianPoint)
+	btcec.ScalarBaseMultNonConst(z, term2)
+	// R_i = g^z_i * \prod_{K_i} Y_{ik}^-(\lambda_{ik} * c)
+	R := new(btcec.JacobianPoint)
+	btcec.AddNonConst(term2, prod, R)
+
+	// Fail if R is the point at infinity
+	is_infinity := false
+	if (R.X.IsZero() && R.Y.IsZero()) || R.Z.IsZero() {
+		is_infinity = true
+	}
+	assert.False(p.suite.T, is_infinity, "verify partial sig proof: R is the point at infinity")
+	if is_infinity {
+		return false
+	}
+
+	R.ToAffine()
+
+	// verify R point equals provided R_X
+	assert.Equal(p.suite.T, &R.X, R_X, "verify partial sig proof: R.X does not match provided R_X")
+	return R.X.Equals(R_X)
 }

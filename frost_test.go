@@ -48,7 +48,6 @@ type FrostParticipant struct {
 func TestCreateFrostParticipant(t *testing.T) {
 	suite := testhelper.TestSuite{}
 	suite.SetupStaticSimNetSuite(t)
-	defer suite.StaticSimNetTearDown()
 
 	n := 7
 	thres := 5
@@ -60,8 +59,7 @@ func TestCreateFrostParticipant(t *testing.T) {
 func TestFrostCalculateShares(t *testing.T) {
 	suite := new(testhelper.TestSuite)
 	suite.SetupStaticSimNetSuite(t)
-	defer suite.StaticSimNetTearDown()
-	participant := testhelper.NewFrostParticipant(suite, 5, 3, 1, nil)
+	participant := testhelper.NewFrostParticipant(suite, nil, 5, 3, 1, nil)
 	assert.NotNil(t, participant)
 
 	participant.CalculateSecretShares()
@@ -74,7 +72,6 @@ func TestFrostCalculateShares(t *testing.T) {
 func TestFrostSignature(t *testing.T) {
 	suite := testhelper.TestSuite{}
 	suite.SetupStaticSimNetSuite(t)
-	defer suite.StaticSimNetTearDown()
 
 	n := 7
 	thres := 5
@@ -151,9 +148,10 @@ func TestFrostSignature(t *testing.T) {
 	}
 
 	// verify that the combined signing_verification_shares equals the combined public key
+	// with 5 honest participants
 	calculated_y := new(btcec.JacobianPoint)
-	for i := 0; i < n; i++ {
-		lambda_i := suite.CalculateLagrangeCoeff(i, []int{0, 1, 2, 3, 4, 5, 6})
+	for i := 0; i < thres; i++ {
+		lambda_i := suite.CalculateLagrangeCoeff(int64(i+1), []int64{1, 2, 3, 4, 5})
 		// Y_i^(\lambda_i)
 		term := new(btcec.JacobianPoint)
 		btcec.ScalarMultNonConst(lambda_i, participants[i].signing_verification_shares, term)
@@ -439,8 +437,8 @@ func (participant *FrostParticipant) partialSign(suite *testhelper.TestSuite, ho
 	p_i_scalar.SetByteSlice(p_i)
 
 	// d_i, e_i
-	d_i := participant.this_participant_nonce[0]
-	e_i := participant.this_participant_nonce[1]
+	d_i := new(btcec.ModNScalar).Set(participant.this_participant_nonce[0])
+	e_i := new(btcec.ModNScalar).Set(participant.this_participant_nonce[1])
 	// e_i * p_i
 	term := new(btcec.ModNScalar).Mul2(e_i, p_i_scalar)
 	// d_i + e_i * p_i
@@ -465,7 +463,7 @@ func (participant *FrostParticipant) partialSign(suite *testhelper.TestSuite, ho
 	}
 
 	// calculate larange coefficient
-	lamba := suite.CalculateLagrangeCoeff(participant.position-1, honest)
+	lamba := suite.CalculateLagrangeCoeff(int64(participant.position), convertArrInt64WithStart1(honest))
 	// e_i * p_i
 	term = new(btcec.ModNScalar).Mul2(e_i, p_i_scalar)
 	// d_i + e_i * p_i
@@ -570,7 +568,7 @@ func (participant *FrostParticipant) verifyPartialSig(suite *testhelper.TestSuit
 
 	// \lambda_i * c
 	term := new(btcec.ModNScalar)
-	lambda := suite.CalculateLagrangeCoeff(other_posi, honest)
+	lambda := suite.CalculateLagrangeCoeff(int64(other_posi+1), convertArrInt64WithStart1(honest))
 	term.Mul2(lambda, c)
 	// Y_i^-(\lambda_i * c)
 	term1 := new(btcec.JacobianPoint)
@@ -593,4 +591,13 @@ func (participant *FrostParticipant) verifyPartialSig(suite *testhelper.TestSuit
 
 	// verify R point equals provided R_X
 	assert.Equal(suite.T, &R.X, R_X, "verify partial sig proof: R.X does not match provided R_X")
+}
+
+// due to some later changes with stricter enforcement of array position
+func convertArrInt64WithStart1(honest []int) []int64 {
+	honest_int64 := make([]int64, len(honest))
+	for i, h := range honest {
+		honest_int64[i] = int64(h + 1)
+	}
+	return honest_int64
 }
