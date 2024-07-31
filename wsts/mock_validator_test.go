@@ -147,6 +147,18 @@ func (v *MockValidator) ReceiveMessageOnChainLoop() {
 				// store new transactions on - chain
 				v.storeTxs(msg.WithdrawBatch)
 			case MSG_UPDATE_ADAPT_SIG:
+				// MSG_UPDATE_ADAPT_SIG can be called when all nonces have not yet been added in the previous phase
+				// need to ensure that there are group public nonce commitments before entering this phase
+				signing_index := int64(0)
+				if v.frost.AggrNonceCommitment[signing_index] == nil {
+					v.logger.Println("received MSG_UPDATE_ADAPT_SIG but nil AggrNonceCommitment")
+					go func() {
+						time.Sleep(1000)
+						v.msgChanOnChain <- msg
+					}()
+					break
+				}
+
 				msg := &MsgUpdateAdaptSig{}
 				err := proto.Unmarshal(msgBytes, msg)
 				assert.NoError(v.suite.T, err)
@@ -218,7 +230,7 @@ func (v *MockValidator) ReceiveMessageOffChainLoop() {
 				total_keys := (range_key[1] - range_key[0]) * v.partyNum
 				accumulated_keys := int64(len(v.localStorage.store[SECRET_SHARES_STORE_KEY]))
 				v.logger.Printf("validator %d needs more keys %d\n", v.position, total_keys-accumulated_keys)
-				if accumulated_keys == total_keys {
+				if accumulated_keys == total_keys && v.frost.GroupPublicKey == nil {
 					v.logger.Printf("All secret shares have been received for validator %d\n", v.position)
 					v.verifySharesAndCalculateLongTermKey()
 				}
@@ -254,8 +266,8 @@ func (v *MockValidator) DeriveAndSendProofs() {
 	// derive secret proof
 	secret := v.frost.CalculateSecretProofs(CONTEXT_HASH)
 
-	polynomialCommitmentsBytes := make([][]byte, v.frost.Theshold+1)
-	for i := int64(0); i <= v.frost.Theshold; i++ {
+	polynomialCommitmentsBytes := make([][]byte, v.frost.Threshold+1)
+	for i := int64(0); i <= v.frost.Threshold; i++ {
 		polynomialCommitmentsBytes[i] = v.frost.PolynomialCommitments[v.position][i].SerializeCompressed()
 	}
 
@@ -462,6 +474,9 @@ func (v *MockValidator) DeriveRangeOfKeys() map[int64][2]int64 {
 		total += expected_keys
 	}
 	party_keys[1] = v.frost.N - total
+	if party_keys[1] < 0 {
+		panic("party 1 has negative amount of keys")
+	}
 
 	// remove temporary add
 	delete(v.otherVals, v.position)
@@ -511,31 +526,17 @@ func (v *MockValidator) verifySharesAndCalculateLongTermKey() {
 	time_now := time.Now()
 	key_range := v.protocolStorage.GetKeyRange(strconv.FormatInt(v.position, 10))
 	for i := key_range[0]; i < key_range[1]; i++ {
+		all_secret_shares := make(map[int64]*btcec.ModNScalar)
 		for j := int64(1); j <= v.partyNum; j++ {
-			longTermShares := new(btcec.ModNScalar)
-			longTermShares.SetInt(0)
-			secretShares := v.localStorage.GetSecretShares(j, i)
-			// verify secret shares
-			commitments := v.getPolyCommitments(j)
-			var wg sync.WaitGroup
-			wg.Add(1)
-			go func(secretShares *btcec.ModNScalar, commitments []*btcec.PublicKey, posi int64) {
-				v.frost.VerifyPublicSecretShares(secretShares, commitments, uint32(posi))
-				wg.Done()
-			}(secretShares, commitments, i)
-			wg.Wait()
+			all_secret_shares[j] = v.localStorage.GetSecretShares(j, i)
 		}
-	}
-	v.logger.Printf("Time to verify secret shares: %v\n", time.Since(time_now))
 
-	// calculate long term key
-	// can parallelize this process further
-	for i := key_range[0]; i < key_range[1]; i++ {
+		v.frost.VerifyBatchPublicSecretShares(all_secret_shares, uint32(i))
+
 		longTermShares := new(btcec.ModNScalar)
 		longTermShares.SetInt(0)
 		for j := int64(1); j <= v.partyNum; j++ {
-			secretShares := v.localStorage.GetSecretShares(j, i)
-			longTermShares.Add(secretShares)
+			longTermShares.Add(all_secret_shares[j])
 		}
 		longTermSharesBytes := longTermShares.Bytes()
 		v.SetLongTermSecretShares(i, longTermSharesBytes[:])
@@ -544,19 +545,27 @@ func (v *MockValidator) verifySharesAndCalculateLongTermKey() {
 		key := v.frost.CalculateInternalPublicSigningShares(longTermShares, i)
 		v.logger.Printf("key %d, long term key: %v\n", i, key)
 	}
+	v.logger.Printf("Time to verify secret shares: %v\n", time.Since(time_now))
 
 	// calculate public signing shares of all others
-	all_poly_commitments := v.getAllPolyCommitments()
+	time_now = time.Now()
 	for i := int64(1); i <= v.partyNum; i++ {
 		if i == v.position {
 			continue
 		}
+		var wg sync.WaitGroup
 		key_range := v.protocolStorage.GetKeyRange(strconv.FormatInt(i, 10))
 		for j := key_range[0]; j < key_range[1]; j++ {
-			key := v.frost.CalculatePublicSigningShares(v.partyNum, j, all_poly_commitments)
-			v.logger.Printf("for validator %d, key %d, long term key: %v\n", i, j, key)
+			wg.Add(1)
+			go func(j int64) {
+				key := v.frost.CalculatePublicSigningShares(v.partyNum, j)
+				v.logger.Printf("for validator %d, key %d, long term key: %v\n", i, j, key)
+				wg.Done()
+			}(j)
 		}
+		wg.Wait()
 	}
+	v.logger.Printf("Time to calculate public signing shares: %v\n", time.Since(time_now))
 
 	// calculate group public key
 	groupkey := v.frost.CalculateGroupPublicKey(v.partyNum)
@@ -691,8 +700,8 @@ func (v *MockValidator) GetLongTermSecretShares(key int64) *btcec.ModNScalar {
 
 func (v *MockValidator) storePolyCommitments(posi int64, commitments [][]byte) {
 	var err error
-	poly_commitments := make([]*btcec.PublicKey, v.frost.Theshold+1)
-	for i := int64(0); i <= v.frost.Theshold; i++ {
+	poly_commitments := make([]*btcec.PublicKey, v.frost.Threshold+1)
+	for i := int64(0); i <= v.frost.Threshold; i++ {
 		poly_commitments[i], err = btcec.ParsePubKey(commitments[i])
 		assert.NoError(v.suite.T, err)
 	}
@@ -701,14 +710,6 @@ func (v *MockValidator) storePolyCommitments(posi int64, commitments [][]byte) {
 
 func (v *MockValidator) getPolyCommitments(posi int64) []*btcec.PublicKey {
 	return v.frost.PolynomialCommitments[posi]
-}
-
-func (v *MockValidator) getAllPolyCommitments() map[int64][]*btcec.PublicKey {
-	commitments := make(map[int64][]*btcec.PublicKey)
-	for i := int64(1); i <= v.partyNum; i++ {
-		commitments[i] = v.getPolyCommitments(i)
-	}
-	return commitments
 }
 
 func (v *MockValidator) storeBtcCheckPoint(checkpoint_height int64, checkpoint *BtcCheckPoint) {

@@ -96,9 +96,9 @@ func TestNewMockValidatorSet(t *testing.T) {
 	suite := testhelper.TestSuite{}
 	suite.SetupStaticSimNetSuite(t)
 
-	n := int64(10)
-	n_keys := int64(50)
-	threshold := int64(34)
+	n := int64(100)
+	n_keys := int64(5000)
+	threshold := int64(3334)
 	message_num := 10
 	validators := make([]*MockValidator, n)
 	for i := int64(0); i < n; i++ {
