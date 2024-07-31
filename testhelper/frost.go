@@ -241,6 +241,8 @@ func (p *FrostParticipant) VerifyPublicSecretShares(secretShares *btcec.ModNScal
 }
 
 // verify batch public secret shares for a participant secret shares
+//
+// expensive operation
 func (p *FrostParticipant) VerifyBatchPublicSecretShares(secret_shares map[int64]*btcec.ModNScalar, posi uint32) {
 	var wg sync.WaitGroup
 
@@ -275,13 +277,19 @@ func (p *FrostParticipant) VerifyBatchPublicSecretShares(secret_shares map[int64
 		wg.Add(1)
 		go func(posi int64, poly_commitments []*btcec.PublicKey) {
 			term_arr := make([]*secp.JacobianPoint, p.Threshold+1)
+			var wg1 sync.WaitGroup
 			for i := int64(0); i <= p.Threshold; i++ {
-				term := new(btcec.JacobianPoint)
-				poly_commitments[i].AsJacobian(term)
-				btcec.ScalarMultNonConst(i_power_arr[i], term, term)
-				term.ToAffine()
-				term_arr[i] = term
+				wg1.Add(1)
+				go func(i int64) {
+					term := new(btcec.JacobianPoint)
+					poly_commitments[i].AsJacobian(term)
+					btcec.ScalarMultNonConst(i_power_arr[i], term, term)
+					term.ToAffine()
+					term_arr[i] = term
+					wg1.Done()
+				}(i)
 			}
+			wg1.Wait()
 			all_term.Store(posi, term_arr)
 			wg.Done()
 		}(posi, poly_commitments)
@@ -324,16 +332,27 @@ func (p *FrostParticipant) CalculateInternalPublicSigningShares(signingShares *b
 }
 
 // calculate Y_i from other participant secret commitments
+//
 // n_k: total number of keys
+//
 // n_p: total number of parties
+//
 // t: threshold
+//
 // f_m(x), m \in {1, \ldots, n_p}
+//
 // recall that Y_i = g^s_i, i \in {1, \ldots, n_k}
+//
 // recall that A_{mj} = g^{a_{mj}}, j \in {1, \ldots, t}
+//
 // s_i = \sum_{m=1}^{n_p} f_m(i)
+//
 // thus, Y_i = g^(\sum_{m=1}^{n_p} f_m(i)) = \prod_{m=1}^{n_p} g^{f_m(i)}
+//
 // Y_i = \prod_{m=1}^{n_p} g^{\sum_{j=0}^{t} a_mj * i^j}
+//
 // Y_i = \prod_{m=1}^{n_p} \prod_{j=0}^{t} g^{a_mj * i^j}
+//
 // Y_i = \prod_{m=1}^{n_p} \prod_{j=0}^{t} A_mj^i^j
 //
 // intense computation: 0(n*m)

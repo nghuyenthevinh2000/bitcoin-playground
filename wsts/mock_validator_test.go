@@ -304,11 +304,6 @@ func (v *MockValidator) DeriveAndSendSecretShares() {
 
 	v.logger.Printf("Range of keys for validator %d: %v\n", v.position, range_keys)
 
-	shares := v.frost.AllSecretShares()
-	for i, share := range shares {
-		v.logger.Printf("validator %d, index: %d, share: %v\n", v.position, i, share)
-	}
-
 	// save this validator secret shares
 	for i := range_keys[v.position][0]; i < range_keys[v.position][1]; i++ {
 		secretShare := v.frost.GetSecretShares(i)
@@ -345,6 +340,16 @@ func (v *MockValidator) DeriveAndSendSecretShares() {
 
 		v.otherVals[i].SendMessageOffChain(append([]byte{MSG_SECRET_SHARES}, secretShareMsgBytes...))
 	}
+
+	// self - sending in case this validator has collected all secret shares before finishing itself thus unable to activate the check
+	// check if this validator has received all secret shares
+	secretShareMsg := MsgSecretShares{
+		Source:       v.position,
+		SecretShares: make([]*SecretShares, 0),
+	}
+	secretShareMsgBytes, err := proto.Marshal(&secretShareMsg)
+	assert.NoError(v.suite.T, err)
+	v.SendMessageOffChain(append([]byte{MSG_SECRET_SHARES}, secretShareMsgBytes...))
 }
 
 func (v *MockValidator) DeriveAndSendNonces() {
@@ -525,26 +530,32 @@ func (v *MockValidator) verifySharesAndCalculateLongTermKey() {
 	// extract secret shares of a key from all validators
 	time_now := time.Now()
 	key_range := v.protocolStorage.GetKeyRange(strconv.FormatInt(v.position, 10))
+	var wg sync.WaitGroup
 	for i := key_range[0]; i < key_range[1]; i++ {
-		all_secret_shares := make(map[int64]*btcec.ModNScalar)
-		for j := int64(1); j <= v.partyNum; j++ {
-			all_secret_shares[j] = v.localStorage.GetSecretShares(j, i)
-		}
+		wg.Add(1)
+		go func(i int64) {
+			all_secret_shares := make(map[int64]*btcec.ModNScalar)
+			for j := int64(1); j <= v.partyNum; j++ {
+				all_secret_shares[j] = v.localStorage.GetSecretShares(j, i)
+			}
 
-		v.frost.VerifyBatchPublicSecretShares(all_secret_shares, uint32(i))
+			v.frost.VerifyBatchPublicSecretShares(all_secret_shares, uint32(i))
 
-		longTermShares := new(btcec.ModNScalar)
-		longTermShares.SetInt(0)
-		for j := int64(1); j <= v.partyNum; j++ {
-			longTermShares.Add(all_secret_shares[j])
-		}
-		longTermSharesBytes := longTermShares.Bytes()
-		v.SetLongTermSecretShares(i, longTermSharesBytes[:])
+			longTermShares := new(btcec.ModNScalar)
+			longTermShares.SetInt(0)
+			for j := int64(1); j <= v.partyNum; j++ {
+				longTermShares.Add(all_secret_shares[j])
+			}
+			longTermSharesBytes := longTermShares.Bytes()
+			v.SetLongTermSecretShares(i, longTermSharesBytes[:])
 
-		// calculate public signing shares
-		key := v.frost.CalculateInternalPublicSigningShares(longTermShares, i)
-		v.logger.Printf("key %d, long term key: %v\n", i, key)
+			// calculate public signing shares
+			key := v.frost.CalculateInternalPublicSigningShares(longTermShares, i)
+			v.logger.Printf("key %d, long term key: %v\n", i, key)
+			wg.Done()
+		}(i)
 	}
+	wg.Wait()
 	v.logger.Printf("Time to verify secret shares: %v\n", time.Since(time_now))
 
 	// calculate public signing shares of all others
