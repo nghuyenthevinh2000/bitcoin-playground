@@ -2699,3 +2699,32 @@
 2024-07-30 10:08:56.874 [INF] RPCS: New websocket client [::1]:49348
 2024-07-30 10:08:57.407 [INF] RPCS: Beginning rescan for 23 addresses
 2024-07-30 10:08:57.407 [INF] RPCS: Finished rescan
+2024-08-03 01:15:54.875 [INF] BTCD: Received signal (terminated).  Shutting down...
+2024-08-03 01:15:54.877 [INF] BTCD: Gracefully shutting down the server...
+2024-08-03 01:15:54.878 [WRN] SRVR: Server shutting down
+2024-08-03 01:15:54.878 [WRN] RPCS: RPC server shutting down
+2024-08-03 01:15:54.881 [ERR] RPCS: Websocket receive error from [::1]:49348: read tcp6 [::1]:18556->[::1]:49348: use of closed network connection
+2024-08-03 01:15:54.881 [INF] RPCS: RPC server shutdown complete
+2024-08-03 01:15:54.881 [INF] RPCS: Disconnected websocket client [::1]:49348
+2024-08-03 01:15:55.014 [INF] SYNC: Sync manager shutting down
+2024-08-03 01:15:55.015 [INF] CHAN: Flushing UTXO cache of 97 MiB with 0 entries to disk. For large sizes, this can take up to several minutes...
+2024-08-03 01:15:55.016 [INF] AMGR: Address manager shutting down
+2024-08-03 01:15:55.018 [INF] SRVR: Server shutdown complete
+2024-08-03 01:15:55.018 [INF] BTCD: Gracefully shutting down the database...
+2024-08-03 01:15:55.067 [INF] BTCD: Shutdown complete
+2024-08-13 15:27:50.776 [INF] BTCD: Version 0.24.2-betarc1
+2024-08-13 15:27:50.777 [INF] BTCD: Loading block database from 'simnet/btcd/simnet/blocks_ffldb'
+2024-08-13 15:27:50.805 [INF] BTCD: Block database loaded
+2024-08-13 15:27:50.807 [INF] INDX: Transaction index is enabled
+2024-08-13 15:27:50.807 [INF] INDX: Committed filter index is enabled
+2024-08-13 15:27:50.807 [INF] CHAN: Pre-alloacting for 251 MiB: 
+2024-08-13 15:27:50.813 [INF] CHAN: Loading block index...
+2024-08-13 15:27:50.817 [INF] CHAN: Chain state (height 853, hash 6ff3ea0d157601f42dea4a6268fa785eac18ae561726130e6162da1b0f06fdf6, totaltx 879, work 1708)
+2024-08-13 15:27:50.818 [INF] RPCS: RPC server listening on [::1]:18556
+2024-08-13 15:27:50.818 [INF] RPCS: RPC server listening on 127.0.0.1:18556
+2024-08-13 15:27:50.818 [INF] AMGR: Loaded 0 addresses from file 'simnet/btcd/simnet/peers.json'
+2024-08-13 15:27:50.819 [INF] CMGR: Server listening on 0.0.0.0:18555
+2024-08-13 15:27:50.819 [INF] CMGR: Server listening on [::]:18555
+2024-08-13 15:27:57.003 [INF] RPCS: New websocket client [::1]:52465
+2024-08-13 15:27:57.742 [INF] RPCS: Beginning rescan for 23 addresses
+2024-08-13 15:27:57.743 [INF] RPCS: Finished rescan

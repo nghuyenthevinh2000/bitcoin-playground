@@ -6,10 +6,10 @@ import (
 
 	"github.com/btcsuite/btcd/btcec/v2"
 	"github.com/nghuyenthevinh2000/bitcoin-playground/testhelper"
+	"github.com/stretchr/testify/assert"
 )
 
 // go test -v -run ^TestFrostSignature1$ github.com/nghuyenthevinh2000/bitcoin-playground
-// TODO: handle sign problem, flaky issue
 func TestFrostSignature1(t *testing.T) {
 	suite := testhelper.TestSuite{}
 	suite.SetupStaticSimNetSuite(t)
@@ -67,5 +67,47 @@ func TestFrostSignature1(t *testing.T) {
 
 		// try out batch verification of secret shares
 		participant.VerifyBatchPublicSecretShares(secret_shares_map[participant.Position], uint32(participant.Position))
+	}
+
+	// calculate public signing shares
+	signing_shares_map := make(map[int64]*btcec.ModNScalar)
+	for i := int64(0); i < n; i++ {
+		participant := participants[i]
+		signing_shares_map[participant.Position] = new(btcec.ModNScalar)
+		signing_shares_map[participant.Position].SetInt(0)
+
+		for j := int64(0); j < n; j++ {
+			secret := secret_shares_map[participant.Position][j+1]
+			signing_shares_map[participant.Position].Add(secret)
+		}
+	}
+
+	// calculate public signing shares
+	for i := int64(0); i < n; i++ {
+		participant := participants[i]
+		participant.CalculateInternalPublicSigningShares(signing_shares_map[participant.Position], participant.Position)
+
+		// calculate public signing shares of other participants
+		for j := int64(0); j < n; j++ {
+			if i == j {
+				continue
+			}
+
+			participant.CalculatePublicSigningShares(participant.N, j+1)
+		}
+	}
+
+	// verify correct calculation of public signing shares
+	for i := int64(0); i < n; i++ {
+		participant := participants[i]
+
+		// verify public signing shares of other participants
+		for j := int64(0); j < n; j++ {
+			if i == j {
+				continue
+			}
+
+			assert.Equal(t, participant.PublicSigningShares[i+1], participants[j].PublicSigningShares[i+1])
+		}
 	}
 }

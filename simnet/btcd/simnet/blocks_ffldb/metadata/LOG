@@ -784,3 +784,36 @@
 10:08:50.679425 version@stat F·[3 1] S·638KiB[1KiB 636KiB] Sc·[0.75 0.01]
 10:08:50.710987 db@janitor F·6 G·0
 10:08:50.711014 db@open done T·32.305917ms
+=============== Aug 3, 2024 (+07) ===============
+01:15:54.947608 transaction@flush created L0@188 N·2 S·225B "\x00\x00\x00..fee,d10553":"\x00\x00\x00..loc,v10552"
+01:15:54.948410 version@stat F·[4 1] S·639KiB[2KiB 636KiB] Sc·[1.00 0.01]
+01:15:54.969258 table@compaction L0·4 -> L1·1 S·639KiB Q·10551
+01:15:54.982943 transaction@flush created L0@189 N·2 S·1KiB "\x00\x00\x00..fee,v10554":"\x00\x00\x00..loc,v10555"
+01:15:54.983134 version@stat F·[5 1] S·640KiB[3KiB 636KiB] Sc·[1.25 0.01]
+01:15:55.025774 transaction@flush created L0@191 N·2 S·266B "\x00\x00\x00..loc,v10556":"\x00\x00\x00..ncy,v10557"
+01:15:55.025955 version@stat F·[6 1] S·640KiB[3KiB 636KiB] Sc·[1.50 0.01]
+01:15:55.038685 db@close closing
+01:15:55.065297 table@build created L1@190 N·10318 S·636KiB "\x00\x00\x00..ate,v10436":"bid..bid,v35"
+01:15:55.065367 table@build exiting
+01:15:55.065412 table@build revert @190
+01:15:55.067417 db@close done T·28.662125ms
+=============== Aug 13, 2024 (+07) ===============
+15:27:50.777623 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+15:27:50.778550 version@stat F·[6 1] S·640KiB[3KiB 636KiB] Sc·[1.50 0.01]
+15:27:50.778569 db@open opening
+15:27:50.778633 journal@recovery F·1
+15:27:50.779126 journal@recovery recovering @186
+15:27:50.779546 version@stat F·[6 1] S·640KiB[3KiB 636KiB] Sc·[1.50 0.01]
+15:27:50.803983 db@janitor F·9 G·0
+15:27:50.804027 db@open done T·25.44975ms
+15:27:50.804114 table@compaction L0·6 -> L1·1 S·640KiB Q·10557
+15:27:50.826003 table@build created L1@194 N·10316 S·636KiB "\x00\x00\x00..ate,v10436":"bid..bid,v35"
+15:27:50.826064 version@stat F·[0 1] S·636KiB[0B 636KiB] Sc·[0.00 0.01]
+15:27:50.837180 table@compaction committed F-6 S-3KiB Ke·0 D·12 T·33.021959ms
+15:30:20.839866 table@remove removed @191
+15:30:20.840201 table@remove removed @189
+15:30:20.840643 table@remove removed @188
+15:30:20.840780 table@remove removed @185
+15:30:20.840855 table@remove removed @184
+15:30:20.840930 table@remove removed @183
+15:30:20.841097 table@remove removed @182
