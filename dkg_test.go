@@ -3,7 +3,7 @@ package main
 import (
 	"testing"
 
-	btcec "github.com/btcsuite/btcd/btcec/v2"
+	"github.com/btcsuite/btcd/btcec/v2"
 	"github.com/nghuyenthevinh2000/bitcoin-playground/testhelper"
 	"github.com/stretchr/testify/assert"
 )
@@ -178,10 +178,10 @@ func TestBasicGennaroDKG(t *testing.T) {
 	}
 }
 
-func newGennaroParticipantDKG(s *testhelper.TestSuite, threshold, participant_num int) *GennaroParticipant {
+func newGennaroParticipantDKG(s *testhelper.TestSuite, threshold, participantNum int) *GennaroParticipant {
 	participant := &GennaroParticipant{
 		PedersonParticipant: &PedersonParticipant{
-			N:                    participant_num,
+			N:                    participantNum,
 			Threshold:            threshold,
 			SecretShares:         make(map[int]*btcec.ModNScalar),
 			CombinedPublicKey:    new(btcec.PublicKey),
@@ -191,15 +191,15 @@ func newGennaroParticipantDKG(s *testhelper.TestSuite, threshold, participant_nu
 		CombinedCommitmentShares: new(btcec.ModNScalar),
 	}
 
-	secretPolynomial := s.GeneratePolynomial(int64(threshold - 1))
+	secretPolynomial := s.GeneratePolynomial(threshold - 1)
 	participant.testSecretPolynomial = secretPolynomial
-	commitmentPolynomial := s.GeneratePolynomial(int64(threshold - 1))
+	commitmentPolynomial := s.GeneratePolynomial(threshold - 1)
 	participant.testCommitmentPolynomial = commitmentPolynomial
 	participant.SecretCommitments = participant.generatePedersenCommitments()
 	participant.Commitments = participant.generateGennaroCommitments()
 
 	// calculate shares for each participant
-	for j := 0; j < participant_num; j++ {
+	for j := 0; j < participantNum; j++ {
 		// evaluate the secret polynomial at the participant index
 		participant_scalar := new(btcec.ModNScalar).SetInt(uint32(j + 1))
 		// secret shares as f(x)
@@ -209,7 +209,7 @@ func newGennaroParticipantDKG(s *testhelper.TestSuite, threshold, participant_nu
 	}
 
 	// verify internal commitment and secret aggregated shares
-	for i := 0; i < participant_num; i++ {
+	for i := 0; i < participantNum; i++ {
 		// expected commitment: g^(f(i) + h(i))
 		e := new(btcec.ModNScalar).Add2(participant.SecretShares[i], participant.CommitmentShares[i])
 		expected_commitment := new(btcec.JacobianPoint)
@@ -255,7 +255,7 @@ func newGennaroParticipantDKG(s *testhelper.TestSuite, threshold, participant_nu
 	// verify internal secret shares
 	// g^f(i) = g^(a_0 + a_1*i + a_2*i^2 + ... + a_t*i^t) = g^sum(a_k*i^k), k = [0, t]
 	// g^sum(a_k*i^k) = prod(A_k^i^k), k = [0, t]
-	for i := 0; i < participant_num; i++ {
+	for i := 0; i < participantNum; i++ {
 		// expected value
 		expected_secret := new(btcec.JacobianPoint)
 		btcec.ScalarBaseMultNonConst(participant.SecretShares[i], expected_secret)
@@ -348,7 +348,7 @@ func newPedersonParticipantDKG(s *testhelper.TestSuite, threshold, participant_n
 		CombinedSecretShares: new(btcec.ModNScalar),
 	}
 
-	secretPolynomial := s.GeneratePolynomial(int64(threshold - 1))
+	secretPolynomial := s.GeneratePolynomial(threshold - 1)
 	participant.testSecretPolynomial = secretPolynomial
 	participant.SecretCommitments = participant.generatePedersenCommitments()
 

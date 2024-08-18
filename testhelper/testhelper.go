@@ -5,12 +5,12 @@ import (
 	"testing"
 
 	"github.com/btcsuite/btcd/blockchain"
-	btcec "github.com/btcsuite/btcd/btcec/v2"
+	"github.com/btcsuite/btcd/btcec/v2"
 	"github.com/btcsuite/btcd/btcec/v2/schnorr"
 	"github.com/btcsuite/btcd/btcutil"
 	"github.com/btcsuite/btcd/btcutil/hdkeychain"
 	"github.com/btcsuite/btcd/chaincfg"
-	_ "github.com/btcsuite/btcd/database/ffldb"
+	//_ "github.com/btcsuite/btcd/database/ffldb"
 	"github.com/btcsuite/btcd/rpcclient"
 	"github.com/btcsuite/btcd/txscript"
 	"github.com/btcsuite/btcwallet/chain"
@@ -43,9 +43,9 @@ func (s *TestSuite) SetupStaticSimNetSuite(t *testing.T) {
 	s.BtcdChainConfig = &chaincfg.SimNetParams
 
 	// setup new utxo viewpoint
-	s.UtxoViewpoint = blockchain.NewUtxoViewpoint()
-	s.SigCache = txscript.NewSigCache(50000)
-	s.HashCache = txscript.NewHashCache(50000)
+	//s.UtxoViewpoint = blockchain.NewUtxoViewpoint()
+	//s.SigCache = txscript.NewSigCache(50000)
+	//s.HashCache = txscript.NewHashCache(50000)
 }
 
 func (s *TestSuite) SetupSimNetSuite(t *testing.T) {
