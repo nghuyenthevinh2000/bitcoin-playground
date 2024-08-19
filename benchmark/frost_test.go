@@ -17,8 +17,8 @@ func BenchmarkFrostSignature(b *testing.B) {
 	suite.SetupBenchmarkStaticSimNetSuite(b, log.Default())
 
 	// frost
-	n := int64(100)
-	threshold := int64(67)
+	n := int64(200)
+	threshold := int64(140)
 	participants := make([]*testhelper.FrostParticipant, n)
 	logger := log.Default()
 	for i := int64(0); i < n; i++ {
@@ -165,8 +165,5 @@ func BenchmarkFrostSignature(b *testing.B) {
 
 	b.StopTimer()
 	// dump logs
-	suite.BenchmarkThreadSafeReport.Range(func(key, value interface{}) bool {
-		suite.Logger.Println(key, value)
-		return true
-	})
+	suite.FlushBenchmarkThreadSafeReport()
 }

@@ -108,6 +108,15 @@ func (s *TestSuite) SetupSimNetSuite(t assert.TestingT, log *log.Logger) {
 	assert.Nil(t, err)
 }
 
+func (s *TestSuite) FlushBenchmarkThreadSafeReport() {
+	s.BenchmarkThreadSafeReport.Range(func(key, value interface{}) bool {
+		s.Logger.Println(key, value)
+		return true
+	})
+
+	s.BenchmarkThreadSafeReport = sync.Map{}
+}
+
 func (s *TestSuite) BytesToHexStr(b []byte) string {
 	return hex.EncodeToString(b)
 }
