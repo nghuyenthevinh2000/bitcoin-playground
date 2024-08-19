@@ -71,7 +71,7 @@ func (s *MockProtocolStorage) GetSecretShares(posi int64, key int64) *btcec.ModN
 // go test -v -run ^TestPersistKeyRange$ github.com/nghuyenthevinh2000/bitcoin-playground/wsts
 func TestPersistKeyRange(t *testing.T) {
 	suite := testhelper.TestSuite{}
-	suite.SetupStaticSimNetSuite(t)
+	suite.SetupStaticSimNetSuite(t, log.Default())
 
 	storage := MockProtocolStorage{
 		store: make(map[string]map[string][]byte),
@@ -94,7 +94,7 @@ func TestPersistKeyRange(t *testing.T) {
 // go test -v -run ^TestNewMockValidatorSet$ github.com/nghuyenthevinh2000/bitcoin-playground/wsts
 func TestNewMockValidatorSet(t *testing.T) {
 	suite := testhelper.TestSuite{}
-	suite.SetupStaticSimNetSuite(t)
+	suite.SetupStaticSimNetSuite(t, log.Default())
 
 	n := int64(4)
 	n_keys := int64(10)

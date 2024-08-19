@@ -817,3 +817,34 @@
 15:30:20.840855 table@remove removed @184
 15:30:20.840930 table@remove removed @183
 15:30:20.841097 table@remove removed @182
+=============== Aug 16, 2024 (+07) ===============
+01:55:02.302628 transaction@flush created L0@195 N·2 S·225B "\x00\x00\x00..fee,d10559":"\x00\x00\x00..loc,v10558"
+01:55:02.303390 version@stat F·[1 1] S·637KiB[225B 636KiB] Sc·[0.25 0.01]
+01:55:02.324532 transaction@flush created L0@196 N·2 S·1KiB "\x00\x00\x00..fee,v10560":"\x00\x00\x00..loc,v10561"
+01:55:02.324629 version@stat F·[2 1] S·638KiB[1KiB 636KiB] Sc·[0.50 0.01]
+01:55:02.368907 transaction@flush created L0@197 N·2 S·266B "\x00\x00\x00..loc,v10562":"\x00\x00\x00..ncy,v10563"
+01:55:02.369004 version@stat F·[3 1] S·638KiB[1KiB 636KiB] Sc·[0.75 0.01]
+01:55:02.375065 db@close closing
+01:55:02.375453 db@close done T·381.459µs
+=============== Aug 18, 2024 (+07) ===============
+19:08:50.977470 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+19:08:50.978052 version@stat F·[3 1] S·638KiB[1KiB 636KiB] Sc·[0.75 0.01]
+19:08:50.978066 db@open opening
+19:08:50.978113 journal@recovery F·1
+19:08:50.978877 journal@recovery recovering @192
+19:08:50.979306 version@stat F·[3 1] S·638KiB[1KiB 636KiB] Sc·[0.75 0.01]
+19:08:51.010908 db@janitor F·6 G·0
+19:08:51.011181 db@open done T·33.10475ms
+19:38:39.093181 transaction@flush created L0@200 N·2 S·225B "\x00\x00\x00..fee,d10565":"\x00\x00\x00..loc,v10564"
+19:38:39.093626 version@stat F·[4 1] S·639KiB[2KiB 636KiB] Sc·[1.00 0.01]
+19:38:39.099765 table@compaction L0·4 -> L1·1 S·639KiB Q·10563
+19:38:39.104796 transaction@flush created L0@201 N·2 S·259B "\x00\x00\x00..loc,v10566":"\x00\x00\x00.._\xd5\\,v10567"
+19:38:39.105459 version@stat F·[5 1] S·639KiB[2KiB 636KiB] Sc·[1.25 0.01]
+19:38:39.156892 table@build created L1@202 N·10318 S·636KiB "\x00\x00\x00..ate,v10436":"bid..bid,v35"
+19:38:39.157694 version@stat F·[1 1] S·637KiB[259B 636KiB] Sc·[0.25 0.01]
+19:38:39.170401 table@compaction committed F-4 S-2KiB Ke·0 D·6 T·70.453875ms
+19:38:39.175264 table@remove removed @200
+19:38:39.181342 table@remove removed @197
+19:38:39.182438 table@remove removed @196
+19:38:39.182604 table@remove removed @195
+19:38:39.187093 table@remove removed @194

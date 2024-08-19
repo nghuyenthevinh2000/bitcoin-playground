@@ -2,6 +2,7 @@ package main
 
 import (
 	"crypto/sha256"
+	"log"
 	"os"
 	"testing"
 	"time"
@@ -52,7 +53,7 @@ func TestMain(m *testing.M) {
 // go test -v -run ^TestUtxoViewpoint$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestUtxoViewpoint(t *testing.T) {
 	s := testhelper.TestSuite{}
-	s.SetupStaticSimNetSuite(t)
+	s.SetupStaticSimNetSuite(t, log.Default())
 
 	_, key_pair := s.NewHDKeyPairFromSeed("")
 	trScript, err := txscript.PayToTaprootScript(key_pair.Pub)
@@ -74,7 +75,7 @@ func TestUtxoViewpoint(t *testing.T) {
 // go test -v -run ^TestRetrieveBlocks$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestRetrieveBlocks(t *testing.T) {
 	s := testhelper.TestSuite{}
-	s.SetupSimNetSuite(t)
+	s.SetupSimNetSuite(t, log.Default())
 
 	// block 10
 	hash, err := s.ChainClient.GetBlockHash(10)
@@ -94,7 +95,7 @@ func TestRetrieveBlocks(t *testing.T) {
 // go test -v -run ^TestSeedString$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestSeedString(t *testing.T) {
 	suite := testhelper.TestSuite{}
-	suite.SetupStaticSimNetSuite(t)
+	suite.SetupStaticSimNetSuite(t, log.Default())
 
 	for i := 0; i < 3; i++ {
 		seed := suite.GenerateSeedString()
@@ -105,7 +106,7 @@ func TestSeedString(t *testing.T) {
 // go test -v -run ^TestSchnorr$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestSchnorr(t *testing.T) {
 	s := testhelper.TestSuite{}
-	s.SetupStaticSimNetSuite(t)
+	s.SetupStaticSimNetSuite(t, log.Default())
 
 	// s = t + e * d
 	_, t_pair := s.NewHDKeyPairFromSeed("")
@@ -146,7 +147,7 @@ func TestSchnorr(t *testing.T) {
 // go test -v -run ^TestJacobianOdd$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestJacobianOdd(t *testing.T) {
 	s := testhelper.TestSuite{}
-	s.SetupStaticSimNetSuite(t)
+	s.SetupStaticSimNetSuite(t, log.Default())
 
 	d_seed := s.Generate32BSeed()
 	e_seed := s.Generate32BSeed()

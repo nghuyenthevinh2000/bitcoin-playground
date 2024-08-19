@@ -3,6 +3,7 @@ package main
 import (
 	"crypto/sha256"
 	"fmt"
+	"log"
 	"os"
 	"testing"
 
@@ -26,7 +27,7 @@ import (
 // go test -v -run ^TestPTLCAliceSig$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestPTLCAliceSig(t *testing.T) {
 	s := testhelper.TestSuite{}
-	s.SetupStaticSimNetSuite(t)
+	s.SetupStaticSimNetSuite(t, log.Default())
 
 	// Alice, Bob key pair
 	_, pair_1 := s.NewHDKeyPairFromSeed(ALICE_WALLET_SEED)
@@ -64,7 +65,7 @@ func TestPTLCAliceSig(t *testing.T) {
 // go test -v -run ^TestPTLCCombinedSig$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestPTLCCombinedSig(t *testing.T) {
 	s := testhelper.TestSuite{}
-	s.SetupStaticSimNetSuite(t)
+	s.SetupStaticSimNetSuite(t, log.Default())
 
 	// Alice, Bob key pair
 	_, pair_1 := s.NewHDKeyPairFromSeed(ALICE_WALLET_SEED)
@@ -128,7 +129,7 @@ func TestPTLCCombinedSig(t *testing.T) {
 // the PTLC is between Alice and Bob, and Bob has to send Alice 1 btc, if Alice can provide private data x
 func TestPTLC(t *testing.T) {
 	s := testhelper.TestSuite{}
-	s.SetupStaticSimNetSuite(t)
+	s.SetupStaticSimNetSuite(t, log.Default())
 
 	// Alice, Bob key pair
 	_, pair_1 := s.NewHDKeyPairFromSeed(ALICE_WALLET_SEED)
@@ -204,7 +205,7 @@ func TestPTLC(t *testing.T) {
 	var bob_adaptor_sig []byte
 	var alice_combined_sig []byte
 	var alice_secret []byte
-	s.ValidateScript(p2tr, 1, func(t *testing.T, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness {
+	s.ValidateScript(p2tr, 1, func(t assert.TestingT, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness {
 		// calculating sighash
 		inputFetcher := txscript.NewCannedPrevOutputFetcher(
 			prevOut.PkScript,
@@ -293,7 +294,7 @@ func TestPTLC(t *testing.T) {
 	ctrlBlockBytes_1, err := controlBlock_1.ToBytes()
 	assert.Nil(t, err)
 
-	s.ValidateScript(p2tr, 10, func(t *testing.T, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness {
+	s.ValidateScript(p2tr, 10, func(t assert.TestingT, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness {
 		// Bob signature
 		sig, err := txscript.RawTxInTapscriptSignature(tx, sigHashes, idx, prevOut.Value, p2tr, tapLeafs[1], txscript.SigHashDefault, pair_2.GetTestPriv())
 		assert.Nil(t, err)

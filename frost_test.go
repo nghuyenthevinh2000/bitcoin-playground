@@ -2,6 +2,7 @@ package main
 
 import (
 	"crypto/sha256"
+	"log"
 	"testing"
 
 	btcec "github.com/btcsuite/btcd/btcec/v2"
@@ -47,7 +48,7 @@ type FrostParticipant struct {
 // go test -v -count=10 -run ^TestCreateFrostParticipant$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestCreateFrostParticipant(t *testing.T) {
 	suite := testhelper.TestSuite{}
-	suite.SetupStaticSimNetSuite(t)
+	suite.SetupStaticSimNetSuite(t, log.Default())
 
 	n := 7
 	thres := 5
@@ -58,7 +59,7 @@ func TestCreateFrostParticipant(t *testing.T) {
 // go test -v -run ^TestFrostCalculateShares$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestFrostCalculateShares(t *testing.T) {
 	suite := new(testhelper.TestSuite)
-	suite.SetupStaticSimNetSuite(t)
+	suite.SetupStaticSimNetSuite(t, log.Default())
 	participant := testhelper.NewFrostParticipant(suite, nil, 5, 3, 1, nil)
 	assert.NotNil(t, participant)
 
@@ -71,7 +72,7 @@ func TestFrostCalculateShares(t *testing.T) {
 // go test -v -run ^TestFrostSignature$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestFrostSignature(t *testing.T) {
 	suite := testhelper.TestSuite{}
-	suite.SetupStaticSimNetSuite(t)
+	suite.SetupStaticSimNetSuite(t, log.Default())
 
 	n := 7
 	thres := 5
@@ -458,7 +459,7 @@ func (participant *FrostParticipant) partialSign(suite *testhelper.TestSuite, ho
 
 	s_i := participant.signing_shares
 	if participant.CombinedPublicKey.SerializeCompressed()[0] == secp.PubKeyFormatCompressedOdd {
-		suite.T.Logf("participant %d, CombinedPublicKey is odd", participant.position)
+		suite.Logger.Printf("participant %d, CombinedPublicKey is odd", participant.position)
 		s_i.Negate()
 	}
 

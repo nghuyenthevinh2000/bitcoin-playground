@@ -12,11 +12,11 @@ import (
 // go test -v -run ^TestFrostSignature1$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestFrostSignature1(t *testing.T) {
 	suite := testhelper.TestSuite{}
-	suite.SetupStaticSimNetSuite(t)
+	suite.SetupStaticSimNetSuite(t, log.Default())
 
 	// frost
-	n := int64(7)
-	threshold := int64(5)
+	n := int64(100)
+	threshold := int64(67)
 	participants := make([]*testhelper.FrostParticipant, n)
 	logger := log.Default()
 	for i := int64(0); i < n; i++ {
@@ -60,10 +60,6 @@ func TestFrostSignature1(t *testing.T) {
 	for i := int64(0); i < n; i++ {
 		participant := participants[i]
 		participant.CalculateSecretShares()
-		for j := int64(0); j < n; j++ {
-			secret := secret_shares_map[participant.Position][j+1]
-			participant.VerifyPublicSecretShares(secret, j+1, uint32(participant.Position))
-		}
 
 		// try out batch verification of secret shares
 		participant.VerifyBatchPublicSecretShares(secret_shares_map[participant.Position], uint32(participant.Position))

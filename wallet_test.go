@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/hex"
+	"log"
 	"strings"
 	"testing"
 	"time"
@@ -17,7 +18,7 @@ import (
 // go test -v -run ^TestExportPriv$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestExportPriv(t *testing.T) {
 	suite := testhelper.TestSuite{}
-	suite.SetupSimNetSuite(t)
+	suite.SetupSimNetSuite(t, log.Default())
 
 	// open bob wallet
 	bobWallet := suite.OpenWallet(t, BOB_WALLET_SEED, "bob")
@@ -31,7 +32,7 @@ func TestExportPriv(t *testing.T) {
 // create bob wallet and fund bob wallet with 1000 sats sent from btcd registered mining wallet
 func TestBtcdCreateWallet(t *testing.T) {
 	suite := testhelper.TestSuite{}
-	suite.SetupSimNetSuite(t)
+	suite.SetupSimNetSuite(t, log.Default())
 
 	// use a HD wallet seed
 	seedStr := strings.TrimSpace(strings.ToLower(BOB_WALLET_SEED))

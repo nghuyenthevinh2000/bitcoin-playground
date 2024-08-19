@@ -54,7 +54,7 @@ func (s *TestSuite) FundWallet(wallet *wallet.Wallet, amount btcutil.Amount) {
 	addr, err := wallet.CurrentAddress(0, waddrmgr.KeyScopeBIP0044)
 	assert.Nil(s.T, err)
 
-	s.T.Logf("address: %s", addr.EncodeAddress())
+	s.Logger.Printf("address: %s", addr.EncodeAddress())
 
 	// send 0.1 BTC to the address
 	_, err = s.WalletClient.SendToAddress(addr, amount)

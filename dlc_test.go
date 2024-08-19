@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"testing"
 
 	"github.com/nghuyenthevinh2000/bitcoin-playground/testhelper"
@@ -8,7 +9,7 @@ import (
 
 func TestDLC(t *testing.T) {
 	s := testhelper.TestSuite{}
-	s.SetupSimNetSuite(t)
+	s.SetupSimNetSuite(t, log.Default())
 
 	// setup alice and bob
 	// _, alice_pub, alice_priv := s.generateKeyPair()

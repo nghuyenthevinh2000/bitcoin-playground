@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"testing"
 
 	btcec "github.com/btcsuite/btcd/btcec/v2"
@@ -58,7 +59,7 @@ type PedersonParticipant struct {
 // go test -v -run ^TestCreatePerdersonParticipant$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestCreatePerdersonParticipant(t *testing.T) {
 	suite := testhelper.TestSuite{}
-	suite.SetupStaticSimNetSuite(t)
+	suite.SetupStaticSimNetSuite(t, log.Default())
 
 	threshold := 5
 	participant_num := 7
@@ -89,7 +90,7 @@ func TestCreatePerdersonParticipant(t *testing.T) {
 // 3. commitments of secret shares: C(i) = g^(f(i) + h(i)) = prod(E(k)^i^k), k = [0, t]
 func TestBasicGennaroDKG(t *testing.T) {
 	s := testhelper.TestSuite{}
-	s.SetupStaticSimNetSuite(t)
+	s.SetupStaticSimNetSuite(t, log.Default())
 
 	// setup 7 participants
 	// threshold = 5

@@ -2,6 +2,7 @@ package main
 
 import (
 	"crypto/sha256"
+	"log"
 	"testing"
 	"time"
 
@@ -20,7 +21,7 @@ import (
 // third run will always fail, but amount of alice is updated
 func TestBallGameContract(t *testing.T) {
 	suite := testhelper.TestSuite{}
-	suite.SetupSimNetSuite(t)
+	suite.SetupSimNetSuite(t, log.Default())
 
 	// Alice, Bob wallet
 	alice := suite.OpenWallet(t, ALICE_WALLET_SEED, "alice")

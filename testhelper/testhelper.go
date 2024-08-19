@@ -2,6 +2,8 @@ package testhelper
 
 import (
 	"encoding/hex"
+	"log"
+	"sync"
 	"testing"
 
 	"github.com/btcsuite/btcd/blockchain"
@@ -18,7 +20,11 @@ import (
 )
 
 type TestSuite struct {
-	T *testing.T
+	T assert.TestingT
+	B *testing.B
+
+	Logger                    *log.Logger
+	BenchmarkThreadSafeReport sync.Map
 
 	// this is for bitcoin live network
 	ChainClient       *rpcclient.Client
@@ -33,13 +39,15 @@ type TestSuite struct {
 	HashCache     *txscript.HashCache
 }
 
-func (s *TestSuite) SetupRegNetSuite(t *testing.T) {
+func (s *TestSuite) SetupRegNetSuite(t assert.TestingT, log *log.Logger) {
 	s.T = t
+	s.Logger = log
 	s.BtcdChainConfig = &chaincfg.RegressionNetParams
 }
 
-func (s *TestSuite) SetupStaticSimNetSuite(t *testing.T) {
+func (s *TestSuite) SetupStaticSimNetSuite(t assert.TestingT, log *log.Logger) {
 	s.T = t
+	s.Logger = log
 	s.BtcdChainConfig = &chaincfg.SimNetParams
 
 	// setup new utxo viewpoint
@@ -48,10 +56,16 @@ func (s *TestSuite) SetupStaticSimNetSuite(t *testing.T) {
 	s.HashCache = txscript.NewHashCache(50000)
 }
 
-func (s *TestSuite) SetupSimNetSuite(t *testing.T) {
+func (s *TestSuite) SetupBenchmarkStaticSimNetSuite(b *testing.B, log *log.Logger) {
+	s.B = b
+	s.SetupStaticSimNetSuite(b, log)
+}
+
+func (s *TestSuite) SetupSimNetSuite(t assert.TestingT, log *log.Logger) {
 	var err error
 
 	s.T = t
+	s.Logger = log
 	// connect to bitcoin btcd simnet network
 	s.BtcdConnConfig = &rpcclient.ConnConfig{
 		Host:         MockBtcdHost,

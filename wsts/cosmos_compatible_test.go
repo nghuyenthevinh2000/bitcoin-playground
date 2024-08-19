@@ -1,6 +1,7 @@
 package wsts
 
 import (
+	"log"
 	"testing"
 
 	"github.com/btcsuite/btcd/btcec/v2"
@@ -12,7 +13,7 @@ import (
 // go test -v -run ^TestCosmosCompatibleKey$ github.com/nghuyenthevinh2000/bitcoin-playground/wsts
 func TestCosmosCompatibleKey(t *testing.T) {
 	suite := testhelper.TestSuite{}
-	suite.SetupStaticSimNetSuite(t)
+	suite.SetupStaticSimNetSuite(t, log.Default())
 
 	priv := cosmossecp.GenPrivKey()
 	cosmosPubBytes := priv.PubKey().Bytes()

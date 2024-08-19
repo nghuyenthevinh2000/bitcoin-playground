@@ -1,6 +1,7 @@
 package testhelper
 
 import (
+	"fmt"
 	"log"
 	"sync"
 	"time"
@@ -37,6 +38,11 @@ type FrostParticipant struct {
 	// nonce commitments for multiples signing usages
 	nonces [][2]*btcec.ModNScalar
 
+	// caching for faster computation
+	power_map sync.Map
+	q_map     sync.Map
+	w_map     sync.Map
+
 	PolynomialCommitments map[int64][]*btcec.PublicKey
 	PublicSigningShares   map[int64]*btcec.PublicKey
 	GroupPublicKey        *btcec.PublicKey
@@ -50,6 +56,7 @@ func NewFrostParticipant(suite *TestSuite, logger *log.Logger, n, Threshold, pos
 	frost := &FrostParticipant{
 		suite:                 suite,
 		logger:                logger,
+		power_map:             sync.Map{},
 		N:                     n,
 		Threshold:             Threshold,
 		Position:              posi,
@@ -67,6 +74,82 @@ func NewFrostParticipant(suite *TestSuite, logger *log.Logger, n, Threshold, pos
 	frost.PolynomialCommitments[posi] = frost.generatePedersenCommitments()
 
 	return frost
+}
+
+func (p *FrostParticipant) ParseQMap(q_map map[interface{}]interface{}) {
+	for key, value := range q_map {
+		p.q_map.Store(key, value)
+	}
+}
+
+func (p *FrostParticipant) ParseWMap(w_map map[interface{}]interface{}) {
+	for key, value := range w_map {
+		p.w_map.Store(key, value)
+	}
+}
+
+func (p *FrostParticipant) CopyQMap() map[interface{}]interface{} {
+	q_map_copy := make(map[interface{}]interface{})
+	p.q_map.Range(func(key, value interface{}) bool {
+		q_map_copy[key] = value
+		return true
+	})
+
+	return q_map_copy
+}
+
+func (p *FrostParticipant) CopyWMap() map[interface{}]interface{} {
+	w_map_copy := make(map[interface{}]interface{})
+	p.w_map.Range(func(key, value interface{}) bool {
+		w_map_copy[key] = value
+		return true
+	})
+
+	return w_map_copy
+}
+
+func (p *FrostParticipant) StoreWMapItem(key int64, value map[int64]*btcec.JacobianPoint) {
+	p.w_map.Store(key, value)
+}
+
+func (p *FrostParticipant) GetWMapItem(key int64) map[int64]*btcec.JacobianPoint {
+	value, ok := p.w_map.Load(key)
+	// check item exists
+	assert.True(p.suite.T, ok)
+	return value.(map[int64]*btcec.JacobianPoint)
+}
+
+func (p *FrostParticipant) StoreQMapItem(key int64, value map[int64][]*btcec.JacobianPoint) {
+	p.q_map.Store(key, value)
+}
+
+func (p *FrostParticipant) GetQMapItem(key int64) map[int64][]*btcec.JacobianPoint {
+	value, ok := p.q_map.Load(key)
+
+	// check item exists
+	assert.True(p.suite.T, ok)
+
+	// check if length is correct
+	map_val := value.(map[int64][]*btcec.JacobianPoint)
+	assert.Equal(p.suite.T, len(map_val), int(p.N))
+	assert.Equal(p.suite.T, len(map_val[1]), int(p.Threshold+1))
+
+	return value.(map[int64][]*btcec.JacobianPoint)
+}
+
+func (p *FrostParticipant) StorePowerMapItem(key int64, value []*btcec.ModNScalar) {
+	p.power_map.Store(key, value)
+}
+
+func (p *FrostParticipant) GetPowerMapItem(key int64) []*btcec.ModNScalar {
+	value, ok := p.power_map.Load(key)
+	// check item exists
+	assert.True(p.suite.T, ok)
+
+	// check if length is correct
+	assert.Equal(p.suite.T, len(value.([]*btcec.ModNScalar)), int(p.Threshold+1))
+
+	return value.([]*btcec.ModNScalar)
 }
 
 // calculate A(k) = g^a_k
@@ -240,87 +323,6 @@ func (p *FrostParticipant) VerifyPublicSecretShares(secretShares *btcec.ModNScal
 	assert.Equal(p.suite.T, expected_a.X, calculated_a.X)
 }
 
-// verify batch public secret shares for a participant secret shares
-//
-// expensive operation
-func (p *FrostParticipant) VerifyBatchPublicSecretShares(secret_shares map[int64]*btcec.ModNScalar, posi uint32) {
-	var wg sync.WaitGroup
-
-	// calculate expected A_i for all parties
-	// make(map[int64]*btcec.JacobianPoint)
-	// s_ji = f_j(i)
-	all_expected_A := make(map[int64]*btcec.JacobianPoint)
-	for index, shares := range secret_shares {
-		expected_A := new(btcec.JacobianPoint)
-		btcec.ScalarBaseMultNonConst(shares, expected_A)
-		expected_A.ToAffine()
-		all_expected_A[index] = expected_A
-	}
-
-	// calculate map of i^k for this participant
-	time_now := time.Now()
-	posi_scalar := new(btcec.ModNScalar).SetInt(posi)
-	i_power_arr := make([]*btcec.ModNScalar, p.Threshold+1)
-	i_power := new(btcec.ModNScalar)
-	i_power.SetInt(1)
-	for i := int64(0); i <= p.Threshold; i++ {
-		i_power_arr[i] = new(btcec.ModNScalar).Set(i_power)
-		i_power.Mul(posi_scalar)
-	}
-	p.logger.Printf("calculate i^k time: %v\n", time.Since(time_now))
-
-	// calculate map of A_k^i^k for all parties
-	// make(map[int64][]*btcec.JacobianPoint)
-	time_now = time.Now()
-	all_term := sync.Map{}
-	for posi, poly_commitments := range p.PolynomialCommitments {
-		wg.Add(1)
-		go func(posi int64, poly_commitments []*btcec.PublicKey) {
-			term_arr := make([]*secp.JacobianPoint, p.Threshold+1)
-			var wg1 sync.WaitGroup
-			for i := int64(0); i <= p.Threshold; i++ {
-				wg1.Add(1)
-				go func(i int64) {
-					term := new(btcec.JacobianPoint)
-					poly_commitments[i].AsJacobian(term)
-					btcec.ScalarMultNonConst(i_power_arr[i], term, term)
-					term.ToAffine()
-					term_arr[i] = term
-					wg1.Done()
-				}(i)
-			}
-			wg1.Wait()
-			all_term.Store(posi, term_arr)
-			wg.Done()
-		}(posi, poly_commitments)
-	}
-	wg.Wait()
-	p.logger.Printf("calculate A_k^i^k time: %v\n", time.Since(time_now))
-
-	// calculate prod(A_k^i^k) for all parties
-	// then verify against expected values
-	time_now = time.Now()
-	all_term.Range(func(key any, value any) bool {
-		index := key.(int64)
-		term := value.([]*btcec.JacobianPoint)
-		wg.Add(1)
-		go func(index int64, term []*btcec.JacobianPoint) {
-			calculated_A := new(btcec.JacobianPoint)
-			for _, val := range term {
-				btcec.AddNonConst(calculated_A, val, calculated_A)
-			}
-			calculated_A.ToAffine()
-			expected_A := all_expected_A[index]
-			assert.Equal(p.suite.T, expected_A, calculated_A)
-			wg.Done()
-		}(index, term)
-
-		return true
-	})
-	wg.Wait()
-	p.logger.Printf("verify batch secret shares time: %v\n", time.Since(time_now))
-}
-
 func (p *FrostParticipant) CalculateInternalPublicSigningShares(signingShares *btcec.ModNScalar, posi int64) *btcec.PublicKey {
 	signingPoint := new(btcec.JacobianPoint)
 	btcec.ScalarBaseMultNonConst(signingShares, signingPoint)
@@ -361,18 +363,18 @@ func (p *FrostParticipant) CalculatePublicSigningShares(party_num, posi int64) *
 	posi_scalar.SetInt(uint32(posi))
 
 	Y := new(btcec.JacobianPoint)
-	for i := int64(1); i <= party_num; i++ {
-		i_power_map := make([]*btcec.ModNScalar, p.Threshold+1)
-		i_power := new(btcec.ModNScalar)
-		i_power.SetInt(1)
-		for j := int64(0); j <= p.Threshold; j++ {
-			i_power_map[j] = new(btcec.ModNScalar).Set(i_power)
-			i_power.Mul(posi_scalar)
-		}
+	i_power_map := make([]*btcec.ModNScalar, p.Threshold+1)
+	i_power := new(btcec.ModNScalar)
+	i_power.SetInt(1)
+	for j := int64(0); j <= p.Threshold; j++ {
+		i_power_map[j] = new(btcec.ModNScalar).Set(i_power)
+		i_power.Mul(posi_scalar)
+	}
 
+	for i := int64(1); i <= party_num; i++ {
 		// parallel computation
 		// \prod_{j=0}^{t} A_mj^i^j
-		term_1_map := make([]*btcec.JacobianPoint, p.Threshold+1)
+		term_1_arr := make([]*btcec.JacobianPoint, p.Threshold+1)
 		var wg sync.WaitGroup
 		for j := int64(0); j <= p.Threshold; j++ {
 			wg.Add(1)
@@ -384,8 +386,12 @@ func (p *FrostParticipant) CalculatePublicSigningShares(party_num, posi int64) *
 				// calculate A_mj^i^j
 				term1 := new(btcec.JacobianPoint)
 				btcec.ScalarMultNonConst(i_power_map[j], A_ij, term1)
+				term1.ToAffine()
 
-				term_1_map[j] = term1
+				term_1_arr[j] = term1
+
+				// p.suite.Logger.Printf("Participant %d: public signing shares for %d: A_%d%d%d=%v\n", p.Position, posi, posi, i, j, term1)
+				// p.suite.Logger.Printf("A_ij: %v, i_power_map[j]: %v\n", A_ij, i_power_map[j])
 
 				wg.Done()
 			}(j)
@@ -394,8 +400,12 @@ func (p *FrostParticipant) CalculatePublicSigningShares(party_num, posi int64) *
 
 		term := new(btcec.JacobianPoint)
 		for j := int64(0); j <= p.Threshold; j++ {
-			btcec.AddNonConst(term, term_1_map[j], term)
+			btcec.AddNonConst(term, term_1_arr[j], term)
+			// p.suite.Logger.Printf("Calculating w for (participant, external, m) = (%d, %d, %d), A_%d%d%d=%v\n\n", p.Position, posi, i, posi, i, j, term_1_arr[j])
 		}
+		term.ToAffine()
+
+		// p.suite.Logger.Printf("Calculating w for (participant, external, m) = (%d, %d, %d): %v\n", p.Position, posi, i, term)
 
 		btcec.AddNonConst(Y, term, Y)
 	}
@@ -752,4 +762,203 @@ func (p *FrostParticipant) WeightedPartialVerification(sig *schnorr.Signature, s
 	// verify R point equals provided R_X
 	assert.Equal(p.suite.T, &R.X, R_X, "verify partial sig proof: R.X does not match provided R_X")
 	return R.X.Equals(R_X)
+}
+
+// BATCH CALCULATION
+
+// derive power map for future calculation
+func (p *FrostParticipant) DerivePowerMap() {
+	var wg sync.WaitGroup
+	time_now := time.Now()
+	for posi := int64(1); posi <= p.N; posi++ {
+		wg.Add(1)
+		go func(posi int64) {
+			defer wg.Done()
+			posi_scalar := new(btcec.ModNScalar)
+			posi_scalar.SetInt(uint32(posi))
+
+			i_power_arr := make([]*btcec.ModNScalar, p.Threshold+1)
+			i_power := new(btcec.ModNScalar)
+			i_power.SetInt(1)
+			for j := int64(0); j <= p.Threshold; j++ {
+				i_power_arr[j] = new(btcec.ModNScalar).Set(i_power)
+				i_power.Mul(posi_scalar)
+			}
+			p.StorePowerMapItem(posi, i_power_arr)
+		}(posi)
+	}
+	wg.Wait()
+	if p.suite.B != nil {
+		p.suite.BenchmarkThreadSafeReport.Store(fmt.Sprintf("ms/derive-power-map-%d", p.Position), float64(time.Since(time_now).Milliseconds()))
+	}
+}
+
+// derive Q_mj(i) = A_mj^i^j map for calculation of public signing shares
+func (p *FrostParticipant) DeriveExternalQMap() {
+	var wg sync.WaitGroup
+	time_now := time.Now()
+	for posi := int64(1); posi <= p.N; posi++ {
+		wg.Add(1)
+		go func(posi int64) {
+			defer wg.Done()
+			i_power_arr := p.GetPowerMapItem(posi)
+			A_m_map := make(map[int64][]*btcec.JacobianPoint)
+			for m, A_m := range p.PolynomialCommitments {
+				A_mj_arr := make([]*btcec.JacobianPoint, p.Threshold+1)
+				var wg1 sync.WaitGroup
+				for j, A_mj := range A_m {
+					wg1.Add(1)
+					go func(j int, A_mj *btcec.PublicKey) {
+						defer wg1.Done()
+						A_mj_point := new(btcec.JacobianPoint)
+						A_mj.AsJacobian(A_mj_point)
+
+						// calculate A_mj^i^j
+						term1 := new(btcec.JacobianPoint)
+						btcec.ScalarMultNonConst(i_power_arr[j], A_mj_point, term1)
+						term1.ToAffine()
+
+						// p.suite.Logger.Printf("Participant %d, calculating batch public shares for %d: A_%d%d%d = %v\n", p.Position, posi, posi, m, j, term1)
+						// p.suite.Logger.Printf("A_mj: %v, i_power_arr: %v\n", A_mj_point, i_power_arr[j])
+
+						A_mj_arr[j] = term1
+					}(j, A_mj)
+				}
+				wg1.Wait()
+				A_m_map[m] = A_mj_arr
+			}
+			p.StoreQMapItem(posi, A_m_map)
+		}(posi)
+	}
+	wg.Wait()
+	if p.suite.B != nil {
+		p.suite.BenchmarkThreadSafeReport.Store(fmt.Sprintf("ms/derive-q-map-%d", p.Position), float64(time.Since(time_now).Milliseconds()))
+	}
+}
+
+// Derive W_m(i) = \prod_{j=0}^{t} A_mj^i^j
+// Y_i = \prod_{m=1}^{n_p} \prod_{j=0}^{t} A_mj^i^j
+func (p *FrostParticipant) DeriveExternalWMap() {
+	var wg sync.WaitGroup
+	time_now := time.Now()
+	for posi := int64(1); posi <= p.N; posi++ {
+		A_m_map := p.GetQMapItem(posi)
+		wg.Add(1)
+		go func(posi int64) {
+			defer wg.Done()
+			W_m_arr := make(map[int64]*btcec.JacobianPoint)
+			for m := range p.PolynomialCommitments {
+				A_mj_arr := A_m_map[m]
+				// calculate \prod_{j=0}^{t} A_mj^i^j
+				W_m := new(btcec.JacobianPoint)
+				for _, A_mj := range A_mj_arr {
+					btcec.AddNonConst(W_m, A_mj, W_m)
+					// p.suite.Logger.Printf("Calculating batch wmap for (participant, external, m) = (%d, %d, %d), A_%d%d%d=%v\n", p.Position, posi, m, posi, m, j, A_mj)
+				}
+				W_m.ToAffine()
+				W_m_arr[m] = W_m
+
+				// p.suite.Logger.Printf("Calculating batch wmap for (participant, external, m) = (%d, %d, %d): %v\n", p.Position, posi, m, W_m)
+			}
+			p.StoreWMapItem(posi, W_m_arr)
+		}(posi)
+	}
+	wg.Wait()
+	if p.suite.B != nil {
+		p.suite.BenchmarkThreadSafeReport.Store(fmt.Sprintf("ms/derive-w-map-%d", p.Position), float64(time.Since(time_now).Milliseconds()))
+	}
+}
+
+// verify batch public secret shares for a participant secret shares
+//
+// expensive operation
+func (p *FrostParticipant) VerifyBatchPublicSecretShares(secret_shares map[int64]*btcec.ModNScalar, posi uint32) {
+	var wg sync.WaitGroup
+	time_now := time.Now()
+
+	// calculate expected A_i for all parties
+	// make(map[int64]*btcec.JacobianPoint)
+	// s_ji = f_j(i)
+	all_expected_A := make(map[int64]*btcec.JacobianPoint)
+	for index, shares := range secret_shares {
+		expected_A := new(btcec.JacobianPoint)
+		btcec.ScalarBaseMultNonConst(shares, expected_A)
+		expected_A.ToAffine()
+		all_expected_A[index] = expected_A
+	}
+
+	i_power_arr := p.GetPowerMapItem(int64(posi))
+
+	// calculate map of A_k^i^k for all parties
+	// make(map[int64][]*btcec.JacobianPoint)
+	all_term := sync.Map{}
+	for posi, poly_commitments := range p.PolynomialCommitments {
+		wg.Add(1)
+		go func(posi int64, poly_commitments []*btcec.PublicKey) {
+			term_arr := make([]*secp.JacobianPoint, p.Threshold+1)
+			var wg1 sync.WaitGroup
+			for i := int64(0); i <= p.Threshold; i++ {
+				wg1.Add(1)
+				go func(i int64) {
+					term := new(btcec.JacobianPoint)
+					poly_commitments[i].AsJacobian(term)
+					btcec.ScalarMultNonConst(i_power_arr[i], term, term)
+					term.ToAffine()
+					term_arr[i] = term
+					wg1.Done()
+				}(i)
+			}
+			wg1.Wait()
+			all_term.Store(posi, term_arr)
+			wg.Done()
+		}(posi, poly_commitments)
+	}
+	wg.Wait()
+
+	// calculate prod(A_k^i^k) for all parties
+	// then verify against expected values
+	all_term.Range(func(key any, value any) bool {
+		index := key.(int64)
+		term := value.([]*btcec.JacobianPoint)
+		wg.Add(1)
+		go func(index int64, term []*btcec.JacobianPoint) {
+			calculated_A := new(btcec.JacobianPoint)
+			for _, val := range term {
+				btcec.AddNonConst(calculated_A, val, calculated_A)
+			}
+			calculated_A.ToAffine()
+			expected_A := all_expected_A[index]
+			assert.Equal(p.suite.T, expected_A, calculated_A)
+			wg.Done()
+		}(index, term)
+
+		return true
+	})
+	wg.Wait()
+	if p.suite.B != nil {
+		p.suite.BenchmarkThreadSafeReport.Store(fmt.Sprintf("ms/verify-batch-secret-shares-%d", p.Position), float64(time.Since(time_now).Milliseconds()))
+	}
+}
+
+// CalculateBatchPublicSigningShares calculates the public signing shares for other participants
+func (p *FrostParticipant) CalculateBatchPublicSigningShares() {
+	time_now := time.Now()
+
+	// calculate Y_i
+	for posi := int64(1); posi <= p.N; posi++ {
+		if posi == p.Position {
+			continue
+		}
+
+		W_m := p.GetWMapItem(posi)
+		Y := new(btcec.JacobianPoint)
+		for _, W := range W_m {
+			btcec.AddNonConst(Y, W, Y)
+		}
+		Y.ToAffine()
+		p.PublicSigningShares[posi] = btcec.NewPublicKey(&Y.X, &Y.Y)
+	}
+	if p.suite.B != nil {
+		p.suite.BenchmarkThreadSafeReport.Store(fmt.Sprintf("ms/calculate-batch-public-signing-shares-%d", p.Position), float64(time.Since(time_now).Milliseconds()))
+	}
 }

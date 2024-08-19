@@ -530,6 +530,9 @@ func (v *MockValidator) verifySharesAndCalculateLongTermKey() {
 	// extract secret shares of a key from all validators
 	time_now := time.Now()
 	key_range := v.protocolStorage.GetKeyRange(strconv.FormatInt(v.position, 10))
+
+	v.frost.DerivePowerMap()
+
 	var wg sync.WaitGroup
 	for i := key_range[0]; i < key_range[1]; i++ {
 		wg.Add(1)

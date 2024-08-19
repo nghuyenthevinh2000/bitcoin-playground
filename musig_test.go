@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/hex"
 	"fmt"
+	"log"
 	"os"
 	"testing"
 
@@ -21,7 +22,7 @@ import (
 // go test -v -run ^TestMuSig2$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestMuSig2(t *testing.T) {
 	s := testhelper.TestSuite{}
-	s.SetupStaticSimNetSuite(t)
+	s.SetupStaticSimNetSuite(t, log.Default())
 
 	// create aggregated public key
 	_, pair_1 := s.NewHDKeyPairFromSeed(ALICE_WALLET_SEED)
@@ -39,7 +40,7 @@ func TestMuSig2(t *testing.T) {
 
 	// verify aggregated signature
 	// check aggregated R value, it should be the same as when signing
-	s.ValidateScript(trScript, 1, func(t *testing.T, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness {
+	s.ValidateScript(trScript, 1, func(t assert.TestingT, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness {
 		// calculating sighash
 		inputFetcher := txscript.NewCannedPrevOutputFetcher(
 			prevOut.PkScript,
@@ -86,7 +87,7 @@ func TestMuSig2(t *testing.T) {
 // go test -v -run ^TestLinearTaprootMuSig$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestLinearTaprootMuSig(t *testing.T) {
 	s := testhelper.TestSuite{}
-	s.SetupStaticSimNetSuite(t)
+	s.SetupStaticSimNetSuite(t, log.Default())
 
 	_, pair_1 := s.NewHDKeyPairFromSeed(ALICE_WALLET_SEED)
 	_, pair_2 := s.NewHDKeyPairFromSeed(BOB_WALLET_SEED)
@@ -166,7 +167,7 @@ func TestLinearTaprootMuSig(t *testing.T) {
 	testLog.SetLevel(btclog.LevelTrace)
 	txscript.UseLogger(testLog)
 
-	s.ValidateScript(p2trScript, 1, func(t *testing.T, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness {
+	s.ValidateScript(p2trScript, 1, func(t assert.TestingT, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness {
 		sig_1 := []byte{}
 
 		sig_2, err := txscript.RawTxInTapscriptSignature(tx, sigHashes, idx, prevOut.Value, p2trScript, tapleaf, txscript.SigHashDefault, pair_2.GetTestPriv())
@@ -194,7 +195,7 @@ func TestLinearTaprootMuSig(t *testing.T) {
 // go test -v -run ^TestSubsetTaprootMuSig$ github.com/nghuyenthevinh2000/bitcoin-playground
 func TestSubsetTaprootMuSig(t *testing.T) {
 	s := testhelper.TestSuite{}
-	s.SetupStaticSimNetSuite(t)
+	s.SetupStaticSimNetSuite(t, log.Default())
 
 	_, pair_1 := s.NewHDKeyPairFromSeed(ALICE_WALLET_SEED)
 	_, pair_2 := s.NewHDKeyPairFromSeed(BOB_WALLET_SEED)
@@ -264,7 +265,7 @@ func TestSubsetTaprootMuSig(t *testing.T) {
 	testLog.SetLevel(btclog.LevelTrace)
 	txscript.UseLogger(testLog)
 
-	s.ValidateScript(p2trScript, 1, func(t *testing.T, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness {
+	s.ValidateScript(p2trScript, 1, func(t assert.TestingT, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness {
 		// create aggregated nonces
 		nonce_1, err := musig2.GenNonces(musig2.WithPublicKey(pair_1.Pub))
 		assert.Nil(s.T, err)

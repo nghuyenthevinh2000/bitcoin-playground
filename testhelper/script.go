@@ -1,8 +1,6 @@
 package testhelper
 
 import (
-	"testing"
-
 	"github.com/btcsuite/btcd/blockchain"
 	"github.com/btcsuite/btcd/btcutil"
 	"github.com/btcsuite/btcd/chaincfg/chainhash"
@@ -14,7 +12,7 @@ import (
 // validate script creates a funding transaction and a spending transaction
 // the funding transaction will send funds to the test script
 // the spending transaction will spend the funds from the funding transaction with test witness
-func (s *TestSuite) ValidateScript(pkScript []byte, blockHeight int32, witnessFunc func(t *testing.T, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness) {
+func (s *TestSuite) ValidateScript(pkScript []byte, blockHeight int32, witnessFunc func(t assert.TestingT, prevOut *wire.TxOut, tx *wire.MsgTx, sigHashes *txscript.TxSigHashes, idx int) wire.TxWitness) {
 	// create a random key pair
 	_, keypair := s.NewHDKeyPairFromSeed("")
 
