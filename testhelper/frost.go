@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	btcec "github.com/btcsuite/btcd/btcec/v2"
+	"github.com/btcsuite/btcd/btcec/v2"
 	"github.com/btcsuite/btcd/btcec/v2/schnorr"
 	"github.com/btcsuite/btcd/chaincfg/chainhash"
 	secp "github.com/decred/dcrd/dcrec/secp256k1/v4"
@@ -21,14 +21,14 @@ var (
 	TagFROSTChallenge = []byte("FROST/challenge")
 )
 
-// multiple signing usages are meant to sign multiple messages with this Frost setup
+// FrostParticipant multiple signing usages are meant to sign multiple messages with this Frost setup
 type FrostParticipant struct {
 	suite  *TestSuite
 	logger *log.Logger
 
-	N         int64
-	Threshold int64
-	Position  int64
+	N         int
+	Threshold int
+	Position  int
 
 	secretSharesMutex sync.Mutex
 
@@ -37,68 +37,74 @@ type FrostParticipant struct {
 	// nonce commitments for multiples signing usages
 	nonces [][2]*btcec.ModNScalar
 
-	PolynomialCommitments map[int64][]*btcec.PublicKey
-	PublicSigningShares   map[int64]*btcec.PublicKey
+	PolynomialCommitment []*btcec.PublicKey
+
+	PolynomialCommitments [][]*btcec.PublicKey
+	PublicSigningShares   map[int]*btcec.PublicKey
 	GroupPublicKey        *btcec.PublicKey
 	// contains the nonce commitments for multiple signing usages
 	NonceCommitments [][2]*btcec.PublicKey
 	// contains the aggregated nonce commitments for multiple signing usages
-	AggrNonceCommitment map[int64]*btcec.JacobianPoint
+	AggrNonceCommitment map[int]*btcec.JacobianPoint
 }
 
-func NewFrostParticipant(suite *TestSuite, logger *log.Logger, n, Threshold, posi int64, secret *btcec.ModNScalar) *FrostParticipant {
-	frost := &FrostParticipant{
-		suite:                 suite,
-		logger:                logger,
-		N:                     n,
-		Threshold:             Threshold,
-		Position:              posi,
-		PolynomialCommitments: make(map[int64][]*btcec.PublicKey),
-		PublicSigningShares:   make(map[int64]*btcec.PublicKey),
-		AggrNonceCommitment:   make(map[int64]*secp.JacobianPoint),
-	}
-
+func NewFrostParticipant(suite *TestSuite, logger *log.Logger, n, threshold, posi int, secret *btcec.ModNScalar) *FrostParticipant {
 	// generate secret polynomial
-	frost.secretPolynomial = suite.GeneratePolynomial(Threshold)
+	secretPolynomial := suite.GeneratePolynomial(threshold)
 	if secret != nil {
-		frost.secretPolynomial[0] = secret
+		secretPolynomial[0] = secret
 	}
-	// generate public polynomial commitments
-	frost.PolynomialCommitments[posi] = frost.generatePedersenCommitments()
+	polynomialCommitment := generatePedersenCommitments(secretPolynomial)
 
+	frost := &FrostParticipant{
+		suite:                suite,
+		logger:               logger,
+		N:                    n,
+		Threshold:            threshold,
+		Position:             posi,
+		PolynomialCommitment: polynomialCommitment,
+		secretPolynomial:     secretPolynomial,
+		//PolynomialCommitments: make(map[int][]*btcec.PublicKey),
+		PublicSigningShares: make(map[int]*btcec.PublicKey),
+		AggrNonceCommitment: make(map[int]*secp.JacobianPoint),
+	}
+
+	// generate public polynomial commitments
+	//frost.PolynomialCommitments[posi] = frost.generatePedersenCommitments()
 	return frost
 }
 
 // calculate A(k) = g^a_k
-func (p *FrostParticipant) generatePedersenCommitments() []*btcec.PublicKey {
-	commitments := make([]*btcec.PublicKey, p.Threshold+1)
-	for i := int64(0); i <= p.Threshold; i++ {
+func generatePedersenCommitments(polynomial []*btcec.ModNScalar) []*btcec.PublicKey {
+	commitments := make([]*btcec.PublicKey, len(polynomial))
+	for i := 0; i < len(polynomial); i++ {
 		// g^a_k
 		point := new(btcec.JacobianPoint)
-		btcec.ScalarBaseMultNonConst(p.secretPolynomial[i], point)
+		btcec.ScalarBaseMultNonConst(polynomial[i], point)
 		point.ToAffine()
 		commitments[i] = btcec.NewPublicKey(&point.X, &point.Y)
 	}
 	return commitments
 }
 
-func (p *FrostParticipant) UpdatePolynomialCommitments(posi int64, commitments []*btcec.PublicKey) {
-	p.PolynomialCommitments[posi] = commitments
-}
+//
+//func (p *FrostParticipant) UpdatePolynomialCommitments(posi int, commitments []*btcec.PublicKey) {
+//	p.PolynomialCommitments[posi] = commitments
+//}
 
-// calculating secret proofs challenge
+// CalculateSecretProofsChallenge calculating secret proofs challenge
 // c = H(i, stamp, A_i, R_i)
-func (p *FrostParticipant) CalculateSecretProofsChallenge(context_hash [32]byte, R_x *btcec.FieldVal, position int64, secretCommitments *btcec.PublicKey) *btcec.ModNScalar {
+func (p *FrostParticipant) CalculateSecretProofsChallenge(context_hash [32]byte, R_x *btcec.FieldVal, position int, secretCommitments *btcec.PublicKey) *btcec.ModNScalar {
 	// c = H(i, stamp, A_i, R_i)
-	commitment_data := make([]byte, 0)
-	commitment_data = append(commitment_data, byte(position))
-	commitment_data = append(commitment_data, context_hash[:]...)
-	commitment_data = append(commitment_data, schnorr.SerializePubKey(secretCommitments)...)
-	commitment_data = append(commitment_data, R_x.Bytes()[:]...)
+	commitmentData := make([]byte, 0)
+	commitmentData = append(commitmentData, byte(position))
+	commitmentData = append(commitmentData, context_hash[:]...)
+	commitmentData = append(commitmentData, schnorr.SerializePubKey(secretCommitments)...)
+	commitmentData = append(commitmentData, R_x.Bytes()[:]...)
 
-	commitment_hash := chainhash.TaggedHash(TagFROSTChallenge, commitment_data)
+	commitmentHash := chainhash.TaggedHash(TagFROSTChallenge, commitmentData)
 	c := new(btcec.ModNScalar)
-	c.SetByteSlice(commitment_hash[:])
+	c.SetByteSlice(commitmentHash[:])
 
 	return c
 }
@@ -118,46 +124,43 @@ func (p *FrostParticipant) CalculateSecretProofs(context_hash [32]byte) *schnorr
 	// BIP340 requires that Y coordinate is even
 	// Warning: btcec.ModNScalar is stored as pointer, so we need to create a copy else the original value will be modified
 	secret := new(btcec.ModNScalar).Set(p.secretPolynomial[0])
-	secret_commitment_bytes := p.PolynomialCommitments[p.Position][0].SerializeCompressed()
-	if secret_commitment_bytes[0] == secp.PubKeyFormatCompressedOdd {
+	secretCommitmentBytes := p.PolynomialCommitment[0].SerializeCompressed()
+	if secretCommitmentBytes[0] == secp.PubKeyFormatCompressedOdd {
 		secret.Negate()
 	}
 
-	c := p.CalculateSecretProofsChallenge(context_hash, &R.X, p.Position, p.PolynomialCommitments[p.Position][0])
+	c := p.CalculateSecretProofsChallenge(context_hash, &R.X, p.Position, p.PolynomialCommitment[0])
 
-	s_scalar := new(btcec.ModNScalar).Mul2(secret, c).Add(k)
-	sig := schnorr.NewSignature(&R.X, s_scalar)
-
-	// self verification
-	p.VerifySecretProofs(context_hash, sig, p.Position, p.PolynomialCommitments[p.Position][0])
+	sScalar := new(btcec.ModNScalar).Mul2(secret, c).Add(k)
+	sig := schnorr.NewSignature(&R.X, sScalar)
 
 	return sig
 }
 
-func (p *FrostParticipant) VerifySecretProofs(context_hash [32]byte, secret_proof *schnorr.Signature, position int64, secretCommitments *btcec.PublicKey) {
+func (p *FrostParticipant) VerifySecretProofs(contextHash [32]byte, secretProof *schnorr.Signature, position int, secretCommitments *btcec.PublicKey) {
 	// retrive (R, s) from secret Schnorr proof
-	secret_proof_bytes := secret_proof.Serialize()
-	R_bytes := secret_proof_bytes[0:32]
-	R_x := new(btcec.FieldVal)
-	R_x.SetByteSlice(R_bytes)
-	s_bytes := secret_proof_bytes[32:64]
+	secretProofBytes := secretProof.Serialize()
+	RBytes := secretProofBytes[0:32]
+	RX := new(btcec.FieldVal)
+	RX.SetByteSlice(RBytes)
+	sBytes := secretProofBytes[32:64]
 	s := new(btcec.ModNScalar)
-	s.SetByteSlice(s_bytes)
+	s.SetByteSlice(sBytes)
 
-	c := p.CalculateSecretProofsChallenge(context_hash, R_x, position, secretCommitments)
+	c := p.CalculateSecretProofsChallenge(contextHash, RX, position, secretCommitments)
 
 	// making even the public key Y coordinate
-	secret_commitment_bytes := schnorr.SerializePubKey(secretCommitments)
-	secret_commitment_pubkey, err := schnorr.ParsePubKey(secret_commitment_bytes)
+	secretCommitmentBytes := schnorr.SerializePubKey(secretCommitments)
+	secretCommitmentPubkey, err := schnorr.ParsePubKey(secretCommitmentBytes)
 	assert.Nil(p.suite.T, err)
 
 	R := new(btcec.JacobianPoint)
 	// A_i0^-c
-	secret_commitment_point := new(btcec.JacobianPoint)
-	secret_commitment_pubkey.AsJacobian(secret_commitment_point)
+	secretCommitmentPoint := new(btcec.JacobianPoint)
+	secretCommitmentPubkey.AsJacobian(secretCommitmentPoint)
 	term := new(btcec.JacobianPoint)
 	c.Negate()
-	btcec.ScalarMultNonConst(c, secret_commitment_point, term)
+	btcec.ScalarMultNonConst(c, secretCommitmentPoint, term)
 	// g^\mu_i
 	term1 := new(btcec.JacobianPoint)
 	btcec.ScalarBaseMultNonConst(s, term1)
@@ -165,29 +168,29 @@ func (p *FrostParticipant) VerifySecretProofs(context_hash [32]byte, secret_proo
 	btcec.AddNonConst(term1, term, R)
 
 	// Fail if R is the point at infinity
-	is_infinity := false
+	isInfinity := false
 	if (R.X.IsZero() && R.Y.IsZero()) || R.Z.IsZero() {
-		is_infinity = true
+		isInfinity = true
 	}
-	assert.False(p.suite.T, is_infinity, "verify frost secret proof: R is the point at infinity")
+	assert.False(p.suite.T, isInfinity, "verify frost secret proof: R is the point at infinity")
 
 	// R_Y cannot be odd
 	R.ToAffine()
 	assert.False(p.suite.T, R.Y.IsOdd(), "verify frost secret proof: R.Y is odd")
 
 	// verify R point equals provided R_X
-	assert.Equal(p.suite.T, &R.X, R_x, "verify frost secret proof: R.X does not match provided R_X")
+	assert.Equal(p.suite.T, &R.X, RX, "verify frost secret proof: R.X does not match provided R_X")
 }
 
-// calculating f(i)
+// CalculateSecretShares calculating f(i)
 // calculate secret shares can be parallelized
 func (p *FrostParticipant) CalculateSecretShares() {
 	p.secretShares = make([]*btcec.ModNScalar, p.N)
-	for j := int64(0); j < p.N; j++ {
+	for j := 0; j < p.N; j++ {
 		// evaluate the secret polynomial at the participant index
-		participant_scalar := new(btcec.ModNScalar).SetInt(uint32(j + 1))
+		participantScalar := new(btcec.ModNScalar).SetInt(uint32(j + 1))
 		// secret shares as f(x)
-		shares := p.suite.EvaluatePolynomial(p.secretPolynomial, participant_scalar)
+		shares := p.suite.EvaluatePolynomial(p.secretPolynomial, participantScalar)
 		p.updateSecretShares(j+1, shares)
 	}
 }
@@ -196,142 +199,136 @@ func (p *FrostParticipant) AllSecretShares() []*btcec.ModNScalar {
 	return p.secretShares
 }
 
-func (p *FrostParticipant) GetSecretShares(position int64) *btcec.ModNScalar {
+func (p *FrostParticipant) GetSecretShares(position int) *btcec.ModNScalar {
 	return p.secretShares[position-1]
 }
 
-func (p *FrostParticipant) updateSecretShares(posi int64, val *btcec.ModNScalar) {
+func (p *FrostParticipant) updateSecretShares(posi int, val *btcec.ModNScalar) {
 	// p.secretSharesMutex.Lock()
 	// defer p.secretSharesMutex.Unlock()
 	p.secretShares[posi-1] = val
 }
 
-// verify secret shares
-func (p *FrostParticipant) VerifyPublicSecretShares(secretShares *btcec.ModNScalar, which_participant_poly int64, posi uint32) {
-	posi_scalar := new(btcec.ModNScalar).SetInt(posi)
-	polynomialCommitments := p.PolynomialCommitments[which_participant_poly]
+// VerifyPublicSecretShares verify secret shares
+func (p *FrostParticipant) VerifyPublicSecretShares(secretShares *btcec.ModNScalar, whichParticipantPoly int) {
+	posiScalar := new(btcec.ModNScalar).SetInt(uint32(p.Position))
+	polynomialCommitments := p.PolynomialCommitments[whichParticipantPoly]
 
 	// calculate A(i) = g^f(i)
-	expected_a := new(btcec.JacobianPoint)
-	btcec.ScalarBaseMultNonConst(secretShares, expected_a)
+	expectedA := new(btcec.JacobianPoint)
+	btcec.ScalarBaseMultNonConst(secretShares, expectedA)
 
 	// calculate prod(A_k^i^k)
-	i_power := new(btcec.ModNScalar)
-	i_power.SetInt(1)
-	calculated_a := new(btcec.JacobianPoint)
+	iPower := new(btcec.ModNScalar)
+	iPower.SetInt(1)
+	calculatedA := new(btcec.JacobianPoint)
 	for i := 0; i < len(polynomialCommitments); i++ {
 		term := new(btcec.JacobianPoint)
 		polynomialCommitments[i].AsJacobian(term)
 		// calculate term = A_k^i^k = g^(a_k*i^k)
-		btcec.ScalarMultNonConst(i_power, term, term)
-		term.ToAffine()
+		btcec.ScalarMultNonConst(iPower, term, term)
 		// calculate prod(A_k^i^k)
-		btcec.AddNonConst(calculated_a, term, calculated_a)
-		i_power.Mul(posi_scalar)
+		btcec.AddNonConst(calculatedA, term, calculatedA)
+		iPower.Mul(posiScalar)
 	}
 
-	calculated_a.ToAffine()
-	expected_a.ToAffine()
+	calculatedA.ToAffine()
+	expectedA.ToAffine()
 
 	// there can be even and odd Y coordinate
 	// should I check for a specific Y coordinate?
 
 	// check if the calculated commitment is equal to the expected commitment
-	assert.Equal(p.suite.T, expected_a.X, calculated_a.X)
+	assert.Equal(p.suite.T, expectedA.X, calculatedA.X)
 }
 
-// verify batch public secret shares for a participant secret shares
+// VerifyBatchPublicSecretShares verify batch public secret shares for a participant secret shares
 //
 // expensive operation
-func (p *FrostParticipant) VerifyBatchPublicSecretShares(secret_shares map[int64]*btcec.ModNScalar, posi uint32) {
-	var wg sync.WaitGroup
-
+func (p *FrostParticipant) VerifyBatchPublicSecretShares(secretShares map[int]*btcec.ModNScalar) {
 	// calculate expected A_i for all parties
-	// make(map[int64]*btcec.JacobianPoint)
+	// make(map[int]*btcec.JacobianPoint)
 	// s_ji = f_j(i)
-	all_expected_A := make(map[int64]*btcec.JacobianPoint)
-	for index, shares := range secret_shares {
-		expected_A := new(btcec.JacobianPoint)
-		btcec.ScalarBaseMultNonConst(shares, expected_A)
-		expected_A.ToAffine()
-		all_expected_A[index] = expected_A
+	allExpectedA := make(map[int]*btcec.JacobianPoint)
+	for index, shares := range secretShares {
+		expectedA := new(btcec.JacobianPoint)
+		btcec.ScalarBaseMultNonConst(shares, expectedA)
+		expectedA.ToAffine()
+		allExpectedA[index] = expectedA
 	}
 
 	// calculate map of i^k for this participant
-	time_now := time.Now()
-	posi_scalar := new(btcec.ModNScalar).SetInt(posi)
-	i_power_arr := make([]*btcec.ModNScalar, p.Threshold+1)
-	i_power := new(btcec.ModNScalar)
-	i_power.SetInt(1)
-	for i := int64(0); i <= p.Threshold; i++ {
-		i_power_arr[i] = new(btcec.ModNScalar).Set(i_power)
-		i_power.Mul(posi_scalar)
+	posiScalar := new(btcec.ModNScalar).SetInt(uint32(p.Position))
+	iPowerArr := make([]*btcec.ModNScalar, p.Threshold+1)
+	//TODO: can be optimized
+	iPower := new(btcec.ModNScalar)
+	iPower.SetInt(1)
+	for i := 0; i <= p.Threshold; i++ {
+		iPowerArr[i] = new(btcec.ModNScalar).Set(iPower)
+		iPower.Mul(posiScalar)
 	}
-	p.logger.Printf("calculate i^k time: %v\n", time.Since(time_now))
 
 	// calculate map of A_k^i^k for all parties
-	// make(map[int64][]*btcec.JacobianPoint)
-	time_now = time.Now()
-	all_term := sync.Map{}
-	for posi, poly_commitments := range p.PolynomialCommitments {
+	// make(map[int][]*btcec.JacobianPoint)
+	timeNow := time.Now()
+	allTerms := sync.Map{}
+	var wg sync.WaitGroup
+	for i := 1; i < len(p.PolynomialCommitments); i++ {
 		wg.Add(1)
-		go func(posi int64, poly_commitments []*btcec.PublicKey) {
-			term_arr := make([]*secp.JacobianPoint, p.Threshold+1)
-			var wg1 sync.WaitGroup
-			for i := int64(0); i <= p.Threshold; i++ {
-				wg1.Add(1)
-				go func(i int64) {
-					term := new(btcec.JacobianPoint)
-					poly_commitments[i].AsJacobian(term)
-					btcec.ScalarMultNonConst(i_power_arr[i], term, term)
-					term.ToAffine()
-					term_arr[i] = term
-					wg1.Done()
-				}(i)
+		go func(posi int, polyCommitments []*btcec.PublicKey) {
+			defer wg.Done()
+			termArr := make([]*secp.JacobianPoint, p.Threshold+1)
+			for i := 0; i <= p.Threshold; i++ {
+				term := new(btcec.JacobianPoint)
+				polyCommitments[i].AsJacobian(term)
+				btcec.ScalarMultNonConst(iPowerArr[i], term, term)
+				//term.ToAffine() this is redundant and expensive, check the method comments
+				termArr[i] = term
 			}
-			wg1.Wait()
-			all_term.Store(posi, term_arr)
-			wg.Done()
-		}(posi, poly_commitments)
+			allTerms.Store(posi, termArr)
+		}(i, p.PolynomialCommitments[i])
 	}
 	wg.Wait()
-	p.logger.Printf("calculate A_k^i^k time: %v\n", time.Since(time_now))
+	p.logger.Printf("calculate A_k^i^k time: %v\n", time.Since(timeNow))
 
 	// calculate prod(A_k^i^k) for all parties
 	// then verify against expected values
-	time_now = time.Now()
-	all_term.Range(func(key any, value any) bool {
-		index := key.(int64)
-		term := value.([]*btcec.JacobianPoint)
+	timeNow = time.Now()
+	// TODO: fix allTerms type
+	allTerms.Range(func(key any, value any) bool {
+		index := key.(int)
+		terms := value.([]*btcec.JacobianPoint)
 		wg.Add(1)
-		go func(index int64, term []*btcec.JacobianPoint) {
-			calculated_A := new(btcec.JacobianPoint)
-			for _, val := range term {
-				btcec.AddNonConst(calculated_A, val, calculated_A)
+		go func(index int, terms []*btcec.JacobianPoint) {
+			defer wg.Done()
+			// Sum all the terms
+			sum := new(btcec.JacobianPoint)
+			for _, term := range terms {
+				btcec.AddNonConst(sum, term, sum)
 			}
-			calculated_A.ToAffine()
-			expected_A := all_expected_A[index]
-			assert.Equal(p.suite.T, expected_A, calculated_A)
-			wg.Done()
-		}(index, term)
+			sum.ToAffine()
+			expectedA := allExpectedA[index]
+			assert.Equal(p.suite.T, expectedA, sum)
+		}(index, terms)
 
 		return true
 	})
 	wg.Wait()
-	p.logger.Printf("verify batch secret shares time: %v\n", time.Since(time_now))
+
+	p.logger.Printf("verify batch secret shares time: %v\n", time.Since(timeNow))
 }
 
-func (p *FrostParticipant) CalculateInternalPublicSigningShares(signingShares *btcec.ModNScalar, posi int64) *btcec.PublicKey {
+func (p *FrostParticipant) CalculateInternalPublicSigningShares(signingShares *btcec.ModNScalar) *btcec.PublicKey {
 	signingPoint := new(btcec.JacobianPoint)
 	btcec.ScalarBaseMultNonConst(signingShares, signingPoint)
 	signingPoint.ToAffine()
 
-	p.PublicSigningShares[posi] = btcec.NewPublicKey(&signingPoint.X, &signingPoint.Y)
+	p.PublicSigningShares[p.Position] = btcec.NewPublicKey(&signingPoint.X, &signingPoint.Y)
 
-	return p.PublicSigningShares[posi]
+	return p.PublicSigningShares[p.Position]
 }
 
-// calculate Y_i from other participant secret commitments
+// CalculatePublicSigningShares calculate Y_i from other participant secret commitments
 //
 // n_k: total number of keys
 //
@@ -356,48 +353,25 @@ func (p *FrostParticipant) CalculateInternalPublicSigningShares(signingShares *b
 // Y_i = \prod_{m=1}^{n_p} \prod_{j=0}^{t} A_mj^i^j
 //
 // intense computation: 0(n*m)
-func (p *FrostParticipant) CalculatePublicSigningShares(party_num, posi int64) *btcec.PublicKey {
-	posi_scalar := new(btcec.ModNScalar)
-	posi_scalar.SetInt(uint32(posi))
+func (p *FrostParticipant) CalculatePublicSigningShares(aggregateCommitments []*btcec.JacobianPoint, posi int) *btcec.PublicKey {
+	posiScalar := new(btcec.ModNScalar)
+	posiScalar.SetInt(uint32(posi))
 
 	Y := new(btcec.JacobianPoint)
-	for i := int64(1); i <= party_num; i++ {
-		i_power_map := make([]*btcec.ModNScalar, p.Threshold+1)
-		i_power := new(btcec.ModNScalar)
-		i_power.SetInt(1)
-		for j := int64(0); j <= p.Threshold; j++ {
-			i_power_map[j] = new(btcec.ModNScalar).Set(i_power)
-			i_power.Mul(posi_scalar)
-		}
 
-		// parallel computation
-		// \prod_{j=0}^{t} A_mj^i^j
-		term_1_map := make([]*btcec.JacobianPoint, p.Threshold+1)
-		var wg sync.WaitGroup
-		for j := int64(0); j <= p.Threshold; j++ {
-			wg.Add(1)
-			go func(j int64) {
-				// A_mj
-				A_ij := new(btcec.JacobianPoint)
-				p.PolynomialCommitments[i][j].AsJacobian(A_ij)
+	// cacheable
+	iPowerMap := make([]*btcec.ModNScalar, p.Threshold+1)
+	iPower := new(btcec.ModNScalar)
+	iPower.SetInt(1)
+	for j := 0; j <= p.Threshold; j++ {
+		iPowerMap[j] = new(btcec.ModNScalar).Set(iPower)
+		iPower.Mul(posiScalar)
+	}
 
-				// calculate A_mj^i^j
-				term1 := new(btcec.JacobianPoint)
-				btcec.ScalarMultNonConst(i_power_map[j], A_ij, term1)
-
-				term_1_map[j] = term1
-
-				wg.Done()
-			}(j)
-		}
-		wg.Wait()
-
-		term := new(btcec.JacobianPoint)
-		for j := int64(0); j <= p.Threshold; j++ {
-			btcec.AddNonConst(term, term_1_map[j], term)
-		}
-
-		btcec.AddNonConst(Y, term, Y)
+	for j := 0; j <= p.Threshold; j++ {
+		agg := new(btcec.JacobianPoint)
+		btcec.ScalarMultNonConst(iPowerMap[j], aggregateCommitments[j], agg)
+		btcec.AddNonConst(Y, agg, Y)
 	}
 	Y.ToAffine()
 
@@ -406,9 +380,9 @@ func (p *FrostParticipant) CalculatePublicSigningShares(party_num, posi int64) *
 	return p.PublicSigningShares[posi]
 }
 
-func (p *FrostParticipant) CalculateGroupPublicKey(party_num int64) *btcec.PublicKey {
+func (p *FrostParticipant) CalculateGroupPublicKey(party_num int) *btcec.PublicKey {
 	Y := new(btcec.JacobianPoint)
-	for i := int64(1); i <= party_num; i++ {
+	for i := 1; i <= party_num; i++ {
 		A_0 := new(btcec.JacobianPoint)
 		p.PolynomialCommitments[i][0].AsJacobian(A_0)
 		btcec.AddNonConst(Y, A_0, Y)
@@ -420,10 +394,10 @@ func (p *FrostParticipant) CalculateGroupPublicKey(party_num int64) *btcec.Publi
 	return p.GroupPublicKey
 }
 
-func (p *FrostParticipant) GenerateSigningNonces(signing_time int64) [][2]*btcec.PublicKey {
+func (p *FrostParticipant) GenerateSigningNonces(signing_time int) [][2]*btcec.PublicKey {
 	p.nonces = make([][2]*btcec.ModNScalar, signing_time)
 	p.NonceCommitments = make([][2]*btcec.PublicKey, signing_time)
-	for i := int64(0); i < signing_time; i++ {
+	for i := 0; i < signing_time; i++ {
 		// generate nonces (d, e) for each signing
 		// for pi = 1 number of pairs
 		d_seed := p.suite.Generate32BSeed()
@@ -452,7 +426,7 @@ func (p *FrostParticipant) GenerateSigningNonces(signing_time int64) [][2]*btcec
 	return p.NonceCommitments
 }
 
-// with provided public nonces from other participants, calculate the aggregated public nonce commitments
+// CalculatePublicNonceCommitments with provided public nonces from other participants, calculate the aggregated public nonce commitments
 // R_i = D_i * E_i ^ p_i
 // p_i = H(i, m, B)
 // B = {D_1, E_1, ..., D_t, E_t}
@@ -461,7 +435,7 @@ func (p *FrostParticipant) GenerateSigningNonces(signing_time int64) [][2]*btcec
 // and i is the participant's position
 //
 // honest would be a list of exact position starting from 1
-func (p *FrostParticipant) CalculatePublicNonceCommitments(signing_index int64, honest []int64, message_hash [32]byte, public_nonces map[int64][2]*btcec.PublicKey) map[int64]*btcec.PublicKey {
+func (p *FrostParticipant) CalculatePublicNonceCommitments(signing_index int, honest []int, message_hash [32]byte, public_nonces map[int][2]*btcec.PublicKey) map[int]*btcec.PublicKey {
 	// calculate p_i for each honest participants
 	p_data := make([]byte, 0)
 	p_data = append(p_data, message_hash[:]...)
@@ -475,7 +449,7 @@ func (p *FrostParticipant) CalculatePublicNonceCommitments(signing_index int64, 
 		p_data = append(p_data, E.X.Bytes()[:]...)
 	}
 
-	p_list := make(map[int64]*btcec.ModNScalar)
+	p_list := make(map[int]*btcec.ModNScalar)
 	for _, i := range honest {
 		p_i_data := append([]byte{byte(i)}, p_data...)
 		p := chainhash.HashB(p_i_data)
@@ -486,7 +460,7 @@ func (p *FrostParticipant) CalculatePublicNonceCommitments(signing_index int64, 
 	}
 
 	// calculate R and R_i
-	nonce_commitments := make(map[int64]*btcec.PublicKey)
+	nonce_commitments := make(map[int]*btcec.PublicKey)
 	aggrNonceCommitment := new(btcec.JacobianPoint)
 
 	for _, i := range honest {
@@ -512,12 +486,12 @@ func (p *FrostParticipant) CalculatePublicNonceCommitments(signing_index int64, 
 	return nonce_commitments
 }
 
-// construct z_i = d_i + e_i * p_i + \lambda_i * s_i * c
+// PartialSign construct z_i = d_i + e_i * p_i + \lambda_i * s_i * c
 // \lambda_i is the Lagrange coefficient for the participant i over the honest participants
 // s_i is the long-term secret share of participant i
 // c = H(R, Y, m)
 // TODO: have not checked for even or odd Y - coordinates
-func (p *FrostParticipant) PartialSign(position, signing_index int64, honest_party []int64, message_hash [32]byte, public_nonces map[int64][2]*btcec.PublicKey, signing_shares *btcec.ModNScalar) *schnorr.Signature {
+func (p *FrostParticipant) PartialSign(position, signing_index int, honest_party []int, message_hash [32]byte, public_nonces map[int][2]*btcec.PublicKey, signing_shares *btcec.ModNScalar) *schnorr.Signature {
 	// calculate c
 	commitment_data := make([]byte, 0)
 	commitment_data = append(commitment_data, p.AggrNonceCommitment[signing_index].X.Bytes()[:]...)
@@ -584,14 +558,14 @@ func (p *FrostParticipant) PartialSign(position, signing_index int64, honest_par
 	return sig
 }
 
-// construct z_i = d_i + e_i * p_i + \sum_{K_i} \lambda_{ik} * s_{ik} * c, K_i is the threshold set of honest keys of participant i
+// WeightedPartialSign construct z_i = d_i + e_i * p_i + \sum_{K_i} \lambda_{ik} * s_{ik} * c, K_i is the threshold set of honest keys of participant i
 // \lambda_i is the Lagrange coefficient for the participant i over the honest participants
 // s_i is the long-term secret share of participant i
 // c = H(R, Y, m)
 // TODO: have not checked for even or odd Y - coordinates
 //
 // a different variant of partial sign for wsts
-func (p *FrostParticipant) WeightedPartialSign(position, signing_index int64, honest_party, honest_keys []int64, message_hash [32]byte, public_nonces map[int64][2]*btcec.PublicKey, signing_shares map[int64]*btcec.ModNScalar) *schnorr.Signature {
+func (p *FrostParticipant) WeightedPartialSign(position, signing_index int, honest_party, honest_keys []int, message_hash [32]byte, public_nonces map[int][2]*btcec.PublicKey, signing_shares map[int]*btcec.ModNScalar) *schnorr.Signature {
 	// calculate c
 	commitment_data := make([]byte, 0)
 	commitment_data = append(commitment_data, p.AggrNonceCommitment[signing_index].X.Bytes()[:]...)
@@ -674,13 +648,13 @@ func (p *FrostParticipant) WeightedPartialSign(position, signing_index int64, ho
 	return sig
 }
 
-// verifying the partial signature from each honest participant
+// WeightedPartialVerification verifying the partial signature from each honest participant
 // recall that: z_i = d_i + e_i * p_i + \sum_{K_i} \lambda_{ik} * s_{ik} * c
 // thus, g^z_i = R_i * g^(\sum_{K_i} \lambda_{ik} * s_{ik} * c) = R_i * \prod_{K_i} Y_{ik}^(\lambda_{ik} * c)
 // thus, R_i = g^z_i * \prod_{K_i} Y_{ik}^-(\lambda_{ik} * c)
 //
 // a different variant of partial sign for wsts
-func (p *FrostParticipant) WeightedPartialVerification(sig *schnorr.Signature, signing_index, posi int64, message_hash [32]byte, honest_keys []int64, signing_verification_shares map[int64]*btcec.PublicKey) bool {
+func (p *FrostParticipant) WeightedPartialVerification(sig *schnorr.Signature, signing_index, posi int, message_hash [32]byte, honest_keys []int, signing_verification_shares map[int]*btcec.PublicKey) bool {
 	// derive z and R_X
 	sig_bytes := sig.Serialize()
 	R_bytes := sig_bytes[0:32]

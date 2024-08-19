@@ -4,7 +4,7 @@ import (
 	"crypto/sha256"
 	"testing"
 
-	btcec "github.com/btcsuite/btcd/btcec/v2"
+	"github.com/btcsuite/btcd/btcec/v2"
 	"github.com/btcsuite/btcd/btcec/v2/schnorr"
 	"github.com/btcsuite/btcd/chaincfg/chainhash"
 	secp "github.com/decred/dcrd/dcrec/secp256k1/v4"
@@ -151,7 +151,7 @@ func TestFrostSignature(t *testing.T) {
 	// with 5 honest participants
 	calculated_y := new(btcec.JacobianPoint)
 	for i := 0; i < thres; i++ {
-		lambda_i := suite.CalculateLagrangeCoeff(int64(i+1), []int64{1, 2, 3, 4, 5})
+		lambda_i := suite.CalculateLagrangeCoeff(i+1, []int{1, 2, 3, 4, 5})
 		// Y_i^(\lambda_i)
 		term := new(btcec.JacobianPoint)
 		btcec.ScalarMultNonConst(lambda_i, participants[i].signing_verification_shares, term)
@@ -463,7 +463,7 @@ func (participant *FrostParticipant) partialSign(suite *testhelper.TestSuite, ho
 	}
 
 	// calculate larange coefficient
-	lamba := suite.CalculateLagrangeCoeff(int64(participant.position), convertArrInt64WithStart1(honest))
+	lamba := suite.CalculateLagrangeCoeff(participant.position, convertArrintWithStart1(honest))
 	// e_i * p_i
 	term = new(btcec.ModNScalar).Mul2(e_i, p_i_scalar)
 	// d_i + e_i * p_i
@@ -568,7 +568,7 @@ func (participant *FrostParticipant) verifyPartialSig(suite *testhelper.TestSuit
 
 	// \lambda_i * c
 	term := new(btcec.ModNScalar)
-	lambda := suite.CalculateLagrangeCoeff(int64(other_posi+1), convertArrInt64WithStart1(honest))
+	lambda := suite.CalculateLagrangeCoeff(other_posi+1, convertArrintWithStart1(honest))
 	term.Mul2(lambda, c)
 	// Y_i^-(\lambda_i * c)
 	term1 := new(btcec.JacobianPoint)
@@ -594,10 +594,10 @@ func (participant *FrostParticipant) verifyPartialSig(suite *testhelper.TestSuit
 }
 
 // due to some later changes with stricter enforcement of array position
-func convertArrInt64WithStart1(honest []int) []int64 {
-	honest_int64 := make([]int64, len(honest))
+func convertArrintWithStart1(honest []int) []int {
+	honest_int := make([]int, len(honest))
 	for i, h := range honest {
-		honest_int64[i] = int64(h + 1)
+		honest_int[i] = h + 1
 	}
-	return honest_int64
+	return honest_int
 }
