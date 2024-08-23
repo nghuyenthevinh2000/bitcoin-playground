@@ -520,7 +520,7 @@ func (v *MockValidator) verifyAdaptSig(posi, signing_index int64, adapt_sig *sch
 	key_range := v.protocolStorage.GetKeyRange(strconv.FormatInt(posi, 10))
 	public_signing_share := make(map[int64]*btcec.PublicKey)
 	for i := key_range[0]; i < key_range[1]; i++ {
-		public_signing_share[i] = v.frost.PublicSigningShares[i]
+		public_signing_share[i] = v.frost.GetPublicSigningShares(i)
 	}
 
 	return v.frost.WeightedPartialVerification(adapt_sig, signing_index, posi, sigHash, honest_keys, public_signing_share)

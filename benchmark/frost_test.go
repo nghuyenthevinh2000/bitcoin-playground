@@ -11,14 +11,33 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+type WSTS struct {
+	suite *testhelper.TestSuite
+
+	num_party int64
+	keys      []int64
+	frost     *testhelper.FrostParticipant
+}
+
+func NewWSTSParticipant(suite *testhelper.TestSuite, n int64, frost *testhelper.FrostParticipant) *WSTS {
+	wsts := &WSTS{
+		suite:     suite,
+		num_party: n,
+		keys:      make([]int64, 0),
+		frost:     frost,
+	}
+
+	return wsts
+}
+
 // go test -benchmem -run=^$ -bench ^BenchmarkFrostSignature$ github.com/nghuyenthevinh2000/bitcoin-playground/benchmark
 func BenchmarkFrostSignature(b *testing.B) {
 	suite := testhelper.TestSuite{}
 	suite.SetupBenchmarkStaticSimNetSuite(b, log.Default())
 
 	// frost
-	n := int64(200)
-	threshold := int64(140)
+	n := int64(1000)
+	threshold := int64(700)
 	participants := make([]*testhelper.FrostParticipant, n)
 	logger := log.Default()
 	for i := int64(0); i < n; i++ {
@@ -45,22 +64,12 @@ func BenchmarkFrostSignature(b *testing.B) {
 		challenge := participant.CalculateSecretProofs([32]byte{})
 		participant.VerifySecretProofs([32]byte{}, challenge, i+1, participant.PolynomialCommitments[participant.Position][0])
 	}
-	b.ReportMetric(float64(time.Since(time_now).Milliseconds()), "ms/secret-proofs")
+	suite.BenchmarkThreadSafeReport.Store("ms/secret-proofs", float64(time.Since(time_now).Milliseconds()))
 
 	// calculate secret shares
 	secret_shares_map := make(map[int64]map[int64]*btcec.ModNScalar)
 	for i := int64(0); i < n; i++ {
 		secret_shares_map[i+1] = make(map[int64]*btcec.ModNScalar)
-	}
-	for i := int64(0); i < n; i++ {
-		participant := participants[i]
-		participant.CalculateSecretShares()
-
-		// distribute to all participants
-		for j := int64(0); j < n; j++ {
-			secret := participant.GetSecretShares(j + 1)
-			secret_shares_map[j+1][i+1] = secret
-		}
 	}
 
 	time_now = time.Now()
@@ -73,19 +82,37 @@ func BenchmarkFrostSignature(b *testing.B) {
 		}(i)
 	}
 	wg.Wait()
+	suite.BenchmarkThreadSafeReport.Store("ms/calculate-secret-shares", float64(time.Since(time_now).Milliseconds()))
 
+	// distribute to all participants
 	for i := int64(0); i < n; i++ {
-		// try out batch verification of secret shares
+		for j := int64(0); j < n; j++ {
+			secret := participants[i].GetSecretShares(j + 1)
+			secret_shares_map[j+1][i+1] = secret
+		}
+	}
+
+	// derive power map
+	for i := int64(0); i < n; i++ {
 		wg.Add(1)
 		go func(i int64) {
 			defer wg.Done()
 			participants[i].DerivePowerMap()
+		}(i)
+	}
+	wg.Wait()
 
+	time_now = time.Now()
+	for i := int64(0); i < 1; i++ {
+		// try out batch verification of secret shares
+		wg.Add(1)
+		go func(i int64) {
+			defer wg.Done()
 			participants[i].VerifyBatchPublicSecretShares(secret_shares_map[participants[i].Position], uint32(participants[i].Position))
 		}(i)
 	}
 	wg.Wait()
-	b.ReportMetric(float64(time.Since(time_now).Milliseconds()), "ms/verify-batch-public-secret-shares")
+	suite.BenchmarkThreadSafeReport.Store("ms/verify-batch-public-secret-shares", float64(time.Since(time_now).Milliseconds()))
 
 	// distribute signing shares
 	signing_shares_map := make(map[int64]*btcec.ModNScalar)
@@ -111,7 +138,7 @@ func BenchmarkFrostSignature(b *testing.B) {
 		}(i)
 	}
 	wg.Wait()
-	b.ReportMetric(float64(time.Since(time_now).Milliseconds()), "ms/calculate-internal-public-signing-shares")
+	suite.BenchmarkThreadSafeReport.Store("ms/calculate-internal-public-signing-shares", float64(time.Since(time_now).Milliseconds()))
 
 	// calculate public signing shares
 
@@ -119,6 +146,7 @@ func BenchmarkFrostSignature(b *testing.B) {
 	// In a distributed settings, each participant will independently calculate this value and derive the same value.
 	// So, it is OK to copy the value from the first participant to all other participants.
 	// If someone wants to verify, they can uncomment the same functionallity in the loop below.
+	time_now = time.Now()
 	participants[0].DeriveExternalQMap()
 	participants[0].DeriveExternalWMap()
 
@@ -131,6 +159,7 @@ func BenchmarkFrostSignature(b *testing.B) {
 		}(i)
 	}
 	wg.Wait()
+	suite.BenchmarkThreadSafeReport.Store("ms/derive-external-q-w-map", float64(time.Since(time_now).Milliseconds()))
 
 	time_now = time.Now()
 	for i := int64(0); i < n; i++ {
@@ -147,7 +176,8 @@ func BenchmarkFrostSignature(b *testing.B) {
 		}(i)
 	}
 	wg.Wait()
-	b.ReportMetric(float64(time.Since(time_now).Milliseconds()), "ms/calculate-batch-public-signing-shares")
+	suite.BenchmarkThreadSafeReport.Store("ms/calculate-batch-public-signing-shares", float64(time.Since(time_now).Milliseconds()))
+	b.StopTimer()
 
 	// verify correct calculation of public signing shares
 	for i := int64(0); i < n; i++ {
@@ -159,11 +189,14 @@ func BenchmarkFrostSignature(b *testing.B) {
 				continue
 			}
 
-			assert.Equal(suite.T, participant.PublicSigningShares[i+1], participants[j].PublicSigningShares[i+1])
+			assert.Equal(suite.T, participant.GetPublicSigningShares(i+1), participants[j].GetPublicSigningShares(i+1))
 		}
 	}
 
-	b.StopTimer()
 	// dump logs
 	suite.FlushBenchmarkThreadSafeReport()
+}
+
+func BenchmarkWSTSSignature(b *testing.B) {
+
 }

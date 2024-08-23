@@ -848,3 +848,14 @@
 19:38:39.182438 table@remove removed @196
 19:38:39.182604 table@remove removed @195
 19:38:39.187093 table@remove removed @194
+=============== Aug 23, 2024 (+07) ===============
+01:17:09.969780 transaction@flush created L0@203 N·26 S·1KiB "\x00\x00\x00..ate,v10568":"\x00\x00\x00..\xb8\xf5b,v10593"
+01:17:09.970666 version@stat F·[2 1] S·638KiB[2KiB 636KiB] Sc·[0.50 0.01]
+01:17:09.994532 transaction@flush created L0@204 N·2 S·1KiB "\x00\x00\x00..fee,v10594":"\x00\x00\x00..loc,v10595"
+01:17:09.994623 version@stat F·[3 1] S·640KiB[3KiB 636KiB] Sc·[0.75 0.01]
+01:17:10.281724 transaction@flush created L0@205 N·8 S·623B "\x00\x00\x00..loc,v10596":"\x00\x00\x00..E\xa6\x00,v10601"
+01:17:10.281894 version@stat F·[4 1] S·640KiB[4KiB 636KiB] Sc·[1.00 0.01]
+01:17:10.287873 db@close closing
+01:17:10.288601 table@compaction L0·4 -> L1·1 S·640KiB Q·10603
+01:17:10.288689 table@build exiting
+01:17:10.289073 db@close done T·1.131708ms

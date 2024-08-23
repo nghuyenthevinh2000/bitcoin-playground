@@ -59,7 +59,6 @@ func TestFrostSignature1(t *testing.T) {
 
 	for i := int64(0); i < n; i++ {
 		participant := participants[i]
-		participant.CalculateSecretShares()
 
 		// try out batch verification of secret shares
 		participant.VerifyBatchPublicSecretShares(secret_shares_map[participant.Position], uint32(participant.Position))
@@ -103,7 +102,7 @@ func TestFrostSignature1(t *testing.T) {
 				continue
 			}
 
-			assert.Equal(t, participant.PublicSigningShares[i+1], participants[j].PublicSigningShares[i+1])
+			assert.Equal(t, participant.GetPublicSigningShares(i+1), participants[j].GetPublicSigningShares(i+1))
 		}
 	}
 }
