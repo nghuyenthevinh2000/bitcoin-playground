@@ -31,8 +31,6 @@ type FrostParticipant struct {
 	Threshold int64
 	Position  int64
 
-	secretSharesMutex sync.Mutex
-
 	secretPolynomial []*btcec.ModNScalar
 	secretShares     []*btcec.ModNScalar
 	// nonce commitments for multiples signing usages
@@ -47,7 +45,8 @@ type FrostParticipant struct {
 	PublicSigningShares   sync.Map
 	GroupPublicKey        *btcec.PublicKey
 	// contains the nonce commitments for multiple signing usages
-	NonceCommitments [][2]*btcec.PublicKey
+	NonceCommitments       [][2]*btcec.PublicKey
+	PublicNonceCommitments map[int64][][2]*btcec.PublicKey
 	// contains the aggregated nonce commitments for multiple signing usages
 	AggrNonceCommitment map[int64]*btcec.JacobianPoint
 }
@@ -418,11 +417,11 @@ func (p *FrostParticipant) CalculatePublicSigningShares(party_num, posi int64) *
 	return p.GetPublicSigningShares(posi)
 }
 
-func (p *FrostParticipant) CalculateGroupPublicKey(party_num int64) *btcec.PublicKey {
+func (p *FrostParticipant) CalculateGroupPublicKey() *btcec.PublicKey {
 	Y := new(btcec.JacobianPoint)
-	for i := int64(1); i <= party_num; i++ {
+	for _, commitments := range p.PolynomialCommitments {
 		A_0 := new(btcec.JacobianPoint)
-		p.PolynomialCommitments[i][0].AsJacobian(A_0)
+		commitments[0].AsJacobian(A_0)
 		btcec.AddNonConst(Y, A_0, Y)
 	}
 	Y.ToAffine()
@@ -473,10 +472,10 @@ func (p *FrostParticipant) GenerateSigningNonces(signing_time int64) [][2]*btcec
 // and i is the participant's position
 //
 // honest would be a list of exact position starting from 1
-func (p *FrostParticipant) CalculatePublicNonceCommitments(signing_index int64, honest []int64, message_hash [32]byte, public_nonces map[int64][2]*btcec.PublicKey) map[int64]*btcec.PublicKey {
+func (p *FrostParticipant) CalculatePublicNonceCommitments(signing_index int64, honest []int64, nonce_message_hash [32]byte, public_nonces map[int64][2]*btcec.PublicKey) map[int64]*btcec.PublicKey {
 	// calculate p_i for each honest participants
 	p_data := make([]byte, 0)
-	p_data = append(p_data, message_hash[:]...)
+	p_data = append(p_data, nonce_message_hash[:]...)
 	for _, j := range honest {
 		D := new(btcec.JacobianPoint)
 		public_nonces[j][0].AsJacobian(D)
@@ -807,9 +806,9 @@ func (p *FrostParticipant) DeriveExternalQMap() {
 			for j := int64(0); j <= p.Threshold; j++ {
 				// calculate \prod_{m=1}^{n_p} A_mj
 				term := new(btcec.JacobianPoint)
-				for m := int64(1); m <= p.N; m++ {
+				for _, commitments := range p.PolynomialCommitments {
 					A_mj_point := new(btcec.JacobianPoint)
-					A_mj := p.PolynomialCommitments[m][j]
+					A_mj := commitments[j]
 					A_mj.AsJacobian(A_mj_point)
 
 					btcec.AddNonConst(term, A_mj_point, term)
@@ -934,13 +933,13 @@ func (p *FrostParticipant) VerifyBatchPublicSecretShares(secret_shares map[int64
 // Y_i = \prod_{m=1}^{n_p} \prod_{j=0}^{t} A_mj^i^j
 // Y_i = \prod_{j=0}^{t} (\prod_{m=1}^{n_p} A_mj)^i^j
 // Y_i = \prod_{j=0}^{t} Q_j^i^j
-func (p *FrostParticipant) CalculateBatchPublicSigningShares() {
+func (p *FrostParticipant) CalculateBatchPublicSigningShares(skip_positions map[int64]bool) {
 	time_now := time.Now()
 	var wg sync.WaitGroup
 
 	// calculate Y_i
 	for posi := int64(1); posi <= p.N; posi++ {
-		if posi == p.Position {
+		if _, ok := skip_positions[posi]; ok {
 			continue
 		}
 

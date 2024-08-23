@@ -582,7 +582,7 @@ func (v *MockValidator) verifySharesAndCalculateLongTermKey() {
 	v.logger.Printf("Time to calculate public signing shares: %v\n", time.Since(time_now))
 
 	// calculate group public key
-	groupkey := v.frost.CalculateGroupPublicKey(v.partyNum)
+	groupkey := v.frost.CalculateGroupPublicKey()
 	v.logger.Printf("group public key: %v\n", groupkey)
 }
 

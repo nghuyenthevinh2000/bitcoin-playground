@@ -117,12 +117,14 @@ func (s *TestSuite) FlushBenchmarkThreadSafeReport() {
 	s.BenchmarkThreadSafeReport = sync.Map{}
 }
 
-func (s *TestSuite) BroadcastLog(key interface{}) {
-	go func() {
-		log, ok := s.BenchmarkThreadSafeReport.Load(key)
-		assert.True(s.T, ok)
-		s.Logger.Println(key, log)
-	}()
+func (s *TestSuite) LogBenchmarkThreadSafeReport(key, value interface{}, isLater bool) {
+	if isLater {
+		s.BenchmarkThreadSafeReport.Store(key, value)
+	} else {
+		go func() {
+			s.Logger.Println(key, value)
+		}()
+	}
 }
 
 func (s *TestSuite) BytesToHexStr(b []byte) string {
