@@ -1,6 +1,7 @@
 package benchmark
 
 import (
+	"fmt"
 	"log"
 	"sync"
 	"testing"
@@ -13,12 +14,90 @@ import (
 
 // go test -benchmem -run=^$ -bench ^BenchmarkFrostDKG$ github.com/nghuyenthevinh2000/bitcoin-playground/benchmark
 func BenchmarkFrostDKG(b *testing.B) {
+	test_suite := []struct {
+		n         int64
+		threshold int64
+	}{
+		{
+			n:         100,
+			threshold: 70,
+		},
+		{
+			n:         300,
+			threshold: 210,
+		},
+		{
+			n:         500,
+			threshold: 350,
+		},
+		{
+			n:         700,
+			threshold: 490,
+		},
+		{
+			n:         1000,
+			threshold: 700,
+		},
+	}
+
+	for _, test := range test_suite {
+		test_name := fmt.Sprintf("frost-dkg-%d/%d", test.threshold, test.n)
+		b.Run(test_name, func(b *testing.B) {
+			RunFrostDKG(test_name, test.n, test.threshold, b)
+		})
+	}
+}
+
+// go test -benchmem -run=^$ -bench ^BenchmarkWstsDKG$ github.com/nghuyenthevinh2000/bitcoin-playground/benchmark
+func BenchmarkWstsDKG(b *testing.B) {
+
+	// participant - keys ratio: 1 - 5
+	test_suite := []struct {
+		n_p       int64
+		n_keys    int64
+		threshold int64
+	}{
+		{
+			n_p:       20,
+			n_keys:    100,
+			threshold: 70,
+		},
+		{
+			n_p:       60,
+			n_keys:    300,
+			threshold: 210,
+		},
+		{
+			n_p:       100,
+			n_keys:    500,
+			threshold: 350,
+		},
+		{
+			n_p:       140,
+			n_keys:    700,
+			threshold: 490,
+		},
+		{
+			n_p:       200,
+			n_keys:    1000,
+			threshold: 700,
+		},
+	}
+
+	for _, test := range test_suite {
+		test_name := fmt.Sprintf("wsts-dkg-%d/%d/%d", test.threshold, test.n_keys, test.n_p)
+		b.Run(test_name, func(b *testing.B) {
+			RunWstsDKG(test_name, test.n_p, test.n_keys, test.threshold, b)
+		})
+	}
+}
+
+// go test -benchmem -run=^$ -bench ^BenchmarkFrostDKG$ github.com/nghuyenthevinh2000/bitcoin-playground/benchmark
+func RunFrostDKG(name string, n, threshold int64, b *testing.B) {
 	suite := testhelper.TestSuite{}
 	suite.SetupBenchmarkStaticSimNetSuite(b, log.Default())
 
 	// frost
-	n := int64(1000)
-	threshold := int64(700)
 	participants := make([]*testhelper.FrostParticipant, n)
 	logger := log.Default()
 	for i := int64(0); i < n; i++ {
@@ -189,18 +268,14 @@ func BenchmarkFrostDKG(b *testing.B) {
 	}
 
 	// dump logs
-	suite.FlushBenchmarkThreadSafeReport()
+	// suite.FlushBenchmarkThreadSafeReport()
 }
 
-// go test -benchmem -run=^$ -bench ^BenchmarkWstsDKG$ github.com/nghuyenthevinh2000/bitcoin-playground/benchmark
-func BenchmarkWstsDKG(b *testing.B) {
+func RunWstsDKG(name string, n_p, n_keys, threshold int64, b *testing.B) {
 	suite := testhelper.TestSuite{}
 	suite.SetupBenchmarkStaticSimNetSuite(b, log.Default())
 
 	// wsts participant
-	n_p := int64(100)
-	n_keys := int64(1000)
-	threshold := int64(700)
 	participants := make([]*testhelper.WstsParticipant, n_p)
 	logger := log.Default()
 	for i := int64(0); i < n_p; i++ {
@@ -381,5 +456,5 @@ func BenchmarkWstsDKG(b *testing.B) {
 	}
 
 	// dump logs
-	suite.FlushBenchmarkThreadSafeReport()
+	// suite.FlushBenchmarkThreadSafeReport()
 }
