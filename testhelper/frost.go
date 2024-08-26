@@ -1,10 +1,8 @@
 package testhelper
 
 import (
-	"fmt"
 	"log"
 	"sync"
-	"time"
 
 	btcec "github.com/btcsuite/btcd/btcec/v2"
 	"github.com/btcsuite/btcd/btcec/v2/schnorr"
@@ -770,7 +768,7 @@ func (p *FrostParticipant) WeightedPartialVerification(sig *schnorr.Signature, s
 // derive power map for future calculation
 func (p *FrostParticipant) DerivePowerMap() {
 	var wg sync.WaitGroup
-	time_now := time.Now()
+	// time_now := time.Now()
 	for posi := int64(1); posi <= p.N; posi++ {
 		wg.Add(1)
 		go func(posi int64) {
@@ -790,14 +788,14 @@ func (p *FrostParticipant) DerivePowerMap() {
 	}
 	wg.Wait()
 	if p.suite.B != nil {
-		p.suite.BenchmarkThreadSafeReport.Store(fmt.Sprintf("ms/derive-power-map-%d", p.Position), float64(time.Since(time_now).Milliseconds()))
+		// p.suite.LogBenchmarkThreadSafeReport(fmt.Sprintf("ms/derive-power-map-%d", p.Position), float64(time.Since(time_now).Milliseconds()), true)
 	}
 }
 
 // derive Q_j(i) = \prod_{m=1}^{n_p} A_mj, j \in [0,t]  Q_mj map for calculation of public signing shares
 func (p *FrostParticipant) DeriveExternalQMap() {
 	var wg sync.WaitGroup
-	time_now := time.Now()
+	// time_now := time.Now()
 	for posi := int64(1); posi <= p.N; posi++ {
 		wg.Add(1)
 		go func(posi int64) {
@@ -823,14 +821,14 @@ func (p *FrostParticipant) DeriveExternalQMap() {
 	}
 	wg.Wait()
 	if p.suite.B != nil {
-		p.suite.BenchmarkThreadSafeReport.Store(fmt.Sprintf("ms/derive-q-map-%d", p.Position), float64(time.Since(time_now).Milliseconds()))
+		// p.suite.LogBenchmarkThreadSafeReport(fmt.Sprintf("ms/derive-q-map-%d", p.Position), float64(time.Since(time_now).Milliseconds()), true)
 	}
 }
 
 // Derive W_j(i) = Q_j^i^j, j \in [0,t] W_mj map for calculation of public signing shares
 func (p *FrostParticipant) DeriveExternalWMap() {
 	var wg sync.WaitGroup
-	time_now := time.Now()
+	// time_now := time.Now()
 	for posi := int64(1); posi <= p.N; posi++ {
 		Q_j_arr := p.GetQMapItem(posi)
 		i_j_arr := p.GetPowerMapItem(posi)
@@ -854,7 +852,7 @@ func (p *FrostParticipant) DeriveExternalWMap() {
 	}
 	wg.Wait()
 	if p.suite.B != nil {
-		p.suite.BenchmarkThreadSafeReport.Store(fmt.Sprintf("ms/derive-w-map-%d", p.Position), float64(time.Since(time_now).Milliseconds()))
+		// p.suite.LogBenchmarkThreadSafeReport(fmt.Sprintf("ms/derive-w-map-%d", p.Position), float64(time.Since(time_now).Milliseconds()), true)
 	}
 }
 
@@ -863,7 +861,7 @@ func (p *FrostParticipant) DeriveExternalWMap() {
 // expensive operation
 func (p *FrostParticipant) VerifyBatchPublicSecretShares(secret_shares map[int64]*btcec.ModNScalar, posi uint32) {
 	var wg sync.WaitGroup
-	time_now := time.Now()
+	// time_now := time.Now()
 
 	// calculate expected A_i for all parties
 	// make(map[int64]*btcec.JacobianPoint)
@@ -924,7 +922,7 @@ func (p *FrostParticipant) VerifyBatchPublicSecretShares(secret_shares map[int64
 	})
 	wg.Wait()
 	if p.suite.B != nil {
-		p.suite.BenchmarkThreadSafeReport.Store(fmt.Sprintf("ms/verify-batch-secret-shares-%d", p.Position), float64(time.Since(time_now).Milliseconds()))
+		// p.suite.LogBenchmarkThreadSafeReport(fmt.Sprintf("ms/verify-batch-secret-shares-%d", p.Position), float64(time.Since(time_now).Milliseconds()), true)
 	}
 }
 
@@ -934,7 +932,7 @@ func (p *FrostParticipant) VerifyBatchPublicSecretShares(secret_shares map[int64
 // Y_i = \prod_{j=0}^{t} (\prod_{m=1}^{n_p} A_mj)^i^j
 // Y_i = \prod_{j=0}^{t} Q_j^i^j
 func (p *FrostParticipant) CalculateBatchPublicSigningShares(skip_positions map[int64]bool) {
-	time_now := time.Now()
+	// time_now := time.Now()
 	var wg sync.WaitGroup
 
 	// calculate Y_i
@@ -957,6 +955,6 @@ func (p *FrostParticipant) CalculateBatchPublicSigningShares(skip_positions map[
 	}
 	wg.Wait()
 	if p.suite.B != nil {
-		p.suite.BenchmarkThreadSafeReport.Store(fmt.Sprintf("ms/calculate-batch-public-signing-shares-%d", p.Position), float64(time.Since(time_now).Milliseconds()))
+		// p.suite.LogBenchmarkThreadSafeReport(fmt.Sprintf("ms/calculate-batch-public-signing-shares-%d", p.Position), float64(time.Since(time_now).Milliseconds()), true)
 	}
 }

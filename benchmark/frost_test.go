@@ -23,20 +23,24 @@ func BenchmarkFrostDKG(b *testing.B) {
 			threshold: 70,
 		},
 		{
-			n:         300,
-			threshold: 210,
-		},
-		{
 			n:         500,
 			threshold: 350,
 		},
 		{
-			n:         700,
-			threshold: 490,
-		},
-		{
 			n:         1000,
 			threshold: 700,
+		},
+		{
+			n:         2000,
+			threshold: 1400,
+		},
+		{
+			n:         4000,
+			threshold: 2800,
+		},
+		{
+			n:         8000,
+			threshold: 5600,
 		},
 	}
 
@@ -63,24 +67,29 @@ func BenchmarkWstsDKG(b *testing.B) {
 			threshold: 70,
 		},
 		{
-			n_p:       60,
-			n_keys:    300,
-			threshold: 210,
-		},
-		{
 			n_p:       100,
 			n_keys:    500,
 			threshold: 350,
 		},
 		{
-			n_p:       140,
-			n_keys:    700,
-			threshold: 490,
-		},
-		{
 			n_p:       200,
 			n_keys:    1000,
 			threshold: 700,
+		},
+		{
+			n_p:       400,
+			n_keys:    2000,
+			threshold: 1400,
+		},
+		{
+			n_p:       800,
+			n_keys:    4000,
+			threshold: 2800,
+		},
+		{
+			n_p:       1600,
+			n_keys:    8000,
+			threshold: 5600,
 		},
 	}
 
@@ -124,7 +133,7 @@ func RunFrostDKG(name string, n, threshold int64, b *testing.B) {
 		challenge := participant.CalculateSecretProofs([32]byte{})
 		participant.VerifySecretProofs([32]byte{}, challenge, i+1, participant.PolynomialCommitments[participant.Position][0])
 	}
-	suite.LogBenchmarkThreadSafeReport("ms/secret-proofs", float64(time.Since(time_now).Milliseconds()), true)
+	// suite.LogBenchmarkThreadSafeReport("ms/secret-proofs", float64(time.Since(time_now).Milliseconds()), true)
 
 	// calculate secret shares
 	secret_shares_map := make(map[int64]map[int64]*btcec.ModNScalar)
@@ -132,7 +141,7 @@ func RunFrostDKG(name string, n, threshold int64, b *testing.B) {
 		secret_shares_map[i+1] = make(map[int64]*btcec.ModNScalar)
 	}
 
-	time_now = time.Now()
+	// time_now = time.Now()
 	var wg sync.WaitGroup
 	for i := int64(0); i < n; i++ {
 		wg.Add(1)
@@ -142,7 +151,7 @@ func RunFrostDKG(name string, n, threshold int64, b *testing.B) {
 		}(i)
 	}
 	wg.Wait()
-	suite.LogBenchmarkThreadSafeReport("ms/calculate-secret-shares", float64(time.Since(time_now).Milliseconds()), true)
+	// suite.LogBenchmarkThreadSafeReport("ms/calculate-secret-shares", float64(time.Since(time_now).Milliseconds()), true)
 
 	// distribute to all participants
 	for i := int64(0); i < n; i++ {
@@ -198,7 +207,7 @@ func RunFrostDKG(name string, n, threshold int64, b *testing.B) {
 		}(i)
 	}
 	wg.Wait()
-	suite.LogBenchmarkThreadSafeReport("ms/calculate-internal-public-signing-shares", float64(time.Since(time_now).Milliseconds()), true)
+	// suite.LogBenchmarkThreadSafeReport("ms/calculate-internal-public-signing-shares", float64(time.Since(time_now).Milliseconds()), true)
 
 	// calculate public signing shares
 
@@ -236,7 +245,7 @@ func RunFrostDKG(name string, n, threshold int64, b *testing.B) {
 		}(i)
 	}
 	wg.Wait()
-	suite.LogBenchmarkThreadSafeReport("ms/calculate-batch-public-signing-shares", float64(time.Since(time_now).Milliseconds()), true)
+	// suite.LogBenchmarkThreadSafeReport("ms/calculate-batch-public-signing-shares", float64(time.Since(time_now).Milliseconds()), true)
 
 	// calculate group public key
 	time_now = time.Now()
@@ -249,7 +258,7 @@ func RunFrostDKG(name string, n, threshold int64, b *testing.B) {
 		}(i)
 	}
 	wg.Wait()
-	suite.LogBenchmarkThreadSafeReport("ms/calculate-group-public-key", float64(time.Since(time_now).Milliseconds()), true)
+	// suite.LogBenchmarkThreadSafeReport("ms/calculate-group-public-key", float64(time.Since(time_now).Milliseconds()), true)
 
 	b.StopTimer()
 
@@ -268,7 +277,7 @@ func RunFrostDKG(name string, n, threshold int64, b *testing.B) {
 	}
 
 	// dump logs
-	// suite.FlushBenchmarkThreadSafeReport()
+	suite.FlushBenchmarkThreadSafeReport()
 }
 
 func RunWstsDKG(name string, n_p, n_keys, threshold int64, b *testing.B) {
@@ -312,7 +321,7 @@ func RunWstsDKG(name string, n_p, n_keys, threshold int64, b *testing.B) {
 		challenge := participant.Frost.CalculateSecretProofs([32]byte{})
 		participant.Frost.VerifySecretProofs([32]byte{}, challenge, i+1, participant.Frost.PolynomialCommitments[participant.Frost.Position][0])
 	}
-	suite.LogBenchmarkThreadSafeReport("ms/secret-proofs", float64(time.Since(time_now).Milliseconds()), true)
+	// suite.LogBenchmarkThreadSafeReport("ms/secret-proofs", float64(time.Since(time_now).Milliseconds()), true)
 
 	// calculate secret shares
 
@@ -326,7 +335,7 @@ func RunWstsDKG(name string, n_p, n_keys, threshold int64, b *testing.B) {
 		}(i)
 	}
 	wg.Wait()
-	suite.LogBenchmarkThreadSafeReport("ms/calculate-secret-shares", float64(time.Since(time_now).Milliseconds()), true)
+	// suite.LogBenchmarkThreadSafeReport("ms/calculate-secret-shares", float64(time.Since(time_now).Milliseconds()), true)
 
 	// distribute to all participants
 	for i := int64(0); i < n_p; i++ {
@@ -389,7 +398,7 @@ func RunWstsDKG(name string, n_p, n_keys, threshold int64, b *testing.B) {
 		}(i)
 	}
 	wg.Wait()
-	suite.LogBenchmarkThreadSafeReport("ms/calculate-internal-public-signing-shares", float64(time.Since(time_now).Milliseconds()), true)
+	// suite.LogBenchmarkThreadSafeReport("ms/calculate-internal-public-signing-shares", float64(time.Since(time_now).Milliseconds()), true)
 
 	// calculate public signing shares
 	time_now = time.Now()
@@ -422,7 +431,7 @@ func RunWstsDKG(name string, n_p, n_keys, threshold int64, b *testing.B) {
 		}(i)
 	}
 	wg.Wait()
-	suite.LogBenchmarkThreadSafeReport("ms/calculate-batch-public-signing-shares", float64(time.Since(time_now).Milliseconds()), true)
+	// suite.LogBenchmarkThreadSafeReport("ms/calculate-batch-public-signing-shares", float64(time.Since(time_now).Milliseconds()), true)
 
 	// calculate group public key
 	time_now = time.Now()
@@ -435,7 +444,7 @@ func RunWstsDKG(name string, n_p, n_keys, threshold int64, b *testing.B) {
 		}(i)
 	}
 	wg.Wait()
-	suite.LogBenchmarkThreadSafeReport("ms/calculate-group-public-key", float64(time.Since(time_now).Milliseconds()), true)
+	// suite.LogBenchmarkThreadSafeReport("ms/calculate-group-public-key", float64(time.Since(time_now).Milliseconds()), true)
 
 	b.StopTimer()
 
@@ -456,5 +465,5 @@ func RunWstsDKG(name string, n_p, n_keys, threshold int64, b *testing.B) {
 	}
 
 	// dump logs
-	// suite.FlushBenchmarkThreadSafeReport()
+	suite.FlushBenchmarkThreadSafeReport()
 }
