@@ -31,16 +31,16 @@ func BenchmarkFrostDKG(b *testing.B) {
 			threshold: 700,
 		},
 		{
+			n:         1500,
+			threshold: 1050,
+		},
+		{
 			n:         2000,
 			threshold: 1400,
 		},
 		{
 			n:         4000,
 			threshold: 2800,
-		},
-		{
-			n:         8000,
-			threshold: 5600,
 		},
 	}
 
@@ -55,48 +55,40 @@ func BenchmarkFrostDKG(b *testing.B) {
 // go test -benchmem -run=^$ -bench ^BenchmarkWstsDKG$ github.com/nghuyenthevinh2000/bitcoin-playground/benchmark
 func BenchmarkWstsDKG(b *testing.B) {
 
-	// participant - keys ratio: 1 - 5
-	test_suite := []struct {
-		n_p       int64
-		n_keys    int64
-		threshold int64
-	}{
-		{
-			n_p:       20,
-			n_keys:    100,
-			threshold: 70,
-		},
+	test_suite := []*WstsBenchmark{
 		{
 			n_p:       100,
 			n_keys:    500,
 			threshold: 350,
 		},
 		{
-			n_p:       200,
+			n_p:       100,
 			n_keys:    1000,
 			threshold: 700,
 		},
 		{
-			n_p:       400,
+			n_p:       100,
+			n_keys:    1500,
+			threshold: 1050,
+		},
+		{
+			n_p:       100,
 			n_keys:    2000,
 			threshold: 1400,
 		},
-		{
-			n_p:       800,
-			n_keys:    4000,
-			threshold: 2800,
-		},
-		{
-			n_p:       1600,
-			n_keys:    8000,
-			threshold: 5600,
-		},
 	}
 
-	for _, test := range test_suite {
-		test_name := fmt.Sprintf("wsts-dkg-%d/%d/%d", test.threshold, test.n_keys, test.n_p)
+	for _, wsts := range test_suite {
+		test_name := fmt.Sprintf("wsts-dkg-%d/%d/%d", wsts.threshold, wsts.n_keys, wsts.n_p)
 		b.Run(test_name, func(b *testing.B) {
-			RunWstsDKG(test_name, test.n_p, test.n_keys, test.threshold, b)
+			wsts.RunWstsDKG(test_name, b)
+		})
+	}
+
+	for _, wsts := range test_suite {
+		test_name := fmt.Sprintf("wsts-signing-%d/%d/%d", wsts.threshold, wsts.n_keys, wsts.n_p)
+		b.Run(test_name, func(b *testing.B) {
+			wsts.RunWstsSigning(test_name, b)
 		})
 	}
 }
@@ -280,35 +272,42 @@ func RunFrostDKG(name string, n, threshold int64, b *testing.B) {
 	suite.FlushBenchmarkThreadSafeReport()
 }
 
-func RunWstsDKG(name string, n_p, n_keys, threshold int64, b *testing.B) {
+type WstsBenchmark struct {
+	n_p          int64
+	n_keys       int64
+	threshold    int64
+	participants []*testhelper.WstsParticipant
+}
+
+func (wsts *WstsBenchmark) RunWstsDKG(name string, b *testing.B) {
 	suite := testhelper.TestSuite{}
 	suite.SetupBenchmarkStaticSimNetSuite(b, log.Default())
 
 	// wsts participant
-	participants := make([]*testhelper.WstsParticipant, n_p)
+	wsts.participants = make([]*testhelper.WstsParticipant, wsts.n_p)
 	logger := log.Default()
-	for i := int64(0); i < n_p; i++ {
-		frost := testhelper.NewFrostParticipant(&suite, logger, n_keys, threshold, i+1, nil)
-		participants[i] = testhelper.NewWSTSParticipant(&suite, n_p, frost)
+	for i := int64(0); i < wsts.n_p; i++ {
+		frost := testhelper.NewFrostParticipant(&suite, logger, wsts.n_keys, wsts.threshold, i+1, nil)
+		wsts.participants[i] = testhelper.NewWSTSParticipant(&suite, wsts.n_p, frost)
 	}
 
 	// update polynomial commitments
-	for i := int64(0); i < n_p; i++ {
-		for j := int64(0); j < n_p; j++ {
+	for i := int64(0); i < wsts.n_p; i++ {
+		for j := int64(0); j < wsts.n_p; j++ {
 			if i == j {
 				continue
 			}
-			participant := participants[j]
-			participant.Frost.UpdatePolynomialCommitments(i+1, participants[i].Frost.PolynomialCommitments[i+1])
+			participant := wsts.participants[j]
+			participant.Frost.UpdatePolynomialCommitments(i+1, wsts.participants[i].Frost.PolynomialCommitments[i+1])
 		}
 	}
 
 	// update key ranges
-	keys := suite.DeriveSharesOfKeys(n_p, n_keys)
+	keys := suite.DeriveSharesOfKeys(wsts.n_p, wsts.n_keys)
 	range_keys := suite.DeriveRangeOfKeys(keys)
-	for i := int64(0); i < n_p; i++ {
+	for i := int64(0); i < wsts.n_p; i++ {
 		for j := range_keys[i+1][0]; j < range_keys[i+1][1]; j++ {
-			participants[i].Keys[j] = true
+			wsts.participants[i].Keys[j] = true
 		}
 	}
 
@@ -316,8 +315,8 @@ func RunWstsDKG(name string, n_p, n_keys, threshold int64, b *testing.B) {
 	b.ResetTimer()
 	b.StartTimer()
 	time_now := time.Now()
-	for i := int64(0); i < n_p; i++ {
-		participant := participants[i]
+	for i := int64(0); i < wsts.n_p; i++ {
+		participant := wsts.participants[i]
 		challenge := participant.Frost.CalculateSecretProofs([32]byte{})
 		participant.Frost.VerifySecretProofs([32]byte{}, challenge, i+1, participant.Frost.PolynomialCommitments[participant.Frost.Position][0])
 	}
@@ -327,24 +326,24 @@ func RunWstsDKG(name string, n_p, n_keys, threshold int64, b *testing.B) {
 
 	time_now = time.Now()
 	var wg sync.WaitGroup
-	for i := int64(0); i < n_p; i++ {
+	for i := int64(0); i < wsts.n_p; i++ {
 		wg.Add(1)
 		go func(i int64) {
 			defer wg.Done()
-			participants[i].Frost.CalculateSecretShares()
+			wsts.participants[i].Frost.CalculateSecretShares()
 		}(i)
 	}
 	wg.Wait()
 	// suite.LogBenchmarkThreadSafeReport("ms/calculate-secret-shares", float64(time.Since(time_now).Milliseconds()), true)
 
 	// distribute to all participants
-	for i := int64(0); i < n_p; i++ {
-		participant := participants[i]
+	for i := int64(0); i < wsts.n_p; i++ {
+		participant := wsts.participants[i]
 
 		for j := range participant.Keys {
 			secrets := make(map[int64]*btcec.ModNScalar)
-			for m := int64(0); m < n_p; m++ {
-				secret := participants[m].Frost.GetSecretShares(j)
+			for m := int64(0); m < wsts.n_p; m++ {
+				secret := wsts.participants[m].Frost.GetSecretShares(j)
 				secrets[m+1] = secret
 			}
 			participant.StoreSecretShares(j, secrets)
@@ -352,11 +351,11 @@ func RunWstsDKG(name string, n_p, n_keys, threshold int64, b *testing.B) {
 	}
 
 	// derive power map
-	for i := int64(0); i < n_p; i++ {
+	for i := int64(0); i < wsts.n_p; i++ {
 		wg.Add(1)
 		go func(i int64) {
 			defer wg.Done()
-			participants[i].Frost.DerivePowerMap()
+			wsts.participants[i].Frost.DerivePowerMap()
 		}(i)
 	}
 	wg.Wait()
@@ -367,7 +366,7 @@ func RunWstsDKG(name string, n_p, n_keys, threshold int64, b *testing.B) {
 		wg.Add(1)
 		go func(i int64) {
 			defer wg.Done()
-			participant := participants[i]
+			participant := wsts.participants[i]
 			for j := range participant.Keys {
 				participant.Frost.VerifyBatchPublicSecretShares(participant.GetSecretSharesMap(j), uint32(j))
 			}
@@ -377,8 +376,8 @@ func RunWstsDKG(name string, n_p, n_keys, threshold int64, b *testing.B) {
 	suite.LogBenchmarkThreadSafeReport("ms/verify-batch-public-secret-shares", float64(time.Since(time_now).Milliseconds()), true)
 
 	// calculate signing shares
-	for i := int64(0); i < n_p; i++ {
-		participant := participants[i]
+	for i := int64(0); i < wsts.n_p; i++ {
+		participant := wsts.participants[i]
 		wg.Add(1)
 		go func(i int64) {
 			defer wg.Done()
@@ -389,11 +388,11 @@ func RunWstsDKG(name string, n_p, n_keys, threshold int64, b *testing.B) {
 
 	// calculate public signing shares
 	time_now = time.Now()
-	for i := int64(0); i < n_p; i++ {
+	for i := int64(0); i < wsts.n_p; i++ {
 		wg.Add(1)
 		go func(i int64) {
 			defer wg.Done()
-			participant := participants[i]
+			participant := wsts.participants[i]
 			participant.CalculateInternalPublicSigningShares()
 		}(i)
 	}
@@ -402,22 +401,22 @@ func RunWstsDKG(name string, n_p, n_keys, threshold int64, b *testing.B) {
 
 	// calculate public signing shares
 	time_now = time.Now()
-	participants[0].Frost.DeriveExternalQMap()
-	participants[0].Frost.DeriveExternalWMap()
+	wsts.participants[0].Frost.DeriveExternalQMap()
+	wsts.participants[0].Frost.DeriveExternalWMap()
 
-	for i := int64(1); i < n_p; i++ {
+	for i := int64(1); i < wsts.n_p; i++ {
 		wg.Add(1)
 		go func(i int64) {
 			defer wg.Done()
-			participants[i].Frost.ParseQMap(participants[0].Frost.CopyQMap())
-			participants[i].Frost.ParseWMap(participants[0].Frost.CopyWMap())
+			wsts.participants[i].Frost.ParseQMap(wsts.participants[0].Frost.CopyQMap())
+			wsts.participants[i].Frost.ParseWMap(wsts.participants[0].Frost.CopyWMap())
 		}(i)
 	}
 	wg.Wait()
 	suite.LogBenchmarkThreadSafeReport("ms/derive-external-q-w-map", float64(time.Since(time_now).Milliseconds()), true)
 
 	time_now = time.Now()
-	for i := int64(0); i < n_p; i++ {
+	for i := int64(0); i < wsts.n_p; i++ {
 		wg.Add(1)
 		go func(i int64) {
 			defer wg.Done()
@@ -427,7 +426,7 @@ func RunWstsDKG(name string, n_p, n_keys, threshold int64, b *testing.B) {
 			// participants[i].DeriveExternalWMap()
 
 			// calculate public signing shares of other participants
-			participants[i].CalculateBatchPublicSigningShares()
+			wsts.participants[i].CalculateBatchPublicSigningShares()
 		}(i)
 	}
 	wg.Wait()
@@ -435,11 +434,11 @@ func RunWstsDKG(name string, n_p, n_keys, threshold int64, b *testing.B) {
 
 	// calculate group public key
 	time_now = time.Now()
-	for i := int64(0); i < n_p; i++ {
+	for i := int64(0); i < wsts.n_p; i++ {
 		wg.Add(1)
 		go func(i int64) {
 			defer wg.Done()
-			participant := participants[i]
+			participant := wsts.participants[i]
 			participant.Frost.CalculateGroupPublicKey()
 		}(i)
 	}
@@ -449,21 +448,38 @@ func RunWstsDKG(name string, n_p, n_keys, threshold int64, b *testing.B) {
 	b.StopTimer()
 
 	// verify correct calculation of public signing shares
-	for i := int64(0); i < n_p; i++ {
-		participant := participants[i]
+	for i := int64(0); i < wsts.n_p; i++ {
+		participant := wsts.participants[i]
 
 		// verify public signing shares of other participants
-		for j := int64(0); j < n_p; j++ {
+		for j := int64(0); j < wsts.n_p; j++ {
 			if i == j {
 				continue
 			}
 
 			for key := range participant.Keys {
-				assert.Equal(suite.T, participant.Frost.GetPublicSigningShares(key), participants[j].Frost.GetPublicSigningShares(key))
+				assert.Equal(suite.T, participant.Frost.GetPublicSigningShares(key), wsts.participants[j].Frost.GetPublicSigningShares(key))
 			}
 		}
 	}
 
 	// dump logs
 	suite.FlushBenchmarkThreadSafeReport()
+}
+
+func (wsts *WstsBenchmark) RunWstsSigning(name string, honest_set []int64, b *testing.B) {
+	// Stage 1: Nonce generation
+	for _, participant := range wsts.participants {
+		participant.Frost.GenerateSigningNonces(1)
+	}
+
+	for _, participant := range wsts.participants {
+		participant.Frost.CalculatePublicNonceCommitments(0, honest_set, [32]byte{})
+	}
+
+	// distribute nonces to other participants
+
+	// Stage 2: Partial signature generation (Benchmark ends here)
+
+	// Stage 3: WSTS verification
 }
