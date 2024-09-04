@@ -58,30 +58,40 @@ func BenchmarkWstsDKG(b *testing.B) {
 
 	test_suite := []*WstsBenchmark{
 		{
-			n_p:       10,
-			n_keys:    50,
-			threshold: 35,
+			n_p:       100,
+			n_keys:    500,
+			threshold: 350,
 		},
-		// {
-		// 	n_p:       100,
-		// 	n_keys:    500,
-		// 	threshold: 350,
-		// },
-		// {
-		// 	n_p:       100,
-		// 	n_keys:    1000,
-		// 	threshold: 700,
-		// },
-		// {
-		// 	n_p:       100,
-		// 	n_keys:    1500,
-		// 	threshold: 1050,
-		// },
-		// {
-		// 	n_p:       100,
-		// 	n_keys:    2000,
-		// 	threshold: 1400,
-		// },
+		{
+			n_p:       100,
+			n_keys:    1000,
+			threshold: 700,
+		},
+		{
+			n_p:       100,
+			n_keys:    1500,
+			threshold: 1050,
+		},
+		{
+			n_p:       100,
+			n_keys:    2000,
+			threshold: 1400,
+		},
+		{
+			n_p:       200,
+			n_keys:    1000,
+			threshold: 700,
+		},
+		{
+			n_p:       200,
+			n_keys:    1500,
+			threshold: 1050,
+		},
+		{
+			n_p:       200,
+			n_keys:    2000,
+			threshold: 1400,
+		},
 	}
 
 	for _, wsts := range test_suite {
