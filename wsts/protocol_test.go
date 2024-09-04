@@ -91,7 +91,7 @@ func TestPersistKeyRange(t *testing.T) {
 	assert.Equal(t, int64(30000), key_range[1])
 }
 
-// go test -v -run ^TestNewMockValidatorSet$ github.com/nghuyenthevinh2000/bitcoin-playground/wsts
+// go test -count=10 -v -run ^TestNewMockValidatorSet$ github.com/nghuyenthevinh2000/bitcoin-playground/wsts
 func TestNewMockValidatorSet(t *testing.T) {
 	suite := testhelper.TestSuite{}
 	suite.SetupStaticSimNetSuite(t, log.Default())
