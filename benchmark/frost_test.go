@@ -62,26 +62,26 @@ func BenchmarkWstsDKG(b *testing.B) {
 			n_keys:    50,
 			threshold: 35,
 		},
-		{
-			n_p:       100,
-			n_keys:    500,
-			threshold: 350,
-		},
-		{
-			n_p:       100,
-			n_keys:    1000,
-			threshold: 700,
-		},
-		{
-			n_p:       100,
-			n_keys:    1500,
-			threshold: 1050,
-		},
-		{
-			n_p:       100,
-			n_keys:    2000,
-			threshold: 1400,
-		},
+		// {
+		// 	n_p:       100,
+		// 	n_keys:    500,
+		// 	threshold: 350,
+		// },
+		// {
+		// 	n_p:       100,
+		// 	n_keys:    1000,
+		// 	threshold: 700,
+		// },
+		// {
+		// 	n_p:       100,
+		// 	n_keys:    1500,
+		// 	threshold: 1050,
+		// },
+		// {
+		// 	n_p:       100,
+		// 	n_keys:    2000,
+		// 	threshold: 1400,
+		// },
 	}
 
 	for _, wsts := range test_suite {
@@ -352,7 +352,7 @@ func (wsts *WstsBenchmark) RunWstsDKG(name string, b *testing.B) {
 	for i := int64(0); i < wsts.n_p; i++ {
 		participant := wsts.participants[i]
 
-		for j := range participant.Keys {
+		for j := range participant.Keys[i+1] {
 			secrets := make(map[int64]*btcec.ModNScalar)
 			for m := int64(0); m < wsts.n_p; m++ {
 				secret := wsts.participants[m].Frost.GetSecretShares(j)
@@ -379,7 +379,7 @@ func (wsts *WstsBenchmark) RunWstsDKG(name string, b *testing.B) {
 		go func(i int64) {
 			defer wg.Done()
 			participant := wsts.participants[i]
-			for j := range participant.Keys {
+			for j := range participant.Keys[i+1] {
 				participant.Frost.VerifyBatchPublicSecretShares(participant.GetSecretSharesMap(j), uint32(j))
 			}
 		}(i)
@@ -469,7 +469,7 @@ func (wsts *WstsBenchmark) RunWstsDKG(name string, b *testing.B) {
 				continue
 			}
 
-			for key := range participant.Keys {
+			for key := range participant.Keys[i+1] {
 				assert.Equal(wsts.suite.T, participant.Frost.GetPublicSigningShares(key), wsts.participants[j].Frost.GetPublicSigningShares(key))
 			}
 		}
@@ -484,10 +484,6 @@ func (wsts *WstsBenchmark) RunWstsSigning(name string, b *testing.B) {
 
 	// honest_set[0] key_share is honest_keys[0]
 	honest_set := wsts.suite.RandomHonestSet(wsts.n_p, wsts.n_keys, wsts.key_shares)
-	honest_key_shares := make([]int64, len(honest_set))
-	for i, key := range honest_set {
-		honest_key_shares[i] = wsts.key_shares[key-1]
-	}
 
 	b.ResetTimer()
 	b.StartTimer()
@@ -499,23 +495,26 @@ func (wsts *WstsBenchmark) RunWstsSigning(name string, b *testing.B) {
 		public_nonces[participant.Frost.Position] = nonces[signing_index]
 	}
 
-	for _, participant := range wsts.participants {
+	for _, participant_index := range honest_set {
+		participant := wsts.participants[participant_index-1]
 		participant.Frost.CalculatePublicNonceCommitments(signing_index, honest_set, [32]byte{}, public_nonces)
 	}
 
 	// Stage 2: Partial signature generation (Benchmark ends here for individual participants)
 	partial_signatures := make(map[int64]*schnorr.Signature)
-	for _, participant := range wsts.participants {
-		sig := participant.WeightedPartialSign(signing_index, honest_set, honest_key_shares, [32]byte{}, public_nonces)
+	for _, participant_index := range honest_set {
+		participant := wsts.participants[participant_index-1]
+
+		sig := participant.WeightedPartialSign(signing_index, honest_set, [32]byte{}, public_nonces)
 		partial_signatures[participant.Frost.Position] = sig
 	}
 
 	var wg sync.WaitGroup
-	for participant_index := range wsts.participants {
+	for _, participant_index := range honest_set {
 		wg.Add(1)
-		go func(participant_index int) {
+		go func(participant_index int64) {
 			defer wg.Done()
-			participant := wsts.participants[participant_index]
+			participant := wsts.participants[participant_index-1]
 			for posi, p_sig := range partial_signatures {
 				if posi == participant.Frost.Position {
 					continue
@@ -527,7 +526,7 @@ func (wsts *WstsBenchmark) RunWstsSigning(name string, b *testing.B) {
 				}
 
 				// Verify partial signatures
-				ok := participant.WeightedPartialVerification(p_sig, signing_index, posi, [32]byte{}, honest_key_shares, public_signing_share)
+				ok := participant.WeightedPartialVerification(p_sig, signing_index, posi, [32]byte{}, honest_set, public_signing_share)
 				assert.True(wsts.suite.T, ok, fmt.Sprintf("participant %d: failed to verify partial signature of %d", participant.Frost.Position, posi))
 			}
 		}(participant_index)

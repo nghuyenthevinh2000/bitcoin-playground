@@ -71,7 +71,7 @@ func (wsts *WstsParticipant) CalculateBatchPublicSigningShares() {
 
 func (wsts *WstsParticipant) CalculateInternalPublicSigningShares() {
 	var wg sync.WaitGroup
-	for key := range wsts.Keys {
+	for key := range wsts.Keys[wsts.Frost.Position] {
 		wg.Add(1)
 		go func(key int64) {
 			defer wg.Done()
@@ -84,7 +84,7 @@ func (wsts *WstsParticipant) CalculateInternalPublicSigningShares() {
 
 func (wsts *WstsParticipant) CalculateSigningShares() {
 	var wg sync.WaitGroup
-	for key := range wsts.Keys {
+	for key := range wsts.Keys[wsts.Frost.Position] {
 		wg.Add(1)
 		go func(key int64) {
 			defer wg.Done()
@@ -109,7 +109,15 @@ func (wsts *WstsParticipant) CalculateSigningShares() {
 // TODO: have not checked for even or odd Y - coordinates
 //
 // a different variant of partial sign for wsts
-func (wsts *WstsParticipant) WeightedPartialSign(signing_index int64, honest_party, honest_keys []int64, message_hash [32]byte, public_nonces map[int64][2]*btcec.PublicKey) *schnorr.Signature {
+func (wsts *WstsParticipant) WeightedPartialSign(signing_index int64, honest_party []int64, message_hash [32]byte, public_nonces map[int64][2]*btcec.PublicKey) *schnorr.Signature {
+	// honest keys
+	honest_keys := make([]int64, 0)
+	for _, index := range honest_party {
+		for key := range wsts.Keys[index] {
+			honest_keys = append(honest_keys, key)
+		}
+	}
+
 	// calculate c
 	commitment_data := make([]byte, 0)
 	commitment_data = append(commitment_data, wsts.Frost.AggrNonceCommitment[signing_index].X.Bytes()[:]...)
@@ -195,7 +203,15 @@ func (wsts *WstsParticipant) WeightedPartialSign(signing_index int64, honest_par
 // thus, R_i = g^z_i * \prod_{K_i} Y_{ik}^-(\lambda_{ik} * c)
 //
 // a different variant of partial sign for wsts
-func (wsts *WstsParticipant) WeightedPartialVerification(sig *schnorr.Signature, signing_index, posi int64, message_hash [32]byte, honest_keys []int64, signing_verification_shares map[int64]*btcec.PublicKey) bool {
+func (wsts *WstsParticipant) WeightedPartialVerification(sig *schnorr.Signature, signing_index, posi int64, message_hash [32]byte, honest_party []int64, signing_verification_shares map[int64]*btcec.PublicKey) bool {
+	// honest keys
+	honest_keys := make([]int64, 0)
+	for _, index := range honest_party {
+		for key := range wsts.Keys[index] {
+			honest_keys = append(honest_keys, key)
+		}
+	}
+
 	// derive z and R_X
 	sig_bytes := sig.Serialize()
 	R_bytes := sig_bytes[0:32]
