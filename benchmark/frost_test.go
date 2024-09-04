@@ -510,20 +510,27 @@ func (wsts *WstsBenchmark) RunWstsSigning(name string, b *testing.B) {
 		partial_signatures[participant.Frost.Position] = sig
 	}
 
-	for _, participant := range wsts.participants {
-		for posi, p_sig := range partial_signatures {
-			if posi == participant.Frost.Position {
-				continue
-			}
+	var wg sync.WaitGroup
+	for participant_index := range wsts.participants {
+		wg.Add(1)
+		go func(participant_index int) {
+			defer wg.Done()
+			participant := wsts.participants[participant_index]
+			for posi, p_sig := range partial_signatures {
+				if posi == participant.Frost.Position {
+					continue
+				}
 
-			public_signing_share := make(map[int64]*btcec.PublicKey)
-			for key := range participant.Keys[posi] {
-				public_signing_share[key] = participant.Frost.GetPublicSigningShares(key)
-			}
+				public_signing_share := make(map[int64]*btcec.PublicKey)
+				for key := range participant.Keys[posi] {
+					public_signing_share[key] = participant.Frost.GetPublicSigningShares(key)
+				}
 
-			// Verify partial signatures
-			ok := participant.WeightedPartialVerification(p_sig, signing_index, posi, [32]byte{}, honest_key_shares, public_signing_share)
-			assert.True(wsts.suite.T, ok, fmt.Sprintf("participant %d: failed to verify partial signature of %d", participant.Frost.Position, posi))
-		}
+				// Verify partial signatures
+				ok := participant.WeightedPartialVerification(p_sig, signing_index, posi, [32]byte{}, honest_key_shares, public_signing_share)
+				assert.True(wsts.suite.T, ok, fmt.Sprintf("participant %d: failed to verify partial signature of %d", participant.Frost.Position, posi))
+			}
+		}(participant_index)
 	}
+	wg.Wait()
 }
