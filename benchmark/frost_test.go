@@ -485,7 +485,7 @@ func (wsts *WstsBenchmark) RunWstsDKG(name string, t *testing.T) {
 	wg.Wait()
 	// suite.LogBenchmarkThreadSafeReport("ms/calculate-group-public-key", float64(time.Since(time_now).Milliseconds()), true)
 
-	wsts.suite.LogBenchmarkThreadSafeReport("ms/wsts-dkg", float64(time.Since(time_all).Milliseconds()), true)
+	wsts.suite.LogBenchmarkThreadSafeReport("ms/wsts-dkg", float64(time.Since(time_all).Milliseconds()), false)
 
 	// verify correct calculation of public signing shares
 	for i := int64(0); i < wsts.n_p; i++ {
@@ -560,5 +560,5 @@ func (wsts *WstsBenchmark) RunWstsSigning(name string, t *testing.T) {
 	}
 	wg.Wait()
 
-	wsts.suite.LogBenchmarkThreadSafeReport("ms/wsts-signing", float64(time.Since(time_all).Milliseconds()), true)
+	wsts.suite.LogBenchmarkThreadSafeReport("ms/wsts-signing", float64(time.Since(time_all).Milliseconds()), false)
 }
