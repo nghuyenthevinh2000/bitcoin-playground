@@ -78,6 +78,16 @@ func BenchmarkWstsDKG(b *testing.B) {
 			threshold: 1400,
 		},
 		{
+			n_p:       100,
+			n_keys:    2500,
+			threshold: 1750,
+		},
+		{
+			n_p:       100,
+			n_keys:    3000,
+			threshold: 2100,
+		},
+		{
 			n_p:       200,
 			n_keys:    1000,
 			threshold: 700,
@@ -91,6 +101,16 @@ func BenchmarkWstsDKG(b *testing.B) {
 			n_p:       200,
 			n_keys:    2000,
 			threshold: 1400,
+		},
+		{
+			n_p:       200,
+			n_keys:    2500,
+			threshold: 1750,
+		},
+		{
+			n_p:       200,
+			n_keys:    3000,
+			threshold: 2100,
 		},
 	}
 
