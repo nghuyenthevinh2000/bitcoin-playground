@@ -53,8 +53,8 @@ func BenchmarkFrostDKG(b *testing.B) {
 	}
 }
 
-// go test -benchmem -run=^$ -bench ^BenchmarkWstsDKG$ github.com/nghuyenthevinh2000/bitcoin-playground/benchmark
-func BenchmarkWstsDKG(b *testing.B) {
+// go test -timeout 1h -run ^TestBenchmarkWstsDKG$ github.com/nghuyenthevinh2000/bitcoin-playground/benchmark
+func TestBenchmarkWstsDKG(t *testing.T) {
 
 	test_suite := []*WstsBenchmark{
 		{
@@ -116,16 +116,16 @@ func BenchmarkWstsDKG(b *testing.B) {
 
 	for _, wsts := range test_suite {
 		wsts.suite = testhelper.TestSuite{}
-		wsts.suite.SetupBenchmarkStaticSimNetSuite(b, log.Default())
+		wsts.suite.SetupStaticSimNetSuite(t, log.Default())
 
 		test_name := fmt.Sprintf("wsts-dkg-%d/%d/%d", wsts.threshold, wsts.n_keys, wsts.n_p)
-		b.Run(test_name, func(b *testing.B) {
-			wsts.RunWstsDKG(test_name, b)
+		t.Run(test_name, func(t *testing.T) {
+			wsts.RunWstsDKG(test_name, t)
 		})
 
 		test_name = fmt.Sprintf("wsts-signing-%d/%d/%d", wsts.threshold, wsts.n_keys, wsts.n_p)
-		b.Run(test_name, func(b *testing.B) {
-			wsts.RunWstsSigning(test_name, b)
+		t.Run(test_name, func(t *testing.T) {
+			wsts.RunWstsSigning(test_name, t)
 		})
 	}
 }
@@ -318,7 +318,7 @@ type WstsBenchmark struct {
 	participants []*testhelper.WstsParticipant
 }
 
-func (wsts *WstsBenchmark) RunWstsDKG(name string, b *testing.B) {
+func (wsts *WstsBenchmark) RunWstsDKG(name string, t *testing.T) {
 	// wsts participant
 	wsts.participants = make([]*testhelper.WstsParticipant, wsts.n_p)
 	logger := log.Default()
@@ -354,9 +354,7 @@ func (wsts *WstsBenchmark) RunWstsDKG(name string, b *testing.B) {
 	}
 
 	// generate challenges
-	b.ResetTimer()
-	b.StartTimer()
-	time_now := time.Now()
+	time_all := time.Now()
 	for i := int64(0); i < wsts.n_p; i++ {
 		participant := wsts.participants[i]
 		challenge := participant.Frost.CalculateSecretProofs([32]byte{})
@@ -366,7 +364,7 @@ func (wsts *WstsBenchmark) RunWstsDKG(name string, b *testing.B) {
 
 	// calculate secret shares
 
-	time_now = time.Now()
+	time_now := time.Now()
 	var wg sync.WaitGroup
 	for i := int64(0); i < wsts.n_p; i++ {
 		wg.Add(1)
@@ -487,7 +485,7 @@ func (wsts *WstsBenchmark) RunWstsDKG(name string, b *testing.B) {
 	wg.Wait()
 	// suite.LogBenchmarkThreadSafeReport("ms/calculate-group-public-key", float64(time.Since(time_now).Milliseconds()), true)
 
-	b.StopTimer()
+	wsts.suite.LogBenchmarkThreadSafeReport("ms/wsts-dkg", float64(time.Since(time_all).Milliseconds()), true)
 
 	// verify correct calculation of public signing shares
 	for i := int64(0); i < wsts.n_p; i++ {
@@ -509,14 +507,13 @@ func (wsts *WstsBenchmark) RunWstsDKG(name string, b *testing.B) {
 	wsts.suite.FlushBenchmarkThreadSafeReport()
 }
 
-func (wsts *WstsBenchmark) RunWstsSigning(name string, b *testing.B) {
+func (wsts *WstsBenchmark) RunWstsSigning(name string, t *testing.T) {
 	signing_index := int64(0)
 
 	// honest_set[0] key_share is honest_keys[0]
 	honest_set := wsts.suite.RandomHonestSet(wsts.n_p, wsts.n_keys, wsts.key_shares)
 
-	b.ResetTimer()
-	b.StartTimer()
+	time_all := time.Now()
 
 	// Stage 1: Nonce generation
 	public_nonces := make(map[int64][2]*btcec.PublicKey)
@@ -562,4 +559,6 @@ func (wsts *WstsBenchmark) RunWstsSigning(name string, b *testing.B) {
 		}(participant_index)
 	}
 	wg.Wait()
+
+	wsts.suite.LogBenchmarkThreadSafeReport("ms/wsts-signing", float64(time.Since(time_all).Milliseconds()), true)
 }
