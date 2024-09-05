@@ -53,9 +53,8 @@ func BenchmarkFrostDKG(b *testing.B) {
 	}
 }
 
-// go test -v -timeout 1h -run ^TestBenchmarkWstsDKG$ github.com/nghuyenthevinh2000/bitcoin-playground/benchmark
+// go test -timeout 1h -run ^TestBenchmarkWstsDKG$ github.com/nghuyenthevinh2000/bitcoin-playground/benchmark
 func TestBenchmarkWstsDKG(t *testing.T) {
-
 	test_suite := []*WstsBenchmark{
 		{
 			n_p:       100,
@@ -78,17 +77,17 @@ func TestBenchmarkWstsDKG(t *testing.T) {
 			threshold: 1400,
 		},
 		{
-			n_p:       200,
+			n_p:       150,
 			n_keys:    1000,
 			threshold: 700,
 		},
 		{
-			n_p:       200,
+			n_p:       150,
 			n_keys:    1500,
 			threshold: 1050,
 		},
 		{
-			n_p:       200,
+			n_p:       150,
 			n_keys:    2000,
 			threshold: 1400,
 		},
