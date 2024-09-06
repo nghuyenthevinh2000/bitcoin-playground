@@ -342,8 +342,6 @@ func (wsts *WstsBenchmark) RunWstsDKG(name string, t *testing.T) {
 	// suite.LogBenchmarkThreadSafeReport("ms/secret-proofs", float64(time.Since(time_now).Milliseconds()), true)
 
 	// calculate secret shares
-
-	time_now := time.Now()
 	var wg sync.WaitGroup
 	for i := int64(0); i < wsts.n_p; i++ {
 		wg.Add(1)
@@ -379,7 +377,7 @@ func (wsts *WstsBenchmark) RunWstsDKG(name string, t *testing.T) {
 	}
 	wg.Wait()
 
-	time_now = time.Now()
+	time_verify_ss := time.Now()
 	for i := int64(0); i < 1; i++ {
 		// try out batch verification of secret shares
 		wg.Add(1)
@@ -392,7 +390,8 @@ func (wsts *WstsBenchmark) RunWstsDKG(name string, t *testing.T) {
 		}(i)
 	}
 	wg.Wait()
-	wsts.suite.LogBenchmarkThreadSafeReport("ms/verify-batch-public-secret-shares", float64(time.Since(time_now).Milliseconds()), true)
+	time_verify_ss_duration := time.Since(time_verify_ss).Milliseconds()
+	wsts.suite.LogBenchmarkThreadSafeReport("ms/verify-batch-public-secret-shares", float64(time_verify_ss_duration), true)
 
 	// calculate signing shares
 	for i := int64(0); i < wsts.n_p; i++ {
@@ -406,7 +405,6 @@ func (wsts *WstsBenchmark) RunWstsDKG(name string, t *testing.T) {
 	wg.Wait()
 
 	// calculate public signing shares
-	time_now = time.Now()
 	for i := int64(0); i < wsts.n_p; i++ {
 		wg.Add(1)
 		go func(i int64) {
@@ -419,7 +417,7 @@ func (wsts *WstsBenchmark) RunWstsDKG(name string, t *testing.T) {
 	// suite.LogBenchmarkThreadSafeReport("ms/calculate-internal-public-signing-shares", float64(time.Since(time_now).Milliseconds()), true)
 
 	// calculate public signing shares
-	time_now = time.Now()
+	time_map_calculate := time.Now()
 	wsts.participants[0].Frost.DeriveExternalQMap()
 	wsts.participants[0].Frost.DeriveExternalWMap()
 
@@ -432,9 +430,9 @@ func (wsts *WstsBenchmark) RunWstsDKG(name string, t *testing.T) {
 		}(i)
 	}
 	wg.Wait()
-	wsts.suite.LogBenchmarkThreadSafeReport("ms/derive-external-q-w-map", float64(time.Since(time_now).Milliseconds()), true)
+	time_map_calculate_duration := time.Since(time_map_calculate).Milliseconds()
+	wsts.suite.LogBenchmarkThreadSafeReport("ms/derive-external-q-w-map", float64(time_map_calculate_duration), true)
 
-	time_now = time.Now()
 	for i := int64(0); i < wsts.n_p; i++ {
 		wg.Add(1)
 		go func(i int64) {
@@ -452,7 +450,6 @@ func (wsts *WstsBenchmark) RunWstsDKG(name string, t *testing.T) {
 	// suite.LogBenchmarkThreadSafeReport("ms/calculate-batch-public-signing-shares", float64(time.Since(time_now).Milliseconds()), true)
 
 	// calculate group public key
-	time_now = time.Now()
 	for i := int64(0); i < wsts.n_p; i++ {
 		wg.Add(1)
 		go func(i int64) {
@@ -463,8 +460,6 @@ func (wsts *WstsBenchmark) RunWstsDKG(name string, t *testing.T) {
 	}
 	wg.Wait()
 	// suite.LogBenchmarkThreadSafeReport("ms/calculate-group-public-key", float64(time.Since(time_now).Milliseconds()), true)
-
-	wsts.suite.LogBenchmarkThreadSafeReport("ms/wsts-dkg", float64(time.Since(time_all).Milliseconds()), false)
 
 	// verify correct calculation of public signing shares
 	for i := int64(0); i < wsts.n_p; i++ {
@@ -481,6 +476,15 @@ func (wsts *WstsBenchmark) RunWstsDKG(name string, t *testing.T) {
 			}
 		}
 	}
+
+	// verify ss and map calculation is done one time only to save CPU time since these two operations are expensive on one machine
+	time_all_duration := time.Since(time_all).Milliseconds()
+	time_all_duration -= time_verify_ss_duration
+	time_all_duration -= time_map_calculate_duration
+	time_each_duration := time_all_duration / int64(wsts.n_p)
+	time_each_duration += time_verify_ss_duration
+	time_each_duration += time_map_calculate_duration
+	wsts.suite.LogBenchmarkThreadSafeReport("ms/wsts-dkg", float64(time_each_duration), false)
 
 	// dump logs
 	wsts.suite.FlushBenchmarkThreadSafeReport()
@@ -539,5 +543,7 @@ func (wsts *WstsBenchmark) RunWstsSigning(name string, t *testing.T) {
 	}
 	wg.Wait()
 
-	wsts.suite.LogBenchmarkThreadSafeReport("ms/wsts-signing", float64(time.Since(time_all).Milliseconds()), false)
+	time_all_duration := time.Since(time_all).Milliseconds()
+	time_each_duration := time_all_duration / int64(len(honest_set))
+	wsts.suite.LogBenchmarkThreadSafeReport("ms/wsts-signing", float64(time_each_duration), false)
 }
