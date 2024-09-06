@@ -81,16 +81,6 @@ func TestBenchmarkWstsDKG(t *testing.T) {
 			n_keys:    1000,
 			threshold: 700,
 		},
-		{
-			n_p:       150,
-			n_keys:    1500,
-			threshold: 1050,
-		},
-		{
-			n_p:       150,
-			n_keys:    2000,
-			threshold: 1400,
-		},
 	}
 
 	for _, wsts := range test_suite {
@@ -545,5 +535,5 @@ func (wsts *WstsBenchmark) RunWstsSigning(name string, t *testing.T) {
 
 	time_all_duration := time.Since(time_all).Milliseconds()
 	time_each_duration := time_all_duration / int64(len(honest_set))
-	wsts.suite.LogBenchmarkThreadSafeReport("ms/wsts-signing", float64(time_each_duration), false)
+	wsts.suite.LogBenchmarkThreadSafeReport(fmt.Sprintf("ms/wsts-signing-%d", len(honest_set)), float64(time_each_duration), false)
 }

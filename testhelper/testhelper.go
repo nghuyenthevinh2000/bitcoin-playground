@@ -121,9 +121,7 @@ func (s *TestSuite) LogBenchmarkThreadSafeReport(key, value interface{}, isLater
 	if isLater {
 		s.BenchmarkThreadSafeReport.Store(key, value)
 	} else {
-		go func() {
-			s.Logger.Println(key, value)
-		}()
+		s.Logger.Println(key, value)
 	}
 }
 
