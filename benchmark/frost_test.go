@@ -284,6 +284,7 @@ type WstsBenchmark struct {
 	n_keys       int64
 	threshold    int64
 	key_shares   []int64
+	partial_sig  map[int64]*schnorr.Signature
 	participants []*testhelper.WstsParticipant
 }
 
@@ -501,12 +502,12 @@ func (wsts *WstsBenchmark) RunWstsSigning(name string, t *testing.T) {
 	}
 
 	// Stage 2: Partial signature generation (Benchmark ends here for individual participants)
-	partial_signatures := make(map[int64]*schnorr.Signature)
+	wsts.partial_sig = make(map[int64]*schnorr.Signature)
 	for _, participant_index := range honest_set {
 		participant := wsts.participants[participant_index-1]
 
 		sig := participant.WeightedPartialSign(signing_index, honest_set, [32]byte{}, public_nonces)
-		partial_signatures[participant.Frost.Position] = sig
+		wsts.partial_sig[participant.Frost.Position] = sig
 	}
 
 	var wg sync.WaitGroup
@@ -515,7 +516,7 @@ func (wsts *WstsBenchmark) RunWstsSigning(name string, t *testing.T) {
 		go func(participant_index int64) {
 			defer wg.Done()
 			participant := wsts.participants[participant_index-1]
-			for posi, p_sig := range partial_signatures {
+			for posi, p_sig := range wsts.partial_sig {
 				if posi == participant.Frost.Position {
 					continue
 				}
