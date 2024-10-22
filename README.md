@@ -10,7 +10,7 @@ This repository goal is to find and quickly test ideas about Bitcoin products an
 
 ![one piece](knowledge/assets/going_merry.webp)
 
-# Bitcoin building blocks
+# Bitcoin building blocks (covenants)
 A Bitcoin product will consist of many building blocks. Here is a list of discovered building blocks so far in Bitcoin. For any readers out there, please help me complete my knowledge gap so I can one day come up with a new solution and onboard you to our pirate ship 😎😎😎
 
 My contact: nghuyenthevinh@gmail.com
