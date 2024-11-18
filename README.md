@@ -63,3 +63,11 @@ This solution group relies on `OP_RETURN`
 
 1. [RGB: single-use seal](https://docs.rgb.info/distributed-computing-concepts/single-use-seals)
 2. [Ordinals](https://docs.ordinals.com/)
+
+## Taproot hacks
+Taproot upgrade introduces two special properties to Bitcoin script:
+* Tapscript allows Bitcoin scripts to be branched in a tree, instead of clustering them in a single script through OR. When revealing, only a branch needs to be revealed instead of the whole script.
+* Schnorr aggregate properties allow mathematical hacks. Most notable one is the hack to evaluate arbitrary data through `OP_CAT`
+
+1. [BitVM circuit tree commitment](https://bitvm.org/bitvm.pdf): a frauf-proof system by evaluating contract outputs through Tapscript tree
+2. [MATT](https://covenants.info/proposals/matt/): a fraud-proof system for smart contract (using OP_CAT)
