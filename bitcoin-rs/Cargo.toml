@@ -1,0 +1,13 @@
+[workspace]
+members = [
+    "core-zk",
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["nghuyenthevinh@gmail.com"]
+
+[workspace.dependencies]
+# Add shared dependencies here
