@@ -17,6 +17,9 @@ My contact: nghuyenthevinh@gmail.com
 
 I am also trying to understand deeply by rebuilding POC for these building blocks
 
+1. Bitcoin Go POC (Lightning Network prefers Go): [codebase](./bitcoin-go/)
+2. Bitcoin Rust POC (BitVM, ZK prefers Rust): [codebase](.bitcoin-rs)
+
 ## adaptor signatures
 Adaptor signature is regarded as one of the native contract on Bitcoin. It uses secret pre - images as conditions for a Bitcoin payment. If conditions are satisfied, pre - images are revealed thus fulfilling a Bitcoin payment.
 
