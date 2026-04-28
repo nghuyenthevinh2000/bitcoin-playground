@@ -8,7 +8,7 @@ playground to mess around with bitcoin scripts
 # current direction
 This repository goal is to find and quickly test ideas about Bitcoin products and solutions. Why the author is dedicated to this goal? Bitcoin is the most trusted and decentralized blockchain. It has neither foundations nor major controlling parties. But, Bitcoin is not Turing - complete and prohibitively expensive in gas for any serious applications. This frustration has forced a group of people to leave and build Etherum, Solana, .... While the rest remains to find ways around the limitations. The so called "Script Renaissance" is finally possible now with Taproot on Bitcoin mainnet, with promises of greatly enhanced script expressiveness squeezable into a constant - sized Schnorr signature. It is time to return and find new riches!
 
-![one piece](knowledge/assets/going_merry.webp)
+![one piece](btc-research/assets/going_merry.webp)
 
 # Bitcoin building blocks (covenants)
 A Bitcoin product will consist of many building blocks. Here is a list of discovered building blocks so far in Bitcoin. For any readers out there, please help me complete my knowledge gap so I can one day come up with a new solution and onboard you to our pirate ship 😎😎😎
